@@ -1,3 +1,11 @@
 # Composer dependencies -- ignore vendor directory in project root, see
 # http://getcomposer.org/doc/01-basic-usage.md#installing-dependencies
 /vendor/
+
+# PHPUnit test coverage data
+/tests/coverage
+
+# PHPUnit custom phpunit.xml test suite description -- this is for
+# users to have a local, custom phpunit.xml for use during development
+# which overrides phpunit.xml.dist
+/phpunit.xml

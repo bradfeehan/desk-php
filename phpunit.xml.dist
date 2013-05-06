@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    verbose="true"
+    strict="true"
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+>
+
+    <!-- Test suites to be run -->
+    <testsuites>
+        <testsuite name="bradfeehan/php-desk">
+            <directory suffix="Test.php">tests/Desk/Test/Unit</directory>
+            <directory suffix="SystemTest.php">tests/Desk/Test/System</directory>
+        </testsuite>
+    </testsuites>
+
+    <!-- Filters for code coverage reporting -->
+    <filter>
+        <whitelist>
+            <directory>./lib</directory>
+        </whitelist>
+    </filter>
+
+    <!-- Logging -->
+    <logging>
+        <log type="coverage-clover" target="tests/coverage/clover.xml" />
+        <log type="coverage-html" target="tests/coverage/html" highlight="true" />
+        <log type="coverage-text" target="php://stdout" />
+    </logging>
+
+    <!-- Test listeners -->
+    <listeners>
+        <listener class="\Mockery\Adapter\Phpunit\TestListener" file="vendor/mockery/mockery/library/Mockery/Adapter/Phpunit/TestListener.php"></listener>
+    </listeners>
+
+</phpunit>

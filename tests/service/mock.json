@@ -1,0 +1,14 @@
+{
+    "services": {
+        "mock": {
+            "class": "Desk\\Client",
+            "params": {
+                "base_url": "http://mock.localhost/",
+                "consumer_key": "consumerkeyconsumerk",
+                "consumer_secret": "consumersecretconsumersecretconsumersecr",
+                "token": "tokentokentokentoken",
+                "token_secret": "tokensecrettokensecrettokensecrettokens"
+            }
+        }
+    }
+}

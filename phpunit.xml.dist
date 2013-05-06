@@ -33,4 +33,12 @@
         <listener class="\Mockery\Adapter\Phpunit\TestListener" file="vendor/mockery/mockery/library/Mockery/Adapter/Phpunit/TestListener.php"></listener>
     </listeners>
 
+    <php>
+        <!--
+            Specify the path to a service configuration file which will
+            be used for "test" API access when running tests.
+        -->
+        <!--server name="DESK_TEST_CONFIG" value="tests/service/test.json" /-->
+    </php>
+
 </phpunit>

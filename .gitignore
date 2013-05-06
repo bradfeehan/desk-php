@@ -1,0 +1,3 @@
+# Composer dependencies -- ignore vendor directory in project root, see
+# http://getcomposer.org/doc/01-basic-usage.md#installing-dependencies
+/vendor/

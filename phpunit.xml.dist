@@ -14,6 +14,13 @@
         </testsuite>
     </testsuites>
 
+    <!-- Exclude slow network tests (can be run manually) -->
+    <groups>
+        <exclude>
+            <group>network</group>
+        </exclude>
+    </groups>
+
     <!-- Filters for code coverage reporting -->
     <filter>
         <whitelist>

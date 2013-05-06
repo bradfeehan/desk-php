@@ -39,4 +39,18 @@ class ClientSystemTest extends SystemTestCase
     {
         Client::factory();
     }
+
+    /**
+     * @group network
+     */
+    public function testNetwork()
+    {
+        $client = $this->getServiceBuilder()->get('test');
+        $response = $client->get('')->send();
+
+        $this->assertTrue($response->isSuccessful());
+
+        $result = $response->json();
+        $this->assertInternalType('array', $result);
+    }
 }

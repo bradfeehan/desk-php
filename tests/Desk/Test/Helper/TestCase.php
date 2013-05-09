@@ -2,12 +2,31 @@
 
 namespace Desk\Test\Helper;
 
+use Desk\Client as DeskClient;
 use Guzzle\Service\Client;
 use Guzzle\Tests\GuzzleTestCase;
 use ReflectionClass;
 
 abstract class TestCase extends GuzzleTestCase
 {
+
+    public function setUp()
+    {
+        $this->clearInstances();
+    }
+
+    public function tearDown()
+    {
+        $this->clearInstances();
+    }
+
+    /**
+     * Clears the singleton instance stored in the Factory
+     */
+    private function clearInstances()
+    {
+        DeskClient::setFactory();
+    }
 
     /**
      * The base path of all test cases (usually PROJECT_BASE_DIR/tests)

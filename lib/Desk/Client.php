@@ -2,10 +2,46 @@
 
 namespace Desk;
 
-use Desk\Client\Factory as ClientFactory;
+use Desk\Client\FactoryInterface;
+use Desk\Client\Factory;
 
 class Client extends \Guzzle\Service\Client
 {
+
+    /**
+     * The client factory that creates instances of this class
+     *
+     * @var Desk\Client\FactoryInterface
+     */
+    private static $factory;
+
+
+    /**
+     * Gets the client factory that creates instances of this class
+     *
+     * @return Desk\Client\FactoryInterface
+     */
+    public static function getFactory()
+    {
+        if (!self::$factory) {
+            self::$factory = new Factory();
+        }
+
+        return self::$factory;
+    }
+
+    /**
+     * Sets the client factory that creates instances of this class
+     *
+     * If called with no argument, this will reset the client factory
+     * to an instance of the default Desk\Client\Factory.
+     *
+     * @param Desk\Client\FactoryInterface $factory
+     */
+    public static function setFactory($factory = null)
+    {
+        self::$factory = $factory;
+    }
 
     /**
      * Factory method to create a new instance of this client
@@ -21,8 +57,9 @@ class Client extends \Guzzle\Service\Client
      */
     public static function factory($config = array())
     {
-        return ClientFactory::instance()->factory($config);
+        return self::getFactory()->factory($config);
     }
+
 
     /**
      * Sets basic authentication details on all subsequent requests

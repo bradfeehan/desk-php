@@ -3,48 +3,14 @@
 namespace Desk\Client;
 
 use Desk\Client;
+use Desk\Client\FactoryInterface;
 use Desk\Exception\InvalidArgumentException;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Description\ServiceDescription;
 
-class Factory
+class Factory implements FactoryInterface
 {
-
-    /**
-     * The singleton instance of the client factory
-     *
-     * @var Desk\Client\Factory
-     */
-    private static $instance;
-
-
-    /**
-     * Gets the singleton instance
-     *
-     * @return Desk\Client\Factory
-     */
-    public static function instance()
-    {
-        if (!self::$instance) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Overrides the singleton instance (for dependency injection)
-     *
-     * Sets the instance back to default if no argument is supplied.
-     *
-     * @param Desk\Client\Factory $instance The new instance to use
-     */
-    public static function setInstance(Factory $instance = null)
-    {
-        self::$instance = $instance;
-    }
-
 
     /**
      * Factory method to create a new instance of Desk\Client

@@ -10,24 +10,6 @@ use Guzzle\Common\Collection;
 class ClientTest extends UnitTestCase
 {
 
-    public function setUp()
-    {
-        $this->clearInstance();
-    }
-
-    public function tearDown()
-    {
-        $this->clearInstance();
-    }
-
-    /**
-     * Clears the singleton instance stored in the Factory
-     */
-    private function clearInstance()
-    {
-        ClientFactory::setInstance();
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -37,17 +19,50 @@ class ClientTest extends UnitTestCase
     }
 
     /**
+     * @covers Desk\Client::getFactory
+     */
+    public function testGetFactory()
+    {
+        $this->assertInstanceOf('Desk\\Client\\Factory', Client::getFactory());
+    }
+
+    /**
+     * @covers Desk\Client::setFactory
+     */
+    public function testSetFactory()
+    {
+        $factory = \Mockery::mock('Desk\\Client\\FactoryInterface');
+        Client::setFactory($factory);
+
+        $this->assertSame($factory, Client::getFactory());
+    }
+
+    /**
+     * @covers Desk\Client::setFactory
+     */
+    public function testSetFactoryWithNoArgumentsResetsToDefault()
+    {
+        $factory = \Mockery::mock('Desk\\Client\\FactoryInterface');
+        Client::setFactory($factory);
+
+        $this->assertSame($factory, Client::getFactory());
+
+        Client::setFactory();
+        $this->assertNotSame($factory, Client::getFactory());
+    }
+
+    /**
      * @covers Desk\Client::factory
      */
     public function testFactory()
     {
         $factory = \Mockery::mock('Desk\\Client\\Factory')
             ->shouldReceive('factory')
-            ->with(array('foo' => 'bar'))
-            ->andReturn('return value')
+                ->with(array('foo' => 'bar'))
+                ->andReturn('return value')
             ->getMock();
 
-        ClientFactory::setInstance($factory);
+        Client::setFactory($factory);
 
         $result = Client::factory(array('foo' => 'bar'));
         $this->assertSame('return value', $result);

@@ -10,49 +10,12 @@ use Guzzle\Common\Collection;
 class FactoryTest extends UnitTestCase
 {
 
-    public function setUp()
-    {
-        $this->clearInstance();
-    }
-
-    public function tearDown()
-    {
-        $this->clearInstance();
-    }
-
-    /**
-     * Clears the singleton instance stored in the Factory
-     */
-    private function clearInstance()
-    {
-        ClientFactory::setInstance();
-    }
-
     /**
      * {@inheritdoc}
      */
     protected function getMockedClass()
     {
         return 'Desk\\Client\\Factory';
-    }
-
-    /**
-     * @covers Desk\Client\Factory::instance
-     */
-    public function testInstance()
-    {
-        $result = ClientFactory::instance();
-        $this->assertInstanceOf('Desk\\Client\\Factory', $result);
-    }
-
-    /**
-     * @covers Desk\Client\Factory::setInstance
-     */
-    public function testSetInstance()
-    {
-        $instance = \Mockery::mock('Desk\\Client\\Factory');
-        ClientFactory::setInstance($instance);
-        $this->assertSame($instance, ClientFactory::instance());
     }
 
     /**
@@ -155,7 +118,7 @@ class FactoryTest extends UnitTestCase
      */
     public function testAddAuthenticationWithBasicAuth()
     {
-        $factory = ClientFactory::instance();
+        $factory = new ClientFactory();
 
         $client = new Client(
             'http://mock.localhost/',
@@ -180,7 +143,7 @@ class FactoryTest extends UnitTestCase
      */
     public function testAddAuthenticationWithOauth()
     {
-        $factory = ClientFactory::instance();
+        $factory = new ClientFactory();
 
         $client = new Client(
             'http://mock.localhost/',
@@ -217,7 +180,7 @@ class FactoryTest extends UnitTestCase
      */
     public function testAddAuthenticationInvalid()
     {
-        $factory = ClientFactory::instance();
+        $factory = new ClientFactory();
         $client = new Client('http://mock.localhost/', new Collection(array()));
 
         $factory->addAuthentication($client);
@@ -230,7 +193,7 @@ class FactoryTest extends UnitTestCase
     {
         $testCase = $this;
 
-        $factory = ClientFactory::instance();
+        $factory = new ClientFactory();
         $client = \Mockery::mock('Desk\\Client')
             ->shouldReceive('setDescription')
             ->with(

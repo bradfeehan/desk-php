@@ -1,7 +1,7 @@
 <?php
 
+use Desk\Test\Helper\TestCase;
 use Guzzle\Service\Builder\ServiceBuilder;
-use Guzzle\Tests\GuzzleTestCase;
 
 error_reporting(-1);
 
@@ -29,4 +29,6 @@ if (isset($_SERVER['DESK_TEST_CONFIG'])) {
     $config = __DIR__ . '/service/mock.json';
 }
 
-GuzzleTestCase::setServiceBuilder(ServiceBuilder::factory($config));
+TestCase::setServiceBuilder(ServiceBuilder::factory($config));
+TestCase::setTestsBasePath(__DIR__);
+TestCase::setMockBasePath(__DIR__ . '/mock');

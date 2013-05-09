@@ -6,6 +6,7 @@ use Desk\Client;
 use Desk\Exception\InvalidArgumentException;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
+use Guzzle\Service\Description\ServiceDescription;
 
 class Factory
 {
@@ -61,6 +62,7 @@ class Factory
         $client = new Client($baseUrl, $config);
 
         $this->addAuthentication($client);
+        $this->addServiceDescription($client);
 
         return $client;
     }
@@ -145,5 +147,16 @@ class Factory
                 $value = $client->getConfig('authentication');
                 throw new InvalidArgumentException("Invalid authentication '$value'");
         }
+    }
+
+    /**
+     * Adds the correct service description to a client
+     *
+     * @param Desk\Client $client The client to add the description to
+     */
+    public function addServiceDescription(&$client)
+    {
+        $description = ServiceDescription::factory(__DIR__ . '/desk.json');
+        $client->setDescription($description);
     }
 }

@@ -87,6 +87,18 @@ class ClientSystemTest extends SystemTestCase
         $this->assertContainsIns('OAuth', $request->getHeader('Authorization'));
     }
 
+    public function testClientHasServiceDescription()
+    {
+        $client = $this->getServiceBuilder()->get('mock');
+
+        $this->assertInstanceOf(
+            'Guzzle\\Service\\Description\\ServiceDescription',
+            $client->getDescription()
+        );
+
+        $this->assertSame('Desk.com', $client->getDescription()->getName());
+    }
+
     /**
      * @group network
      */

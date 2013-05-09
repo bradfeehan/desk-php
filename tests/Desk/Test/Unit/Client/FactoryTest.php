@@ -60,11 +60,18 @@ class FactoryTest extends UnitTestCase
      */
     public function testFactory()
     {
-        $factory = $this->mock(array('processConfig', 'addAuthentication'))
+        $mockedMethods = array(
+            'processConfig',
+            'addAuthentication',
+            'addServiceDescription',
+        );
+
+        $factory = $this->mock($mockedMethods)
             ->shouldReceive('processConfig')
                 ->with(array())
                 ->andReturn(array('base_url' => 'http://mock.localhost/'))
             ->shouldReceive('addAuthentication')
+            ->shouldReceive('addServiceDescription')
             ->getMock();
 
         $client = $factory->factory();
@@ -214,5 +221,37 @@ class FactoryTest extends UnitTestCase
         $client = new Client('http://mock.localhost/', new Collection(array()));
 
         $factory->addAuthentication($client);
+    }
+
+    /**
+     * @covers Desk\Client\Factory::addServiceDescription
+     */
+    public function testAddServiceDescription()
+    {
+        $testCase = $this;
+
+        $factory = ClientFactory::instance();
+        $client = \Mockery::mock('Desk\\Client')
+            ->shouldReceive('setDescription')
+            ->with(
+                \Mockery::on(
+                    function ($description) use ($testCase) {
+                        $testCase->assertInstanceOf(
+                            'Guzzle\\Service\\Description\\ServiceDescription',
+                            $description
+                        );
+
+                        $testCase->assertSame(
+                            'Desk.com',
+                            $description->getName()
+                        );
+                        return true;
+                    }
+                )
+            )
+            ->once()
+            ->getMock();
+
+        $factory->addServiceDescription($client);
     }
 }

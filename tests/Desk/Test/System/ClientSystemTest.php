@@ -3,7 +3,6 @@
 namespace Desk\Test\System;
 
 use Desk\Client;
-use Desk\Client\Factory as ClientFactory;
 use Desk\Test\Helper\SystemTestCase;
 
 /**
@@ -13,31 +12,79 @@ use Desk\Test\Helper\SystemTestCase;
 class ClientSystemTest extends SystemTestCase
 {
 
-    public function testCreateClientFromSubdomain()
+    /**
+     * @dataProvider dataCreateClientValid
+     */
+    public function testCreateClientValid($config)
     {
-        $client = Client::factory(
-            array('subdomain' => 'foo')
-        );
-
+        $client = Client::factory($config);
         $this->assertInstanceOf('Desk\\Client', $client);
     }
 
-    public function testCreateClientFromBaseUrl()
+    public function dataCreateClientValid()
     {
-        $client = Client::factory(
-            array('base_url' => 'http://foo.example.com/')
+        return array(
+            array(array(
+                'subdomain' => 'foo',
+                'username'  => 'bar',
+                'password'  => 'baz',
+            )),
+            array(array(
+                'base_url' => 'http://foo.example.com/',
+                'username' => 'bar',
+                'password' => 'baz',
+            )),
+            array(array(
+                'subdomain'       => 'test',
+                'consumer_key'    => '123',
+                'consumer_secret' => '456',
+                'token'           => '789',
+                'token_secret'    => '012',
+            )),
         );
-
-        $this->assertInstanceOf('Desk\\Client', $client);
     }
 
     /**
+     * @dataProvider dataCreateClientInvalid
      * @expectedException Guzzle\Common\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Config must contain a 'subdomain' key
      */
-    public function testCreateClientWithInvalidData()
+    public function testCreateClientInvalid($config)
     {
-        Client::factory();
+        Client::factory($config);
+    }
+
+    public function dataCreateClientInvalid()
+    {
+        return array(
+            array(array(
+                'username' => 'foo',
+                'password' => 'bar',
+            )),
+            array(array(
+                'base_url' => 'http://foo.example.com/',
+            )),
+            array(array(
+                'subdomain' => 'test',
+            )),
+            array(array(
+                'consumer_key'    => '123',
+                'consumer_secret' => '456',
+                'token'           => '789',
+                'token_secret'    => '012',
+            )),
+        );
+    }
+
+    public function testClientHasOauthPlugin()
+    {
+        $client = $this->getServiceBuilder()->get('mock');
+        $this->setMockResponse($client, 'success');
+
+        $request = $client->get('/foo');
+        $request->send();
+
+        $this->assertTrue($request->hasHeader('Authorization'));
+        $this->assertContainsIns('OAuth', $request->getHeader('Authorization'));
     }
 
     /**

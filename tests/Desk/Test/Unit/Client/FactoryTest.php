@@ -5,6 +5,7 @@ namespace Desk\Test\Unit\Client;
 use Desk\Client;
 use Desk\Client\Factory as ClientFactory;
 use Desk\Test\Helper\UnitTestCase;
+use Guzzle\Common\Collection;
 
 class FactoryTest extends UnitTestCase
 {
@@ -28,20 +29,11 @@ class FactoryTest extends UnitTestCase
     }
 
     /**
-     * Creates a mock of Desk\Client\Factory
-     *
-     * All methods will be passed through to the underlying
-     * implementation, except for method names passed in to $methods
-     * (these can be stubbed using shouldReceive()... etc).
-     *
-     * @param array $methods Any methods that will be overridden
-     *
-     * @return Desk\Client\Factory
+     * {@inheritdoc}
      */
-    private function mock($methods = array())
+    protected function getMockedClass()
     {
-        $methods = implode(',', $methods);
-        return \Mockery::mock("Desk\\Client\\Factory[{$methods}]");
+        return 'Desk\\Client\\Factory';
     }
 
     /**
@@ -68,16 +60,17 @@ class FactoryTest extends UnitTestCase
      */
     public function testFactory()
     {
-        $factory = $this->mock(array('processConfig'))
+        $factory = $this->mock(array('processConfig', 'addAuthentication'))
             ->shouldReceive('processConfig')
-            ->with(array())
-            ->andReturn(array('base_url' => 'http://foo.example.com/'))
+                ->with(array())
+                ->andReturn(array('base_url' => 'http://mock.localhost/'))
+            ->shouldReceive('addAuthentication')
             ->getMock();
 
         $client = $factory->factory();
 
         $this->assertInstanceOf('Desk\\Client', $client);
-        $this->assertSame('http://foo.example.com/', $client->getBaseUrl());
+        $this->assertSame('http://mock.localhost/', $client->getBaseUrl());
     }
 
     /**
@@ -95,19 +88,39 @@ class FactoryTest extends UnitTestCase
     {
         return array(
             array(
-                array('subdomain' => 'foo'),
+                array(
+                    'subdomain' => 'foo',
+                    'username' => 'foo',
+                    'password' => 'bar',
+                ),
                 'https://foo.desk.com/api/v2/'
             ),
             array(
-                array('base_url' => 'http://example.com/'),
+                array(
+                    'base_url' => 'http://example.com/',
+                    'username' => 'foo',
+                    'password' => 'bar',
+                ),
                 'http://example.com/'
             ),
             array(
                 array(
                     'base_url' => 'http://{subdomain}.example.com/',
                     'subdomain' => 'foo',
+                    'username' => 'foo',
+                    'password' => 'bar',
                 ),
                 'http://foo.example.com/'
+            ),
+            array(
+                array(
+                    'subdomain'       => 'foo',
+                    'consumer_key'    => '123',
+                    'consumer_secret' => '456',
+                    'token'           => '789',
+                    'token_secret'    => '012',
+                ),
+                'https://foo.desk.com/api/v2/'
             ),
         );
     }
@@ -128,5 +141,78 @@ class FactoryTest extends UnitTestCase
             array(array()),
             array(array('base_url' => 'http://{subdomain}.example.com/')),
         );
+    }
+
+    /**
+     * @covers Desk\Client\Factory::addAuthentication
+     */
+    public function testAddAuthenticationWithBasicAuth()
+    {
+        $factory = ClientFactory::instance();
+
+        $client = new Client(
+            'http://mock.localhost/',
+            new Collection(
+                array(
+                    'authentication' => 'basic',
+                    'username' => 'user',
+                    'password' => 'pass',
+                )
+            )
+        );
+
+        $factory->addAuthentication($client);
+
+        $headers = $client->getDefaultHeaders();
+        $this->assertTrue($headers->hasKey('Authorization'));
+        $this->assertSame('Basic dXNlcjpwYXNz', $headers->get('Authorization'));
+    }
+
+    /**
+     * @covers Desk\Client\Factory::addAuthentication
+     */
+    public function testAddAuthenticationWithOauth()
+    {
+        $factory = ClientFactory::instance();
+
+        $client = new Client(
+            'http://mock.localhost/',
+            new Collection(
+                array(
+                    'authentication'  => 'oauth',
+                    'consumer_key'    => 'foo',
+                    'consumer_secret' => 'bar',
+                    'token'           => 'baz',
+                    'token_secret'    => 'qux',
+                )
+            )
+        );
+
+        $factory->addAuthentication($client);
+
+        $listeners = $client
+            ->getEventDispatcher()
+            ->getListeners('request.before_send');
+
+        $this->assertSame(1, count($listeners));
+
+        list($listener, $method) = $listeners[0];
+
+        $this->assertSame('Guzzle\\Plugin\\Oauth\\OauthPlugin', get_class($listener));
+        $this->assertSame('onRequestBeforeSend', $method);
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @covers Desk\Client\Factory::addAuthentication
+     * @expectedException Desk\Exception\InvalidArgumentException
+     */
+    public function testAddAuthenticationInvalid()
+    {
+        $factory = ClientFactory::instance();
+        $client = new Client('http://mock.localhost/', new Collection(array()));
+
+        $factory->addAuthentication($client);
     }
 }

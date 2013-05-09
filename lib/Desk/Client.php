@@ -23,4 +23,36 @@ class Client extends \Guzzle\Service\Client
     {
         return ClientFactory::instance()->factory($config);
     }
+
+    /**
+     * Sets basic authentication details on all subsequent requests
+     *
+     * @param string $user     The basic auth username
+     * @param string $password The basic auth password
+     *
+     * @return Desk\Client
+     * @chainable
+     */
+    public function setAuth($user, $password)
+    {
+        return $this->addDefaultHeader('Authorization', 'Basic ' . base64_encode("$user:$password"));
+    }
+
+    /**
+     * Appends to the list of default headers, don't replace them all
+     *
+     * @param string $header The name of the header
+     * @param string $value  The value to set the header to
+     *
+     * @return Desk\Client
+     * @chainable
+     */
+    public function addDefaultHeader($header, $value)
+    {
+        $headers = $this->getDefaultHeaders() ?: new Collection();
+        $headers->set($header, $value);
+        $this->setDefaultHeaders($headers);
+
+        return $this;
+    }
 }

@@ -5,6 +5,7 @@ namespace Desk\Client;
 use Desk\Client;
 use Desk\Client\FactoryInterface;
 use Desk\Exception\InvalidArgumentException;
+use Desk\Relationship\Plugin as RelationshipPlugin;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Description\ServiceDescription;
@@ -29,6 +30,7 @@ class Factory implements FactoryInterface
 
         $this->addAuthentication($client);
         $this->addServiceDescription($client);
+        $this->addRelationshipPlugin($client);
 
         return $client;
     }
@@ -127,5 +129,15 @@ class Factory implements FactoryInterface
     {
         $description = ServiceDescription::factory(__DIR__ . '/desk.json');
         $client->setDescription($description);
+    }
+
+    /**
+     * Adds a relationship plugin to a client
+     *
+     * @param Desk\Client $client The client to add the plugin to
+     */
+    public function addRelationshipPlugin(&$client)
+    {
+        $client->addSubscriber(new RelationshipPlugin());
     }
 }

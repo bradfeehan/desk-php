@@ -120,4 +120,36 @@ abstract class TestCase extends GuzzleTestCase
         $reflectionClass = new ReflectionClass($this);
         return dirname($reflectionClass->getFileName());
     }
+
+    /**
+     * Gets the value of a private or protected property on any object
+     *
+     * @param mixed  $object       The object with the property to get
+     * @param string $propertyName The name of the property to get
+     *
+     * @return mixed
+     */
+    public function getPrivateProperty($object, $propertyName)
+    {
+        $className = get_class($object);
+        $class = new ReflectionClass($className);
+
+        // Private properties on parent classes can't be accessed by
+        // getProperty(), so we have to ascend the class heirarchy
+        // until we find the class it was actually defined on
+        while ($class && !$class->hasProperty($propertyName)) {
+            $class = $class->getParentClass();
+        }
+
+        if (!$class) {
+            throw new InvalidArgumentException(
+                "Property '$propertyName' not found on '$className' " .
+                "or any of its parent classes"
+            );
+        }
+
+        $property = $class->getProperty($propertyName);
+        $property->setAccessible(true);
+        return $property->getValue($object);
+    }
 }

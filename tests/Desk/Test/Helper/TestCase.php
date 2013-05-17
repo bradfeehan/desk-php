@@ -63,7 +63,7 @@ abstract class TestCase extends GuzzleTestCase
      * by self::setTestsBasePath() and self::setMockBasePath().
      *
      * @param Guzzle\Service\Client $client        Client object to modify
-     * @param string                $responseNames Path to files within the Mock
+     * @param string|array          $responseNames Path to files within the Mock
      *                                             folder of the service
      *
      * @return Guzzle\Plugin\Mock\MockPlugin The created mock plugin

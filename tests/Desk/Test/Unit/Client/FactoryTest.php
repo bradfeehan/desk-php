@@ -27,6 +27,7 @@ class FactoryTest extends UnitTestCase
             'processConfig',
             'addAuthentication',
             'addServiceDescription',
+            'addRelationshipPlugin',
         );
 
         $factory = $this->mock($mockedMethods)
@@ -35,6 +36,7 @@ class FactoryTest extends UnitTestCase
                 ->andReturn(array('base_url' => 'http://mock.localhost/'))
             ->shouldReceive('addAuthentication')
             ->shouldReceive('addServiceDescription')
+            ->shouldReceive('addRelationshipPlugin')
             ->getMock();
 
         $client = $factory->factory();
@@ -216,5 +218,22 @@ class FactoryTest extends UnitTestCase
             ->getMock();
 
         $factory->addServiceDescription($client);
+    }
+
+    /**
+     * @covers Desk\Client\Factory::addRelationshipPlugin
+     */
+    public function testAddRelationshipPlugin()
+    {
+        $originalClient = \Mockery::mock('Desk\\Client')
+            ->shouldReceive('addSubscriber')
+                ->with(\Mockery::type('Desk\\Relationship\\Plugin'))
+                ->once()
+            ->getMock();
+
+        $client = $originalClient;
+
+        $this->mock()->addRelationshipPlugin($client);
+        $this->assertSame($originalClient, $client);
     }
 }

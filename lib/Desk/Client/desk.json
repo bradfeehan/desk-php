@@ -1,3 +1,113 @@
 {
-    "name": "Desk.com"
+    "name": "Desk.com",
+    "description": "",
+    "apiVersion": 2,
+    "operations": {
+        "base": {
+            "class": "Desk\\Relationship\\Command",
+            "responseType": "model",
+            "parameters": {
+                "embed": {
+                    "description": "Which relationships should be embedded in the response",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "string",
+                        "enum": []
+                    },
+                    "location": "query"
+                }
+            }
+        },
+
+
+        "list": {
+            "extends": "base",
+            "httpMethod": "GET",
+            "parameters": {
+                "per_page": {
+                    "description": "Number of entries returned per page",
+                    "type": "integer",
+                    "minimum": 1,
+                    "location": "query"
+                },
+                "page": {
+                    "description": "The page number of results to retrieve",
+                    "type": "integer",
+                    "minimum": 1,
+                    "location": "query"
+                }
+            }
+        },
+        "show": {
+            "extends": "base",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "description": "The Desk ID of the item to retrieve",
+                    "required": true,
+                    "type": "integer",
+                    "minimum": 1,
+                    "location": "uri"
+                }
+            }
+        },
+        "create": {
+            "extends": "base",
+            "httpMethod": "POST"
+        },
+        "update": {
+            "extends": "base",
+            "httpMethod": "PATCH"
+        },
+        "delete": {
+            "extends": "base",
+            "httpMethod": "DELETE"
+        },
+        "search": {
+            "extends": "base",
+            "httpMethod": "GET"
+        },
+
+
+        "ShowUser": {
+            "extends": "show",
+            "summary": "Retrieve a single user by ID",
+            "uri": "users/{id}",
+            "responseClass": "UserModel",
+            "data": {
+                "deskClass": "user"
+            }
+        }
+    },
+    "models": {
+        "UserModel": {
+            "data": {
+                "deskClass": "user"
+            },
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the user",
+                    "location": "json",
+                    "type": "string"
+                },
+                "public_name": {
+                    "description": "Public facing name of the user",
+                    "location": "json",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "User's email",
+                    "location": "json",
+                    "type": "string"
+                },
+                "level": {
+                    "description": "User's permission level",
+                    "location": "json",
+                    "type": "string"
+                }
+            }
+        }
+    }
 }

@@ -10,6 +10,7 @@
     <testsuites>
         <testsuite name="bradfeehan/php-desk">
             <directory suffix="Test.php">tests/Desk/Test/Unit</directory>
+            <directory suffix="OperationTest.php">tests/Desk/Test/Operation</directory>
             <directory suffix="SystemTest.php">tests/Desk/Test/System</directory>
         </testsuite>
     </testsuites>

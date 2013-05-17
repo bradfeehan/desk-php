@@ -87,7 +87,8 @@ class Factory implements FactoryInterface
      *
      * @param Desk\Client $client The client (with configuration)
      *
-     * @throws InvalidArgumentException If authentication configuration provided is unknown
+     * @throws InvalidArgumentException If authentication configuration
+     * provided is unknown
      */
     public function addAuthentication(&$client)
     {

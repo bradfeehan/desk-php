@@ -97,17 +97,21 @@ abstract class OperationTestCase extends SystemTestCase
      * Should return an array in the following format:
      *
      * array(
-     *   array($name1, $value1, $assertions1),
-     *   array($name2, $value2, $assertions2),
+     *   array($parameters1, $assertions1),
+     *   array($parameters2, $assertions2),
      *   // ...
      * );
+     *
+     * Where $parameters1 and $parameters2 are parameters to set on the
+     * command, which should pass validation. These should be an
+     * associative array of parameters to set.
      *
      * The test will be ran once for each element in the root of the
      * array (e.g. twice in the example above).
      *
-     * The parameter with key $name1 will be set to $value1. Assertions
-     * passed in via the third parameter will be tested. Assertions can
-     * be specified as an array with the following keys:
+     * Assertions passed in via the second optional parameter will be
+     * tested. Assertions can be specified as an array with the
+     * following keys:
      *     - url:        Regex to test the URL (excluding query string)
      *     - query:      Regex to test the query string
      *     - postFields: Regex to test the postField query string
@@ -123,10 +127,14 @@ abstract class OperationTestCase extends SystemTestCase
      * Should return an array in the following format:
      *
      * array(
-     *   array($name1, $value1),
-     *   array($name2, $value2),
+     *   array($parameters1),
+     *   array($parameters2),
      *   // ...
      * );
+     *
+     * Where $parameters1 and $parameters2 are parameters to set on the
+     * command, which should fail validation. These should be an
+     * associative array of parameters to set.
      *
      * The test will be ran once for each element in the root of the
      * array (e.g. twice in the example above).

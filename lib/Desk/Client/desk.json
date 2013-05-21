@@ -94,6 +94,22 @@
         },
 
 
+        "ShowCustomer": {
+            "extends": "show",
+            "summary": "Retrieve a single customer by ID",
+            "uri": "customers/{id}",
+            "responseClass": "CustomerModel",
+            "data": {
+                "links": {
+                    "self": {
+                        "operation": "ShowCustomer",
+                        "pattern": "#/api/v2/customers/(?P<id>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+
+
         "ListUsers": {
             "extends": "list",
             "summary": "Retrieve a paginated list of all users",
@@ -129,6 +145,87 @@
                     "description": "Total number of entries on all pages of the result",
                     "location": "json",
                     "type": "integer"
+                }
+            }
+        },
+        "CustomerModel": {
+            "data": {
+                "deskClass": "customer"
+            },
+            "type": "object",
+            "properties": {
+                "first_name": {
+                    "description": "The customer's first name",
+                    "location": "json",
+                    "type": "string"
+                },
+                "last_name": {
+                    "description": "The customer's last name",
+                    "location": "json",
+                    "type": "string"
+                },
+                "company": {
+                    "description": "The customer's company",
+                    "location": "json",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "The customer's title",
+                    "location": "json",
+                    "type": "string"
+                },
+                "external_id": {
+                    "description": "The customer's unique external identifier to reference this customer in an external system",
+                    "location": "json",
+                    "type": "string"
+                },
+                "background": {
+                    "description": "Any background information for the customer",
+                    "location": "json",
+                    "type": "string"
+                },
+                "locked_until": {
+                    "description": "Time at which the lock on the customer will expire",
+                    "location": "json",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "Time at which the customer was created",
+                    "location": "json",
+                    "type": "string"
+                },
+                "updated_at": {
+                    "description": "Time at which the customer was last updated at",
+                    "location": "json",
+                    "type": "string"
+                },
+                "emails": {
+                    "description": "Array of e-mail objects, each specifying the contact type and value of the e-mail address",
+                    "location": "json",
+                    "type": "array",
+                    "items": {
+                    }
+                },
+                "phone_numbers": {
+                    "description": "Array of phone number objects, each specifying the contact type and value of the phone number",
+                    "location": "json",
+                    "type": "array",
+                    "items": {
+                    }
+                },
+                "addresses": {
+                    "description": "Array of address objects, each specifying the contact type and value of the location",
+                    "location": "json",
+                    "type": "array",
+                    "items": {
+                    }
+                },
+                "custom_fields": {
+                    "description": "Associative array of values for custom fields",
+                    "location": "json",
+                    "type": "array",
+                    "items": {
+                    }
                 }
             }
         },

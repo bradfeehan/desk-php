@@ -24,6 +24,10 @@
         "list": {
             "extends": "base",
             "httpMethod": "GET",
+            "responseClass": "Page",
+            "data": {
+                "deskClass": "page"
+            },
             "parameters": {
                 "per_page": {
                     "description": "Number of entries returned per page",
@@ -70,6 +74,11 @@
         },
 
 
+        "ListUsers": {
+            "extends": "list",
+            "summary": "Retrieve a paginated list of all users",
+            "uri": "users"
+        },
         "ShowUser": {
             "extends": "show",
             "summary": "Retrieve a single user by ID",
@@ -81,6 +90,19 @@
         }
     },
     "models": {
+        "Page": {
+            "data": {
+                "deskClass": "page"
+            },
+            "type": "object",
+            "properties": {
+                "total_entries": {
+                    "description": "Total number of entries on all pages of the result",
+                    "location": "json",
+                    "type": "integer"
+                }
+            }
+        },
         "UserModel": {
             "data": {
                 "deskClass": "user"

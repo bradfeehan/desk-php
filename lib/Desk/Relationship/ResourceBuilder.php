@@ -53,6 +53,17 @@ class ResourceBuilder implements ResourceBuilderInterface
      */
     public function createModelFromEmbedded(array $data)
     {
+        // detect if this is an embedded array of models
+        if (isset($data[0])) {
+            $models = array();
+
+            foreach ($data as $element) {
+                $models[] = $this->createModelFromEmbedded($element);
+            }
+
+            return $models;
+        }
+
         if (empty($data['_links']) || empty($data['_links']['self'])) {
             throw InvalidEmbedFormatException::fromEmbed($data);
         }

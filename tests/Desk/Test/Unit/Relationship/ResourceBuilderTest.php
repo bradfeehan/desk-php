@@ -121,6 +121,64 @@ class ResourceBuilderTest extends UnitTestCase
 
     /**
      * @covers Desk\Relationship\ResourceBuilder::createModelFromEmbedded
+     */
+    public function testCreateModelFromEmbeddedWithEmbeddedArray()
+    {
+        $self = array(
+            'class' => 'myClass',
+            'href' => '/path/to/self',
+        );
+
+        $embedded = array(
+            array(
+                'foo' => 'bar',
+                '_links' => array(
+                    'self' => $self,
+                ),
+            ),
+            array(
+                'baz' => 'qux',
+                '_links' => array(
+                    'self' => $self,
+                ),
+            ),
+            array(
+                'fim' => 'fum',
+                '_links' => array(
+                    'self' => $self,
+                ),
+            ),
+        );
+
+        $structure = \Mockery::mock('Guzzle\\Service\\Description\\Parameter');
+
+        $builder = $this->mock(array('validateLink', 'getModelForDeskClass'))
+            ->shouldReceive('validateLink')
+                ->with($self)
+                ->times(3)
+            ->shouldReceive('getModelForDeskClass')
+                ->with('myClass')
+                ->times(3)
+                ->andReturn($structure)
+            ->getMock();
+
+        $models = $builder->createModelFromEmbedded($embedded);
+        $this->assertInternalType('array', $models);
+        $this->assertSame(3, count($models));
+
+        foreach ($models as $model) {
+            $modelBuilder = $this->getPrivateProperty($model, 'builder');
+            $this->assertSame($builder, $modelBuilder);
+            $this->assertSame($structure, $model->getStructure());
+        }
+
+        $this->assertSame('bar', $models[0]->get('foo'));
+        $this->assertSame('qux', $models[1]->get('baz'));
+        $this->assertSame('fum', $models[2]->get('fim'));
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::createModelFromEmbedded
      * @expectedException Desk\Relationship\Exception\InvalidEmbedFormatException
      * @expectedExceptionMessage format: missing expected '_links' element; missing
      */

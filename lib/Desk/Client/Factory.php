@@ -92,7 +92,7 @@ class Factory implements FactoryInterface
      * @throws InvalidArgumentException If authentication configuration
      * provided is unknown
      */
-    public function addAuthentication(&$client)
+    public function addAuthentication(Client &$client)
     {
         $authentication = $client->getConfig('authentication');
         switch ($authentication) {
@@ -125,7 +125,7 @@ class Factory implements FactoryInterface
      *
      * @param Desk\Client $client The client to add the description to
      */
-    public function addServiceDescription(&$client)
+    public function addServiceDescription(Client &$client)
     {
         $description = ServiceDescription::factory(__DIR__ . '/desk.json');
         $client->setDescription($description);
@@ -136,7 +136,7 @@ class Factory implements FactoryInterface
      *
      * @param Desk\Client $client The client to add the plugin to
      */
-    public function addRelationshipPlugin(&$client)
+    public function addRelationshipPlugin(Client &$client)
     {
         $client->addSubscriber(new RelationshipPlugin());
     }

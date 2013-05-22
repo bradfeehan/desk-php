@@ -87,7 +87,7 @@ abstract class OperationTestCase extends SystemTestCase
      * This should be one of the keys under "operation" in the client's
      * service description.
      *
-     * @var string
+     * @return string
      */
     abstract protected function getOperationName();
 
@@ -118,6 +118,8 @@ abstract class OperationTestCase extends SystemTestCase
      *
      * If an exception is thrown or one of the regexes don't match, the
      * test will fail.
+     *
+     * @return array
      */
     abstract public function dataParameterValid();
 
@@ -142,6 +144,8 @@ abstract class OperationTestCase extends SystemTestCase
      * The parameter with key $name1 will be set to $value1, and the
      * Command should throw a ValidationException. If not, the test
      * will fail.
+     *
+     * @return array
      */
     abstract public function dataParameterInvalid();
 

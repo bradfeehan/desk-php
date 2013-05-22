@@ -38,7 +38,7 @@ class Client extends \Guzzle\Service\Client
      *
      * @param Desk\Client\FactoryInterface $factory
      */
-    public static function setFactory($factory = null)
+    public static function setFactory(FactoryInterface $factory = null)
     {
         self::$factory = $factory;
     }

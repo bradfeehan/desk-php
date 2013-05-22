@@ -4,7 +4,6 @@ namespace Desk\Relationship;
 
 use Desk\Relationship\ResponseParser;
 use Guzzle\Common\Event;
-use SplObjectStorage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

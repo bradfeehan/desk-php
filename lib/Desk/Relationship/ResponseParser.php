@@ -2,7 +2,6 @@
 
 namespace Desk\Relationship;
 
-use Desk\Relationship\Model;
 use Desk\Relationship\ResourceBuilderInterface;
 use Guzzle\Http\Message\Response;
 use Guzzle\Service\Command\AbstractCommand;
@@ -33,9 +32,13 @@ class ResponseParser extends OperationResponseParser
     private $builder;
 
     /**
-     * Resource builder which is passed to each constructed model
+     * Cached singleton instance of this class
      *
-     * @var Desk\Relationship\ResourceBuilderInterface
+     * This class needs to store its singleton instance separately to
+     * its parent class' instance, otherwise one will be inaccessible
+     * (if the other one is instantiated first).
+     *
+     * @var Desk\Relationship\ResponseParser
      */
     private static $relationshipInstance;
 
@@ -111,7 +114,7 @@ class ResponseParser extends OperationResponseParser
      *
      * @return mixed
      */
-    public function createClass($className, $arguments = array())
+    public function createClass($className, array $arguments = array())
     {
         $class = new ReflectionClass($className);
         return $class->newInstanceArgs($arguments);

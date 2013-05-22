@@ -23,7 +23,7 @@ class InvalidLinkFormatExceptionTest extends UnitTestCase
      * @param array  $link            The link to pass to fromLink()
      * @param string $expectedMessage The expected resulting message
      */
-    public function testFromLink($link, $expectedMessage = null)
+    public function testFromLink(array $link, $expectedMessage = null)
     {
         $exception = InvalidLinkFormatException::fromLink($link);
 

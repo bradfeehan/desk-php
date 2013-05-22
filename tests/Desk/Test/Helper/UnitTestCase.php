@@ -24,7 +24,7 @@ abstract class UnitTestCase extends TestCase
      * @param array $methods         Any methods that will be overridden
      * @param array $constructorArgs Optional constructor args
      *
-     * @return Desk\Client\Factory
+     * @return mixed
      */
     protected function mock($methods = array(), array $constructorArgs = array())
     {

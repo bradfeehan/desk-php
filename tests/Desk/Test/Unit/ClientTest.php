@@ -3,7 +3,6 @@
 namespace Desk\Test\Unit;
 
 use Desk\Client;
-use Desk\Client\Factory as ClientFactory;
 use Desk\Test\Helper\UnitTestCase;
 use Guzzle\Common\Collection;
 

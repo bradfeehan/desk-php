@@ -72,10 +72,10 @@ class ClientTest extends UnitTestCase
      */
     public function testSetAuth()
     {
-        $client = $this->mock('addDefaultHeader')
+        $client = $this->mock('setAuth')
             ->shouldReceive('addDefaultHeader')
-            ->with('Authorization', 'Basic Zm9vOmJhcg==')
-            ->andReturn(\Mockery::self())
+                ->with('Authorization', 'Basic Zm9vOmJhcg==')
+                ->andReturn(\Mockery::self())
             ->getMock();
 
         $this->assertSame($client, $client->setAuth('foo', 'bar'));
@@ -86,7 +86,7 @@ class ClientTest extends UnitTestCase
      */
     public function testAddDefaultHeader()
     {
-        $client = $this->mock(array('getDefaultHeaders', 'setDefaultHeaders'))
+        $client = $this->mock('addDefaultHeader')
             ->shouldReceive('getDefaultHeaders')
                 ->andReturn(new Collection(array('foo' => 'bar')))
             ->shouldReceive('setDefaultHeaders')

@@ -42,7 +42,7 @@ class ResponseParserTest extends UnitTestCase
     {
         $builder = \Mockery::mock('Desk\\Relationship\\ResourceBuilder');
 
-        $parser = $this->mock();
+        $parser = $this->mock('setResourceBuilder');
         $parser->setResourceBuilder($builder);
 
         $parserBuilder = $this->getPrivateProperty($parser, 'builder');
@@ -80,18 +80,17 @@ class ResponseParserTest extends UnitTestCase
         $contentType = 'content_type';
         $builder = \Mockery::mock('Desk\\Relationship\\ResourceBuilder');
 
-        $parser = $this->mock(array('responseTypeIsModel', 'createClass'));
-        $parser
+        $parser = $this->mock('setResourceBuilder')
             ->shouldReceive('responseTypeIsModel')
                 ->with($command)
-                ->andReturn(true);
-        $parser
+                ->andReturn(true)
             ->shouldReceive('createClass')
                 ->with(
                     'Desk\\Relationship\\Model',
                     array($builder, array(), $structure)
                 )
-                ->andReturn('return_value');
+                ->andReturn('return_value')
+            ->getMock();
 
         $parser->setResourceBuilder($builder);
 
@@ -129,7 +128,7 @@ class ResponseParserTest extends UnitTestCase
 
         $contentType = 'content_type';
 
-        $parser = $this->mock();
+        $parser = ResponseParser::getInstance();
 
         $reflectionParser = new ReflectionObject($parser);
         $handleParsing = $reflectionParser->getMethod('handleParsing');
@@ -144,7 +143,7 @@ class ResponseParserTest extends UnitTestCase
      */
     public function testCreateClass()
     {
-        $factory = $this->mock();
+        $factory = $this->mock('createClass');
         $result = $factory->createClass('SplObjectStorage');
         $this->assertInstanceOf('SplObjectStorage', $result);
     }
@@ -177,7 +176,7 @@ class ResponseParserTest extends UnitTestCase
                 ->andReturn('model')
             ->getMock();
 
-        $parser = $this->mock();
+        $parser = $this->mock('responseTypeIsModel');
         $this->assertTrue($parser->responseTypeIsModel($command));
     }
     /**
@@ -199,7 +198,7 @@ class ResponseParserTest extends UnitTestCase
                 ->with(AbstractCommand::RESPONSE_PROCESSING)
             ->getMock();
 
-        $parser = $this->mock();
+        $parser = $this->mock('responseTypeIsModel');
         $this->assertFalse($parser->responseTypeIsModel($command));
     }
 }

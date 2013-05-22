@@ -51,13 +51,7 @@ class ResourceBuilderTest extends UnitTestCase
                 ->with('fooOperation', $parameters)
                 ->andReturn('result');
 
-        $overriddenMethods = array(
-            'validateLink',
-            'getLinkDescription',
-            'parseHref',
-        );
-
-        $builder = $this->mock($overriddenMethods, array($command))
+        $builder = $this->mock('createCommandFromLink', array($command))
             ->shouldReceive('validateLink')
                 ->with($data)
             ->shouldReceive('getLinkDescription')
@@ -87,7 +81,7 @@ class ResourceBuilderTest extends UnitTestCase
                 ->with('myModel')
                 ->andReturn($structure);
 
-        $builder = $this->mock('getEmbedDescription', array($command))
+        $builder = $this->mock('createModelFromEmbedded', array($command))
             ->shouldReceive('getEmbedDescription')
                 ->with('myLink')
                 ->andReturn(array('model' => 'myModel'))
@@ -123,7 +117,7 @@ class ResourceBuilderTest extends UnitTestCase
                 ->with('myModel')
                 ->andReturn($structure);
 
-        $builder = $this->mock('getEmbedDescription', array($command))
+        $builder = $this->mock('createModelFromEmbedded', array($command))
             ->shouldReceive('getEmbedDescription')
                 ->with('myLink')
                 ->andReturn(array('model' => 'myModel'))
@@ -159,7 +153,7 @@ class ResourceBuilderTest extends UnitTestCase
                 ->with('myModel')
                 ->andReturn(null);
 
-        $builder = $this->mock('getEmbedDescription', array($command))
+        $builder = $this->mock('createModelFromEmbedded', array($command))
             ->shouldReceive('getEmbedDescription')
                 ->with('myLink')
                 ->andReturn(array('model' => 'myModel'))
@@ -173,7 +167,7 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testGetLinkDescription()
     {
-        $builder = $this->mock('getDescription')
+        $builder = $this->mock('getLinkDescription')
             ->shouldReceive('getDescription')
                 ->with('links', 'myLinkName')
                 ->andReturn('returnValue')
@@ -189,7 +183,7 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testGetEmbedDescription()
     {
-        $builder = $this->mock('getDescription')
+        $builder = $this->mock('getEmbedDescription')
             ->shouldReceive('getDescription')
                 ->with('embeds', 'myLinkName')
                 ->andReturn('returnValue')
@@ -216,7 +210,7 @@ class ResourceBuilderTest extends UnitTestCase
                 ->with('myType')
                 ->andReturn($links);
 
-        $builder = $this->mock(array(), array($command));
+        $builder = $this->mock('getDescription', array($command));
         $result = $builder->getDescription('myType', 'myLink');
 
         $this->assertSame('$myLinkDescription', $result);
@@ -247,7 +241,7 @@ class ResourceBuilderTest extends UnitTestCase
                 ->andReturn($operation)
             ->getMock();
 
-        $builder = $this->mock(array(), array($command));
+        $builder = $this->mock('getDescription', array($command));
         $builder->getDescription('myType', 'nonExistantLink');
     }
 
@@ -259,7 +253,8 @@ class ResourceBuilderTest extends UnitTestCase
         $href = '/foo/bar/baz';
         $pattern = '#^/(?P<one>[a-z]+)/(?P<two>[a-z]+)/(?P<three>[a-z]+)$#';
 
-        $parameters = $this->mock()->parseHref($href, $pattern);
+        $builder = $this->mock('parseHref');
+        $parameters = $builder->parseHref($href, $pattern);
 
         $this->assertInternalType('array', $parameters);
 
@@ -278,7 +273,8 @@ class ResourceBuilderTest extends UnitTestCase
         $href = '/foo/bar/baz';
         $pattern = '#grault/(?P<one>[a-z]+)#';
 
-        $this->mock()->parseHref($href, $pattern);
+        $builder = $this->mock('parseHref');
+        $builder->parseHref($href, $pattern);
     }
 
     /**
@@ -289,7 +285,8 @@ class ResourceBuilderTest extends UnitTestCase
         $href = '/foo/bar/123';
         $pattern = '#^/foo/bar/(?P<id>[0-9]+)$#';
 
-        $parameters = $this->mock()->parseHref($href, $pattern);
+        $builder = $this->mock('parseHref');
+        $parameters = $builder->parseHref($href, $pattern);
 
         $this->assertInternalType('array', $parameters);
         $this->assertSame(123, $parameters['id']); // integer type
@@ -300,8 +297,7 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testValidateLink()
     {
-        $builder = $this->mock();
-        $builder->validateLink(
+        $this->mock('validateLink')->validateLink(
             array(
                 'class' => 'myClass',
                 'href' => 'path/to/foo',
@@ -319,7 +315,7 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testValidateLinkInvalid()
     {
-        $builder = $this->mock();
+        $builder = $this->mock('validateLink');
         $builder->validateLink(array('class' => 'missing href'));
     }
 }

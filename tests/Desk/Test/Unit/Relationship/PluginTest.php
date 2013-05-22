@@ -21,7 +21,8 @@ class PluginTest extends UnitTestCase
      */
     public function testGetSubscribedEvents()
     {
-        $events = $this->mock()->getSubscribedEvents();
+        $plugin = $this->mock('getSubscribedEvents');
+        $events = $plugin->getSubscribedEvents();
         $this->assertInternalType('array', $events);
     }
 
@@ -54,7 +55,7 @@ class PluginTest extends UnitTestCase
                 ->andReturn($command)
             ->getMock();
 
-        $this->mock()->onCreateCommand($event);
+        $this->mock('onCreateCommand')->onCreateCommand($event);
 
         if ($parser instanceof ResponseParser) {
             $builder = $this->getPrivateProperty($parser, 'builder');

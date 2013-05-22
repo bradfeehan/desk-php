@@ -23,14 +23,7 @@ class FactoryTest extends UnitTestCase
      */
     public function testFactory()
     {
-        $mockedMethods = array(
-            'processConfig',
-            'addAuthentication',
-            'addServiceDescription',
-            'addRelationshipPlugin',
-        );
-
-        $factory = $this->mock($mockedMethods)
+        $factory = $this->mock('factory')
             ->shouldReceive('processConfig')
                 ->with(array())
                 ->andReturn(array('base_url' => 'http://mock.localhost/'))
@@ -233,7 +226,8 @@ class FactoryTest extends UnitTestCase
 
         $client = $originalClient;
 
-        $this->mock()->addRelationshipPlugin($client);
+        $factory = $this->mock('addRelationshipPlugin');
+        $factory->addRelationshipPlugin($client);
         $this->assertSame($originalClient, $client);
     }
 }

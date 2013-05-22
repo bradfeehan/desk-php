@@ -4,7 +4,6 @@
     "apiVersion": 2,
     "operations": {
         "base": {
-            "class": "Desk\\Relationship\\Command",
             "responseType": "model",
             "parameters": {
                 "embed": {
@@ -25,9 +24,6 @@
             "extends": "base",
             "httpMethod": "GET",
             "responseClass": "Page",
-            "data": {
-                "deskClass": "page"
-            },
             "parameters": {
                 "per_page": {
                     "description": "Number of entries returned per page",
@@ -77,7 +73,14 @@
         "ListUsers": {
             "extends": "list",
             "summary": "Retrieve a paginated list of all users",
-            "uri": "users"
+            "uri": "users",
+            "data": {
+                "embeds": {
+                    "entries": {
+                        "model": "UserModel"
+                    }
+                }
+            }
         },
         "ShowUser": {
             "extends": "show",
@@ -85,15 +88,17 @@
             "uri": "users/{id}",
             "responseClass": "UserModel",
             "data": {
-                "deskClass": "user"
+                "links": {
+                    "self": {
+                        "operation": "ShowUser",
+                        "pattern": "#/api/v2/users/(?P<id>[0-9]+)$#"
+                    }
+                }
             }
         }
     },
     "models": {
         "Page": {
-            "data": {
-                "deskClass": "page"
-            },
             "type": "object",
             "properties": {
                 "total_entries": {
@@ -104,9 +109,6 @@
             }
         },
         "UserModel": {
-            "data": {
-                "deskClass": "user"
-            },
             "type": "object",
             "properties": {
                 "name": {

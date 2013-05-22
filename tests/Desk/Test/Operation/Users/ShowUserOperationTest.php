@@ -55,10 +55,10 @@ class ShowUserOperationTest extends ShowOperationTestCase
 
         // Get a link to the "self" link in the response
         $self = $user->getLink('self');
-        $this->assertInstanceOf('Desk\\Relationship\\Command', $self);
+        $this->assertInstanceOf('Guzzle\\Service\\Command\\OperationCommand', $self);
 
         // Check the URL for the request is the same as the response
         $url = $self->prepare()->getUrl();
-        $this->assertSame('http://mock.localhost/api/v2/users/1', $url);
+        $this->assertSame('http://mock.localhost/users/1', $url);
     }
 }

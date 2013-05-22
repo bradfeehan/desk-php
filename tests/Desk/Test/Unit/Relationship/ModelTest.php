@@ -79,7 +79,7 @@ class ModelTest extends UnitTestCase
     {
         $builder = \Mockery::mock('Desk\\Relationship\\ResourceBuilderInterface')
             ->shouldReceive('createCommandFromLink')
-                ->with(array('link' => 'content'))
+                ->with('myLink', array('link' => 'content'))
                 ->andReturn('returnValue')
             ->getMock();
 
@@ -120,7 +120,7 @@ class ModelTest extends UnitTestCase
     {
         $builder = \Mockery::mock('Desk\\Relationship\\ResourceBuilderInterface')
             ->shouldReceive('createModelFromEmbedded')
-                ->with(array('embedded' => 'content'))
+                ->with('myEmbedded', array('embedded' => 'content'))
                 ->andReturn('returnValue')
             ->getMock();
 

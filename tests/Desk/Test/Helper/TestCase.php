@@ -6,6 +6,7 @@ use Desk\Client as DeskClient;
 use Guzzle\Service\Client;
 use Guzzle\Tests\GuzzleTestCase;
 use ReflectionClass;
+use InvalidArgumentException;
 
 abstract class TestCase extends GuzzleTestCase
 {

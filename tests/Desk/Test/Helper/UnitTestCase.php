@@ -21,14 +21,15 @@ abstract class UnitTestCase extends TestCase
      * implementation, except for method names passed in to $methods
      * (these can be stubbed using shouldReceive()... etc).
      *
-     * @param array $methods Any methods that will be overridden
+     * @param array $methods         Any methods that will be overridden
+     * @param array $constructorArgs Optional constructor args
      *
      * @return Desk\Client\Factory
      */
-    protected function mock($methods = array())
+    protected function mock($methods = array(), array $constructorArgs = array())
     {
         $class = $this->getMockedClass();
         $methods = implode(',', (array)$methods);
-        return \Mockery::mock("{$class}[{$methods}]");
+        return \Mockery::mock("{$class}[{$methods}]", $constructorArgs);
     }
 }

@@ -34,7 +34,7 @@ class Plugin implements EventSubscriberInterface
      */
     public function onCreateCommand(Event $event)
     {
-        $resourceBuilder = new ResourceBuilder($event['client']);
+        $resourceBuilder = new ResourceBuilder($event['command']);
         $responseParser = ResponseParser::getInstance();
         $responseParser->setResourceBuilder($resourceBuilder);
         $event['command']->setResponseParser($responseParser);

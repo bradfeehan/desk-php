@@ -2,80 +2,74 @@
 
 namespace Desk\Relationship;
 
-use Desk\Client;
 use Desk\Exception\InvalidArgumentException;
-use Desk\Relationship\Exception\InvalidEmbedFormatException;
+use Desk\Exception\UnexpectedValueException;
 use Desk\Relationship\Exception\InvalidLinkFormatException;
 use Desk\Relationship\Model;
 use Desk\Relationship\ResourceBuilderInterface;
+use Guzzle\Service\Command\AbstractCommand;
 
 class ResourceBuilder implements ResourceBuilderInterface
 {
 
     /**
-     * The client used to build resources
+     * The command which this builder is making resources for
      *
-     * @var Desk\Client
+     * @var Guzzle\Service\Command\AbstractCommand
      */
-    private $client;
+    private $command;
 
 
     /**
-     * @param Desk\Client $client The client used to build resources
+     * @param Guzzle\Service\Command\AbstractCommand $command Command being built for
      */
-    public function __construct(Client $client)
+    public function __construct(AbstractCommand $command)
     {
-        $this->client = $client;
+        $this->command = $command;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createCommandFromLink(array $link)
+    public function createCommandFromLink($linkName, array $data)
     {
-        $this->validateLink($link);
+        $this->validateLink($data);
+        $description = $this->getLinkDescription($linkName);
 
-        try {
-            $command = $this->getCommandForDeskClass($link['class']);
-        } catch (InvalidArgumentException $e) {
-            throw new InvalidLinkFormatException(
-                "Unknown linked resource class '{$link['class']}'"
-            );
-        }
+        $parameters = $this->parseHref($data['href'], $description['pattern']);
 
-        $command->setUri($link['href']);
-
-        return $command;
+        return $this->command
+            ->getClient()
+            ->getCommand($description['operation'], $parameters);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createModelFromEmbedded(array $data)
+    public function createModelFromEmbedded($linkName, array $data)
     {
-        // detect if this is an embedded array of models
+        // Process an array recursively if it's not associative
         if (isset($data[0])) {
             $models = array();
 
             foreach ($data as $element) {
-                $models[] = $this->createModelFromEmbedded($element);
+                $models[] = $this->createModelFromEmbedded($linkName, $element);
             }
 
             return $models;
         }
 
-        if (empty($data['_links']) || empty($data['_links']['self'])) {
-            throw InvalidEmbedFormatException::fromEmbed($data);
-        }
+        // find out what model it should be from the link name
+        $description = $this->getEmbedDescription($linkName);
 
-        $this->validateLink($data['_links']['self']);
-        $class = $data['_links']['self']['class'];
+        $structure = $this->command
+            ->getClient()
+            ->getDescription()
+            ->getModel($description['model']);
 
-        try {
-            $structure = $this->getModelForDeskClass($class);
-        } catch (InvalidArgumentException $e) {
-            throw new InvalidEmbedFormatException(
-                "Unknown embedded resource class '$class'"
+        if (!$structure) {
+            throw new UnexpectedValueException(
+                "Unknown embedded resource model '{$description['model']}'"
             );
         }
 
@@ -98,50 +92,101 @@ class ResourceBuilder implements ResourceBuilderInterface
     }
 
     /**
-     * Creates a command for a particular Desk "class"
+     * Finds the link description for a given link name
      *
-     * @param string $deskClass
+     * @param string $linkName The name of the link
      *
-     * @return Desk\Relationship\Command
-     *
-     * @throws Desk\Exception\InvalidArgumentException If $deskClass is
-     * not a known Desk class
+     * @return array The link description
+     * @throws Desk\Exception\InvalidArgumentException If description
+     * for the link is missing
      */
-    public function getCommandForDeskClass($deskClass)
+    public function getLinkDescription($linkName)
     {
-        $operations = $this->client->getDescription()->getOperations();
-        foreach ($operations as $operation) {
-            if ($operation->getData('deskClass') === $deskClass) {
-                return $this->client->getCommand($operation->getName());
+        return $this->getDescription('links', $linkName);
+    }
+
+    /**
+     * Finds the embeddable link description for a given link name
+     *
+     * @param string $linkName The name of the link
+     *
+     * @return array The embeddable link description
+     * @throws Desk\Exception\InvalidArgumentException If description
+     * for the link is missing
+     */
+    public function getEmbedDescription($linkName)
+    {
+        return $this->getDescription('embeds', $linkName);
+    }
+
+    /**
+     * Helper function to get a link description
+     *
+     * Implements common functionality of getLinkDescription() and
+     * getEmbeddableLinkDescription().
+     *
+     * @param string $linkType The data key to look for the description
+     * @param string $linkName The name of the link
+     *
+     * @return array
+     * @throws Desk\Exception\InvalidArgumentException If description
+     * for the link is missing
+     */
+    public function getDescription($linkType, $linkName)
+    {
+        $links = $this->command->getOperation()->getData($linkType);
+
+        foreach ((array) $links as $name => $description) {
+            if ($name === $linkName) {
+                return $description;
             }
         }
 
+        $operation = $this->command->getOperation()->getName();
+
         throw new InvalidArgumentException(
-            "Unknown Desk class '$deskClass'"
+            "Operation '$operation' missing '$linkName' link description"
         );
     }
 
     /**
-     * Gets the model structure for a particular Desk "class"
+     * Parses the href into an associative array of parameters
      *
-     * @param string $deskClass
+     * @param string $href
+     * @param string $pattern
      *
-     * @return Guzzle\Service\Description\Parameter
-     *
-     * @throws Desk\Exception\InvalidArgumentException If $deskClass is
-     * not a known Desk class
+     * @return array
+     * @throws Desk\Exception\UnexpectedValueException If no matches
+     * are found or there's an error with the regex
      */
-    public function getModelForDeskClass($deskClass)
+    public function parseHref($href, $pattern)
     {
-        $models = $this->client->getDescription()->getModels();
-        foreach ($models as $model) {
-            if ($model->getData('deskClass') === $deskClass) {
-                return $model;
+        // Parse href using pattern
+        if (!($result = preg_match($pattern, $href, $parameters))) {
+            throw new UnexpectedValueException(
+                "Couldn't parse parameters from link href"
+            );
+        }
+
+        // Only return named capture groups -- preg_match() returns
+        // both numeric keys for all capture groups, and string keys
+        // for named capture groups, so filter out numeric keys
+        for ($i = 0; $i < count($parameters); $i++) {
+            unset($parameters[$i]);
+        }
+
+        // Convert strings containing integers to integer types. This
+        // is desirable, because if the service description says that
+        // the type must be a string, SchemaValidator will cast a
+        // numeric type to a string, and validation will pass. But if
+        // the schema specifies an integer type, then a string
+        // containing a number is passed in, it will fail validation.
+        foreach ($parameters as $key => &$value) {
+            if (is_string($value) && ctype_digit($value)) {
+                $value = (integer) $value;
             }
         }
 
-        throw new InvalidArgumentException(
-            "Unknown Desk class '$deskClass'"
-        );
+        return $parameters;
     }
 }

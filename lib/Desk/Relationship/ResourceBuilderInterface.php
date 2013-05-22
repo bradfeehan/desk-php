@@ -8,18 +8,20 @@ interface ResourceBuilderInterface
     /**
      * Creates a Desk command representing a link to a resource
      *
-     * @param array $link A node unter "_links" in a Desk response
+     * @param string $linkName The name of the link in question
+     * @param array  $data     A node unter "_links" in a Desk response
      *
-     * @return Desk\Relationship\Command
+     * @return Guzzle\Service\Command\OperationCommand
      */
-    public function createCommandFromLink(array $link);
+    public function createCommandFromLink($linkName, array $data);
 
     /**
      * Creates a model representing an embedded resource
      *
-     * @param array $data A node under "_embedded" in a Desk response
+     * @param string $linkName The name of the link in question
+     * @param array  $data     A node under "_embedded" in a response
      *
      * @return Desk\Relationship\Model
      */
-    public function createModelFromEmbedded(array $data);
+    public function createModelFromEmbedded($linkName, array $data);
 }

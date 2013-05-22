@@ -64,7 +64,7 @@ class Model extends GuzzleModel
      *
      * @param string $linkName The name of the link (e.g. "self")
      *
-     * @return Guzzle\Service\Command\CommandInterface
+     * @return Guzzle\Service\Command\OperationCommand
      */
     public function getLink($linkName)
     {
@@ -74,8 +74,8 @@ class Model extends GuzzleModel
             );
         }
 
-        $link = $this->links[$linkName];
-        return $this->builder->createCommandFromLink($link);
+        $data = $this->links[$linkName];
+        return $this->builder->createCommandFromLink($linkName, $data);
     }
 
     /**
@@ -94,6 +94,6 @@ class Model extends GuzzleModel
         }
 
         $data = $this->embedded[$linkName];
-        return $this->builder->createModelFromEmbedded($data);
+        return $this->builder->createModelFromEmbedded($linkName, $data);
     }
 }

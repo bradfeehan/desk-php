@@ -21,11 +21,11 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testConstruct()
     {
-        $client = \Mockery::mock('Desk\\Client');
-        $builder = new ResourceBuilder($client);
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
+        $builder = new ResourceBuilder($command);
 
-        $actualClient = $this->getPrivateProperty($builder, 'client');
-        $this->assertSame($client, $actualClient);
+        $actualCommand = $this->getPrivateProperty($builder, 'command');
+        $this->assertSame($command, $actualCommand);
     }
 
     /**
@@ -33,55 +33,43 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testCreateCommandFromLink()
     {
-        $command = \Mockery::mock('Desk\\Command')
-            ->shouldReceive('setUri')
-                ->with('/path/to/resource')
-            ->getMock();
+        $description = array(
+            'operation' => 'fooOperation',
+            'pattern' => '/thePattern/',
+        );
 
-        $link = array(
+        $data = array(
             'href' => '/path/to/resource',
             'class' => 'myClass',
         );
 
-        $builder = $this->mock(array('validateLink', 'getCommandForDeskClass'))
-            ->shouldReceive('validateLink')
-                ->with($link)
-            ->shouldReceive('getCommandForDeskClass')
-                ->with('myClass')
-                ->andReturn($command)
-            ->getMock();
+        $parameters = array('foo' => 'bar');
 
-        $result = $builder->createCommandFromLink($link);
-        $this->assertSame($command, $result);
-    }
-
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::createCommandFromLink
-     * @expectedException Desk\Relationship\Exception\InvalidLinkFormatException
-     * @expectedExceptionMessage Unknown linked resource class 'myClass'
-     */
-    public function testCreateCommandFromLinkInvalid()
-    {
-        $command = \Mockery::mock();
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
         $command
-            ->shouldReceive('getOperation->setUri')
-                ->with('/path/to/resource');
+            ->shouldReceive('getClient->getCommand')
+                ->with('fooOperation', $parameters)
+                ->andReturn('result');
 
-        $link = array(
-            'href' => '/path/to/resource',
-            'class' => 'myClass',
+        $overriddenMethods = array(
+            'validateLink',
+            'getLinkDescription',
+            'parseHref',
         );
 
-        $builder = $this->mock(array('validateLink', 'getCommandForDeskClass'))
+        $builder = $this->mock($overriddenMethods, array($command))
             ->shouldReceive('validateLink')
-                ->with($link)
-            ->shouldReceive('getCommandForDeskClass')
-                ->with('myClass')
-                ->andThrow('Desk\\Exception\\InvalidArgumentException')
+                ->with($data)
+            ->shouldReceive('getLinkDescription')
+                ->with('myLink')
+                ->andReturn($description)
+            ->shouldReceive('parseHref')
+                ->with('/path/to/resource', '/thePattern/')
+                ->andReturn($parameters)
             ->getMock();
 
-        $result = $builder->createCommandFromLink($link);
-        $this->assertSame($command, $result);
+        $result = $builder->createCommandFromLink('myLink', $data);
+        $this->assertSame('result', $result);
     }
 
     /**
@@ -89,31 +77,28 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testCreateModelFromEmbedded()
     {
-        $self = array(
-            'class' => 'myClass',
-            'href' => '/path/to/self',
-        );
-
-        $embedded = array(
-            'foo' => 'bar',
-            '_links' => array(
-                'self' => $self,
-            ),
-        );
+        $data = array('foo' => 'bar');
 
         $structure = \Mockery::mock('Guzzle\\Service\\Description\\Parameter');
 
-        $builder = $this->mock(array('validateLink', 'getModelForDeskClass'))
-            ->shouldReceive('validateLink')
-                ->with($self)
-            ->shouldReceive('getModelForDeskClass')
-                ->with('myClass')
-                ->andReturn($structure)
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
+        $command
+            ->shouldReceive('getClient->getDescription->getModel')
+                ->with('myModel')
+                ->andReturn($structure);
+
+        $builder = $this->mock('getEmbedDescription', array($command))
+            ->shouldReceive('getEmbedDescription')
+                ->with('myLink')
+                ->andReturn(array('model' => 'myModel'))
             ->getMock();
 
-        $model = $builder->createModelFromEmbedded($embedded);
-        $this->assertSame(array('foo' => 'bar'), $model->toArray());
+        $model = $builder->createModelFromEmbedded('myLink', $data);
+
+        $this->assertInstanceOf('Desk\\Relationship\\Model', $model);
+
         $this->assertSame($structure, $model->getStructure());
+        $this->assertSame('bar', $model->get('foo'));
 
         $modelBuilder = $this->getPrivateProperty($model, 'builder');
         $this->assertSame($builder, $modelBuilder);
@@ -122,120 +107,192 @@ class ResourceBuilderTest extends UnitTestCase
     /**
      * @covers Desk\Relationship\ResourceBuilder::createModelFromEmbedded
      */
-    public function testCreateModelFromEmbeddedWithEmbeddedArray()
+    public function testCreateModelFromEmbeddedWithArray()
     {
-        $self = array(
-            'class' => 'myClass',
-            'href' => '/path/to/self',
-        );
-
-        $embedded = array(
-            array(
-                'foo' => 'bar',
-                '_links' => array(
-                    'self' => $self,
-                ),
-            ),
-            array(
-                'baz' => 'qux',
-                '_links' => array(
-                    'self' => $self,
-                ),
-            ),
-            array(
-                'fim' => 'fum',
-                '_links' => array(
-                    'self' => $self,
-                ),
-            ),
+        $data = array(
+            array('foo' => 'bar'),
+            array('bar' => 'baz'),
+            array('baz' => 'qux'),
         );
 
         $structure = \Mockery::mock('Guzzle\\Service\\Description\\Parameter');
 
-        $builder = $this->mock(array('validateLink', 'getModelForDeskClass'))
-            ->shouldReceive('validateLink')
-                ->with($self)
-                ->times(3)
-            ->shouldReceive('getModelForDeskClass')
-                ->with('myClass')
-                ->times(3)
-                ->andReturn($structure)
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
+        $command
+            ->shouldReceive('getClient->getDescription->getModel')
+                ->with('myModel')
+                ->andReturn($structure);
+
+        $builder = $this->mock('getEmbedDescription', array($command))
+            ->shouldReceive('getEmbedDescription')
+                ->with('myLink')
+                ->andReturn(array('model' => 'myModel'))
             ->getMock();
 
-        $models = $builder->createModelFromEmbedded($embedded);
+        $models = $builder->createModelFromEmbedded('myLink', $data);
+
         $this->assertInternalType('array', $models);
-        $this->assertSame(3, count($models));
 
         foreach ($models as $model) {
+            $this->assertSame($structure, $model->getStructure());
             $modelBuilder = $this->getPrivateProperty($model, 'builder');
             $this->assertSame($builder, $modelBuilder);
-            $this->assertSame($structure, $model->getStructure());
         }
 
         $this->assertSame('bar', $models[0]->get('foo'));
-        $this->assertSame('qux', $models[1]->get('baz'));
-        $this->assertSame('fum', $models[2]->get('fim'));
+        $this->assertSame('baz', $models[1]->get('bar'));
+        $this->assertSame('qux', $models[2]->get('baz'));
     }
 
     /**
      * @covers Desk\Relationship\ResourceBuilder::createModelFromEmbedded
-     * @expectedException Desk\Relationship\Exception\InvalidEmbedFormatException
-     * @expectedExceptionMessage format: missing expected '_links' element; missing
+     * @expectedException Desk\Exception\UnexpectedValueException
+     * @expectedExceptionMessage Unknown embedded resource model 'myModel'
      */
-    public function testCreateModelFromEmbeddedWithInvalidFormat()
+    public function testCreateModelFromEmbeddedWithUnknownModel()
     {
-        $this->mock()->createModelFromEmbedded(array('foo' => 'bar'));
-    }
+        $data = array('foo' => 'bar');
 
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::createModelFromEmbedded
-     * @expectedException Desk\Relationship\Exception\InvalidLinkFormatException
-     * @expectedExceptionMessage Invalid resource link format: missing expected 'class' element
-     */
-    public function testCreateModelFromEmbeddedWithInvalidSelfLinkFormat()
-    {
-        $embed = array(
-            'foo' => 'bar',
-            '_links' => array(
-                'self' => array(
-                    'href' => '/missing/desk/class',
-                ),
-            ),
-        );
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
+        $command
+            ->shouldReceive('getClient->getDescription->getModel')
+                ->with('myModel')
+                ->andReturn(null);
 
-        $this->mock()->createModelFromEmbedded($embed);
-    }
-
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::createModelFromEmbedded
-     * @expectedException Desk\Relationship\Exception\InvalidEmbedFormatException
-     * @expectedExceptionMessage Unknown embedded resource class 'myClass'
-     */
-    public function testCreateModelFromEmbeddedWithUnknownDeskClass()
-    {
-        $self = array(
-            'class' => 'myClass',
-            'href' => '/path/to/self',
-        );
-
-        $embedded = array(
-            'foo' => 'bar',
-            '_links' => array(
-                'self' => $self,
-            ),
-        );
-
-        $structure = \Mockery::mock('Guzzle\\Service\\Description\\Parameter');
-
-        $builder = $this->mock(array('validateLink', 'getModelForDeskClass'))
-            ->shouldReceive('validateLink')
-                ->with($self)
-            ->shouldReceive('getModelForDeskClass')
-                ->with('myClass')
-                ->andThrow('Desk\\Exception\\InvalidArgumentException')
+        $builder = $this->mock('getEmbedDescription', array($command))
+            ->shouldReceive('getEmbedDescription')
+                ->with('myLink')
+                ->andReturn(array('model' => 'myModel'))
             ->getMock();
 
-        $builder->createModelFromEmbedded($embedded);
+        $builder->createModelFromEmbedded('myLink', $data);
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::getLinkDescription
+     */
+    public function testGetLinkDescription()
+    {
+        $builder = $this->mock('getDescription')
+            ->shouldReceive('getDescription')
+                ->with('links', 'myLinkName')
+                ->andReturn('returnValue')
+            ->getMock();
+
+        $result = $builder->getLinkDescription('myLinkName');
+
+        $this->assertSame('returnValue', $result);
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::getEmbedDescription
+     */
+    public function testGetEmbedDescription()
+    {
+        $builder = $this->mock('getDescription')
+            ->shouldReceive('getDescription')
+                ->with('embeds', 'myLinkName')
+                ->andReturn('returnValue')
+            ->getMock();
+
+        $result = $builder->getEmbedDescription('myLinkName');
+
+        $this->assertSame('returnValue', $result);
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::getDescription
+     */
+    public function testGetDescription()
+    {
+        $links = array(
+            'notMyLink' => '$notMyLinkDescription',
+            'myLink' => '$myLinkDescription',
+        );
+
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
+        $command
+            ->shouldReceive('getOperation->getData')
+                ->with('myType')
+                ->andReturn($links);
+
+        $builder = $this->mock(array(), array($command));
+        $result = $builder->getDescription('myType', 'myLink');
+
+        $this->assertSame('$myLinkDescription', $result);
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::getDescription
+     * @expectedException Desk\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Operation 'myOperation' missing 'nonExistantLink' link description
+     */
+    public function testGetDescriptionUnknownLinkName()
+    {
+        $links = array(
+            'fooLink' => '$fooLinkDescription',
+            'barLink' => '$barLinkDescription',
+        );
+
+        $operation = \Mockery::mock()
+            ->shouldReceive('getData')
+                ->with('myType')
+                ->andReturn($links)
+            ->shouldReceive('getName')
+                ->andReturn('myOperation')
+            ->getMock();
+
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand')
+            ->shouldReceive('getOperation')
+                ->andReturn($operation)
+            ->getMock();
+
+        $builder = $this->mock(array(), array($command));
+        $builder->getDescription('myType', 'nonExistantLink');
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::parseHref
+     */
+    public function testParseHref()
+    {
+        $href = '/foo/bar/baz';
+        $pattern = '#^/(?P<one>[a-z]+)/(?P<two>[a-z]+)/(?P<three>[a-z]+)$#';
+
+        $parameters = $this->mock()->parseHref($href, $pattern);
+
+        $this->assertInternalType('array', $parameters);
+
+        $this->assertSame('foo', $parameters['one']);
+        $this->assertSame('bar', $parameters['two']);
+        $this->assertSame('baz', $parameters['three']);
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::parseHref
+     * @expectedException Desk\Exception\UnexpectedValueException
+     * @expectedExceptionMessage Couldn't parse parameters from link href
+     */
+    public function testParseHrefNoMatches()
+    {
+        $href = '/foo/bar/baz';
+        $pattern = '#grault/(?P<one>[a-z]+)#';
+
+        $this->mock()->parseHref($href, $pattern);
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::parseHref
+     */
+    public function testParseHrefWithIntegerParameters()
+    {
+        $href = '/foo/bar/123';
+        $pattern = '#^/foo/bar/(?P<id>[0-9]+)$#';
+
+        $parameters = $this->mock()->parseHref($href, $pattern);
+
+        $this->assertInternalType('array', $parameters);
+        $this->assertSame(123, $parameters['id']); // integer type
     }
 
     /**
@@ -264,113 +321,5 @@ class ResourceBuilderTest extends UnitTestCase
     {
         $builder = $this->mock();
         $builder->validateLink(array('class' => 'missing href'));
-    }
-
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::getCommandForDeskClass
-     */
-    public function testGetCommandForDeskClass()
-    {
-        $operations = array(
-            \Mockery::mock('Guzzle\\Service\\Description\\Operation')
-                ->shouldReceive('getData')
-                    ->with('deskClass')
-                    ->andReturn('fooClass')
-                ->shouldReceive('getName')->never()
-                ->getMock(),
-            \Mockery::mock('Guzzle\\Service\\Description\\Operation')
-                ->shouldReceive('getData')
-                    ->with('deskClass')
-                    ->andReturn('barClass')
-                ->shouldReceive('getName')
-                    ->andReturn('barOperation')
-                ->getMock(),
-        );
-
-        $client = \Mockery::mock('Desk\\Client');
-        $client
-            ->shouldReceive('getCommand')
-                ->with('barOperation')
-                ->andReturn('returnValue')
-            ->shouldReceive('getDescription->getOperations')
-                ->andReturn($operations);
-
-        $builder = new ResourceBuilder($client);
-
-        $result = $builder->getCommandForDeskClass('barClass');
-        $this->assertSame('returnValue', $result);
-    }
-
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::getCommandForDeskClass
-     * @expectedException Desk\Exception\InvalidArgumentException
-     */
-    public function testGetCommandForDeskClassInvalid()
-    {
-        $operations = array(
-            \Mockery::mock('Guzzle\\Service\\Description\\Operation')
-                ->shouldReceive('getData')
-                    ->with('deskClass')
-                    ->andReturn('fooClass')
-                ->getMock()
-        );
-
-        $client = \Mockery::mock('Desk\\Client');
-        $client
-            ->shouldReceive('getDescription->getOperations')
-                ->andReturn($operations);
-
-        $builder = new ResourceBuilder($client);
-        $builder->getCommandForDeskClass('barClass');
-    }
-
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::getModelForDeskClass
-     */
-    public function testGetModelForDeskClass()
-    {
-        $fooModel = \Mockery::mock('Guzzle\\Service\\Description\\Parameter')
-            ->shouldReceive('getData')
-                ->with('deskClass')
-                ->andReturn('fooClass')
-            ->getMock();
-
-        $barModel = \Mockery::mock('Guzzle\\Service\\Description\\Parameter')
-            ->shouldReceive('getData')
-                ->with('deskClass')
-                ->andReturn('barClass')
-            ->getMock();
-
-        $client = \Mockery::mock('Desk\\Client');
-        $client->shouldReceive('getDescription->getModels')
-            ->andReturn(array($fooModel, $barModel));
-
-        $builder = new ResourceBuilder($client);
-
-        $result = $builder->getModelForDeskClass('barClass');
-        $this->assertSame($barModel, $result);
-    }
-
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::getModelForDeskClass
-     * @expectedException Desk\Exception\InvalidArgumentException
-     */
-    public function testGetModelForDeskClassInvalid()
-    {
-        $models = array(
-            \Mockery::mock('Guzzle\\Service\\Description\\Parameter')
-                ->shouldReceive('getData')
-                    ->with('deskClass')
-                    ->andReturn('fooClass')
-                ->getMock(),
-        );
-
-        $client = \Mockery::mock('Desk\\Client');
-        $client->shouldReceive('getDescription->getModels')
-            ->andReturn($models);
-
-        $builder = new ResourceBuilder($client);
-
-        $builder->getModelForDeskClass('barClass');
     }
 }

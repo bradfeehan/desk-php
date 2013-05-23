@@ -94,6 +94,18 @@
         },
 
 
+        "ListCustomers": {
+            "extends": "list",
+            "summary": "Retrieve a paginated list of all customers",
+            "uri": "customers",
+            "data": {
+                "embeds": {
+                    "entries": {
+                        "model": "CustomerModel"
+                    }
+                }
+            }
+        },
         "ShowCustomer": {
             "extends": "show",
             "summary": "Retrieve a single customer by ID",

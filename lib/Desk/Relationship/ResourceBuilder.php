@@ -38,6 +38,10 @@ class ResourceBuilder implements ResourceBuilderInterface
 
         $parameters = $this->parseHref($data['href'], $description['pattern']);
 
+        if ($description['operation'] === '$self') {
+            $description['operation'] = $this->command->getName();
+        }
+
         return $this->command
             ->getClient()
             ->getCommand($description['operation'], $parameters);

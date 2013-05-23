@@ -67,6 +67,46 @@ class ResourceBuilderTest extends UnitTestCase
     }
 
     /**
+     * @covers Desk\Relationship\ResourceBuilder::createCommandFromLink
+     */
+    public function testCreateCommandFromLinkWithSelfOperation()
+    {
+        $description = array(
+            'operation' => '$self',
+            'pattern' => '/thePattern/',
+        );
+
+        $data = array(
+            'href' => '/path/to/resource',
+            'class' => 'myClass',
+        );
+
+        $parameters = array('foo' => 'bar');
+
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
+        $command
+            ->shouldReceive('getName')
+                ->andReturn('selfOperationName')
+            ->shouldReceive('getClient->getCommand')
+                ->with('selfOperationName', $parameters)
+                ->andReturn('result');
+
+        $builder = $this->mock('createCommandFromLink', array($command))
+            ->shouldReceive('validateLink')
+                ->with($data)
+            ->shouldReceive('getLinkDescription')
+                ->with('myLink')
+                ->andReturn($description)
+            ->shouldReceive('parseHref')
+                ->with('/path/to/resource', '/thePattern/')
+                ->andReturn($parameters)
+            ->getMock();
+
+        $result = $builder->createCommandFromLink('myLink', $data);
+        $this->assertSame('result', $result);
+    }
+
+    /**
      * @covers Desk\Relationship\ResourceBuilder::createModelFromEmbedded
      */
     public function testCreateModelFromEmbedded()

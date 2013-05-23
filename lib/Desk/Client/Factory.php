@@ -4,14 +4,35 @@ namespace Desk\Client;
 
 use Desk\Client;
 use Desk\Client\FactoryInterface;
+use Desk\Client\ServiceDescriptionLoader;
 use Desk\Exception\InvalidArgumentException;
 use Desk\Relationship\Plugin as RelationshipPlugin;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Description\ServiceDescription;
+use Guzzle\Service\Description\ServiceDescriptionLoader as GuzzleServiceDescriptionLoader;
 
 class Factory implements FactoryInterface
 {
+
+    /**
+     * The service description loader used by this factory
+     *
+     * @var Guzzle\Service\Description\ServiceDescriptionLoader
+     */
+    private $loader;
+
+
+    /**
+     * Creates a new Factory
+     *
+     * @param Guzzle\Service\Description\ServiceDescriptionLoader $loader
+     */
+    public function __construct(GuzzleServiceDescriptionLoader $loader = null)
+    {
+        $this->loader = $loader ?: new ServiceDescriptionLoader();
+    }
+
 
     /**
      * Factory method to create a new instance of Desk\Client
@@ -127,7 +148,7 @@ class Factory implements FactoryInterface
      */
     public function addServiceDescription(Client &$client)
     {
-        $description = ServiceDescription::factory(__DIR__ . '/desk.json');
+        $description = $this->loader->load(__DIR__ . '/desk.json');
         $client->setDescription($description);
     }
 

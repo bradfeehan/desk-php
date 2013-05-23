@@ -19,6 +19,18 @@ class FactoryTest extends UnitTestCase
     }
 
     /**
+     * @covers Desk\Client\Factory::__construct
+     */
+    public function testConstruct()
+    {
+        $loader = \Mockery::mock('Desk\\Client\\ServiceDescriptionLoader');
+        $factory = new ClientFactory($loader);
+
+        $factoryLoader = $this->getPrivateProperty($factory, 'loader');
+        $this->assertSame($loader, $factoryLoader);
+    }
+
+    /**
      * @covers Desk\Client\Factory::factory
      */
     public function testFactory()

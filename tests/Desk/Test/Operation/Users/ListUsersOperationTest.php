@@ -52,5 +52,11 @@ class ListUsersOperationTest extends ListOperationTestCase
         $this->assertSame('Jane Doe', $jane->get('public_name'));
         $this->assertSame('jane@acme.com', $jane->get('email'));
         $this->assertSame('agent', $jane->get('level'));
+
+        // test links to other pages
+        $first = $results->getLink('first');
+
+        $this->assertInstanceOf('Guzzle\\Service\\Command\\AbstractCommand', $first);
+        $request = $first->prepare();
     }
 }

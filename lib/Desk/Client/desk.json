@@ -37,6 +37,30 @@
                     "minimum": 1,
                     "location": "query"
                 }
+            },
+            "data": {
+                "links": {
+                    "self": {
+                        "operation": "$self",
+                        "pattern": "#\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "$self",
+                        "pattern": "#\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "$self",
+                        "pattern": "#\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "$self",
+                        "pattern": "#\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "$self",
+                        "pattern": "#\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
             }
         },
         "show": {

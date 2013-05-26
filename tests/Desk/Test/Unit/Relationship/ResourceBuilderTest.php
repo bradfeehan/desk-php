@@ -33,77 +33,35 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testCreateCommandFromLink()
     {
-        $description = array(
+        $data = array(
+            'class' => 'fooClass',
+            'href' => '/path/to/foo',
+        );
+
+        $desc = array(
             'operation' => 'fooOperation',
-            'pattern' => '/thePattern/',
+            'pattern' => '$pattern',
         );
-
-        $data = array(
-            'href' => '/path/to/resource',
-            'class' => 'myClass',
-        );
-
-        $parameters = array('foo' => 'bar');
 
         $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
         $command
             ->shouldReceive('getClient->getCommand')
-                ->with('fooOperation', $parameters)
-                ->andReturn('result');
+                ->with('fooOperation', array('the' => 'params'))
+                ->andReturn('returnValue');
 
         $builder = $this->mock('createCommandFromLink', array($command))
             ->shouldReceive('validateLink')
                 ->with($data)
-            ->shouldReceive('getLinkDescription')
-                ->with('myLink')
-                ->andReturn($description)
+            ->shouldReceive('validateLinkDescription')
+                ->with($desc)
             ->shouldReceive('parseHref')
-                ->with('/path/to/resource', '/thePattern/')
-                ->andReturn($parameters)
+                ->with('/path/to/foo', '$pattern')
+                ->andReturn(array('the' => 'params'))
             ->getMock();
 
-        $result = $builder->createCommandFromLink('myLink', $data);
-        $this->assertSame('result', $result);
-    }
+        $command = $builder->createCommandFromLink('fooLink', $data, $desc);
 
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::createCommandFromLink
-     */
-    public function testCreateCommandFromLinkWithSelfOperation()
-    {
-        $description = array(
-            'operation' => '$self',
-            'pattern' => '/thePattern/',
-        );
-
-        $data = array(
-            'href' => '/path/to/resource',
-            'class' => 'myClass',
-        );
-
-        $parameters = array('foo' => 'bar');
-
-        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
-        $command
-            ->shouldReceive('getName')
-                ->andReturn('selfOperationName')
-            ->shouldReceive('getClient->getCommand')
-                ->with('selfOperationName', $parameters)
-                ->andReturn('result');
-
-        $builder = $this->mock('createCommandFromLink', array($command))
-            ->shouldReceive('validateLink')
-                ->with($data)
-            ->shouldReceive('getLinkDescription')
-                ->with('myLink')
-                ->andReturn($description)
-            ->shouldReceive('parseHref')
-                ->with('/path/to/resource', '/thePattern/')
-                ->andReturn($parameters)
-            ->getMock();
-
-        $result = $builder->createCommandFromLink('myLink', $data);
-        $this->assertSame('result', $result);
+        $this->assertSame('returnValue', $command);
     }
 
     /**
@@ -111,28 +69,27 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testCreateModelFromEmbedded()
     {
-        $data = array('foo' => 'bar');
-
         $structure = \Mockery::mock('Guzzle\\Service\\Description\\Parameter');
 
         $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
         $command
             ->shouldReceive('getClient->getDescription->getModel')
-                ->with('myModel')
+                ->with('fooModel')
                 ->andReturn($structure);
 
+        $desc = array('model' => 'fooModel');
+        $data = array('foo' => 'bar');
+
         $builder = $this->mock('createModelFromEmbedded', array($command))
-            ->shouldReceive('getEmbedDescription')
-                ->with('myLink')
-                ->andReturn(array('model' => 'myModel'))
+            ->shouldReceive('validateEmbedDescription')
+                ->with($desc)
             ->getMock();
 
-        $model = $builder->createModelFromEmbedded('myLink', $data);
+        $model = $builder->createModelFromEmbedded('fooEmbed', $data, $desc);
 
         $this->assertInstanceOf('Desk\\Relationship\\Model', $model);
-
         $this->assertSame($structure, $model->getStructure());
-        $this->assertSame('bar', $model->get('foo'));
+        $this->assertSame($data, $model->toArray());
 
         $modelBuilder = $this->getPrivateProperty($model, 'builder');
         $this->assertSame($builder, $modelBuilder);
@@ -143,147 +100,156 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testCreateModelFromEmbeddedWithArray()
     {
-        $data = array(
-            array('foo' => 'bar'),
-            array('bar' => 'baz'),
-            array('baz' => 'qux'),
-        );
-
         $structure = \Mockery::mock('Guzzle\\Service\\Description\\Parameter');
 
         $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
         $command
             ->shouldReceive('getClient->getDescription->getModel')
-                ->with('myModel')
+                ->with('fooModel')
                 ->andReturn($structure);
 
+        $desc = array('model' => 'fooModel');
+        $data = array(
+            array('foo' => 'bar'),
+            array('bar' => 'baz'),
+        );
+
         $builder = $this->mock('createModelFromEmbedded', array($command))
-            ->shouldReceive('getEmbedDescription')
-                ->with('myLink')
-                ->andReturn(array('model' => 'myModel'))
+            ->shouldReceive('validateEmbedDescription')
+                ->with($desc)
             ->getMock();
 
-        $models = $builder->createModelFromEmbedded('myLink', $data);
+        $models = $builder->createModelFromEmbedded('fooEmbed', $data, $desc);
 
         $this->assertInternalType('array', $models);
 
+        $i = 0;
         foreach ($models as $model) {
+            $this->assertInstanceOf('Desk\\Relationship\\Model', $model);
             $this->assertSame($structure, $model->getStructure());
+            $this->assertSame($data[$i++], $model->toArray());
+
             $modelBuilder = $this->getPrivateProperty($model, 'builder');
             $this->assertSame($builder, $modelBuilder);
         }
-
-        $this->assertSame('bar', $models[0]->get('foo'));
-        $this->assertSame('baz', $models[1]->get('bar'));
-        $this->assertSame('qux', $models[2]->get('baz'));
     }
 
     /**
-     * @covers Desk\Relationship\ResourceBuilder::createModelFromEmbedded
+     * @covers Desk\Relationship\ResourceBuilder::validateLink
+     */
+    public function testValidateLink()
+    {
+        $builder = $this->mock('validateLink');
+        $builder->validateLink(
+            array(
+                'href' => '/path/to/foo',
+                'class' => 'fooClass',
+            )
+        );
+
+        // Necessary to prevent PHPUnit complaining about no assertions
+        // The real "assertion" is that no exceptions are thrown
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::validateLink
+     * @expectedException Desk\Relationship\Exception\InvalidLinkFormatException
+     * @expectedExceptionMessage Invalid resource link format: missing expected 'href' element
+     */
+    public function testValidateLinkMissingHref()
+    {
+        $builder = $this->mock('validateLink');
+        $builder->validateLink(
+            array(
+                'not_href' => '/path/to/foo',
+                'class' => 'fooClass',
+            )
+        );
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::validateLinkDescription
+     */
+    public function testValidateLinkDescription()
+    {
+        $builder = $this->mock('validateLinkDescription');
+        $builder->validateLinkDescription(
+            array(
+                'operation' => 'fooOperation',
+                'pattern' => '#/foo/(?P<id>\\d+)$#',
+            )
+        );
+
+        // Necessary to prevent PHPUnit complaining about no assertions
+        // The real "assertion" is that no exceptions are thrown
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::validateLinkDescription
      * @expectedException Desk\Exception\UnexpectedValueException
-     * @expectedExceptionMessage Unknown embedded resource model 'myModel'
+     * @expectedExceptionMessage Missing operation for link description
      */
-    public function testCreateModelFromEmbeddedWithUnknownModel()
+    public function testValidateLinkDescriptionMissingOperation()
     {
-        $data = array('foo' => 'bar');
-
-        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
-        $command
-            ->shouldReceive('getClient->getDescription->getModel')
-                ->with('myModel')
-                ->andReturn(null);
-
-        $builder = $this->mock('createModelFromEmbedded', array($command))
-            ->shouldReceive('getEmbedDescription')
-                ->with('myLink')
-                ->andReturn(array('model' => 'myModel'))
-            ->getMock();
-
-        $builder->createModelFromEmbedded('myLink', $data);
+        $builder = $this->mock('validateLinkDescription');
+        $builder->validateLinkDescription(
+            array(
+                'not_operation' => 'fooOperation',
+                'pattern' => '#/foo/(?P<id>\\d+)$#',
+            )
+        );
     }
 
     /**
-     * @covers Desk\Relationship\ResourceBuilder::getLinkDescription
+     * @covers Desk\Relationship\ResourceBuilder::validateLinkDescription
+     * @expectedException Desk\Exception\UnexpectedValueException
+     * @expectedExceptionMessage Missing pattern for link description
      */
-    public function testGetLinkDescription()
+    public function testValidateLinkDescriptionMissingPattern()
     {
-        $builder = $this->mock('getLinkDescription')
-            ->shouldReceive('getDescription')
-                ->with('links', 'myLinkName')
-                ->andReturn('returnValue')
-            ->getMock();
-
-        $result = $builder->getLinkDescription('myLinkName');
-
-        $this->assertSame('returnValue', $result);
+        $builder = $this->mock('validateLinkDescription');
+        $builder->validateLinkDescription(
+            array(
+                'operation' => 'fooOperation',
+                'not_pattern' => '#/foo/(?P<id>\\d+)$#',
+            )
+        );
     }
 
     /**
-     * @covers Desk\Relationship\ResourceBuilder::getEmbedDescription
+     * @covers Desk\Relationship\ResourceBuilder::validateEmbedDescription
      */
-    public function testGetEmbedDescription()
+    public function testValidateEmbedDescription()
     {
-        $builder = $this->mock('getEmbedDescription')
-            ->shouldReceive('getDescription')
-                ->with('embeds', 'myLinkName')
-                ->andReturn('returnValue')
-            ->getMock();
-
-        $result = $builder->getEmbedDescription('myLinkName');
-
-        $this->assertSame('returnValue', $result);
-    }
-
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::getDescription
-     */
-    public function testGetDescription()
-    {
-        $links = array(
-            'notMyLink' => '$notMyLinkDescription',
-            'myLink' => '$myLinkDescription',
+        $builder = $this->mock('validateEmbedDescription');
+        $builder->validateEmbedDescription(
+            array(
+                'model' => 'fooModel',
+            )
         );
 
-        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
-        $command
-            ->shouldReceive('getOperation->getData')
-                ->with('myType')
-                ->andReturn($links);
-
-        $builder = $this->mock('getDescription', array($command));
-        $result = $builder->getDescription('myType', 'myLink');
-
-        $this->assertSame('$myLinkDescription', $result);
+        // Necessary to prevent PHPUnit complaining about no assertions
+        // The real "assertion" is that no exceptions are thrown
+        $this->assertTrue(true);
     }
 
     /**
-     * @covers Desk\Relationship\ResourceBuilder::getDescription
-     * @expectedException Desk\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Operation 'myOperation' missing 'nonExistantLink' link description
+     * @covers Desk\Relationship\ResourceBuilder::validateEmbedDescription
+     * @expectedException Desk\Exception\UnexpectedValueException
+     * @expectedExceptionMessage Missing model for embed description
      */
-    public function testGetDescriptionUnknownLinkName()
+    public function testValidateEmbedDescriptionMissingModel()
     {
-        $links = array(
-            'fooLink' => '$fooLinkDescription',
-            'barLink' => '$barLinkDescription',
+        $builder = $this->mock('validateEmbedDescription');
+        $builder->validateEmbedDescription(
+            array(
+                'not_model' => 'fooModel',
+            )
         );
-
-        $operation = \Mockery::mock()
-            ->shouldReceive('getData')
-                ->with('myType')
-                ->andReturn($links)
-            ->shouldReceive('getName')
-                ->andReturn('myOperation')
-            ->getMock();
-
-        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand')
-            ->shouldReceive('getOperation')
-                ->andReturn($operation)
-            ->getMock();
-
-        $builder = $this->mock('getDescription', array($command));
-        $builder->getDescription('myType', 'nonExistantLink');
     }
+
 
     /**
      * @covers Desk\Relationship\ResourceBuilder::parseHref
@@ -305,20 +271,6 @@ class ResourceBuilderTest extends UnitTestCase
 
     /**
      * @covers Desk\Relationship\ResourceBuilder::parseHref
-     * @expectedException Desk\Exception\UnexpectedValueException
-     * @expectedExceptionMessage Couldn't parse parameters from link href
-     */
-    public function testParseHrefNoMatches()
-    {
-        $href = '/foo/bar/baz';
-        $pattern = '#grault/(?P<one>[a-z]+)#';
-
-        $builder = $this->mock('parseHref');
-        $builder->parseHref($href, $pattern);
-    }
-
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::parseHref
      */
     public function testParseHrefWithIntegerParameters()
     {
@@ -333,29 +285,16 @@ class ResourceBuilderTest extends UnitTestCase
     }
 
     /**
-     * @covers Desk\Relationship\ResourceBuilder::validateLink
+     * @covers Desk\Relationship\ResourceBuilder::parseHref
+     * @expectedException Desk\Exception\UnexpectedValueException
+     * @expectedExceptionMessage Couldn't parse parameters from link href
      */
-    public function testValidateLink()
+    public function testParseHrefNoMatches()
     {
-        $this->mock('validateLink')->validateLink(
-            array(
-                'class' => 'myClass',
-                'href' => 'path/to/foo',
-            )
-        );
+        $href = '/foo/bar/baz';
+        $pattern = '#grault/(?P<one>[a-z]+)#';
 
-        // to avoid "no assertions" error -- we are asserting that no
-        // exception is thrown, but PHPUnit doesn't know that
-        $this->assertTrue(true);
-    }
-
-    /**
-     * @covers Desk\Relationship\ResourceBuilder::validateLink
-     * @expectedException Desk\Relationship\Exception\InvalidLinkFormatException
-     */
-    public function testValidateLinkInvalid()
-    {
-        $builder = $this->mock('validateLink');
-        $builder->validateLink(array('class' => 'missing href'));
+        $builder = $this->mock('parseHref');
+        $builder->parseHref($href, $pattern);
     }
 }

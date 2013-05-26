@@ -31,126 +31,97 @@ class ResourceBuilder implements ResourceBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function createCommandFromLink($linkName, array $data)
+    public function createCommandFromLink($name, array $data, array $description)
     {
         $this->validateLink($data);
-        $description = $this->getLinkDescription($linkName);
+        $this->validateLinkDescription($description);
 
-        $parameters = $this->parseHref($data['href'], $description['pattern']);
-
-        if ($description['operation'] === '$self') {
-            $description['operation'] = $this->command->getName();
-        }
-
-        return $this->command
-            ->getClient()
-            ->getCommand($description['operation'], $parameters);
+        $params = $this->parseHref($data['href'], $description['pattern']);
+        return $this->command->getClient()->getCommand($description['operation'], $params);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createModelFromEmbedded($linkName, array $data)
+    public function createModelFromEmbedded($name, array $data, array $description)
     {
-        // Process an array recursively if it's not associative
+        $this->validateEmbedDescription($description);
+
+        // recursively process numerical-indexed arrays into an array
+        // of models created by this same function
         if (isset($data[0])) {
             $models = array();
 
             foreach ($data as $element) {
-                $models[] = $this->createModelFromEmbedded($linkName, $element);
+                $models[] = $this->createModelFromEmbedded(
+                    $name,
+                    $element,
+                    $description
+                );
             }
 
             return $models;
         }
-
-        // find out what model it should be from the link name
-        $description = $this->getEmbedDescription($linkName);
 
         $structure = $this->command
             ->getClient()
             ->getDescription()
             ->getModel($description['model']);
 
-        if (!$structure) {
-            throw new UnexpectedValueException(
-                "Unknown embedded resource model '{$description['model']}'"
-            );
-        }
-
         // TODO: ResponseParser::visitResult() should go over $data first
         return new Model($this, $data, $structure);
     }
 
     /**
-     * Validates a link array
+     * Validates a link array (from the API)
      *
-     * @param array $link
+     * @param array $data The link data from the API response
      *
      * @throws Desk\Relationship\Exception\InvalidLinkFormatException
      */
     public function validateLink(array $link)
     {
-        if (empty($link['class']) || empty($link['href'])) {
+        if (empty($link['href'])) {
             throw InvalidLinkFormatException::fromLink($link);
         }
     }
 
     /**
-     * Finds the link description for a given link name
+     * Validates a link description (from the model description)
      *
-     * @param string $linkName The name of the link
+     * @param array $description The link description from the model
      *
-     * @return array The link description
-     * @throws Desk\Exception\InvalidArgumentException If description
-     * for the link is missing
+     * @throws Desk\Exception\UnexpectedValueException If it's invalid
      */
-    public function getLinkDescription($linkName)
+    public function validateLinkDescription(array $description)
     {
-        return $this->getDescription('links', $linkName);
-    }
-
-    /**
-     * Finds the embeddable link description for a given link name
-     *
-     * @param string $linkName The name of the link
-     *
-     * @return array The embeddable link description
-     * @throws Desk\Exception\InvalidArgumentException If description
-     * for the link is missing
-     */
-    public function getEmbedDescription($linkName)
-    {
-        return $this->getDescription('embeds', $linkName);
-    }
-
-    /**
-     * Helper function to get a link description
-     *
-     * Implements common functionality of getLinkDescription() and
-     * getEmbeddableLinkDescription().
-     *
-     * @param string $linkType The data key to look for the description
-     * @param string $linkName The name of the link
-     *
-     * @return array
-     * @throws Desk\Exception\InvalidArgumentException If description
-     * for the link is missing
-     */
-    public function getDescription($linkType, $linkName)
-    {
-        $links = $this->command->getOperation()->getData($linkType);
-
-        foreach ((array) $links as $name => $description) {
-            if ($name === $linkName) {
-                return $description;
-            }
+        if (empty($description['operation'])) {
+            throw new UnexpectedValueException(
+                "Missing operation for link description"
+            );
         }
 
-        $operation = $this->command->getOperation()->getName();
+        if (empty($description['pattern'])) {
+            throw new UnexpectedValueException(
+                "Missing pattern for link description"
+            );
+        }
+    }
 
-        throw new InvalidArgumentException(
-            "Operation '$operation' missing '$linkName' link description"
-        );
+    /**
+     * Validates an embed description (from the model description)
+     *
+     * @param array $description The embed description from the model
+     *
+     * @throws Desk\Exception\UnexpectedValueException If it's invalid
+     */
+    public function validateEmbedDescription(array $description)
+    {
+        if (empty($description['model'])) {
+            throw new UnexpectedValueException(
+                "Missing model for embed description"
+            );
+        }
     }
 
     /**

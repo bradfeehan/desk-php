@@ -79,7 +79,11 @@ class ModelTest extends UnitTestCase
     {
         $builder = \Mockery::mock('Desk\\Relationship\\ResourceBuilderInterface')
             ->shouldReceive('createCommandFromLink')
-                ->with('myLink', array('link' => 'content'))
+                ->with(
+                    'myLink',
+                    array('link' => 'content'),
+                    array('the' => 'description')
+                )
                 ->andReturn('returnValue')
             ->getMock();
 
@@ -89,7 +93,11 @@ class ModelTest extends UnitTestCase
             ),
         );
 
-        $model = new Model($builder, $data);
+        $model = $this->mock('getLink', array($builder, $data))
+            ->shouldReceive('getLinkDescription')
+                ->with('myLink')
+                ->andReturn(array('the' => 'description'))
+            ->getMock();
 
         $result = $model->getLink('myLink');
         $this->assertSame('returnValue', $result);
@@ -97,8 +105,8 @@ class ModelTest extends UnitTestCase
 
     /**
      * @covers Desk\Relationship\Model::getLink
-     * @expectedException Desk\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Unknown link 'barLink'
+     * @expectedException Desk\Exception\UnexpectedValueException
+     * @expectedExceptionMessage Link 'barLink' not found on this model
      */
     public function testGetLinkInvalid()
     {
@@ -109,7 +117,12 @@ class ModelTest extends UnitTestCase
             ),
         );
 
-        $model = new Model($builder, $data);
+        $model = $this->mock('getLink', array($builder, $data))
+            ->shouldReceive('getLinkDescription')
+                ->with('barLink')
+                ->andReturn(array('the' => 'description'))
+            ->getMock();
+
         $model->getLink('barLink');
     }
 
@@ -120,7 +133,11 @@ class ModelTest extends UnitTestCase
     {
         $builder = \Mockery::mock('Desk\\Relationship\\ResourceBuilderInterface')
             ->shouldReceive('createModelFromEmbedded')
-                ->with('myEmbedded', array('embedded' => 'content'))
+                ->with(
+                    'myEmbedded',
+                    array('embedded' => 'content'),
+                    array('the' => 'description')
+                )
                 ->andReturn('returnValue')
             ->getMock();
 
@@ -130,7 +147,11 @@ class ModelTest extends UnitTestCase
             ),
         );
 
-        $model = new Model($builder, $data);
+        $model = $this->mock('getEmbedded', array($builder, $data))
+            ->shouldReceive('getLinkDescription')
+                ->with('myEmbedded')
+                ->andReturn(array('the' => 'description'))
+            ->getMock();
 
         $result = $model->getEmbedded('myEmbedded');
         $this->assertSame('returnValue', $result);
@@ -138,7 +159,7 @@ class ModelTest extends UnitTestCase
 
     /**
      * @covers Desk\Relationship\Model::getEmbedded
-     * @expectedException Desk\Exception\InvalidArgumentException
+     * @expectedException Desk\Exception\UnexpectedValueException
      * @expectedExceptionMessage Unknown embedded resource 'barEmbedded'
      */
     public function testGetEmbeddedInvalid()
@@ -150,7 +171,72 @@ class ModelTest extends UnitTestCase
             ),
         );
 
-        $model = new Model($builder, $data);
+        $model = $this->mock('getEmbedded', array($builder, $data))
+            ->shouldReceive('getLinkDescription')
+                ->with('barEmbedded')
+                ->andReturn(array('the' => 'description'))
+            ->getMock();
+
         $model->getEmbedded('barEmbedded');
+    }
+
+    /**
+     * @covers Desk\Relationship\Model::getLinkDescription
+     */
+    public function testGetLinkDescription()
+    {
+        $builder = \Mockery::mock('Desk\\Relationship\\ResourceBuilderInterface');
+
+        $fooLink = array(
+            'operation' => 'FooOperation',
+            'pattern' => '#/path/to/foo/(?P<id>\\d+)$#',
+        );
+
+        $barLink = array(
+            'operation' => 'BarOperation',
+            'pattern' => '#/path/to/bar/(?P<id>\\d+)$#',
+        );
+
+        $links = array(
+            'fooLink' => $fooLink,
+            'barLink' => $barLink,
+        );
+
+        $model = $this->mock('getLinkDescription', array($builder));
+        $model
+            ->shouldReceive('getStructure->getData')
+                ->with('links')
+                ->andReturn($links);
+
+        $description = $model->getLinkDescription('barLink');
+
+        $this->assertSame($barLink, $description);
+    }
+
+    /**
+     * @covers Desk\Relationship\Model::getLinkDescription
+     * @expectedException Desk\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Missing link description for link 'barLink'
+     */
+    public function testGetLinkDescriptionInvalid()
+    {
+        $builder = \Mockery::mock('Desk\\Relationship\\ResourceBuilderInterface');
+
+        $fooLink = array(
+            'operation' => 'FooOperation',
+            'pattern' => '#/path/to/foo/(?P<id>\\d+)$#',
+        );
+
+        $links = array(
+            'fooLink' => $fooLink,
+        );
+
+        $model = $this->mock('getLinkDescription', array($builder));
+        $model
+            ->shouldReceive('getStructure->getData')
+                ->with('links')
+                ->andReturn($links);
+
+        $model->getLinkDescription('barLink');
     }
 }

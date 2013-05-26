@@ -1,0 +1,26 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: must-revalidate, private, max-age=0
+Content-Type: application/json; charset=utf-8
+Status: 200
+X-Rate-Limit-Limit: 60
+X-Rate-Limit-Remaining: 59
+X-Rate-Limit-Reset: 2
+Content-Length: 288
+Connection: keep-alive
+
+{
+    "name": "frequent_buyer",
+    "label": "Frequent Buyer",
+    "type": "customer",
+    "active": true,
+    "data": {
+        "type": "boolean"
+    },
+    "_links": {
+        "self": {
+            "href": "/api/v2/custom_fields/1",
+            "class": "custom_field"
+        }
+    }
+}

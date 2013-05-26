@@ -2,6 +2,7 @@
 
 namespace Desk\Test\Helper\Operation;
 
+use Desk\Relationship\Model;
 use Desk\Test\Helper\OperationTestCase;
 
 /**
@@ -91,6 +92,94 @@ abstract class ShowOperationTestCase extends OperationTestCase
      * @return array
      */
     public function dataParameterInvalidAdditional()
+    {
+        return array();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function testSystem()
+    {
+        $client = $this->client();
+        $this->setMockResponse($client, 'system');
+
+        $params = array('id' => 1);
+        $command = $client->getCommand($this->getOperationName(), $params);
+
+        $model = $command->execute();
+
+        // Perform child class asesrtions on the resulting model
+        $this->assertInstanceOf('Desk\\Relationship\\Model', $model);
+        $this->assertSystem($model);
+    }
+
+    /**
+     * Contains assertions to make about the results of the system test
+     *
+     * @param array $model Resulting model from system test
+     */
+    abstract protected function assertSystem(Model $model);
+
+    /**
+     * Tests links of models
+     *
+     * @dataProvider dataLinks
+     * @depends testSystem
+     *
+     * @param string $linkName    The name of the link to test
+     * @param string $commandName The expected name of the link command
+     * @param array  $parameters  Expected command parameters to be set
+     */
+    public function testLinks($linkName, $commandName = false, array $parameters = null)
+    {
+        $client = $this->client();
+        $this->setMockResponse($client, 'system');
+
+        $params = array('id' => 1);
+        $command = $client->getCommand($this->getOperationName(), $params);
+
+        $model = $command->execute();
+        $link = $model->getLink($linkName);
+
+        $this->assertInstanceOf('Guzzle\\Service\\Command\\OperationCommand', $link);
+
+        if ($commandName) {
+            $this->assertSame($commandName, $link->getName());
+        }
+
+        if ($parameters) {
+            foreach ($parameters as $parameter => $expected) {
+                $this->assertSame($expected, $link->get($parameter));
+            }
+        }
+    }
+
+    public function dataLinks()
+    {
+        return array_merge(
+            array(
+                array('self', $this->getOperationName()),
+            ),
+            $this->dataLinksAdditional()
+        );
+    }
+
+    /**
+     * Adds to the default data provider for dataLinks()
+     *
+     * Override this in a subclass to add additional links to be tested
+     * by testLinks(). The format should be the same as dataLinks():
+     *
+     * array(
+     *   array($linkName1, $commandName1, $parameters1),
+     *   array($linkName2, $commandName2, $parameters2),
+     *   // ...
+     * );
+     *
+     * @return array
+     */
+    public function dataLinksAdditional()
     {
         return array();
     }

@@ -101,4 +101,36 @@ abstract class ListOperationTestCase extends OperationTestCase
     {
         return array();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function testSystem()
+    {
+        $client = $this->client();
+        $command = $client->getCommand($this->getOperationName());
+
+        $this->setMockResponse($client, 'system');
+
+        $results = $command->execute();
+        $models = $results->getEmbedded('entries');
+
+        // $models should be an array of models of length total_entries
+        $this->assertInternalType('array', $models);
+        $this->assertSame(count($models), $results->get('total_entries'));
+
+        foreach ($models as $model) {
+            $this->assertInstanceOf('Desk\\Relationship\\Model', $model);
+        }
+
+        // Perform child class asesrtions on the resulting models
+        $this->assertSystem($models);
+    }
+
+    /**
+     * Contains assertions to make about the results of the system test
+     *
+     * @param array $models Resulting models from system test
+     */
+    abstract protected function assertSystem(array $models);
 }

@@ -177,8 +177,6 @@ class FactoryTest extends UnitTestCase
 
         $this->assertSame('Guzzle\\Plugin\\Oauth\\OauthPlugin', get_class($listener));
         $this->assertSame('onRequestBeforeSend', $method);
-
-        $this->assertTrue(true);
     }
 
     /**

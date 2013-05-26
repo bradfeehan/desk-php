@@ -21,11 +21,11 @@ class ResourceBuilderTest extends UnitTestCase
      */
     public function testConstruct()
     {
-        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
-        $builder = new ResourceBuilder($command);
+        $client = \Mockery::mock('Guzzle\\Service\\Client');
+        $builder = new ResourceBuilder($client);
 
-        $actualCommand = $this->getPrivateProperty($builder, 'command');
-        $this->assertSame($command, $actualCommand);
+        $builderClient = $this->getPrivateProperty($builder, 'client');
+        $this->assertSame($client, $builderClient);
     }
 
     /**
@@ -43,13 +43,13 @@ class ResourceBuilderTest extends UnitTestCase
             'pattern' => '$pattern',
         );
 
-        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
-        $command
-            ->shouldReceive('getClient->getCommand')
+        $client = \Mockery::mock('Guzzle\\Service\\Client')
+            ->shouldReceive('getCommand')
                 ->with('fooOperation', array('the' => 'params'))
-                ->andReturn('returnValue');
+                ->andReturn('returnValue')
+            ->getMock();
 
-        $builder = $this->mock('createCommandFromLink', array($command))
+        $builder = $this->mock('createCommandFromLink', array($client))
             ->shouldReceive('validateLink')
                 ->with($data)
             ->shouldReceive('validateLinkDescription')
@@ -71,16 +71,16 @@ class ResourceBuilderTest extends UnitTestCase
     {
         $structure = \Mockery::mock('Guzzle\\Service\\Description\\Parameter');
 
-        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
-        $command
-            ->shouldReceive('getClient->getDescription->getModel')
+        $client = \Mockery::mock('Guzzle\\Service\\Client');
+        $client
+            ->shouldReceive('getDescription->getModel')
                 ->with('fooModel')
                 ->andReturn($structure);
 
         $desc = array('model' => 'fooModel');
         $data = array('foo' => 'bar');
 
-        $builder = $this->mock('createModelFromEmbedded', array($command))
+        $builder = $this->mock('createModelFromEmbedded', array($client))
             ->shouldReceive('validateEmbedDescription')
                 ->with($desc)
             ->getMock();
@@ -102,9 +102,9 @@ class ResourceBuilderTest extends UnitTestCase
     {
         $structure = \Mockery::mock('Guzzle\\Service\\Description\\Parameter');
 
-        $command = \Mockery::mock('Guzzle\\Service\\Command\\AbstractCommand');
-        $command
-            ->shouldReceive('getClient->getDescription->getModel')
+        $client = \Mockery::mock('Guzzle\\Service\\Client');
+        $client
+            ->shouldReceive('getDescription->getModel')
                 ->with('fooModel')
                 ->andReturn($structure);
 
@@ -114,7 +114,7 @@ class ResourceBuilderTest extends UnitTestCase
             array('bar' => 'baz'),
         );
 
-        $builder = $this->mock('createModelFromEmbedded', array($command))
+        $builder = $this->mock('createModelFromEmbedded', array($client))
             ->shouldReceive('validateEmbedDescription')
                 ->with($desc)
             ->getMock();

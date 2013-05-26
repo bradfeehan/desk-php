@@ -7,25 +7,25 @@ use Desk\Exception\UnexpectedValueException;
 use Desk\Relationship\Exception\InvalidLinkFormatException;
 use Desk\Relationship\Model;
 use Desk\Relationship\ResourceBuilderInterface;
-use Guzzle\Service\Command\AbstractCommand;
+use Guzzle\Service\Client;
 
 class ResourceBuilder implements ResourceBuilderInterface
 {
 
     /**
-     * The command which this builder is making resources for
+     * The client used to create link commands
      *
-     * @var Guzzle\Service\Command\AbstractCommand
+     * @var Guzzle\Service\Client
      */
-    private $command;
+    private $client;
 
 
     /**
-     * @param Guzzle\Service\Command\AbstractCommand $command Command being built for
+     * @param Guzzle\Service\Client $client Used to create link models
      */
-    public function __construct(AbstractCommand $command)
+    public function __construct(Client $client)
     {
-        $this->command = $command;
+        $this->client = $client;
     }
 
     /**
@@ -37,7 +37,7 @@ class ResourceBuilder implements ResourceBuilderInterface
         $this->validateLinkDescription($description);
 
         $params = $this->parseHref($data['href'], $description['pattern']);
-        return $this->command->getClient()->getCommand($description['operation'], $params);
+        return $this->client->getCommand($description['operation'], $params);
     }
 
     /**
@@ -63,9 +63,7 @@ class ResourceBuilder implements ResourceBuilderInterface
             return $models;
         }
 
-        $structure = $this->command
-            ->getClient()
-            ->getDescription()
+        $structure = $this->client->getDescription()
             ->getModel($description['model']);
 
         // TODO: ResponseParser::visitResult() should go over $data first

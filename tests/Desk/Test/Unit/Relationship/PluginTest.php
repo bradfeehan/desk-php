@@ -33,6 +33,8 @@ class PluginTest extends UnitTestCase
     {
         $parser = null;
 
+        $client = \Mockery::mock('Guzzle\\Service\\Client');
+
         $command = \Mockery::mock('Guzzle\\Service\\Command\\OperationCommand')
             ->shouldReceive('setResponseParser')
                 ->with(
@@ -53,6 +55,9 @@ class PluginTest extends UnitTestCase
             ->shouldReceive('offsetGet')
                 ->with('command')
                 ->andReturn($command)
+            ->shouldReceive('offsetGet')
+                ->with('client')
+                ->andReturn($client)
             ->getMock();
 
         $this->mock('onCreateCommand')->onCreateCommand($event);
@@ -61,8 +66,8 @@ class PluginTest extends UnitTestCase
             $builder = $this->getPrivateProperty($parser, 'builder');
             $this->assertInstanceOf('Desk\\Relationship\\ResourceBuilder', $builder);
 
-            $actualCommand = $this->getPrivateProperty($builder, 'command');
-            $this->assertSame($command, $actualCommand);
+            $builderClient = $this->getPrivateProperty($builder, 'client');
+            $this->assertSame($client, $builderClient);
         }
     }
 }

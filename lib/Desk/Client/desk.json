@@ -481,9 +481,15 @@
         "locale": {
             "type": "string"
         },
-        "date": {
+        "date.send": {
+            "type": "object",
+            "instanceOf": "DateTime",
+            "filters": "Desk\\Filter\\Date::objectToString"
+        },
+        "date.receive": {
             "type": "string",
-            "location": "json"
+            "location": "json",
+            "filters": "Desk\\Filter\\Date::stringToObject"
         },
         "priority": {
             "type": "integer",
@@ -890,15 +896,15 @@
                 },
                 "publish_at": {
                     "description": "Date the article is to be published",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "created_at": {
                     "description": "Date the article was created",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "Date the article was updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "body": {
                     "description": "The content of the article (HTML formatted)",
@@ -1088,15 +1094,15 @@
                 },
                 "publish_at": {
                     "description": "Date the article is to be published",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "created_at": {
                     "description": "Date the article was created",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "Date the article was updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 }
             },
             "data": {
@@ -1153,23 +1159,23 @@
                 },
                 "created_at": {
                     "description": "Time of creation",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "Time last updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "active_at": {
                     "description": "Time the case was last active",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "received_at": {
                     "description": "Time the most recent message was received",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "locked_until": {
                     "description": "Time at which the lock on this case will expire",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 }
             },
             "data": {
@@ -1221,11 +1227,11 @@
                 },
                 "created_at": {
                     "description": "Time of creation",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "Time last updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "status": {
                     "description": "The message's current status",
@@ -1266,7 +1272,7 @@
                 },
                 "hidden_at": {
                     "description": "Time at which this answer was hidden from the support center",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 }
             },
             "data": {
@@ -1298,11 +1304,11 @@
                 },
                 "created_at": {
                     "description": "Time of creation",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "Time last updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "status": {
                     "description": "The message's current status",
@@ -1343,7 +1349,7 @@
                 },
                 "hidden_at": {
                     "description": "Time at which this answer was hidden from the support center",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 }
             },
             "data": {
@@ -1369,15 +1375,15 @@
                 },
                 "created_at": {
                     "description": "Time of creation",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "Time last updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "erased_at": {
                     "description": "Time at which an agent erased this note",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 }
             },
             "data": {
@@ -1416,11 +1422,11 @@
                 },
                 "created_at": {
                     "description": "Date the company was created",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "Date the company was updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "custom_fields": {
                     "description": "Hash of values for custom fields",
@@ -1530,13 +1536,11 @@
                 },
                 "created_at": {
                     "description": "Time at which the customer was created",
-                    "location": "json",
-                    "type": "string"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "Time at which the customer was last updated at",
-                    "location": "json",
-                    "type": "string"
+                    "$ref": "date.receive"
                 },
                 "emails": {
                     "description": "Array of e-mail objects, each specifying the contact type and value of the e-mail address",
@@ -1724,11 +1728,11 @@
                 },
                 "created_at": {
                     "description": "When the integration URL was created",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "When the integration URL was last updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 }
             },
             "data": {
@@ -1813,11 +1817,11 @@
                 },
                 "created_at": {
                     "description": "When the action was created",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "When the action was last updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 }
             },
             "data": {
@@ -1863,11 +1867,11 @@
                 },
                 "created_at": {
                     "description": "Time when the topic was created",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "Time when the topic was updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 }
             },
             "data": {
@@ -1898,11 +1902,11 @@
                 },
                 "created_at": {
                     "description": "Time when the translation was created",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 },
                 "updated_at": {
                     "description": "Time when the translation was last updated",
-                    "$ref": "date"
+                    "$ref": "date.receive"
                 }
             },
             "data": {

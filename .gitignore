@@ -3,7 +3,7 @@
 /vendor/
 
 # PHPUnit test coverage data
-/tests/coverage
+/build/logs/
 
 # PHPUnit custom phpunit.xml test suite description -- this is for
 # users to have a local, custom phpunit.xml for use during development

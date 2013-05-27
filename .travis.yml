@@ -5,3 +5,5 @@ php:
   - "5.3"
 before_script:
   - composer install --prefer-dist --dev --no-interaction
+after_script:
+  - vendor/bin/coveralls -v

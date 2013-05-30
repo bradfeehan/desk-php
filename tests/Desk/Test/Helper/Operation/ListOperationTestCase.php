@@ -7,10 +7,10 @@ use Desk\Test\Helper\OperationTestCase;
 /**
  * Base class for any List* operation tests
  *
- * Subclasses must only implement the abstract testSystem() method
- * from OperationTestCase. The testParameterValid() and
- * testParameterInvalid() data providers have been set up with
- * parameter values that should be fine for all List operations.
+ * Subclasses must only implement the abstract assertSystem() method.
+ * The testParameterValid() and testParameterInvalid() data providers
+ * have been set up with parameter values that should be fine for all
+ * List operations.
  *
  * To add further test cases for testParameterValid() or
  * testParameterInvalid() in a subclass, simply override
@@ -103,16 +103,35 @@ abstract class ListOperationTestCase extends OperationTestCase
     }
 
     /**
+     * Gets the command ready for the system test
+     *
+     * @return Guzzle\Service\Command\AbstractCommand
+     */
+    protected function getSystemTestCommand()
+    {
+        $client = $this->client();
+        $this->setMockResponse($client, 'system');
+
+        return $client->getCommand($this->getOperationName());
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function testSystem()
     {
-        $client = $this->client();
-        $command = $client->getCommand($this->getOperationName());
-
-        $this->setMockResponse($client, 'system');
+        $command = $this->getSystemTestCommand();
+        $this->assertInstanceOf(
+            'Guzzle\\Service\\Command\\CommandInterface',
+            $command,
+            get_called_class() . "::getSystemTestCommand should " .
+            "return a Guzzle Command object, got " .
+            (is_object($command) ? get_class($command) : gettype($command))
+        );
 
         $results = $command->execute();
+        $this->assertInstanceOf('Desk\\Relationship\\Model', $results);
+
         $models = $results->getEmbedded('entries');
 
         // $models should be an array of models of length total_entries
@@ -123,7 +142,7 @@ abstract class ListOperationTestCase extends OperationTestCase
             $this->assertInstanceOf('Desk\\Relationship\\Model', $model);
         }
 
-        // Perform child class asesrtions on the resulting models
+        // Perform child class assertions on the resulting models
         $this->assertSystem($models);
     }
 

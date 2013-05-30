@@ -8,7 +8,7 @@
 
     <!-- Test suites to be run -->
     <testsuites>
-        <testsuite name="bradfeehan/php-desk">
+        <testsuite name="bradfeehan/desk-php">
             <directory suffix="Test.php">tests/Desk/Test/Unit</directory>
             <directory suffix="OperationTest.php">tests/Desk/Test/Operation</directory>
             <directory suffix="SystemTest.php">tests/Desk/Test/System</directory>

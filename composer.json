@@ -1,5 +1,5 @@
 {
-    "name": "bradfeehan/php-desk",
+    "name": "bradfeehan/desk-php",
     "description": "PHP client for Desk.com v2 API based on Guzzle",
     "keywords": ["desk", "desk.com", "assistly", "assistly.com", "api", "guzzle"],
     "licence": "MIT",

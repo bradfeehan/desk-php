@@ -122,6 +122,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of translations for a particular article",
             "uri": "articles/{article_id}/translations",
+            "responseClass": "ArticleTranslationsPage",
             "parameters": {
                 "article_id": {
                     "$ref": "id",
@@ -858,6 +859,40 @@
                     "previous": {
                         "operation": "ListUsers",
                         "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+
+
+
+
+        "ArticleTranslationsPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "ArticleTranslationModel"
+                    },
+                    "self": {
+                        "operation": "ListArticleTranslations",
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListArticleTranslations",
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListArticleTranslations",
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListArticleTranslations",
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListArticleTranslations",
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
                     }
                 }
             }

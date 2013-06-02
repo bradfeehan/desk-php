@@ -47,9 +47,20 @@ class Client extends \Guzzle\Service\Client
      * Factory method to create a new instance of this client
      *
      * Available configuration options:
-     *   - base_url:    Full base URL
-     *   - subdomain:   Desk.com subdomain (if base_url omitted)
-     *   - api_version: Desk API version (defaults to 2)
+     *   - base_url:       Full URL (default: http://subdomain.desk.com/api/v2)
+     *   - subdomain:      Desk.com subdomain (required if base_url is omitted)
+     *   - api_version:    Desk API version (default: 2, rarely useful)
+     *   - authentication: "basic" auth or "oauth" (default: auto-detect)
+     *
+     *     Basic Auth-specific options (required if using Basic Auth):
+     *       - username: Basic auth username (plaintext)
+     *       - password: Basic auth password (plaintext)
+     *
+     *     OAuth-specific options (required if using OAuth):
+     *       - consumer_key:    OAuth consumer key
+     *       - consumer_secret: OAuth consumer secret
+     *       - token:           OAuth single access token
+     *       - token_secret:    OAuth single access token secret
      *
      * @param array|Collection $config Configuration options
      *

@@ -179,6 +179,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of customers for a particular company",
             "uri": "companies/{company_id}/customers",
+            "responseClass": "CompanyCustomersPage",
             "parameters": {
                 "company_id": {
                     "$ref": "id",
@@ -955,6 +956,36 @@
                     "previous": {
                         "operation": "ListCaseNotes",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "CompanyCustomersPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CustomerModel"
+                    },
+                    "self": {
+                        "operation": "ListCompanyCustomers",
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListCompanyCustomers",
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListCompanyCustomers",
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListCompanyCustomers",
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListCompanyCustomers",
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
                     }
                 }
             }

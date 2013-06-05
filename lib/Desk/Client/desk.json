@@ -198,8 +198,9 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of cases for a particular customer",
             "uri": "customers/{customer_id}/cases",
+            "responseClass": "CustomerCasesPage",
             "parameters": {
-                "_id": {
+                "customer_id": {
                     "$ref": "id",
                     "description": "The ID of the customer to retrieve cases for"
                 }
@@ -986,6 +987,36 @@
                     "previous": {
                         "operation": "ListCompanyCustomers",
                         "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "CustomerCasesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CaseModel"
+                    },
+                    "self": {
+                        "operation": "ListCustomerCases",
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListCustomerCases",
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListCustomerCases",
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListCustomerCases",
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListCustomerCases",
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
                     }
                 }
             }

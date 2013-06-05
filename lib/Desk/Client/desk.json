@@ -255,6 +255,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of users for a particular group",
             "uri": "groups/{group_id}/users",
+            "responseClass": "GroupUsersPage",
             "parameters": {
                 "group_id": {
                     "$ref": "id",
@@ -1079,6 +1080,36 @@
                     "previous": {
                         "operation": "ListGroupFilters",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "GroupUsersPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "UserModel"
+                    },
+                    "self": {
+                        "operation": "ListGroupUsers",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListGroupUsers",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListGroupUsers",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListGroupUsers",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListGroupUsers",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
                     }
                 }
             }

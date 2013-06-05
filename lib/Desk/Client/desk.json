@@ -217,6 +217,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of cases for a particular filter",
             "uri": "filters/{filter_id}/cases",
+            "responseClass": "FilterCasesPage",
             "parameters": {
                 "filter_id": {
                     "$ref": "id",
@@ -1017,6 +1018,36 @@
                     "previous": {
                         "operation": "ListCustomerCases",
                         "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "FilterCasesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CaseModel"
+                    },
+                    "self": {
+                        "operation": "ListFilterCases",
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListFilterCases",
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListFilterCases",
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListFilterCases",
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListFilterCases",
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
                     }
                 }
             }

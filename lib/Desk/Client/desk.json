@@ -312,6 +312,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of translations for a particular topic",
             "uri": "topics/{topic_id}/translations",
+            "responseClass": "TopicTranslationsPage",
             "parameters": {
                 "topic_id": {
                     "$ref": "id",
@@ -1172,6 +1173,36 @@
                     "previous": {
                         "operation": "ListTopicArticles",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "TopicTranslationsPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "TopicTranslationModel"
+                    },
+                    "self": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
                     }
                 }
             }

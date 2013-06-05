@@ -293,6 +293,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of articles for a particular topic",
             "uri": "topics/{topic_id}/articles",
+            "responseClass": "TopicArticlesPage",
             "parameters": {
                 "topic_id": {
                     "$ref": "id",
@@ -1141,6 +1142,36 @@
                     "previous": {
                         "operation": "ListMacroActions",
                         "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "TopicArticlesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "ArticleModel"
+                    },
+                    "self": {
+                        "operation": "ListTopicArticles",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListTopicArticles",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListTopicArticles",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListTopicArticles",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListTopicArticles",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
                     }
                 }
             }

@@ -236,6 +236,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of filters for a particular group",
             "uri": "groups/{group_id}/filters",
+            "responseClass": "GroupFiltersPage",
             "parameters": {
                 "group_id": {
                     "$ref": "id",
@@ -1048,6 +1049,36 @@
                     "previous": {
                         "operation": "ListFilterCases",
                         "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "GroupFiltersPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "FilterModel"
+                    },
+                    "self": {
+                        "operation": "ListGroupFilters",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListGroupFilters",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListGroupFilters",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListGroupFilters",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListGroupFilters",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
                     }
                 }
             }

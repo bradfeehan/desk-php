@@ -122,6 +122,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of translations for a particular article",
             "uri": "articles/{article_id}/translations",
+            "responseClass": "ArticleTranslationsPage",
             "parameters": {
                 "article_id": {
                     "$ref": "id",
@@ -140,6 +141,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of replies for a particular case",
             "uri": "cases/{case_id}/replies",
+            "responseClass": "CaseRepliesPage",
             "parameters": {
                 "case_id": {
                     "$ref": "id",
@@ -158,6 +160,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of notes for a particular case",
             "uri": "cases/{case_id}/notes",
+            "responseClass": "CaseNotesPage",
             "parameters": {
                 "case_id": {
                     "$ref": "id",
@@ -176,6 +179,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of customers for a particular company",
             "uri": "companies/{company_id}/customers",
+            "responseClass": "CompanyCustomersPage",
             "parameters": {
                 "company_id": {
                     "$ref": "id",
@@ -194,8 +198,9 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of cases for a particular customer",
             "uri": "customers/{customer_id}/cases",
+            "responseClass": "CustomerCasesPage",
             "parameters": {
-                "_id": {
+                "customer_id": {
                     "$ref": "id",
                     "description": "The ID of the customer to retrieve cases for"
                 }
@@ -212,6 +217,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of cases for a particular filter",
             "uri": "filters/{filter_id}/cases",
+            "responseClass": "FilterCasesPage",
             "parameters": {
                 "filter_id": {
                     "$ref": "id",
@@ -230,6 +236,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of filters for a particular group",
             "uri": "groups/{group_id}/filters",
+            "responseClass": "GroupFiltersPage",
             "parameters": {
                 "group_id": {
                     "$ref": "id",
@@ -248,6 +255,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of users for a particular group",
             "uri": "groups/{group_id}/users",
+            "responseClass": "GroupUsersPage",
             "parameters": {
                 "group_id": {
                     "$ref": "id",
@@ -266,6 +274,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of actions for a particular macro",
             "uri": "macros/{macro_id}/actions",
+            "responseClass": "MacroActionsPage",
             "parameters": {
                 "macro_id": {
                     "$ref": "id",
@@ -284,6 +293,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of articles for a particular topic",
             "uri": "topics/{topic_id}/articles",
+            "responseClass": "TopicArticlesPage",
             "parameters": {
                 "topic_id": {
                     "$ref": "id",
@@ -302,6 +312,7 @@
             "extends": "list",
             "summary": "Retrieve a paginated list of translations for a particular topic",
             "uri": "topics/{topic_id}/translations",
+            "responseClass": "TopicTranslationsPage",
             "parameters": {
                 "topic_id": {
                     "$ref": "id",
@@ -858,6 +869,340 @@
                     "previous": {
                         "operation": "ListUsers",
                         "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+
+
+
+
+        "ArticleTranslationsPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "ArticleTranslationModel"
+                    },
+                    "self": {
+                        "operation": "ListArticleTranslations",
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListArticleTranslations",
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListArticleTranslations",
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListArticleTranslations",
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListArticleTranslations",
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "CaseRepliesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CaseReplyModel"
+                    },
+                    "self": {
+                        "operation": "ListCaseReplies",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListCaseReplies",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListCaseReplies",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListCaseReplies",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListCaseReplies",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "CaseNotesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CaseNoteModel"
+                    },
+                    "self": {
+                        "operation": "ListCaseNotes",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListCaseNotes",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListCaseNotes",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListCaseNotes",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListCaseNotes",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "CompanyCustomersPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CustomerModel"
+                    },
+                    "self": {
+                        "operation": "ListCompanyCustomers",
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListCompanyCustomers",
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListCompanyCustomers",
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListCompanyCustomers",
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListCompanyCustomers",
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "CustomerCasesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CaseModel"
+                    },
+                    "self": {
+                        "operation": "ListCustomerCases",
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListCustomerCases",
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListCustomerCases",
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListCustomerCases",
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListCustomerCases",
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "FilterCasesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CaseModel"
+                    },
+                    "self": {
+                        "operation": "ListFilterCases",
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListFilterCases",
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListFilterCases",
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListFilterCases",
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListFilterCases",
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "GroupFiltersPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "FilterModel"
+                    },
+                    "self": {
+                        "operation": "ListGroupFilters",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListGroupFilters",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListGroupFilters",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListGroupFilters",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListGroupFilters",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "GroupUsersPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "UserModel"
+                    },
+                    "self": {
+                        "operation": "ListGroupUsers",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListGroupUsers",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListGroupUsers",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListGroupUsers",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListGroupUsers",
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "MacroActionsPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "MacroActionModel"
+                    },
+                    "self": {
+                        "operation": "ListMacroActions",
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListMacroActions",
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListMacroActions",
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListMacroActions",
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListMacroActions",
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "TopicArticlesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "ArticleModel"
+                    },
+                    "self": {
+                        "operation": "ListTopicArticles",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListTopicArticles",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListTopicArticles",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListTopicArticles",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListTopicArticles",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    }
+                }
+            }
+        },
+        "TopicTranslationsPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "TopicTranslationModel"
+                    },
+                    "self": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "first": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "last": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "next": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                    },
+                    "previous": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
                     }
                 }
             }
@@ -1832,7 +2177,7 @@
                     },
                     "macro": {
                         "operation": "ShowMacro",
-                        "pattern": "/macros/(?P<id>[0-9]+)$"
+                        "pattern": "#/macros/(?P<id>[0-9]+)$#"
                     }
                 }
             }

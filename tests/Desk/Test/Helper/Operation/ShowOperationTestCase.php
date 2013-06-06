@@ -8,10 +8,10 @@ use Desk\Test\Helper\OperationTestCase;
 /**
  * Base class for any Show* operation tests
  *
- * Subclasses must only implement the abstract testSystem() method
- * from OperationTestCase. The testParameterValid() and
- * testParameterInvalid() data providers have been set up with
- * parameter values that should be fine for all Show operations.
+ * Subclasses must only implement the abstract assertSystem() method.
+ * The testParameterValid() and testParameterInvalid() data providers
+ * have been set up with parameter values that should be fine for all
+ * Show operations.
  *
  * To add further test cases for testParameterValid() or
  * testParameterInvalid() in a subclass, simply override

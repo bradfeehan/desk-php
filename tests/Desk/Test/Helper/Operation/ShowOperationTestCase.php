@@ -28,7 +28,7 @@ abstract class ShowOperationTestCase extends OperationTestCase
     {
         return array_merge(
             array(
-                array(array('id' => 9)),
+                array($this->getExampleParameters()),
             ),
             $this->dataParameterValidAdditional()
         );
@@ -58,23 +58,32 @@ abstract class ShowOperationTestCase extends OperationTestCase
      */
     public function dataParameterInvalid()
     {
-        return array_merge(
+        // $tests contains a row for each test run -- each element in
+        // the array is an argument to testParameterInvalid. Start with
+        // basic invalid calls...
+        $tests = array_merge(
             array(
                 array(array()),
-                array(array('id' => 4, 'embed' => 'foo')),
-                array(array('id' => 4, 'embed' => 'self')),
-                array(array('id' => true)),
-                array(array('id' => false)),
-                array(array('id' => null)),
-                array(array('id' => 0)),
-                array(array('id' => -12)),
-                array(array('id' => 12.3)),
-                array(array('id' => -12.3)),
-                array(array('id' => '3')),
-                array(array('id' => new \stdClass())),
+                array($this->getExampleParameters(array('embed' => 'foo'))),
+                array($this->getExampleParameters(array('embed' => 'self'))),
             ),
             $this->dataParameterInvalidAdditional()
         );
+
+        // add invalid calls, use non-integer values in integer params
+        $nonIntegers = array(
+            true, false, null, 0, -12, 12.3, -12.3, '3', new \stdClass(),
+        );
+
+        foreach ($this->getIntegerIdProperties() as $name) {
+            foreach ($nonIntegers as $value) {
+                $tests[] = array(
+                    $this->getExampleParameters(array($name => $value)),
+                );
+            }
+        }
+
+        return $tests;
     }
 
     /**
@@ -97,6 +106,42 @@ abstract class ShowOperationTestCase extends OperationTestCase
     }
 
     /**
+     * Gets parameters for this operation
+     *
+     * This will return an associative array with parameter names for
+     * keys mapping to values for the parameter. The parameters will
+     * represent a valid call to this operation, unless overrides are
+     * specified.
+     *
+     * Overrides are specified in the same way and will add to the
+     * returned array (overriding any that would normally be returned).
+     */
+    protected function getExampleParameters(array $overrides = array())
+    {
+        $properties = array();
+
+        foreach ($this->getIntegerIdProperties() as $property) {
+            $properties[$property] = 9; // valid integer
+        }
+
+        foreach ($overrides as $key => $value) {
+            $properties[$key] = $value;
+        }
+
+        return $properties;
+    }
+
+    /**
+     * Gets which properties should accept valid integer IDs
+     *
+     * @return array
+     */
+    protected function getIntegerIdProperties()
+    {
+        return array('id');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function testSystem()
@@ -104,7 +149,7 @@ abstract class ShowOperationTestCase extends OperationTestCase
         $client = $this->client();
         $this->setMockResponse($client, 'system');
 
-        $params = array('id' => 1);
+        $params = $this->getExampleParameters();
         $command = $client->getCommand($this->getOperationName(), $params);
 
         $model = $command->execute();
@@ -136,7 +181,7 @@ abstract class ShowOperationTestCase extends OperationTestCase
         $client = $this->client();
         $this->setMockResponse($client, 'system');
 
-        $params = array('id' => 1);
+        $params = $this->getExampleParameters();
         $command = $client->getCommand($this->getOperationName(), $params);
 
         $model = $command->execute();

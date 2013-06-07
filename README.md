@@ -20,7 +20,7 @@ PHP client for [Desk.com](http://desk.com) v2 API, based on
     * [Search](https://github.com/bradfeehan/desk-php/issues/15)
  * Sub-item operations (ListCaseNotes, etc)
     * [Show](https://github.com/bradfeehan/desk-php/issues/6)
-    * [List](https://github.com/bradfeehan/desk-php/issues/4)
+    * ~~[List](https://github.com/bradfeehan/desk-php/issues/4)~~
     * [Create](https://github.com/bradfeehan/desk-php/issues/9)
     * [Update](https://github.com/bradfeehan/desk-php/issues/12)
     * [Delete](https://github.com/bradfeehan/desk-php/issues/14)

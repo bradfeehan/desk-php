@@ -125,8 +125,8 @@
             "responseClass": "ArticleTranslationsPage",
             "parameters": {
                 "article_id": {
-                    "$ref": "id",
-                    "description": "The ID of the article to retrieve translations for"
+                    "description": "The ID of the article to retrieve translations for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -144,8 +144,8 @@
             "responseClass": "CaseRepliesPage",
             "parameters": {
                 "case_id": {
-                    "$ref": "id",
-                    "description": "The ID of the case to retrieve replies for"
+                    "description": "The ID of the case to retrieve replies for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -163,8 +163,8 @@
             "responseClass": "CaseNotesPage",
             "parameters": {
                 "case_id": {
-                    "$ref": "id",
-                    "description": "The ID of the case to retrieve notes for"
+                    "description": "The ID of the case to retrieve notes for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -182,8 +182,8 @@
             "responseClass": "CompanyCustomersPage",
             "parameters": {
                 "company_id": {
-                    "$ref": "id",
-                    "description": "The ID of the company to retrieve customers for"
+                    "description": "The ID of the company to retrieve customers for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -201,8 +201,8 @@
             "responseClass": "CustomerCasesPage",
             "parameters": {
                 "customer_id": {
-                    "$ref": "id",
-                    "description": "The ID of the customer to retrieve cases for"
+                    "description": "The ID of the customer to retrieve cases for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -220,8 +220,8 @@
             "responseClass": "FilterCasesPage",
             "parameters": {
                 "filter_id": {
-                    "$ref": "id",
-                    "description": "The ID of the filter to retrieve cases for"
+                    "description": "The ID of the filter to retrieve cases for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -239,8 +239,8 @@
             "responseClass": "GroupFiltersPage",
             "parameters": {
                 "group_id": {
-                    "$ref": "id",
-                    "description": "The ID of the group to retrieve filters for"
+                    "description": "The ID of the group to retrieve filters for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -258,8 +258,8 @@
             "responseClass": "GroupUsersPage",
             "parameters": {
                 "group_id": {
-                    "$ref": "id",
-                    "description": "The ID of the group to retrieve users for"
+                    "description": "The ID of the group to retrieve users for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -277,8 +277,8 @@
             "responseClass": "MacroActionsPage",
             "parameters": {
                 "macro_id": {
-                    "$ref": "id",
-                    "description": "The ID of the macro to retrieve actions for"
+                    "description": "The ID of the macro to retrieve actions for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -296,8 +296,8 @@
             "responseClass": "TopicArticlesPage",
             "parameters": {
                 "topic_id": {
-                    "$ref": "id",
-                    "description": "The ID of the topic to retrieve articles for"
+                    "description": "The ID of the topic to retrieve articles for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -315,8 +315,8 @@
             "responseClass": "TopicTranslationsPage",
             "parameters": {
                 "topic_id": {
-                    "$ref": "id",
-                    "description": "The ID of the topic to retrieve translations for"
+                    "description": "The ID of the topic to retrieve translations for",
+                    "$ref": "id"
                 }
             },
             "data": {
@@ -414,8 +414,8 @@
             "responseClass": "ArticleTranslationModel",
             "parameters": {
                 "article_id": {
-                    "$ref": "id",
-                    "description": "The ID of the article to retrieve the translation for"
+                    "description": "The ID of the article to retrieve the translation for",
+                    "$ref": "id"
                 },
                 "locale": {
                     "description": "The locale of the translation to retrieve",
@@ -469,8 +469,8 @@
             "responseClass": "TopicTranslationModel",
             "parameters": {
                 "topic_id": {
-                    "$ref": "id",
-                    "description": "The ID of the topic to retrieve the translation for"
+                    "description": "The ID of the topic to retrieve the translation for",
+                    "$ref": "id"
                 },
                 "locale": {
                     "description": "The locale of the translation to retrieve",
@@ -499,12 +499,12 @@
             "required": "true",
             "location": "uri"
         },
-        "date.send": {
+        "date.parameter": {
             "type": "object",
             "instanceOf": "DateTime",
             "filters": "Desk\\Filter\\Date::objectToString"
         },
-        "date.receive": {
+        "date.json": {
             "type": "string",
             "location": "json",
             "filters": "Desk\\Filter\\Date::stringToObject"
@@ -1248,15 +1248,15 @@
                 },
                 "publish_at": {
                     "description": "Date the article is to be published",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "created_at": {
                     "description": "Date the article was created",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "Date the article was updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "body": {
                     "description": "The content of the article (HTML formatted)",
@@ -1445,15 +1445,15 @@
                 },
                 "publish_at": {
                     "description": "Date the article is to be published",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "created_at": {
                     "description": "Date the article was created",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "Date the article was updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 }
             },
             "data": {
@@ -1510,23 +1510,23 @@
                 },
                 "created_at": {
                     "description": "Time of creation",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "Time last updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "active_at": {
                     "description": "Time the case was last active",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "received_at": {
                     "description": "Time the most recent message was received",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "locked_until": {
                     "description": "Time at which the lock on this case will expire",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 }
             },
             "data": {
@@ -1578,11 +1578,11 @@
                 },
                 "created_at": {
                     "description": "Time of creation",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "Time last updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "status": {
                     "description": "The message's current status",
@@ -1623,7 +1623,7 @@
                 },
                 "hidden_at": {
                     "description": "Time at which this answer was hidden from the support center",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 }
             },
             "data": {
@@ -1655,11 +1655,11 @@
                 },
                 "created_at": {
                     "description": "Time of creation",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "Time last updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "status": {
                     "description": "The message's current status",
@@ -1700,7 +1700,7 @@
                 },
                 "hidden_at": {
                     "description": "Time at which this answer was hidden from the support center",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 }
             },
             "data": {
@@ -1726,15 +1726,15 @@
                 },
                 "created_at": {
                     "description": "Time of creation",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "Time last updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "erased_at": {
                     "description": "Time at which an agent erased this note",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 }
             },
             "data": {
@@ -1773,11 +1773,11 @@
                 },
                 "created_at": {
                     "description": "Date the company was created",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "Date the company was updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "custom_fields": {
                     "description": "Hash of values for custom fields",
@@ -1887,11 +1887,11 @@
                 },
                 "created_at": {
                     "description": "Time at which the customer was created",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "Time at which the customer was last updated at",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "emails": {
                     "description": "Array of e-mail objects, each specifying the contact type and value of the e-mail address",
@@ -2079,11 +2079,11 @@
                 },
                 "created_at": {
                     "description": "When the integration URL was created",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "When the integration URL was last updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 }
             },
             "data": {
@@ -2168,11 +2168,11 @@
                 },
                 "created_at": {
                     "description": "When the action was created",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "When the action was last updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 }
             },
             "data": {
@@ -2218,11 +2218,11 @@
                 },
                 "created_at": {
                     "description": "Time when the topic was created",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "Time when the topic was updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 }
             },
             "data": {
@@ -2253,11 +2253,11 @@
                 },
                 "created_at": {
                     "description": "Time when the translation was created",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 },
                 "updated_at": {
                     "description": "Time when the translation was last updated",
-                    "$ref": "date.receive"
+                    "$ref": "date.json"
                 }
             },
             "data": {

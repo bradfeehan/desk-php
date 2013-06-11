@@ -500,6 +500,11 @@
             "extends": "delete",
             "summary": "Delete a single integration URL by ID",
             "uri": "integration_urls/{id}"
+        },
+        "DeleteMacro": {
+            "extends": "delete",
+            "summary": "Delete a single macro by ID",
+            "uri": "macros/{id}"
         }
     },
     "models": {

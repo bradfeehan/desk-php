@@ -3,7 +3,7 @@
     "description": "",
     "apiVersion": 2,
     "operations": {
-        "base": {
+        "embeddable": {
             "responseType": "model",
             "parameters": {
                 "embed": {
@@ -19,7 +19,7 @@
             }
         },
         "list": {
-            "extends": "base",
+            "extends": "embeddable",
             "httpMethod": "GET",
             "parameters": {
                 "per_page": {
@@ -37,11 +37,23 @@
             }
         },
         "show": {
-            "extends": "base",
+            "extends": "embeddable",
             "httpMethod": "GET"
         },
         "show.main": {
             "extends": "show",
+            "parameters": {
+                "id": {"$ref": "id"}
+            }
+        },
+        "delete": {
+            "httpMethod": "DELETE",
+            "class": "Desk\\Command\\NullResponseCommand",
+            "responseType": "primitive",
+            "responseClass": "null"
+        },
+        "delete.main": {
+            "extends": "delete",
             "parameters": {
                 "id": {"$ref": "id"}
             }
@@ -474,6 +486,47 @@
                 },
                 "locale": {
                     "description": "The locale of the translation to retrieve",
+                    "$ref": "locale.uri"
+                }
+            }
+        },
+
+
+
+
+        "DeleteArticle": {
+            "extends": "delete.main",
+            "summary": "Delete a single article by ID",
+            "uri": "articles/{id}"
+        },
+        "DeleteIntegrationUrl": {
+            "extends": "delete.main",
+            "summary": "Delete a single integration URL by ID",
+            "uri": "integration_urls/{id}"
+        },
+        "DeleteMacro": {
+            "extends": "delete.main",
+            "summary": "Delete a single macro by ID",
+            "uri": "macros/{id}"
+        },
+        "DeleteTopic": {
+            "extends": "delete.main",
+            "summary": "Delete a single topic by ID",
+            "uri": "topics/{id}"
+        },
+
+
+        "DeleteTopicTranslation": {
+            "extends": "delete",
+            "summary": "Delete a single topic translation by topic ID and locale",
+            "uri": "topics/{topic_id}/translations/{locale}",
+            "parameters": {
+                "topic_id": {
+                    "description": "The ID of the topic to delete the translation from",
+                    "$ref": "id"
+                },
+                "locale": {
+                    "description": "The locale of the translation to delete",
                     "$ref": "locale.uri"
                 }
             }

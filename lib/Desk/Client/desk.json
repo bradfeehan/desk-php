@@ -486,6 +486,15 @@
                     "$ref": "locale.uri"
                 }
             }
+        },
+
+
+
+
+        "DeleteArticle": {
+            "extends": "delete",
+            "summary": "Delete a single article by ID",
+            "uri": "articles/{id}"
         }
     },
     "models": {

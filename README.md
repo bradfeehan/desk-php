@@ -16,14 +16,14 @@ PHP client for [Desk.com](http://desk.com) v2 API, based on
     * ~~[List](https://github.com/bradfeehan/desk-php/issues/3)~~
     * [Create](https://github.com/bradfeehan/desk-php/issues/8)
     * [Update](https://github.com/bradfeehan/desk-php/issues/11)
-    * [Delete](https://github.com/bradfeehan/desk-php/issues/13)
+    * ~~[Delete](https://github.com/bradfeehan/desk-php/issues/13)~~
     * [Search](https://github.com/bradfeehan/desk-php/issues/15)
  * Sub-item operations (ListCaseNotes, etc)
     * ~~[Show](https://github.com/bradfeehan/desk-php/issues/6)~~
     * ~~[List](https://github.com/bradfeehan/desk-php/issues/4)~~
     * [Create](https://github.com/bradfeehan/desk-php/issues/9)
     * [Update](https://github.com/bradfeehan/desk-php/issues/12)
-    * [Delete](https://github.com/bradfeehan/desk-php/issues/14)
+    * ~~[Delete](https://github.com/bradfeehan/desk-php/issues/14)~~
  * Data type filtering
     * ~~Dates~~
     * Custom fields?

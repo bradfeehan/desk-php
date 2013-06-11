@@ -495,6 +495,11 @@
             "extends": "delete",
             "summary": "Delete a single article by ID",
             "uri": "articles/{id}"
+        },
+        "DeleteIntegrationUrl": {
+            "extends": "delete",
+            "summary": "Delete a single integration URL by ID",
+            "uri": "integration_urls/{id}"
         }
     },
     "models": {

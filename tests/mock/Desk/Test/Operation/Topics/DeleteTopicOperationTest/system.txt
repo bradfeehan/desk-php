@@ -1,0 +1,9 @@
+HTTP/1.1 204 No Content
+Accept-Ranges: bytes
+Cache-Control: no-cache
+Status: 204 No Content
+X-Frame-Options: SAMEORIGIN
+X-Rate-Limit-Limit: 60
+X-Rate-Limit-Remaining: 59
+X-Rate-Limit-Reset: 2
+Connection: keep-alive

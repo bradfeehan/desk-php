@@ -505,6 +505,11 @@
             "extends": "delete",
             "summary": "Delete a single macro by ID",
             "uri": "macros/{id}"
+        },
+        "DeleteTopic": {
+            "extends": "delete",
+            "summary": "Delete a single topic by ID",
+            "uri": "topics/{id}"
         }
     },
     "models": {

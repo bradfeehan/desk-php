@@ -3,7 +3,7 @@
     "description": "",
     "apiVersion": 2,
     "operations": {
-        "base": {
+        "embeddable": {
             "responseType": "model",
             "parameters": {
                 "embed": {
@@ -19,7 +19,7 @@
             }
         },
         "list": {
-            "extends": "base",
+            "extends": "embeddable",
             "httpMethod": "GET",
             "parameters": {
                 "per_page": {
@@ -37,11 +37,20 @@
             }
         },
         "show": {
-            "extends": "base",
+            "extends": "embeddable",
             "httpMethod": "GET"
         },
         "show.main": {
             "extends": "show",
+            "parameters": {
+                "id": {"$ref": "id"}
+            }
+        },
+        "delete": {
+            "httpMethod": "DELETE",
+            "class": "Desk\\Command\\NullResponseCommand",
+            "responseType": "primitive",
+            "responseClass": "null",
             "parameters": {
                 "id": {"$ref": "id"}
             }

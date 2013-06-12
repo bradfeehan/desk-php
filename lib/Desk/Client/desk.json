@@ -364,6 +364,168 @@
                 }
             }
         },
+        "SearchCases": {
+            "extends": "list",
+            "summary": "Search cases based on a combination of parameters with pagination",
+            "uri": "cases/search",
+            "responseClass": "SearchCasesPage",
+            "parameters": {
+                "name": {
+                    "description": "Search for cases from customers with particular names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "first_name": {
+                    "description": "Search for cases from customers with particular first names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "last_name": {
+                    "description": "Search for cases from customers with particular last names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "email": {
+                    "description": "Search for cases from customers with particular email addresses",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "phone": {
+                    "description": "Search for cases from customers with particular phone numbers",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "company": {
+                    "description": "Search for cases from customers with particular company names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "twitter": {
+                    "description": "Search for cases from customers with particular twitter handles",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "labels": {
+                    "description": "Search for cases from customers with particular labels",
+                    "$ref": "labels.query"
+                },
+                "case_id": {
+                    "description": "Case IDs to filter by",
+                    "type": "array",
+                    "items": {
+                        "$ref": "id"
+                    },
+                    "location": "query"
+                },
+                "subject": {
+                    "description": "Case subject to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "description": {
+                    "description": "Case description to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "status": {
+                    "description": "Case statuses to filter by",
+                    "type": "array",
+                    "items": {
+                        "$ref": "status"
+                    },
+                    "location": "query"
+                },
+                "priority": {
+                    "description": "Case priorities to filter by",
+                    "type": "array",
+                    "items": {
+                        "$ref": "priority"
+                    },
+                    "location": "query"
+                },
+                "assigned_group": {
+                    "description": "Assigned group name to filter by",
+                    "type": "string",
+                    "location": "query"
+                },
+                "assigned_user": {
+                    "description": "Assigned user name to filter by",
+                    "type": "string",
+                    "location": "query"
+                },
+                "channels": {
+                    "description": "Case channel types to filter by",
+                    "type": "array",
+                    "items": {
+                        "$ref": "channel"
+                    },
+                    "location": "query"
+                },
+                "notes": {
+                    "description": "Case notes to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "attachments": {
+                    "description": "Case attachment file names to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "created": {
+                    "description": "Creation date range to filter by",
+                    "$ref": "date.query.relative"
+                },
+                "updated": {
+                    "description": "Updated date range to filter by",
+                    "$ref": "date.query.relative"
+                },
+                "since_created_at": {
+                    "description": "Search for cases created more recently than a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "max_created_at": {
+                    "description": "Search for cases created on or before a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "since_updated_at": {
+                    "description": "Search for cases updated more recently than a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "max_updated_at": {
+                    "description": "Search for cases updated on or before a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "since_id": {
+                    "description": "Search for cases with an ID greater than a particular ID",
+                    "$ref": "id.query"
+                },
+                "max_id": {
+                    "description": "Search for cases with an ID less than or equal to a particular ID",
+                    "$ref": "id.query"
+                }
+            }
+        },
 
 
 
@@ -591,10 +753,19 @@
             "extends": "date.query",
             "filters": "Desk\\Filter\\Date::objectToTimestamp"
         },
+        "date.query.relative": {
+            "type": "string",
+            "enum": ["today", "yesterday", "week", "month", "year"],
+            "location": "query"
+        },
         "id": {
             "description": "The Desk ID of the item",
             "type": "integer",
             "minimum": 1
+        },
+        "id.query": {
+            "extends": "id",
+            "location": "query"
         },
         "id.uri": {
             "extends": "id",
@@ -610,6 +781,10 @@
         "labels.json": {
             "extends": "labels",
             "location": "json"
+        },
+        "labels.query": {
+            "extends": "labels",
+            "location": "query"
         },
         "locale": {
             "type": "string"
@@ -1352,6 +1527,36 @@
                     "previous": {
                         "operation": "SearchArticles",
                         "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                    }
+                }
+            }
+        },
+        "SearchCasesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CaseModel"
+                    },
+                    "self": {
+                        "operation": "SearchCases",
+                        "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                    },
+                    "first": {
+                        "operation": "SearchCases",
+                        "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                    },
+                    "last": {
+                        "operation": "SearchCases",
+                        "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                    },
+                    "next": {
+                        "operation": "SearchCases",
+                        "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                    },
+                    "previous": {
+                        "operation": "SearchCases",
+                        "pattern": "#/cases/search\\??(?P<_query>.*)$#"
                     }
                 }
             }

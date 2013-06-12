@@ -43,7 +43,7 @@
         "show.main": {
             "extends": "show",
             "parameters": {
-                "id": {"$ref": "id"}
+                "id": {"$ref": "id.uri"}
             }
         },
         "delete": {
@@ -55,7 +55,7 @@
         "delete.main": {
             "extends": "delete",
             "parameters": {
-                "id": {"$ref": "id"}
+                "id": {"$ref": "id.uri"}
             }
         },
 
@@ -138,7 +138,7 @@
             "parameters": {
                 "article_id": {
                     "description": "The ID of the article to retrieve translations for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -157,7 +157,7 @@
             "parameters": {
                 "case_id": {
                     "description": "The ID of the case to retrieve replies for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -176,7 +176,7 @@
             "parameters": {
                 "case_id": {
                     "description": "The ID of the case to retrieve notes for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -195,7 +195,7 @@
             "parameters": {
                 "company_id": {
                     "description": "The ID of the company to retrieve customers for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -214,7 +214,7 @@
             "parameters": {
                 "customer_id": {
                     "description": "The ID of the customer to retrieve cases for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -233,7 +233,7 @@
             "parameters": {
                 "filter_id": {
                     "description": "The ID of the filter to retrieve cases for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -252,7 +252,7 @@
             "parameters": {
                 "group_id": {
                     "description": "The ID of the group to retrieve filters for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -271,7 +271,7 @@
             "parameters": {
                 "group_id": {
                     "description": "The ID of the group to retrieve users for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -290,7 +290,7 @@
             "parameters": {
                 "macro_id": {
                     "description": "The ID of the macro to retrieve actions for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -309,7 +309,7 @@
             "parameters": {
                 "topic_id": {
                     "description": "The ID of the topic to retrieve articles for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -328,7 +328,7 @@
             "parameters": {
                 "topic_id": {
                     "description": "The ID of the topic to retrieve translations for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -427,7 +427,7 @@
             "parameters": {
                 "article_id": {
                     "description": "The ID of the article to retrieve the translation for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 },
                 "locale": {
                     "description": "The locale of the translation to retrieve",
@@ -441,7 +441,7 @@
             "uri": "cases/{case_id}/message",
             "responseClass": "CaseMessageModel",
             "parameters": {
-                "case_id": {"$ref": "id"}
+                "case_id": {"$ref": "id.uri"}
             }
         },
         "ShowCaseReply": {
@@ -450,8 +450,8 @@
             "uri": "cases/{case_id}/replies/{reply_id}",
             "responseClass": "CaseReplyModel",
             "parameters": {
-                "case_id": {"$ref": "id"},
-                "reply_id": {"$ref": "id"}
+                "case_id": {"$ref": "id.uri"},
+                "reply_id": {"$ref": "id.uri"}
             }
         },
         "ShowCaseNote": {
@@ -460,8 +460,8 @@
             "uri": "cases/{case_id}/notes/{note_id}",
             "responseClass": "CaseNoteModel",
             "parameters": {
-                "case_id": {"$ref": "id"},
-                "note_id": {"$ref": "id"}
+                "case_id": {"$ref": "id.uri"},
+                "note_id": {"$ref": "id.uri"}
             }
         },
         "ShowMacroAction": {
@@ -470,8 +470,8 @@
             "uri": "macros/{macro_id}/actions/{action_id}",
             "responseClass": "MacroActionModel",
             "parameters": {
-                "macro_id": {"$ref": "id"},
-                "action_id": {"$ref": "id"}
+                "macro_id": {"$ref": "id.uri"},
+                "action_id": {"$ref": "id.uri"}
             }
         },
         "ShowTopicTranslation": {
@@ -482,7 +482,7 @@
             "parameters": {
                 "topic_id": {
                     "description": "The ID of the topic to retrieve the translation for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 },
                 "locale": {
                     "description": "The locale of the translation to retrieve",
@@ -523,7 +523,7 @@
             "parameters": {
                 "topic_id": {
                     "description": "The ID of the topic to delete the translation from",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 },
                 "locale": {
                     "description": "The locale of the translation to delete",
@@ -533,12 +533,58 @@
         }
     },
     "models": {
+        "channel": {
+            "type": "string",
+            "enum": ["chat", "twitter", "email", "qna", "facebook", "phone"]
+        },
+        "channel.json": {
+            "extends": "channel",
+            "location": "json"
+        },
+        "custom_fields": {
+            "type": "object",
+            "additionalProperties": "true"
+        },
+        "custom_fields.json": {
+            "extends": "custom_fields",
+            "location": "json"
+        },
+        "date.json": {
+            "type": "string",
+            "location": "json",
+            "filters": "Desk\\Filter\\Date::stringToObject"
+        },
+        "date.parameter": {
+            "type": "object",
+            "instanceOf": "DateTime"
+        },
+        "date.query": {
+            "extends": "date.parameter",
+            "location": "query"
+        },
+        "date.query.timestamp": {
+            "extends": "date.query",
+            "filters": "Desk\\Filter\\Date::objectToTimestamp"
+        },
         "id": {
             "description": "The Desk ID of the item",
-            "required": "true",
             "type": "integer",
-            "minimum": 1,
-            "location": "uri"
+            "minimum": 1
+        },
+        "id.uri": {
+            "extends": "id",
+            "location": "uri",
+            "required": "true"
+        },
+        "labels": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "labels.json": {
+            "extends": "labels",
+            "location": "json"
         },
         "locale": {
             "type": "string"
@@ -552,38 +598,22 @@
             "required": "true",
             "location": "uri"
         },
-        "date.parameter": {
-            "type": "object",
-            "instanceOf": "DateTime",
-            "filters": "Desk\\Filter\\Date::objectToString"
-        },
-        "date.json": {
-            "type": "string",
-            "location": "json",
-            "filters": "Desk\\Filter\\Date::stringToObject"
-        },
         "priority": {
             "type": "integer",
             "minimum": 1,
             "maximum": 10
         },
+        "priority.json": {
+            "extends": "priority",
+            "location": "json"
+        },
         "status": {
             "type": "string",
             "enum": ["new", "open", "pending", "resolved", "closed"]
         },
-        "channel": {
-            "type": "string",
-            "enum": ["chat", "twitter", "email", "qna", "facebook", "phone"]
-        },
-        "custom_fields": {
-            "type": "object",
-            "additionalProperties": "true"
-        },
-        "labels": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
+        "status.json": {
+            "extends": "status",
+            "location": "json"
         },
 
 
@@ -1533,8 +1563,7 @@
                 },
                 "priority": {
                     "description": "Priority of the case (1-10, 1 is lowest priority)",
-                    "location": "json",
-                    "$ref": "priority"
+                    "$ref": "priority.json"
                 },
                 "description": {
                     "description": "Description or background information",
@@ -1543,23 +1572,19 @@
                 },
                 "status": {
                     "description": "Current state of the case",
-                    "location": "json",
-                    "$ref": "status"
+                    "$ref": "status.json"
                 },
                 "type": {
                     "description": "Channel of the case",
-                    "location": "json",
-                    "$ref": "channel"
+                    "$ref": "channel.json"
                 },
                 "labels": {
                     "description": "Array of labels associated with this case",
-                    "location": "json",
-                    "$ref": "labels"
+                    "$ref": "labels.json"
                 },
                 "custom_fields": {
                     "description": "Hash of values for custom fields",
-                    "location": "json",
-                    "$ref": "custom_fields"
+                    "$ref": "custom_fields.json"
                 },
                 "created_at": {
                     "description": "Time of creation",

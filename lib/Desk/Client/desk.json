@@ -343,6 +343,31 @@
 
 
 
+        "SearchArticles": {
+            "extends": "list",
+            "summary": "Search public articles with pagination",
+            "uri": "articles/search",
+            "responseClass": "SearchArticlesPage",
+            "parameters": {
+                "text": {
+                    "description": "Search terms -- will search across subject, body_text, keywords, question, and answer fields",
+                    "type": "string",
+                    "location": "query"
+                },
+                "topic_ids": {
+                    "description": "Topic IDs to filter results by",
+                    "type": "array",
+                    "location": "query",
+                    "items": {
+                        "$ref": "id"
+                    }
+                }
+            }
+        },
+
+
+
+
         "ShowArticle": {
             "extends": "show.main",
             "summary": "Retrieve a single article by ID",
@@ -1293,6 +1318,40 @@
                     "previous": {
                         "operation": "ListTopicTranslations",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                    }
+                }
+            }
+        },
+
+
+
+
+        "SearchArticlesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "ArticleModel"
+                    },
+                    "self": {
+                        "operation": "SearchArticles",
+                        "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                    },
+                    "first": {
+                        "operation": "SearchArticles",
+                        "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                    },
+                    "last": {
+                        "operation": "SearchArticles",
+                        "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                    },
+                    "next": {
+                        "operation": "SearchArticles",
+                        "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                    },
+                    "previous": {
+                        "operation": "SearchArticles",
+                        "pattern": "#/articles/search\\??(?P<_query>.*)$#"
                     }
                 }
             }

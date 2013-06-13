@@ -42,6 +42,7 @@ class FactoryTest extends UnitTestCase
             ->shouldReceive('addAuthentication')
             ->shouldReceive('addServiceDescription')
             ->shouldReceive('addRelationshipPlugin')
+            ->shouldReceive('addCommaAggregatorListener')
             ->getMock();
 
         $client = $factory->factory();
@@ -238,6 +239,24 @@ class FactoryTest extends UnitTestCase
 
         $factory = $this->mock('addRelationshipPlugin');
         $factory->addRelationshipPlugin($client);
+        $this->assertSame($originalClient, $client);
+    }
+
+    /**
+     * @covers Desk\Client\Factory::addCommaAggregatorListener
+     */
+    public function testAddCommaAggregatorListener()
+    {
+        $originalClient = \Mockery::mock('Desk\\Client')
+            ->shouldReceive('addSubscriber')
+                ->with(\Mockery::type('Desk\\Client\\CommaAggregatorListener'))
+                ->once()
+            ->getMock();
+
+        $client = $originalClient;
+
+        $factory = $this->mock('addCommaAggregatorListener');
+        $factory->addCommaAggregatorListener($client);
         $this->assertSame($originalClient, $client);
     }
 }

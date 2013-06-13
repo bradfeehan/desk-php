@@ -642,23 +642,23 @@
                     },
                     "self": {
                         "operation": "ListArticles",
-                        "pattern": "#/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListArticles",
-                        "pattern": "#/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListArticles",
-                        "pattern": "#/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListArticles",
-                        "pattern": "#/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListArticles",
-                        "pattern": "#/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -672,23 +672,23 @@
                     },
                     "self": {
                         "operation": "ListCases",
-                        "pattern": "#/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCases",
-                        "pattern": "#/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCases",
-                        "pattern": "#/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCases",
-                        "pattern": "#/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCases",
-                        "pattern": "#/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -702,23 +702,23 @@
                     },
                     "self": {
                         "operation": "ListCompanies",
-                        "pattern": "#/companies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCompanies",
-                        "pattern": "#/companies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCompanies",
-                        "pattern": "#/companies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCompanies",
-                        "pattern": "#/companies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCompanies",
-                        "pattern": "#/companies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -732,23 +732,23 @@
                     },
                     "self": {
                         "operation": "ListCustomFields",
-                        "pattern": "#/custom_fields\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCustomFields",
-                        "pattern": "#/custom_fields\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCustomFields",
-                        "pattern": "#/custom_fields\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCustomFields",
-                        "pattern": "#/custom_fields\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCustomFields",
-                        "pattern": "#/custom_fields\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -762,23 +762,23 @@
                     },
                     "self": {
                         "operation": "ListCustomers",
-                        "pattern": "#/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCustomers",
-                        "pattern": "#/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCustomers",
-                        "pattern": "#/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCustomers",
-                        "pattern": "#/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCustomers",
-                        "pattern": "#/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -792,23 +792,23 @@
                     },
                     "self": {
                         "operation": "ListFilters",
-                        "pattern": "#/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListFilters",
-                        "pattern": "#/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListFilters",
-                        "pattern": "#/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListFilters",
-                        "pattern": "#/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListFilters",
-                        "pattern": "#/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -822,23 +822,23 @@
                     },
                     "self": {
                         "operation": "ListGroups",
-                        "pattern": "#/groups\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListGroups",
-                        "pattern": "#/groups\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListGroups",
-                        "pattern": "#/groups\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListGroups",
-                        "pattern": "#/groups\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListGroups",
-                        "pattern": "#/groups\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -852,23 +852,23 @@
                     },
                     "self": {
                         "operation": "ListIntegrationUrls",
-                        "pattern": "#/integration_urls\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListIntegrationUrls",
-                        "pattern": "#/integration_urls\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListIntegrationUrls",
-                        "pattern": "#/integration_urls\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListIntegrationUrls",
-                        "pattern": "#/integration_urls\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListIntegrationUrls",
-                        "pattern": "#/integration_urls\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -882,23 +882,23 @@
                     },
                     "self": {
                         "operation": "MacroModel",
-                        "pattern": "#/macros\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "MacroModel",
-                        "pattern": "#/macros\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "MacroModel",
-                        "pattern": "#/macros\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "MacroModel",
-                        "pattern": "#/macros\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "MacroModel",
-                        "pattern": "#/macros\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -912,23 +912,23 @@
                     },
                     "self": {
                         "operation": "ListTopics",
-                        "pattern": "#/topics\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListTopics",
-                        "pattern": "#/topics\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListTopics",
-                        "pattern": "#/topics\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListTopics",
-                        "pattern": "#/topics\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListTopics",
-                        "pattern": "#/topics\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -942,23 +942,23 @@
                     },
                     "self": {
                         "operation": "ListUsers",
-                        "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/users\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListUsers",
-                        "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/users\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListUsers",
-                        "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/users\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListUsers",
-                        "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/users\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListUsers",
-                        "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/users\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -976,23 +976,23 @@
                     },
                     "self": {
                         "operation": "ListArticleTranslations",
-                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListArticleTranslations",
-                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListArticleTranslations",
-                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListArticleTranslations",
-                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListArticleTranslations",
-                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1006,23 +1006,23 @@
                     },
                     "self": {
                         "operation": "ListCaseReplies",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCaseReplies",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCaseReplies",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCaseReplies",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCaseReplies",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1036,23 +1036,23 @@
                     },
                     "self": {
                         "operation": "ListCaseNotes",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCaseNotes",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCaseNotes",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCaseNotes",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCaseNotes",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1066,23 +1066,23 @@
                     },
                     "self": {
                         "operation": "ListCompanyCustomers",
-                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCompanyCustomers",
-                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCompanyCustomers",
-                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCompanyCustomers",
-                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCompanyCustomers",
-                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1096,23 +1096,23 @@
                     },
                     "self": {
                         "operation": "ListCustomerCases",
-                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCustomerCases",
-                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCustomerCases",
-                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCustomerCases",
-                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCustomerCases",
-                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1126,23 +1126,23 @@
                     },
                     "self": {
                         "operation": "ListFilterCases",
-                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListFilterCases",
-                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListFilterCases",
-                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListFilterCases",
-                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListFilterCases",
-                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1156,23 +1156,23 @@
                     },
                     "self": {
                         "operation": "ListGroupFilters",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListGroupFilters",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListGroupFilters",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListGroupFilters",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListGroupFilters",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1186,23 +1186,23 @@
                     },
                     "self": {
                         "operation": "ListGroupUsers",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListGroupUsers",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListGroupUsers",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListGroupUsers",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListGroupUsers",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1216,23 +1216,23 @@
                     },
                     "self": {
                         "operation": "ListMacroActions",
-                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListMacroActions",
-                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListMacroActions",
-                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListMacroActions",
-                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListMacroActions",
-                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1246,23 +1246,23 @@
                     },
                     "self": {
                         "operation": "ListTopicArticles",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListTopicArticles",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListTopicArticles",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListTopicArticles",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListTopicArticles",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1276,23 +1276,23 @@
                     },
                     "self": {
                         "operation": "ListTopicTranslations",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListTopicTranslations",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListTopicTranslations",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListTopicTranslations",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListTopicTranslations",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     }
                 }
             }

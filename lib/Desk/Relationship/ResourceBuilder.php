@@ -7,6 +7,7 @@ use Desk\Exception\UnexpectedValueException;
 use Desk\Relationship\Exception\InvalidLinkFormatException;
 use Desk\Relationship\Model;
 use Desk\Relationship\ResourceBuilderInterface;
+use Guzzle\Http\QueryString;
 use Guzzle\Service\Client;
 
 class ResourceBuilder implements ResourceBuilderInterface
@@ -148,6 +149,13 @@ class ResourceBuilder implements ResourceBuilderInterface
             unset($parameters[$i]);
         }
 
+        // Handle special "_query" parameter
+        if (isset($parameters['_query'])) {
+            $query = $this->parseQueryString($parameters['_query']);
+            $parameters = array_merge($parameters, $query->toArray());
+            unset($parameters['_query']);
+        }
+
         // Convert strings containing integers to integer types. This
         // is desirable, because if the service description says that
         // the type must be a string, SchemaValidator will cast a
@@ -161,5 +169,46 @@ class ResourceBuilder implements ResourceBuilderInterface
         }
 
         return $parameters;
+    }
+
+    /**
+     * Same as QueryString::fromString, supports comma-separated values
+     *
+     * @param string $query
+     *
+     * @return Guzzle\Http\QueryString
+     */
+    public function parseQueryString($query)
+    {
+        $q = new QueryString();
+
+        if (0 !== strlen($query)) {
+            if ($query[0] == '?') {
+                $query = substr($query, 1);
+            }
+            foreach (explode('&', $query) as $kvp) {
+                $parts = explode('=', $kvp, 2);
+                $key = rawurldecode($parts[0]);
+
+                if (array_key_exists(1, $parts)) {
+                    if (strpos($parts[1], ',') !== false) {
+                        $value = explode(',', $parts[1]);
+                        foreach ($value as &$item) {
+                            $item = str_replace('+', '%20', $item);
+                            $item = rawurldecode($item);
+                        }
+                    } else {
+                        $value = str_replace('+', '%20', $parts[1]);
+                        $value = rawurldecode($value);
+                    }
+
+                    $q->add($key, $value);
+                } else {
+                    $q->add($key, '');
+                }
+            }
+        }
+
+        return $q;
     }
 }

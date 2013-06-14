@@ -46,6 +46,16 @@
                 "id": {"$ref": "id.uri"}
             }
         },
+        "create": {
+            "httpMethod": "POST",
+            "parameters": {
+                "content_type": {
+                    "location": "header",
+                    "sentAs": "Content-Type",
+                    "default": "application/json"
+                }
+            }
+        },
         "delete": {
             "httpMethod": "DELETE",
             "class": "Desk\\Command\\NullResponseCommand",

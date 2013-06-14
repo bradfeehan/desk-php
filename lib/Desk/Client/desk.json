@@ -12,7 +12,7 @@
                     "minItems": 1,
                     "items": {
                         "type": "string",
-                        "enum": []
+                        "enum": ["none"]
                     },
                     "location": "query"
                 }

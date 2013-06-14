@@ -6,6 +6,7 @@ use Desk\Client;
 use Desk\Client\CommaAggregatorListener;
 use Desk\Client\FactoryInterface;
 use Desk\Client\ServiceDescriptionLoader;
+use Desk\Command\PreValidator;
 use Desk\Exception\InvalidArgumentException;
 use Desk\Relationship\Plugin as RelationshipPlugin;
 use Guzzle\Common\Collection;
@@ -53,6 +54,7 @@ class Factory implements FactoryInterface
         $this->addServiceDescription($client);
         $this->addRelationshipPlugin($client);
         $this->addCommaAggregatorListener($client);
+        $this->addPreValidator($client);
 
         return $client;
     }
@@ -171,5 +173,15 @@ class Factory implements FactoryInterface
     public function addCommaAggregatorListener(Client &$client)
     {
         $client->addSubscriber(new CommaAggregatorListener());
+    }
+
+    /**
+     * Adds a PreValidator plugin to the client
+     *
+     * @param Desk\Client $client The client to add the PreValidator to
+     */
+    public function addPreValidator(Client &$client)
+    {
+        $client->addSubscriber(new PreValidator());
     }
 }

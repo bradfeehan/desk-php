@@ -70,4 +70,36 @@ class DateTest extends UnitTestCase
             ),
         );
     }
+
+    /**
+     * @covers Desk\Filter\Date::objectToTimestamp
+     * @dataProvider dataObjectToTimestamp
+     *
+     * @param DateTime $date     Input date object
+     * @param integer  $expected Expected timestamp to result
+     */
+    public function testObjectToTimestamp($date, $expected)
+    {
+        $originalOffset = $date->getOffset();
+
+        $actual = Date::objectToTimestamp($date);
+        $this->assertSame($expected, $actual);
+
+        // make sure timezone of the DateTime object is unchanged
+        $this->assertSame($originalOffset, $date->getOffset());
+    }
+
+    public function dataObjectToTimestamp()
+    {
+        return array(
+            array(
+                DateTime::createFromFormat(
+                    'Y-m-d H:i:s',
+                    '2012-06-07 17:00:00',
+                    new DateTimeZone('Australia/Melbourne')
+                ),
+                1339052400,
+            ),
+        );
+    }
 }

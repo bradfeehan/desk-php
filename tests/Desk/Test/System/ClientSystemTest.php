@@ -99,6 +99,19 @@ class ClientSystemTest extends SystemTestCase
         $this->assertSame('Desk.com', $client->getDescription()->getName());
     }
 
+    public function testClientCreatedRequestsHaveCommaAggregator()
+    {
+        $client = $this->getServiceBuilder()->get('mock');
+
+        $request = $client->get('path/to/resource');
+        $this->assertInstanceOf('Guzzle\\Http\\Message\\Request', $request);
+
+        $query = $request->getUrl(true)->getQuery();
+        $query->set('foo', array('bar', 'baz'));
+
+        $this->assertSame('foo=bar,baz', (string) $query);
+    }
+
     /**
      * @group network
      */

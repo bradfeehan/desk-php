@@ -1613,6 +1613,10 @@
                         "operation": "ShowCase",
                         "pattern": "#/cases/(?P<id>[0-9]+)$#"
                     },
+                    "message": {
+                        "operation": "ShowCaseMessage",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/message$#"
+                    },
                     "customer": {
                         "operation": "ShowCustomer",
                         "pattern": "#/customers/(?P<id>[0-9]+)$#"

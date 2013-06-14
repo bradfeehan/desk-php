@@ -1,0 +1,113 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: must-revalidate, private, max-age=0
+Content-Type: application/json; charset=utf-8
+Status: 200
+X-Rate-Limit-Limit: 60
+X-Rate-Limit-Remaining: 59
+X-Rate-Limit-Reset: 2
+Content-Length: 3988
+Connection: keep-alive
+
+{
+    "total_entries": 2,
+    "_links": {
+        "self": {
+            "href": "/api/v2/articles/search?text=happy&topic_ids=1,2,4&page=1&per_page=30",
+            "class": "page"
+        },
+        "first": {
+            "href": "/api/v2/articles/search?text=happy&topic_ids=1,2,4&page=1&per_page=30",
+            "class": "page"
+        },
+        "last": {
+            "href": "/api/v2/articles/search?text=happy&topic_ids=1,2,4&page=1&per_page=30",
+            "class": "page"
+        },
+        "next": null,
+        "previous": null
+    },
+    "_embedded": {
+        "entries": [
+            {
+                "subject": "Awesome Subject",
+                "body": "<p>Awesome apples</p>",
+                "body_email": "Email for Awesome apples",
+                "body_email_auto": false,
+                "body_chat": "Awesome apples",
+                "body_chat_auto": true,
+                "body_web_callback": "<p>Awesome Apples</p>",
+                "body_web_callback_auto": false,
+                "body_twitter": "Awesome apples",
+                "body_twitter_auto": true,
+                "body_qna": "Awesome apples",
+                "body_qna_auto": true,
+                "body_phone": "Awesome apples",
+                "body_phone_auto": true,
+                "body_facebook": "Awesome apples",
+                "body_facebook_auto": true,
+                "position": 1,
+                "quickcode": "AWESOME",
+                "in_support_center": true,
+                "internal_notes": "Notes to the agent here",
+                "publish_at": "2013-06-12T15:38:36Z",
+                "created_at": "2013-06-12T15:33:36Z",
+                "updated_at": "2013-06-12T15:38:36Z",
+                "_links": {
+                    "self": {
+                        "href": "/api/v2/articles/1",
+                        "class": "article"
+                    },
+                    "topic": {
+                        "href": "/api/v2/topics/1",
+                        "class": "topic"
+                    },
+                    "translations": {
+                        "href": "/api/v2/articles/1/translations",
+                        "class": "article_translation"
+                    }
+                }
+            },
+            {
+                "subject": "How to make your customers happy",
+                "body": "<strong>Use Desk.com</strong>",
+                "body_email": "Email just doesn't cut it",
+                "body_email_auto": false,
+                "body_chat": "Use Desk.com",
+                "body_chat_auto": true,
+                "body_web_callback": "<strong>Use Desk.com</strong>",
+                "body_web_callback_auto": false,
+                "body_twitter": "Use Desk.com in 140 chars or less",
+                "body_twitter_auto": false,
+                "body_qna": "Use Desk.com",
+                "body_qna_auto": true,
+                "body_phone": "Use Desk.com",
+                "body_phone_auto": true,
+                "body_facebook": "Use Desk.com",
+                "body_facebook_auto": true,
+                "position": 2,
+                "quickcode": "AWESOME1",
+                "in_support_center": false,
+                "internal_notes": "Notes to the agent here",
+                "publish_at": "2013-06-12T15:38:36Z",
+                "created_at": "2013-06-12T15:33:36Z",
+                "updated_at": "2013-06-12T15:38:36Z",
+                "_links": {
+                    "self": {
+                        "href": "/api/v2/articles/2",
+                        "class": "article"
+                    },
+                    "topic": {
+                        "href": "/api/v2/topics/1",
+                        "class": "topic"
+                    },
+                    "translations": {
+                        "href": "/api/v2/articles/2/translations",
+                        "class": "article_translation"
+                    }
+                },
+                "body_text": "Use Desk.com"
+            }
+        ]
+    }
+}

@@ -4,6 +4,7 @@ namespace Desk\Test\Unit\Relationship;
 
 use Desk\Relationship\ResourceBuilder;
 use Desk\Test\Helper\UnitTestCase;
+use Guzzle\Http\QueryString;
 
 class ResourceBuilderTest extends UnitTestCase
 {
@@ -272,6 +273,31 @@ class ResourceBuilderTest extends UnitTestCase
     /**
      * @covers Desk\Relationship\ResourceBuilder::parseHref
      */
+    public function testParseHrefWithSpecialQueryParameter()
+    {
+        $href = '/foo/bar/baz?qux=bongo&thud=grunt&blarg=wham,wibble';
+        $pattern = '#^/foo/(?P<test>[a-z]+)/baz\\?(?P<_query>.*)$#';
+
+        $builder = $this->mock('parseHref')
+            ->shouldReceive('parseQueryString')
+                ->with('qux=bongo&thud=grunt&blarg=wham,wibble')
+                ->andReturn(new QueryString(array('foo' => 'bar')))
+            ->getMock();
+        $parameters = $builder->parseHref($href, $pattern);
+
+        $this->assertInternalType('array', $parameters);
+
+        $expected = array(
+            'test' => 'bar',
+            'foo' => 'bar',
+        );
+
+        $this->assertSame($expected, $parameters);
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::parseHref
+     */
     public function testParseHrefWithIntegerParameters()
     {
         $href = '/foo/bar/123';
@@ -296,5 +322,26 @@ class ResourceBuilderTest extends UnitTestCase
 
         $builder = $this->mock('parseHref');
         $builder->parseHref($href, $pattern);
+    }
+
+    /**
+     * @covers Desk\Relationship\ResourceBuilder::parseQueryString
+     */
+    public function testParseQueryString()
+    {
+        $query = '?foo&bar=baz&qux=whimmy%20wham,wham%2C+wazzle%21';
+        $expected = array(
+            'foo' => '',
+            'bar' => 'baz',
+            'qux' => array(
+                'whimmy wham',
+                'wham, wazzle!',
+            ),
+        );
+
+        $builder = $this->mock('parseQueryString');
+        $result = $builder->parseQueryString($query);
+
+        $this->assertSame($expected, $result->toArray());
     }
 }

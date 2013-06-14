@@ -12,7 +12,7 @@
                     "minItems": 1,
                     "items": {
                         "type": "string",
-                        "enum": []
+                        "enum": ["none"]
                     },
                     "location": "query"
                 }
@@ -43,7 +43,7 @@
         "show.main": {
             "extends": "show",
             "parameters": {
-                "id": {"$ref": "id"}
+                "id": {"$ref": "id.uri"}
             }
         },
         "delete": {
@@ -55,7 +55,7 @@
         "delete.main": {
             "extends": "delete",
             "parameters": {
-                "id": {"$ref": "id"}
+                "id": {"$ref": "id.uri"}
             }
         },
 
@@ -138,7 +138,7 @@
             "parameters": {
                 "article_id": {
                     "description": "The ID of the article to retrieve translations for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -157,7 +157,7 @@
             "parameters": {
                 "case_id": {
                     "description": "The ID of the case to retrieve replies for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -176,7 +176,7 @@
             "parameters": {
                 "case_id": {
                     "description": "The ID of the case to retrieve notes for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -195,7 +195,7 @@
             "parameters": {
                 "company_id": {
                     "description": "The ID of the company to retrieve customers for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -214,7 +214,7 @@
             "parameters": {
                 "customer_id": {
                     "description": "The ID of the customer to retrieve cases for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -233,7 +233,7 @@
             "parameters": {
                 "filter_id": {
                     "description": "The ID of the filter to retrieve cases for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -252,7 +252,7 @@
             "parameters": {
                 "group_id": {
                     "description": "The ID of the group to retrieve filters for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -271,7 +271,7 @@
             "parameters": {
                 "group_id": {
                     "description": "The ID of the group to retrieve users for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -290,7 +290,7 @@
             "parameters": {
                 "macro_id": {
                     "description": "The ID of the macro to retrieve actions for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -309,7 +309,7 @@
             "parameters": {
                 "topic_id": {
                     "description": "The ID of the topic to retrieve articles for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -328,7 +328,7 @@
             "parameters": {
                 "topic_id": {
                     "description": "The ID of the topic to retrieve translations for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 }
             },
             "data": {
@@ -336,6 +336,272 @@
                     "entries": {
                         "model": "TopicTranslationModel"
                     }
+                }
+            }
+        },
+
+
+
+
+        "SearchArticles": {
+            "extends": "list",
+            "summary": "Search public articles with pagination",
+            "uri": "articles/search",
+            "responseClass": "SearchArticlesPage",
+            "parameters": {
+                "text": {
+                    "description": "Search terms -- will search across subject, body_text, keywords, question, and answer fields",
+                    "type": "string",
+                    "location": "query"
+                },
+                "topic_ids": {
+                    "description": "Topic IDs to filter results by",
+                    "type": "array",
+                    "location": "query",
+                    "items": {
+                        "$ref": "id"
+                    }
+                }
+            }
+        },
+        "SearchCases": {
+            "extends": "list",
+            "summary": "Search cases based on a combination of parameters with pagination",
+            "uri": "cases/search",
+            "responseClass": "SearchCasesPage",
+            "parameters": {
+                "name": {
+                    "description": "Search for cases from customers with particular names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "first_name": {
+                    "description": "Search for cases from customers with particular first names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "last_name": {
+                    "description": "Search for cases from customers with particular last names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "email": {
+                    "description": "Search for cases from customers with particular email addresses",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "phone": {
+                    "description": "Search for cases from customers with particular phone numbers",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "company": {
+                    "description": "Search for cases from customers with particular company names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "twitter": {
+                    "description": "Search for cases from customers with particular twitter handles",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "labels": {
+                    "description": "Search for cases from customers with particular labels",
+                    "$ref": "labels.query"
+                },
+                "case_id": {
+                    "description": "Case IDs to filter by",
+                    "type": "array",
+                    "items": {
+                        "$ref": "id"
+                    },
+                    "location": "query"
+                },
+                "subject": {
+                    "description": "Case subject to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "description": {
+                    "description": "Case description to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "status": {
+                    "description": "Case statuses to filter by",
+                    "type": "array",
+                    "items": {
+                        "$ref": "status"
+                    },
+                    "location": "query"
+                },
+                "priority": {
+                    "description": "Case priorities to filter by",
+                    "type": "array",
+                    "items": {
+                        "$ref": "priority"
+                    },
+                    "location": "query"
+                },
+                "assigned_group": {
+                    "description": "Assigned group name to filter by",
+                    "type": "string",
+                    "location": "query"
+                },
+                "assigned_user": {
+                    "description": "Assigned user name to filter by",
+                    "type": "string",
+                    "location": "query"
+                },
+                "channels": {
+                    "description": "Case channel types to filter by",
+                    "type": "array",
+                    "items": {
+                        "$ref": "channel"
+                    },
+                    "location": "query"
+                },
+                "notes": {
+                    "description": "Case notes to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "attachments": {
+                    "description": "Case attachment file names to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "created": {
+                    "description": "Creation date range to filter by",
+                    "$ref": "date.query.relative"
+                },
+                "updated": {
+                    "description": "Updated date range to filter by",
+                    "$ref": "date.query.relative"
+                },
+                "since_created_at": {
+                    "description": "Search for cases created more recently than a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "max_created_at": {
+                    "description": "Search for cases created on or before a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "since_updated_at": {
+                    "description": "Search for cases updated more recently than a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "max_updated_at": {
+                    "description": "Search for cases updated on or before a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "since_id": {
+                    "description": "Search for cases with an ID greater than a particular ID",
+                    "$ref": "id.query"
+                },
+                "max_id": {
+                    "description": "Search for cases with an ID less than or equal to a particular ID",
+                    "$ref": "id.query"
+                }
+            }
+        },
+        "SearchCustomers": {
+            "extends": "list",
+            "summary": "Search customers based on a combination of parameters with pagination",
+            "uri": "customers/search",
+            "responseClass": "SearchCustomersPage",
+            "parameters": {
+                "first_name": {
+                    "description": "Customer's first name to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "last_name": {
+                    "description": "Customer's last name to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "full_name": {
+                    "description": "Customer's first and last name (concatenated) to search for",
+                    "type": "string",
+                    "location": "query"
+                },
+                "since_created_at": {
+                    "description": "Search for customers created more recently than a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "max_created_at": {
+                    "description": "Search for customers created on or before a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "since_updated_at": {
+                    "description": "Search for customers updated more recently than a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "max_updated_at": {
+                    "description": "Search for customers updated on or before a particular date",
+                    "$ref": "date.query.timestamp"
+                },
+                "since_id": {
+                    "description": "Search for customers with an ID greater than a particular ID",
+                    "$ref": "id.query"
+                },
+                "max_id": {
+                    "description": "Search for customers with an ID less than or equal to a particular ID",
+                    "$ref": "id.query"
+                },
+                "email": {
+                    "description": "Customer's email address to search for",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "twitter": {
+                    "description": "Customer's twitter handle to search for",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "phone": {
+                    "description": "Customer's phone number to search for",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
+                },
+                "external_id": {
+                    "description": "Customer's external ID to search for",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "location": "query"
                 }
             }
         },
@@ -427,7 +693,7 @@
             "parameters": {
                 "article_id": {
                     "description": "The ID of the article to retrieve the translation for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 },
                 "locale": {
                     "description": "The locale of the translation to retrieve",
@@ -441,7 +707,7 @@
             "uri": "cases/{case_id}/message",
             "responseClass": "CaseMessageModel",
             "parameters": {
-                "case_id": {"$ref": "id"}
+                "case_id": {"$ref": "id.uri"}
             }
         },
         "ShowCaseReply": {
@@ -450,8 +716,8 @@
             "uri": "cases/{case_id}/replies/{reply_id}",
             "responseClass": "CaseReplyModel",
             "parameters": {
-                "case_id": {"$ref": "id"},
-                "reply_id": {"$ref": "id"}
+                "case_id": {"$ref": "id.uri"},
+                "reply_id": {"$ref": "id.uri"}
             }
         },
         "ShowCaseNote": {
@@ -460,8 +726,8 @@
             "uri": "cases/{case_id}/notes/{note_id}",
             "responseClass": "CaseNoteModel",
             "parameters": {
-                "case_id": {"$ref": "id"},
-                "note_id": {"$ref": "id"}
+                "case_id": {"$ref": "id.uri"},
+                "note_id": {"$ref": "id.uri"}
             }
         },
         "ShowMacroAction": {
@@ -470,8 +736,8 @@
             "uri": "macros/{macro_id}/actions/{action_id}",
             "responseClass": "MacroActionModel",
             "parameters": {
-                "macro_id": {"$ref": "id"},
-                "action_id": {"$ref": "id"}
+                "macro_id": {"$ref": "id.uri"},
+                "action_id": {"$ref": "id.uri"}
             }
         },
         "ShowTopicTranslation": {
@@ -482,7 +748,7 @@
             "parameters": {
                 "topic_id": {
                     "description": "The ID of the topic to retrieve the translation for",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 },
                 "locale": {
                     "description": "The locale of the translation to retrieve",
@@ -523,7 +789,7 @@
             "parameters": {
                 "topic_id": {
                     "description": "The ID of the topic to delete the translation from",
-                    "$ref": "id"
+                    "$ref": "id.uri"
                 },
                 "locale": {
                     "description": "The locale of the translation to delete",
@@ -533,12 +799,71 @@
         }
     },
     "models": {
+        "channel": {
+            "type": "string",
+            "enum": ["chat", "twitter", "email", "qna", "facebook", "phone"]
+        },
+        "channel.json": {
+            "extends": "channel",
+            "location": "json"
+        },
+        "custom_fields": {
+            "type": "object",
+            "additionalProperties": "true"
+        },
+        "custom_fields.json": {
+            "extends": "custom_fields",
+            "location": "json"
+        },
+        "date.json": {
+            "type": "string",
+            "location": "json",
+            "filters": "Desk\\Filter\\Date::stringToObject"
+        },
+        "date.parameter": {
+            "type": "object",
+            "instanceOf": "DateTime"
+        },
+        "date.query": {
+            "extends": "date.parameter",
+            "location": "query"
+        },
+        "date.query.timestamp": {
+            "extends": "date.query",
+            "filters": "Desk\\Filter\\Date::objectToTimestamp"
+        },
+        "date.query.relative": {
+            "type": "string",
+            "enum": ["today", "yesterday", "week", "month", "year"],
+            "location": "query"
+        },
         "id": {
             "description": "The Desk ID of the item",
-            "required": "true",
             "type": "integer",
-            "minimum": 1,
-            "location": "uri"
+            "minimum": 1
+        },
+        "id.query": {
+            "extends": "id",
+            "location": "query"
+        },
+        "id.uri": {
+            "extends": "id",
+            "location": "uri",
+            "required": "true"
+        },
+        "labels": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "labels.json": {
+            "extends": "labels",
+            "location": "json"
+        },
+        "labels.query": {
+            "extends": "labels",
+            "location": "query"
         },
         "locale": {
             "type": "string"
@@ -552,38 +877,22 @@
             "required": "true",
             "location": "uri"
         },
-        "date.parameter": {
-            "type": "object",
-            "instanceOf": "DateTime",
-            "filters": "Desk\\Filter\\Date::objectToString"
-        },
-        "date.json": {
-            "type": "string",
-            "location": "json",
-            "filters": "Desk\\Filter\\Date::stringToObject"
-        },
         "priority": {
             "type": "integer",
             "minimum": 1,
             "maximum": 10
         },
+        "priority.json": {
+            "extends": "priority",
+            "location": "json"
+        },
         "status": {
             "type": "string",
             "enum": ["new", "open", "pending", "resolved", "closed"]
         },
-        "channel": {
-            "type": "string",
-            "enum": ["chat", "twitter", "email", "qna", "facebook", "phone"]
-        },
-        "custom_fields": {
-            "type": "object",
-            "additionalProperties": "true"
-        },
-        "labels": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
+        "status.json": {
+            "extends": "status",
+            "location": "json"
         },
 
 
@@ -612,23 +921,23 @@
                     },
                     "self": {
                         "operation": "ListArticles",
-                        "pattern": "#/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListArticles",
-                        "pattern": "#/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListArticles",
-                        "pattern": "#/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListArticles",
-                        "pattern": "#/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListArticles",
-                        "pattern": "#/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -642,23 +951,23 @@
                     },
                     "self": {
                         "operation": "ListCases",
-                        "pattern": "#/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCases",
-                        "pattern": "#/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCases",
-                        "pattern": "#/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCases",
-                        "pattern": "#/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCases",
-                        "pattern": "#/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -672,23 +981,23 @@
                     },
                     "self": {
                         "operation": "ListCompanies",
-                        "pattern": "#/companies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCompanies",
-                        "pattern": "#/companies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCompanies",
-                        "pattern": "#/companies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCompanies",
-                        "pattern": "#/companies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCompanies",
-                        "pattern": "#/companies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -702,23 +1011,23 @@
                     },
                     "self": {
                         "operation": "ListCustomFields",
-                        "pattern": "#/custom_fields\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCustomFields",
-                        "pattern": "#/custom_fields\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCustomFields",
-                        "pattern": "#/custom_fields\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCustomFields",
-                        "pattern": "#/custom_fields\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCustomFields",
-                        "pattern": "#/custom_fields\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -732,23 +1041,23 @@
                     },
                     "self": {
                         "operation": "ListCustomers",
-                        "pattern": "#/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCustomers",
-                        "pattern": "#/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCustomers",
-                        "pattern": "#/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCustomers",
-                        "pattern": "#/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCustomers",
-                        "pattern": "#/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -762,23 +1071,23 @@
                     },
                     "self": {
                         "operation": "ListFilters",
-                        "pattern": "#/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListFilters",
-                        "pattern": "#/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListFilters",
-                        "pattern": "#/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListFilters",
-                        "pattern": "#/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListFilters",
-                        "pattern": "#/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -792,23 +1101,23 @@
                     },
                     "self": {
                         "operation": "ListGroups",
-                        "pattern": "#/groups\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListGroups",
-                        "pattern": "#/groups\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListGroups",
-                        "pattern": "#/groups\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListGroups",
-                        "pattern": "#/groups\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListGroups",
-                        "pattern": "#/groups\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -822,23 +1131,23 @@
                     },
                     "self": {
                         "operation": "ListIntegrationUrls",
-                        "pattern": "#/integration_urls\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListIntegrationUrls",
-                        "pattern": "#/integration_urls\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListIntegrationUrls",
-                        "pattern": "#/integration_urls\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListIntegrationUrls",
-                        "pattern": "#/integration_urls\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListIntegrationUrls",
-                        "pattern": "#/integration_urls\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -852,23 +1161,23 @@
                     },
                     "self": {
                         "operation": "MacroModel",
-                        "pattern": "#/macros\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "MacroModel",
-                        "pattern": "#/macros\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "MacroModel",
-                        "pattern": "#/macros\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "MacroModel",
-                        "pattern": "#/macros\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "MacroModel",
-                        "pattern": "#/macros\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -882,23 +1191,23 @@
                     },
                     "self": {
                         "operation": "ListTopics",
-                        "pattern": "#/topics\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListTopics",
-                        "pattern": "#/topics\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListTopics",
-                        "pattern": "#/topics\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListTopics",
-                        "pattern": "#/topics\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListTopics",
-                        "pattern": "#/topics\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -912,23 +1221,23 @@
                     },
                     "self": {
                         "operation": "ListUsers",
-                        "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/users\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListUsers",
-                        "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/users\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListUsers",
-                        "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/users\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListUsers",
-                        "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/users\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListUsers",
-                        "pattern": "#/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/users\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -946,23 +1255,23 @@
                     },
                     "self": {
                         "operation": "ListArticleTranslations",
-                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListArticleTranslations",
-                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListArticleTranslations",
-                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListArticleTranslations",
-                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListArticleTranslations",
-                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -976,23 +1285,23 @@
                     },
                     "self": {
                         "operation": "ListCaseReplies",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCaseReplies",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCaseReplies",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCaseReplies",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCaseReplies",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1006,23 +1315,23 @@
                     },
                     "self": {
                         "operation": "ListCaseNotes",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCaseNotes",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCaseNotes",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCaseNotes",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCaseNotes",
-                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1036,23 +1345,23 @@
                     },
                     "self": {
                         "operation": "ListCompanyCustomers",
-                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCompanyCustomers",
-                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCompanyCustomers",
-                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCompanyCustomers",
-                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCompanyCustomers",
-                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1066,23 +1375,23 @@
                     },
                     "self": {
                         "operation": "ListCustomerCases",
-                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListCustomerCases",
-                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListCustomerCases",
-                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListCustomerCases",
-                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListCustomerCases",
-                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1096,23 +1405,23 @@
                     },
                     "self": {
                         "operation": "ListFilterCases",
-                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListFilterCases",
-                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListFilterCases",
-                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListFilterCases",
-                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListFilterCases",
-                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1126,23 +1435,23 @@
                     },
                     "self": {
                         "operation": "ListGroupFilters",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListGroupFilters",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListGroupFilters",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListGroupFilters",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListGroupFilters",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1156,23 +1465,23 @@
                     },
                     "self": {
                         "operation": "ListGroupUsers",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListGroupUsers",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListGroupUsers",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListGroupUsers",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListGroupUsers",
-                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1186,23 +1495,23 @@
                     },
                     "self": {
                         "operation": "ListMacroActions",
-                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListMacroActions",
-                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListMacroActions",
-                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListMacroActions",
-                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListMacroActions",
-                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1216,23 +1525,23 @@
                     },
                     "self": {
                         "operation": "ListTopicArticles",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListTopicArticles",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListTopicArticles",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListTopicArticles",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListTopicArticles",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1246,23 +1555,117 @@
                     },
                     "self": {
                         "operation": "ListTopicTranslations",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "first": {
                         "operation": "ListTopicTranslations",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "last": {
                         "operation": "ListTopicTranslations",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "next": {
                         "operation": "ListTopicTranslations",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     },
                     "previous": {
                         "operation": "ListTopicTranslations",
-                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\?page=(?P<page>[0-9]+)&per_page=(?P<per_page>[0-9]+)$#"
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                    }
+                }
+            }
+        },
+
+
+
+
+        "SearchArticlesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "ArticleModel"
+                    },
+                    "self": {
+                        "operation": "SearchArticles",
+                        "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                    },
+                    "first": {
+                        "operation": "SearchArticles",
+                        "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                    },
+                    "last": {
+                        "operation": "SearchArticles",
+                        "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                    },
+                    "next": {
+                        "operation": "SearchArticles",
+                        "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                    },
+                    "previous": {
+                        "operation": "SearchArticles",
+                        "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                    }
+                }
+            }
+        },
+        "SearchCasesPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CaseModel"
+                    },
+                    "self": {
+                        "operation": "SearchCases",
+                        "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                    },
+                    "first": {
+                        "operation": "SearchCases",
+                        "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                    },
+                    "last": {
+                        "operation": "SearchCases",
+                        "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                    },
+                    "next": {
+                        "operation": "SearchCases",
+                        "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                    },
+                    "previous": {
+                        "operation": "SearchCases",
+                        "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                    }
+                }
+            }
+        },
+        "SearchCustomersPage": {
+            "extends": "page",
+            "data": {
+                "links": {
+                    "entries": {
+                        "model": "CustomerModel"
+                    },
+                    "self": {
+                        "operation": "SearchCustomers",
+                        "pattern": "#/customers/search\\??(?P<_query>.*)$#"
+                    },
+                    "first": {
+                        "operation": "SearchCustomers",
+                        "pattern": "#/customers/search\\??(?P<_query>.*)$#"
+                    },
+                    "last": {
+                        "operation": "SearchCustomers",
+                        "pattern": "#/customers/search\\??(?P<_query>.*)$#"
+                    },
+                    "next": {
+                        "operation": "SearchCustomers",
+                        "pattern": "#/customers/search\\??(?P<_query>.*)$#"
+                    },
+                    "previous": {
+                        "operation": "SearchCustomers",
+                        "pattern": "#/customers/search\\??(?P<_query>.*)$#"
                     }
                 }
             }
@@ -1533,8 +1936,7 @@
                 },
                 "priority": {
                     "description": "Priority of the case (1-10, 1 is lowest priority)",
-                    "location": "json",
-                    "$ref": "priority"
+                    "$ref": "priority.json"
                 },
                 "description": {
                     "description": "Description or background information",
@@ -1543,23 +1945,19 @@
                 },
                 "status": {
                     "description": "Current state of the case",
-                    "location": "json",
-                    "$ref": "status"
+                    "$ref": "status.json"
                 },
                 "type": {
                     "description": "Channel of the case",
-                    "location": "json",
-                    "$ref": "channel"
+                    "$ref": "channel.json"
                 },
                 "labels": {
                     "description": "Array of labels associated with this case",
-                    "location": "json",
-                    "$ref": "labels"
+                    "$ref": "labels.json"
                 },
                 "custom_fields": {
                     "description": "Hash of values for custom fields",
-                    "location": "json",
-                    "$ref": "custom_fields"
+                    "$ref": "custom_fields.json"
                 },
                 "created_at": {
                     "description": "Time of creation",
@@ -1587,6 +1985,10 @@
                     "self": {
                         "operation": "ShowCase",
                         "pattern": "#/cases/(?P<id>[0-9]+)$#"
+                    },
+                    "message": {
+                        "operation": "ShowCaseMessage",
+                        "pattern": "#/cases/(?P<case_id>[0-9]+)/message$#"
                     },
                     "customer": {
                         "operation": "ShowCustomer",

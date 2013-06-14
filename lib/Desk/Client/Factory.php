@@ -3,13 +3,14 @@
 namespace Desk\Client;
 
 use Desk\Client;
+use Desk\Client\CommaAggregatorListener;
 use Desk\Client\FactoryInterface;
 use Desk\Client\ServiceDescriptionLoader;
+use Desk\Command\PreValidator;
 use Desk\Exception\InvalidArgumentException;
 use Desk\Relationship\Plugin as RelationshipPlugin;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
-use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Service\Description\ServiceDescriptionLoader as GuzzleServiceDescriptionLoader;
 
 class Factory implements FactoryInterface
@@ -52,6 +53,8 @@ class Factory implements FactoryInterface
         $this->addAuthentication($client);
         $this->addServiceDescription($client);
         $this->addRelationshipPlugin($client);
+        $this->addCommaAggregatorListener($client);
+        $this->addPreValidator($client);
 
         return $client;
     }
@@ -160,5 +163,25 @@ class Factory implements FactoryInterface
     public function addRelationshipPlugin(Client &$client)
     {
         $client->addSubscriber(new RelationshipPlugin());
+    }
+
+    /**
+     * Adds a listener so that all created requests use CommaAggregator
+     *
+     * @param Desk\Client $client The client to add the listener to
+     */
+    public function addCommaAggregatorListener(Client &$client)
+    {
+        $client->addSubscriber(new CommaAggregatorListener());
+    }
+
+    /**
+     * Adds a PreValidator plugin to the client
+     *
+     * @param Desk\Client $client The client to add the PreValidator to
+     */
+    public function addPreValidator(Client &$client)
+    {
+        $client->addSubscriber(new PreValidator());
     }
 }

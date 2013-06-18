@@ -56,11 +56,14 @@ class FactoryTest extends UnitTestCase
      * @covers Desk\Client\Factory::processConfig
      * @dataProvider dataProcessConfigValid
      */
-    public function testProcessConfigValid($config, $expectedBaseUrl)
+    public function testProcessConfigValid($config, $expectedArray)
     {
-        $result = Client::factory($config);
-        $this->assertInstanceOf('Desk\\Client', $result);
-        $this->assertSame($expectedBaseUrl, $result->getBaseUrl());
+        $factory = $this->mock('processConfig');
+        $actual = $factory->processConfig($config);
+        $this->assertInstanceOf('Guzzle\\Common\\Collection', $actual);
+
+        $actualArray = $actual->toArray();
+        $this->assertSame($expectedArray, $actualArray);
     }
 
     public function dataProcessConfigValid()
@@ -72,7 +75,14 @@ class FactoryTest extends UnitTestCase
                     'username' => 'foo',
                     'password' => 'bar',
                 ),
-                'https://foo.desk.com/api/v2/'
+                array(
+                    'api_version' => 2,
+                    'base_url' => 'https://{subdomain}.desk.com/api/v{api_version}/',
+                    'subdomain' => 'foo',
+                    'username' => 'foo',
+                    'password' => 'bar',
+                    'authentication' => 'basic',
+                ),
             ),
             array(
                 array(
@@ -80,7 +90,13 @@ class FactoryTest extends UnitTestCase
                     'username' => 'foo',
                     'password' => 'bar',
                 ),
-                'http://example.com/'
+                array(
+                    'api_version' => 2,
+                    'base_url' => 'http://example.com/',
+                    'username' => 'foo',
+                    'password' => 'bar',
+                    'authentication' => 'basic',
+                ),
             ),
             array(
                 array(
@@ -89,7 +105,14 @@ class FactoryTest extends UnitTestCase
                     'username' => 'foo',
                     'password' => 'bar',
                 ),
-                'http://foo.example.com/'
+                array(
+                    'api_version' => 2,
+                    'base_url' => 'http://{subdomain}.example.com/',
+                    'subdomain' => 'foo',
+                    'username' => 'foo',
+                    'password' => 'bar',
+                    'authentication' => 'basic',
+                ),
             ),
             array(
                 array(
@@ -99,7 +122,16 @@ class FactoryTest extends UnitTestCase
                     'token'           => '789',
                     'token_secret'    => '012',
                 ),
-                'https://foo.desk.com/api/v2/'
+                array(
+                    'api_version' => 2,
+                    'base_url' => 'https://{subdomain}.desk.com/api/v{api_version}/',
+                    'subdomain' => 'foo',
+                    'consumer_key' => '123',
+                    'consumer_secret' => '456',
+                    'token' => '789',
+                    'token_secret' => '012',
+                    'authentication' => 'oauth',
+                ),
             ),
         );
     }
@@ -200,29 +232,26 @@ class FactoryTest extends UnitTestCase
     {
         $testCase = $this;
 
-        $factory = new ClientFactory();
+        $description = \Mockery::mock(
+            'Guzzle\Service\Description\ServiceDescriptionInterface'
+        );
+
+        $loader = \Mockery::mock(
+            'Guzzle\Service\Description\ServiceDescriptionLoader',
+            array('load' => $description)
+        );
+
         $client = \Mockery::mock('Desk\\Client')
             ->shouldReceive('setDescription')
-            ->with(
-                \Mockery::on(
-                    function ($description) use ($testCase) {
-                        $testCase->assertInstanceOf(
-                            'Guzzle\\Service\\Description\\ServiceDescription',
-                            $description
-                        );
-
-                        $testCase->assertSame(
-                            'Desk.com',
-                            $description->getName()
-                        );
-                        return true;
-                    }
-                )
-            )
-            ->once()
+                ->with($description)
+                ->once()
             ->getMock();
 
+        $factory = new ClientFactory($loader);
         $factory->addServiceDescription($client);
+
+        // the real assertion is done by Mockery
+        $this->assertTrue(true);
     }
 
     /**

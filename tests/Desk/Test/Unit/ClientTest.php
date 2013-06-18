@@ -68,6 +68,16 @@ class ClientTest extends UnitTestCase
     }
 
     /**
+     * @covers Desk\Client::getDescriptionFilename
+     */
+    public function testGetDescriptionFilename()
+    {
+        $result = Client::getDescriptionFilename();
+        $this->assertInternalType('string', $result);
+        $this->assertTrue(file_exists($result));
+    }
+
+    /**
      * @covers Desk\Client::setAuth
      */
     public function testSetAuth()

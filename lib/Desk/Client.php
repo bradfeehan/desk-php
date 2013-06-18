@@ -71,6 +71,17 @@ class Client extends \Guzzle\Service\Client
         return self::getFactory()->factory($config);
     }
 
+    /**
+     * Gets the path of the service description filename for the client
+     *
+     * @return string
+     */
+    public static function getDescriptionFilename()
+    {
+        $ds = DIRECTORY_SEPARATOR;
+        return __DIR__ . "{$ds}Client{$ds}desk.json";
+    }
+
 
     /**
      * Sets basic authentication details on all subsequent requests

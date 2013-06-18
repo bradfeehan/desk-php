@@ -151,7 +151,7 @@ class Factory implements FactoryInterface
      */
     public function addServiceDescription(Client &$client)
     {
-        $description = $this->loader->load(__DIR__ . '/desk.json');
+        $description = $this->loader->load(Client::getDescriptionFilename());
         $client->setDescription($description);
     }
 

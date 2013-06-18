@@ -43,16 +43,16 @@
         "show.main": {
             "extends": "show",
             "parameters": {
-                "id": {"$ref": "id.uri"}
+                "id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
         "create": {
             "httpMethod": "POST",
             "parameters": {
                 "content_type": {
+                    "default": "application/json",
                     "location": "header",
-                    "sentAs": "Content-Type",
-                    "default": "application/json"
+                    "sentAs": "Content-Type"
                 }
             }
         },
@@ -65,7 +65,7 @@
         "delete.main": {
             "extends": "delete",
             "parameters": {
-                "id": {"$ref": "id.uri"}
+                "id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
 
@@ -147,8 +147,10 @@
             "responseClass": "ArticleTranslationsPage",
             "parameters": {
                 "article_id": {
+                    "extends": "id",
                     "description": "The ID of the article to retrieve translations for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -166,8 +168,10 @@
             "responseClass": "CaseRepliesPage",
             "parameters": {
                 "case_id": {
+                    "extends": "id",
                     "description": "The ID of the case to retrieve replies for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -185,8 +189,10 @@
             "responseClass": "CaseNotesPage",
             "parameters": {
                 "case_id": {
+                    "extends": "id",
                     "description": "The ID of the case to retrieve notes for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -204,8 +210,10 @@
             "responseClass": "CompanyCustomersPage",
             "parameters": {
                 "company_id": {
+                    "extends": "id",
                     "description": "The ID of the company to retrieve customers for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -223,8 +231,10 @@
             "responseClass": "CustomerCasesPage",
             "parameters": {
                 "customer_id": {
+                    "extends": "id",
                     "description": "The ID of the customer to retrieve cases for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -242,8 +252,10 @@
             "responseClass": "FilterCasesPage",
             "parameters": {
                 "filter_id": {
+                    "extends": "id",
                     "description": "The ID of the filter to retrieve cases for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -261,8 +273,10 @@
             "responseClass": "GroupFiltersPage",
             "parameters": {
                 "group_id": {
+                    "extends": "id",
                     "description": "The ID of the group to retrieve filters for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -280,8 +294,10 @@
             "responseClass": "GroupUsersPage",
             "parameters": {
                 "group_id": {
+                    "extends": "id",
                     "description": "The ID of the group to retrieve users for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -299,8 +315,10 @@
             "responseClass": "MacroActionsPage",
             "parameters": {
                 "macro_id": {
+                    "extends": "id",
                     "description": "The ID of the macro to retrieve actions for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -318,8 +336,10 @@
             "responseClass": "TopicArticlesPage",
             "parameters": {
                 "topic_id": {
+                    "extends": "id",
                     "description": "The ID of the topic to retrieve articles for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -337,8 +357,10 @@
             "responseClass": "TopicTranslationsPage",
             "parameters": {
                 "topic_id": {
+                    "extends": "id",
                     "description": "The ID of the topic to retrieve translations for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -367,10 +389,8 @@
                 "topic_ids": {
                     "description": "Topic IDs to filter results by",
                     "type": "array",
-                    "location": "query",
-                    "items": {
-                        "$ref": "id"
-                    }
+                    "items": {"extends": "id"},
+                    "location": "query"
                 }
             }
         },
@@ -383,69 +403,54 @@
                 "name": {
                     "description": "Search for cases from customers with particular names",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "first_name": {
                     "description": "Search for cases from customers with particular first names",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "last_name": {
                     "description": "Search for cases from customers with particular last names",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "email": {
                     "description": "Search for cases from customers with particular email addresses",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "phone": {
                     "description": "Search for cases from customers with particular phone numbers",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "company": {
                     "description": "Search for cases from customers with particular company names",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "twitter": {
                     "description": "Search for cases from customers with particular twitter handles",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "labels": {
+                    "extends": "labels",
                     "description": "Search for cases from customers with particular labels",
-                    "$ref": "labels.query"
+                    "location": "query"
                 },
                 "case_id": {
                     "description": "Case IDs to filter by",
                     "type": "array",
-                    "items": {
-                        "$ref": "id"
-                    },
+                    "items": {"extends": "id"},
                     "location": "query"
                 },
                 "subject": {
@@ -461,17 +466,13 @@
                 "status": {
                     "description": "Case statuses to filter by",
                     "type": "array",
-                    "items": {
-                        "$ref": "status"
-                    },
+                    "items": {"extends": "status"},
                     "location": "query"
                 },
                 "priority": {
                     "description": "Case priorities to filter by",
                     "type": "array",
-                    "items": {
-                        "$ref": "priority"
-                    },
+                    "items": {"extends": "priority"},
                     "location": "query"
                 },
                 "assigned_group": {
@@ -487,9 +488,7 @@
                 "channels": {
                     "description": "Case channel types to filter by",
                     "type": "array",
-                    "items": {
-                        "$ref": "channel"
-                    },
+                    "items": {"extends": "channel"},
                     "location": "query"
                 },
                 "notes": {
@@ -503,36 +502,44 @@
                     "location": "query"
                 },
                 "created": {
+                    "extends": "interval",
                     "description": "Creation date range to filter by",
-                    "$ref": "date.query.relative"
+                    "location": "query"
                 },
                 "updated": {
+                    "extends": "interval",
                     "description": "Updated date range to filter by",
-                    "$ref": "date.query.relative"
+                    "location": "query"
                 },
                 "since_created_at": {
+                    "extends": "date.input",
                     "description": "Search for cases created more recently than a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "max_created_at": {
+                    "extends": "date.input",
                     "description": "Search for cases created on or before a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "since_updated_at": {
+                    "extends": "date.input",
                     "description": "Search for cases updated more recently than a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "max_updated_at": {
+                    "extends": "date.input",
                     "description": "Search for cases updated on or before a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "since_id": {
+                    "extends": "id",
                     "description": "Search for cases with an ID greater than a particular ID",
-                    "$ref": "id.query"
+                    "location": "query"
                 },
                 "max_id": {
+                    "extends": "id",
                     "description": "Search for cases with an ID less than or equal to a particular ID",
-                    "$ref": "id.query"
+                    "location": "query"
                 }
             }
         },
@@ -558,59 +565,57 @@
                     "location": "query"
                 },
                 "since_created_at": {
+                    "extends": "date.input",
                     "description": "Search for customers created more recently than a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "max_created_at": {
+                    "extends": "date.input",
                     "description": "Search for customers created on or before a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "since_updated_at": {
+                    "extends": "date.input",
                     "description": "Search for customers updated more recently than a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "max_updated_at": {
+                    "extends": "date.input",
                     "description": "Search for customers updated on or before a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "since_id": {
+                    "extends": "id",
                     "description": "Search for customers with an ID greater than a particular ID",
-                    "$ref": "id.query"
+                    "location": "query"
                 },
                 "max_id": {
+                    "extends": "id",
                     "description": "Search for customers with an ID less than or equal to a particular ID",
-                    "$ref": "id.query"
+                    "location": "query"
                 },
                 "email": {
                     "description": "Customer's email address to search for",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "twitter": {
                     "description": "Customer's twitter handle to search for",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "phone": {
                     "description": "Customer's phone number to search for",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "external_id": {
                     "description": "Customer's external ID to search for",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 }
             }
@@ -702,12 +707,16 @@
             "responseClass": "ArticleTranslationModel",
             "parameters": {
                 "article_id": {
+                    "extends": "id",
                     "description": "The ID of the article to retrieve the translation for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 },
                 "locale": {
+                    "extends": "locale",
                     "description": "The locale of the translation to retrieve",
-                    "$ref": "locale.uri"
+                    "required": true,
+                    "location": "uri"
                 }
             }
         },
@@ -717,7 +726,7 @@
             "uri": "cases/{case_id}/message",
             "responseClass": "CaseMessageModel",
             "parameters": {
-                "case_id": {"$ref": "id.uri"}
+                "case_id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
         "ShowCaseReply": {
@@ -726,8 +735,8 @@
             "uri": "cases/{case_id}/replies/{reply_id}",
             "responseClass": "CaseReplyModel",
             "parameters": {
-                "case_id": {"$ref": "id.uri"},
-                "reply_id": {"$ref": "id.uri"}
+                "case_id": {"extends": "id", "required": "true", "location": "uri"},
+                "reply_id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
         "ShowCaseNote": {
@@ -736,8 +745,8 @@
             "uri": "cases/{case_id}/notes/{note_id}",
             "responseClass": "CaseNoteModel",
             "parameters": {
-                "case_id": {"$ref": "id.uri"},
-                "note_id": {"$ref": "id.uri"}
+                "case_id": {"extends": "id", "required": "true", "location": "uri"},
+                "note_id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
         "ShowMacroAction": {
@@ -746,8 +755,8 @@
             "uri": "macros/{macro_id}/actions/{action_id}",
             "responseClass": "MacroActionModel",
             "parameters": {
-                "macro_id": {"$ref": "id.uri"},
-                "action_id": {"$ref": "id.uri"}
+                "macro_id": {"extends": "id", "required": "true", "location": "uri"},
+                "action_id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
         "ShowTopicTranslation": {
@@ -757,12 +766,16 @@
             "responseClass": "TopicTranslationModel",
             "parameters": {
                 "topic_id": {
+                    "extends": "id",
                     "description": "The ID of the topic to retrieve the translation for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 },
                 "locale": {
+                    "extends": "locale",
                     "description": "The locale of the translation to retrieve",
-                    "$ref": "locale.uri"
+                    "required": true,
+                    "location": "uri"
                 }
             }
         },
@@ -798,12 +811,16 @@
             "uri": "topics/{topic_id}/translations/{locale}",
             "parameters": {
                 "topic_id": {
+                    "extends": "id",
                     "description": "The ID of the topic to delete the translation from",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 },
                 "locale": {
+                    "extends": "locale",
                     "description": "The locale of the translation to delete",
-                    "$ref": "locale.uri"
+                    "required": true,
+                    "location": "uri"
                 }
             }
         }
@@ -813,53 +830,26 @@
             "type": "string",
             "enum": ["chat", "twitter", "email", "qna", "facebook", "phone"]
         },
-        "channel.json": {
-            "extends": "channel",
-            "location": "json"
-        },
         "custom_fields": {
             "type": "object",
             "additionalProperties": "true"
         },
-        "custom_fields.json": {
-            "extends": "custom_fields",
-            "location": "json"
-        },
-        "date.json": {
+        "date.output": {
             "type": "string",
-            "location": "json",
             "filters": "Desk\\Filter\\Date::stringToObject"
         },
-        "date.parameter": {
+        "date.input": {
             "type": "object",
-            "instanceOf": "DateTime"
-        },
-        "date.query": {
-            "extends": "date.parameter",
-            "location": "query"
-        },
-        "date.query.timestamp": {
-            "extends": "date.query",
+            "instanceOf": "DateTime",
             "filters": "Desk\\Filter\\Date::objectToTimestamp"
         },
-        "date.query.relative": {
+        "interval": {
             "type": "string",
-            "enum": ["today", "yesterday", "week", "month", "year"],
-            "location": "query"
+            "enum": ["today", "yesterday", "week", "month", "year"]
         },
         "id": {
-            "description": "The Desk ID of the item",
             "type": "integer",
             "minimum": 1
-        },
-        "id.query": {
-            "extends": "id",
-            "location": "query"
-        },
-        "id.uri": {
-            "extends": "id",
-            "location": "uri",
-            "required": "true"
         },
         "labels": {
             "type": "array",
@@ -867,42 +857,17 @@
                 "type": "string"
             }
         },
-        "labels.json": {
-            "extends": "labels",
-            "location": "json"
-        },
-        "labels.query": {
-            "extends": "labels",
-            "location": "query"
-        },
         "locale": {
             "type": "string"
-        },
-        "locale.json": {
-            "extends": "locale",
-            "location": "json"
-        },
-        "locale.uri": {
-            "extends": "locale",
-            "required": "true",
-            "location": "uri"
         },
         "priority": {
             "type": "integer",
             "minimum": 1,
             "maximum": 10
         },
-        "priority.json": {
-            "extends": "priority",
-            "location": "json"
-        },
         "status": {
             "type": "string",
             "enum": ["new", "open", "pending", "resolved", "closed"]
-        },
-        "status.json": {
-            "extends": "status",
-            "location": "json"
         },
 
 
@@ -913,8 +878,8 @@
             "properties": {
                 "total_entries": {
                     "description": "Total number of entries on all pages of the result",
-                    "location": "json",
-                    "type": "integer"
+                    "type": "integer",
+                    "location": "json"
                 }
             }
         },
@@ -1689,120 +1654,123 @@
             "properties": {
                 "subject": {
                     "description": "The subject of the article",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "in_support_center": {
                     "description": "Whether to display the article in the support center",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "position": {
                     "description": "The position of the article as displayed in the support center",
-                    "location": "json",
-                    "type": "integer"
+                    "type": "integer",
+                    "location": "json"
                 },
                 "quickcode": {
                     "description": "Code used by the agent to quickly add article content to a case",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "keywords": {
                     "description": "Keywords in the article",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "publish_at": {
                     "description": "Date the article is to be published",
-                    "$ref": "date.json"
+                    "extends": "date.output",
+                    "location": "json"
                 },
                 "created_at": {
                     "description": "Date the article was created",
-                    "$ref": "date.json"
+                    "extends": "date.output",
+                    "location": "json"
                 },
                 "updated_at": {
                     "description": "Date the article was updated",
-                    "$ref": "date.json"
+                    "extends": "date.output",
+                    "location": "json"
                 },
                 "body": {
                     "description": "The content of the article (HTML formatted)",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_email": {
                     "description": "Email-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_email_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_chat": {
                     "description": "Chat-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_chat_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_web_callback": {
                     "description": "Chat-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_web_callback_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_twitter": {
                     "description": "Twitter-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_twitter_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_qna": {
                     "description": "QNA-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_qna_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_phone": {
                     "description": "Phone-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_phone_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_facebook": {
                     "description": "Facebook-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_facebook_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "internal_notes": {
                     "description": "Notes to the agent using the article",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 }
             },
             "data": {
@@ -1826,100 +1794,104 @@
             "type": "object",
             "properties": {
                 "locale": {
+                    "extends": "locale",
                     "description": "Article translation's locale",
-                    "$ref": "locale.json"
+                    "location": "json"
                 },
                 "subject": {
                     "description": "The subject of the article",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body": {
                     "description": "The content of the article (HTML formatted)",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_email": {
                     "description": "Email-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_email_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_chat": {
                     "description": "Chat-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_chat_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_web_callback": {
                     "description": "Chat-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_web_callback_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_twitter": {
                     "description": "Twitter-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_twitter_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_qna": {
                     "description": "QNA-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_qna_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_phone": {
                     "description": "Phone-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_phone_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "body_facebook": {
                     "description": "Facebook-specific body content",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "body_facebook_auto": {
                     "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "publish_at": {
+                    "extends": "date.output",
                     "description": "Date the article is to be published",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "Date the article was created",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "Date the article was updated",
-                    "$ref": "date.json"
+                    "location": "json"
                 }
             },
             "data": {
@@ -1945,8 +1917,9 @@
                     "type": "string"
                 },
                 "priority": {
+                    "extends": "priority",
                     "description": "Priority of the case (1-10, 1 is lowest priority)",
-                    "$ref": "priority.json"
+                    "location": "json"
                 },
                 "description": {
                     "description": "Description or background information",
@@ -1954,40 +1927,49 @@
                     "type": "string"
                 },
                 "status": {
+                    "extends": "status",
                     "description": "Current state of the case",
-                    "$ref": "status.json"
+                    "location": "json"
                 },
                 "type": {
+                    "extends": "channel",
                     "description": "Channel of the case",
-                    "$ref": "channel.json"
+                    "location": "json"
                 },
                 "labels": {
+                    "extends": "labels",
                     "description": "Array of labels associated with this case",
-                    "$ref": "labels.json"
+                    "location": "json"
                 },
                 "custom_fields": {
+                    "extends": "custom_fields",
                     "description": "Hash of values for custom fields",
-                    "$ref": "custom_fields.json"
+                    "location": "json"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "Time of creation",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "Time last updated",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "active_at": {
+                    "extends": "date.output",
                     "description": "Time the case was last active",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "received_at": {
+                    "extends": "date.output",
                     "description": "Time the most recent message was received",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "locked_until": {
+                    "extends": "date.output",
                     "description": "Time at which the lock on this case will expire",
-                    "$ref": "date.json"
+                    "location": "json"
                 }
             },
             "data": {
@@ -2032,9 +2014,9 @@
             "properties": {
                 "direction": {
                     "description": "Direction of the message",
-                    "location": "json",
                     "type": "string",
-                    "enum": ["in", "out"]
+                    "enum": ["in", "out"],
+                    "location": "json"
                 },
                 "body": {
                     "description": "Body of the message",
@@ -2042,53 +2024,56 @@
                     "type": "string"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "Time of creation",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "Time last updated",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "status": {
                     "description": "The message's current status",
-                    "location": "json",
                     "type": "string",
-                    "enum": ["received", "pending", "sent", "failed"]
+                    "enum": ["received", "pending", "sent", "failed"],
+                    "location": "json"
                 },
                 "subject": {
                     "description": "The subject of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "from": {
                     "description": "The from address of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "to": {
                     "description": "The to address of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "cc": {
                     "description": "The CC address(es) of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "bcc": {
                     "description": "The BCC address(es) of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "type": {
                     "description": "The type of tweet",
-                    "location": "json",
                     "type": "string",
-                    "enum": ["mention", "dm"]
+                    "enum": ["mention", "dm"],
+                    "location": "json"
                 },
                 "hidden_at": {
+                    "extends": "date.output",
                     "description": "Time at which this answer was hidden from the support center",
-                    "$ref": "date.json"
+                    "location": "json"
                 }
             },
             "data": {
@@ -2109,63 +2094,66 @@
             "properties": {
                 "direction": {
                     "description": "Direction of the message",
-                    "location": "json",
                     "type": "string",
-                    "enum": ["in", "out"]
+                    "enum": ["in", "out"],
+                    "location": "json"
                 },
                 "body": {
                     "description": "Body of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "Time of creation",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "Time last updated",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "status": {
                     "description": "The message's current status",
-                    "location": "json",
                     "type": "string",
-                    "enum": ["received", "pending", "sent", "failed"]
+                    "enum": ["received", "pending", "sent", "failed"],
+                    "location": "json"
                 },
                 "subject": {
                     "description": "The subject of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "from": {
                     "description": "The from address of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "to": {
                     "description": "The to address of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "cc": {
                     "description": "The CC address(es) of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "bcc": {
                     "description": "The BCC address(es) of the message",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "type": {
                     "description": "The type of tweet",
-                    "location": "json",
                     "type": "string",
-                    "enum": ["mention", "dm"]
+                    "enum": ["mention", "dm"],
+                    "location": "json"
                 },
                 "hidden_at": {
+                    "extends": "date.output",
                     "description": "Time at which this answer was hidden from the support center",
-                    "$ref": "date.json"
+                    "location": "json"
                 }
             },
             "data": {
@@ -2186,20 +2174,23 @@
             "properties": {
                 "body": {
                     "description": "The body of the note",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "Time of creation",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "Time last updated",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "erased_at": {
+                    "extends": "date.output",
                     "description": "Time at which an agent erased this note",
-                    "$ref": "date.json"
+                    "location": "json"
                 }
             },
             "data": {
@@ -2228,26 +2219,28 @@
             "properties": {
                 "name": {
                     "description": "Name of the company",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "domains": {
                     "description": "Array of top-level domain names for the company",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "Date the company was created",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "Date the company was updated",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "custom_fields": {
                     "description": "Hash of values for custom fields",
-                    "location": "json",
-                    "type": "object"
+                    "type": "object",
+                    "location": "json"
                 }
             },
             "data": {
@@ -2267,35 +2260,35 @@
             "properties": {
                 "name": {
                     "description": "Custom field name",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "label": {
                     "description": "Custom field label",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "type": {
                     "description": "The type of custom field",
-                    "location": "json",
                     "type": "string",
-                    "enum": ["ticket", "customer"]
+                    "enum": ["ticket", "customer"],
+                    "location": "json"
                 },
                 "active": {
                     "description": "Whether or not this custom field is active",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "data": {
                     "description": "The custom field's data type",
-                    "location": "json",
                     "type": "object",
                     "properties": {
                         "type": {
                             "type": "string",
-                            "enum": ["string", "boolean", "integer", "date", "list"]
+                            "enum": ["string", "boolean", "integer", "date.output", "list"]
                         }
-                    }
+                    },
+                    "location": "json"
                 }
             },
             "data": {
@@ -2312,55 +2305,56 @@
             "properties": {
                 "first_name": {
                     "description": "The customer's first name",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "last_name": {
                     "description": "The customer's last name",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "company": {
                     "description": "The customer's company",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "title": {
                     "description": "The customer's title",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "external_id": {
                     "description": "The customer's unique external identifier to reference this customer in an external system",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "background": {
                     "description": "Any background information for the customer",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "language": {
                     "description": "The customer's language code -- NULL unless multi-lingual support is enabled",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "locked_until": {
                     "description": "Time at which the lock on the customer will expire",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "Time at which the customer was created",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "Time at which the customer was last updated at",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "emails": {
                     "description": "Array of e-mail objects, each specifying the contact type and value of the e-mail address",
-                    "location": "json",
                     "type": "array",
                     "items": {
                         "type": "object",
@@ -2374,11 +2368,11 @@
                                 "type": "string"
                             }
                         }
-                    }
+                    },
+                    "location": "json"
                 },
                 "phone_numbers": {
                     "description": "Array of phone number objects, each specifying the contact type and value of the phone number",
-                    "location": "json",
                     "type": "array",
                     "items": {
                         "type": "object",
@@ -2392,11 +2386,11 @@
                                 "type": "string"
                             }
                         }
-                    }
+                    },
+                    "location": "json"
                 },
                 "addresses": {
                     "description": "Array of address objects, each specifying the contact type and value of the location",
-                    "location": "json",
                     "type": "array",
                     "items": {
                         "type": "object",
@@ -2410,13 +2404,14 @@
                                 "type": "string"
                             }
                         }
-                    }
+                    },
+                    "location": "json"
                 },
                 "custom_fields": {
                     "description": "Associative array of values for custom fields",
-                    "location": "json",
                     "type": "object",
-                    "additionalProperties": true
+                    "additionalProperties": true,
+                    "location": "json"
                 }
             },
             "data": {
@@ -2445,30 +2440,30 @@
             "properties": {
                 "name": {
                     "description": "The name of the filter",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "sort": {
                     "description": "What to sort by",
-                    "location": "json",
                     "type": "string",
-                    "enum": ["priority", "created", "updated", "active"]
+                    "enum": ["priority", "created", "updated", "active"],
+                    "location": "json"
                 },
                 "sort_direction": {
                     "description": "The direction to sort",
-                    "location": "json",
                     "type": "string",
-                    "enum": ["asc", "desc"]
+                    "enum": ["asc", "desc"],
+                    "location": "json"
                 },
                 "position": {
                     "description": "The position of the filter in the list of filters",
-                    "location": "json",
-                    "type": "integer"
+                    "type": "integer",
+                    "location": "json"
                 },
                 "active": {
                     "description": "Whether or not this filter is active",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 }
             },
             "data": {
@@ -2493,8 +2488,8 @@
             "properties": {
                 "name": {
                     "description": "The name of the group",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 }
             },
             "data": {
@@ -2519,36 +2514,38 @@
             "properties": {
                 "name": {
                     "description": "Name of the integration URL",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "description": {
                     "description": "An optional description",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "enabled": {
                     "description": "Whether or not the integration URL is enabled for use",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "markup": {
                     "description": "Liquid code to parse which creates the rendered URL",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "rendered": {
                     "description": "The rendered URL",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "When the integration URL was created",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "When the integration URL was last updated",
-                    "$ref": "date.json"
+                    "location": "json"
                 }
             },
             "data": {
@@ -2573,31 +2570,31 @@
             "properties": {
                 "name": {
                     "description": "Name of the macro",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "description": {
                     "description": "An optional description",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "enabled": {
                     "description": "Whether or not the macro is enabled for use",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "position": {
                     "description": "Placement in the UI",
-                    "location": "json",
-                    "type": "integer"
+                    "type": "integer",
+                    "location": "json"
                 },
                 "folders": {
                     "description": "Array of folders associated with this macro",
-                    "location": "json",
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "location": "json"
                 }
             },
             "data": {
@@ -2618,26 +2615,28 @@
             "properties": {
                 "type": {
                     "description": "The type of action to be performed",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "value": {
                     "description": "Value to set for the given type",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "enabled": {
                     "description": "Whether or not the action is enabled",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "When the action was created",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "When the action was last updated",
-                    "$ref": "date.json"
+                    "location": "json"
                 }
             },
             "data": {
@@ -2658,36 +2657,38 @@
             "properties": {
                 "name": {
                     "description": "Subject of the topic in the default locale",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "description": {
                     "description": "An optional description of the topic",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "position": {
                     "description": "The topic's position in the admin UI",
-                    "location": "json",
-                    "type": "integer"
+                    "type": "integer",
+                    "location": "json"
                 },
                 "allow_questions": {
                     "description": "Whether to allow customers to post questions about this topic in your support center",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "in_support_center": {
                     "description": "Whether to show this topic in the support center",
-                    "location": "json",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "location": "json"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "Time when the topic was created",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "Time when the topic was updated",
-                    "$ref": "date.json"
+                    "location": "json"
                 }
             },
             "data": {
@@ -2708,21 +2709,23 @@
             "properties": {
                 "name": {
                     "description": "The topic's name translated in the locale",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "locale": {
                     "description": "Language code of the translation",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "created_at": {
+                    "extends": "date.output",
                     "description": "Time when the translation was created",
-                    "$ref": "date.json"
+                    "location": "json"
                 },
                 "updated_at": {
+                    "extends": "date.output",
                     "description": "Time when the translation was last updated",
-                    "$ref": "date.json"
+                    "location": "json"
                 }
             },
             "data": {
@@ -2739,23 +2742,23 @@
             "properties": {
                 "name": {
                     "description": "Name of the user",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "public_name": {
                     "description": "Public facing name of the user",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "email": {
                     "description": "User's email",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 },
                 "level": {
                     "description": "User's permission level",
-                    "location": "json",
-                    "type": "string"
+                    "type": "string",
+                    "location": "json"
                 }
             },
             "data": {

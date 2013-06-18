@@ -3,13 +3,23 @@
 namespace Desk\Test\Helper;
 
 use Desk\Client as DeskClient;
+use Guzzle\Common\Exception\RuntimeException;
 use Guzzle\Service\Client;
+use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Tests\GuzzleTestCase;
 use InvalidArgumentException;
 use ReflectionClass;
 
 abstract class TestCase extends GuzzleTestCase
 {
+
+    /**
+     * Cache for the value of canServiceDescriptionBeLoaded()
+     *
+     * @var boolean
+     */
+    private static $serviceDescriptionCanBeLoaded;
+
 
     public function setUp()
     {
@@ -152,5 +162,28 @@ abstract class TestCase extends GuzzleTestCase
         $property = $class->getProperty($propertyName);
         $property->setAccessible(true);
         return $property->getValue($object);
+    }
+
+    /**
+     * Determines whether the desk.json service description is valid
+     *
+     * @return boolean
+     */
+    protected function canServiceDescriptionBeLoaded()
+    {
+        if (self::$serviceDescriptionCanBeLoaded === null) {
+            self::$serviceDescriptionCanBeLoaded = false;
+
+            $filename = DeskClient::getDescriptionFilename();
+
+            try {
+                $description = ServiceDescription::factory($filename);
+                self::$serviceDescriptionCanBeLoaded = true;
+            } catch (RuntimeException $e) {
+                // leave it as false
+            }
+        }
+
+        return self::$serviceDescriptionCanBeLoaded;
     }
 }

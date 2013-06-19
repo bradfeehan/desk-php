@@ -2,7 +2,7 @@
 
 namespace Desk\Test\Operation\Topics\Translations;
 
-use Desk\Relationship\Model;
+use Desk\Relationship\Resource\Model;
 use Desk\Test\Helper\Operation\ShowOperationTestCase;
 
 /**

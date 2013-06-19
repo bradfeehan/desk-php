@@ -2,7 +2,7 @@
 
 namespace Desk\Test\Helper\Operation;
 
-use Desk\Relationship\Model;
+use Desk\Relationship\Resource\Model;
 use Desk\Test\Helper\OperationTestCase;
 
 /**
@@ -155,7 +155,7 @@ abstract class ShowOperationTestCase extends OperationTestCase
         $model = $command->execute();
 
         // Perform child class asesrtions on the resulting model
-        $this->assertInstanceOf('Desk\\Relationship\\Model', $model);
+        $this->assertInstanceOf('Desk\\Relationship\\Resource\\Model', $model);
         $this->assertSystem($model);
     }
 

@@ -41,7 +41,6 @@ class FactoryTest extends UnitTestCase
                 ->andReturn(array('base_url' => 'http://mock.localhost/'))
             ->shouldReceive('addAuthentication')
             ->shouldReceive('addServiceDescription')
-            ->shouldReceive('addRelationshipPlugin')
             ->shouldReceive('addCommaAggregatorListener')
             ->shouldReceive('addPreValidator')
             ->getMock();
@@ -252,24 +251,6 @@ class FactoryTest extends UnitTestCase
 
         // the real assertion is done by Mockery
         $this->assertTrue(true);
-    }
-
-    /**
-     * @covers Desk\Client\Factory::addRelationshipPlugin
-     */
-    public function testAddRelationshipPlugin()
-    {
-        $originalClient = \Mockery::mock('Desk\\Client')
-            ->shouldReceive('addSubscriber')
-                ->with(\Mockery::type('Desk\\Relationship\\Plugin'))
-                ->once()
-            ->getMock();
-
-        $client = $originalClient;
-
-        $factory = $this->mock('addRelationshipPlugin');
-        $factory->addRelationshipPlugin($client);
-        $this->assertSame($originalClient, $client);
     }
 
     /**

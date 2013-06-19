@@ -8,7 +8,6 @@ use Desk\Client\FactoryInterface;
 use Desk\Client\ServiceDescriptionLoader;
 use Desk\Command\PreValidator;
 use Desk\Exception\InvalidArgumentException;
-use Desk\Relationship\Plugin as RelationshipPlugin;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Description\ServiceDescriptionLoader as GuzzleServiceDescriptionLoader;
@@ -52,7 +51,6 @@ class Factory implements FactoryInterface
 
         $this->addAuthentication($client);
         $this->addServiceDescription($client);
-        $this->addRelationshipPlugin($client);
         $this->addCommaAggregatorListener($client);
         $this->addPreValidator($client);
 
@@ -153,16 +151,6 @@ class Factory implements FactoryInterface
     {
         $description = $this->loader->load(Client::getDescriptionFilename());
         $client->setDescription($description);
-    }
-
-    /**
-     * Adds a relationship plugin to a client
-     *
-     * @param Desk\Client $client The client to add the plugin to
-     */
-    public function addRelationshipPlugin(Client &$client)
-    {
-        $client->addSubscriber(new RelationshipPlugin());
     }
 
     /**

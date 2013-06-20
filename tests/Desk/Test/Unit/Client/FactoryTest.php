@@ -43,6 +43,7 @@ class FactoryTest extends UnitTestCase
             ->shouldReceive('addServiceDescription')
             ->shouldReceive('addCommaAggregatorListener')
             ->shouldReceive('addPreValidator')
+            ->shouldReceive('addRelationshipPlugin')
             ->getMock();
 
         $client = $factory->factory();
@@ -286,6 +287,24 @@ class FactoryTest extends UnitTestCase
 
         $factory = $this->mock('addPreValidator');
         $factory->addPreValidator($client);
+        $this->assertSame($originalClient, $client);
+    }
+
+    /**
+     * @covers Desk\Client\Factory::addRelationshipPlugin
+     */
+    public function testAddRelationshipPlugin()
+    {
+        $originalClient = \Mockery::mock('Desk\\Client')
+            ->shouldReceive('addSubscriber')
+                ->with(\Mockery::type('Desk\\Relationship\\Plugin'))
+                ->once()
+            ->getMock();
+
+        $client = $originalClient;
+
+        $factory = $this->mock('addRelationshipPlugin');
+        $factory->addRelationshipPlugin($client);
         $this->assertSame($originalClient, $client);
     }
 }

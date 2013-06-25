@@ -31,7 +31,7 @@ PHP client for [Desk.com](http://desk.com) v2 API, based on
  * Resource relationships (links/embedding)
     * ~~Links to other resources return commands~~
     * ~~Embedded resources return models~~
-    * Embedded model data type filtering
+    * ~~Embedded model data type filtering~~
 
 When most of these are complete, there'll be a v0.1 release which will
 be the first tagged release.

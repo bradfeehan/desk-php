@@ -13,15 +13,15 @@ Connection: keep-alive
     "total_entries": 2,
     "_links": {
         "self": {
-            "href": "/api/v2/article_translations?page=1&per_page=30",
+            "href": "/api/v2/articles/1/translations?page=1&per_page=30",
             "class": "page"
         },
         "first": {
-            "href": "/api/v2/article_translations?page=1&per_page=30",
+            "href": "/api/v2/articles/1/translations?page=1&per_page=30",
             "class": "page"
         },
         "last": {
-            "href": "/api/v2/article_translations?page=1&per_page=30",
+            "href": "/api/v2/articles/1/translations?page=1&per_page=30",
             "class": "page"
         },
         "next": null,

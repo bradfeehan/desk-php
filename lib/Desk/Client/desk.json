@@ -43,7 +43,17 @@
         "show.main": {
             "extends": "show",
             "parameters": {
-                "id": {"$ref": "id.uri"}
+                "id": {"extends": "id", "required": "true", "location": "uri"}
+            }
+        },
+        "create": {
+            "httpMethod": "POST",
+            "parameters": {
+                "content_type": {
+                    "default": "application/json",
+                    "location": "header",
+                    "sentAs": "Content-Type"
+                }
             }
         },
         "delete": {
@@ -55,7 +65,7 @@
         "delete.main": {
             "extends": "delete",
             "parameters": {
-                "id": {"$ref": "id.uri"}
+                "id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
 
@@ -137,8 +147,10 @@
             "responseClass": "ArticleTranslationsPage",
             "parameters": {
                 "article_id": {
+                    "extends": "id",
                     "description": "The ID of the article to retrieve translations for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -156,8 +168,10 @@
             "responseClass": "CaseRepliesPage",
             "parameters": {
                 "case_id": {
+                    "extends": "id",
                     "description": "The ID of the case to retrieve replies for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -175,8 +189,10 @@
             "responseClass": "CaseNotesPage",
             "parameters": {
                 "case_id": {
+                    "extends": "id",
                     "description": "The ID of the case to retrieve notes for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -194,8 +210,10 @@
             "responseClass": "CompanyCustomersPage",
             "parameters": {
                 "company_id": {
+                    "extends": "id",
                     "description": "The ID of the company to retrieve customers for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -213,8 +231,10 @@
             "responseClass": "CustomerCasesPage",
             "parameters": {
                 "customer_id": {
+                    "extends": "id",
                     "description": "The ID of the customer to retrieve cases for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -232,8 +252,10 @@
             "responseClass": "FilterCasesPage",
             "parameters": {
                 "filter_id": {
+                    "extends": "id",
                     "description": "The ID of the filter to retrieve cases for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -251,8 +273,10 @@
             "responseClass": "GroupFiltersPage",
             "parameters": {
                 "group_id": {
+                    "extends": "id",
                     "description": "The ID of the group to retrieve filters for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -270,8 +294,10 @@
             "responseClass": "GroupUsersPage",
             "parameters": {
                 "group_id": {
+                    "extends": "id",
                     "description": "The ID of the group to retrieve users for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -289,8 +315,10 @@
             "responseClass": "MacroActionsPage",
             "parameters": {
                 "macro_id": {
+                    "extends": "id",
                     "description": "The ID of the macro to retrieve actions for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -308,8 +336,10 @@
             "responseClass": "TopicArticlesPage",
             "parameters": {
                 "topic_id": {
+                    "extends": "id",
                     "description": "The ID of the topic to retrieve articles for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -327,8 +357,10 @@
             "responseClass": "TopicTranslationsPage",
             "parameters": {
                 "topic_id": {
+                    "extends": "id",
                     "description": "The ID of the topic to retrieve translations for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 }
             },
             "data": {
@@ -357,10 +389,8 @@
                 "topic_ids": {
                     "description": "Topic IDs to filter results by",
                     "type": "array",
-                    "location": "query",
-                    "items": {
-                        "$ref": "id"
-                    }
+                    "items": {"extends": "id"},
+                    "location": "query"
                 }
             }
         },
@@ -373,69 +403,54 @@
                 "name": {
                     "description": "Search for cases from customers with particular names",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "first_name": {
                     "description": "Search for cases from customers with particular first names",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "last_name": {
                     "description": "Search for cases from customers with particular last names",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "email": {
                     "description": "Search for cases from customers with particular email addresses",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "phone": {
                     "description": "Search for cases from customers with particular phone numbers",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "company": {
                     "description": "Search for cases from customers with particular company names",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "twitter": {
                     "description": "Search for cases from customers with particular twitter handles",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "labels": {
+                    "extends": "labels",
                     "description": "Search for cases from customers with particular labels",
-                    "$ref": "labels.query"
+                    "location": "query"
                 },
                 "case_id": {
                     "description": "Case IDs to filter by",
                     "type": "array",
-                    "items": {
-                        "$ref": "id"
-                    },
+                    "items": {"extends": "id"},
                     "location": "query"
                 },
                 "subject": {
@@ -451,17 +466,13 @@
                 "status": {
                     "description": "Case statuses to filter by",
                     "type": "array",
-                    "items": {
-                        "$ref": "status"
-                    },
+                    "items": {"extends": "status"},
                     "location": "query"
                 },
                 "priority": {
                     "description": "Case priorities to filter by",
                     "type": "array",
-                    "items": {
-                        "$ref": "priority"
-                    },
+                    "items": {"extends": "priority"},
                     "location": "query"
                 },
                 "assigned_group": {
@@ -477,9 +488,7 @@
                 "channels": {
                     "description": "Case channel types to filter by",
                     "type": "array",
-                    "items": {
-                        "$ref": "channel"
-                    },
+                    "items": {"extends": "channel"},
                     "location": "query"
                 },
                 "notes": {
@@ -493,36 +502,44 @@
                     "location": "query"
                 },
                 "created": {
+                    "extends": "interval",
                     "description": "Creation date range to filter by",
-                    "$ref": "date.query.relative"
+                    "location": "query"
                 },
                 "updated": {
+                    "extends": "interval",
                     "description": "Updated date range to filter by",
-                    "$ref": "date.query.relative"
+                    "location": "query"
                 },
                 "since_created_at": {
+                    "extends": "date.input",
                     "description": "Search for cases created more recently than a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "max_created_at": {
+                    "extends": "date.input",
                     "description": "Search for cases created on or before a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "since_updated_at": {
+                    "extends": "date.input",
                     "description": "Search for cases updated more recently than a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "max_updated_at": {
+                    "extends": "date.input",
                     "description": "Search for cases updated on or before a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "since_id": {
+                    "extends": "id",
                     "description": "Search for cases with an ID greater than a particular ID",
-                    "$ref": "id.query"
+                    "location": "query"
                 },
                 "max_id": {
+                    "extends": "id",
                     "description": "Search for cases with an ID less than or equal to a particular ID",
-                    "$ref": "id.query"
+                    "location": "query"
                 }
             }
         },
@@ -548,59 +565,57 @@
                     "location": "query"
                 },
                 "since_created_at": {
+                    "extends": "date.input",
                     "description": "Search for customers created more recently than a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "max_created_at": {
+                    "extends": "date.input",
                     "description": "Search for customers created on or before a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "since_updated_at": {
+                    "extends": "date.input",
                     "description": "Search for customers updated more recently than a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "max_updated_at": {
+                    "extends": "date.input",
                     "description": "Search for customers updated on or before a particular date",
-                    "$ref": "date.query.timestamp"
+                    "location": "query"
                 },
                 "since_id": {
+                    "extends": "id",
                     "description": "Search for customers with an ID greater than a particular ID",
-                    "$ref": "id.query"
+                    "location": "query"
                 },
                 "max_id": {
+                    "extends": "id",
                     "description": "Search for customers with an ID less than or equal to a particular ID",
-                    "$ref": "id.query"
+                    "location": "query"
                 },
                 "email": {
                     "description": "Customer's email address to search for",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "twitter": {
                     "description": "Customer's twitter handle to search for",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "phone": {
                     "description": "Customer's phone number to search for",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 },
                 "external_id": {
                     "description": "Customer's external ID to search for",
                     "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
+                    "items": {"type": "string"},
                     "location": "query"
                 }
             }
@@ -692,12 +707,16 @@
             "responseClass": "ArticleTranslationModel",
             "parameters": {
                 "article_id": {
+                    "extends": "id",
                     "description": "The ID of the article to retrieve the translation for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 },
                 "locale": {
+                    "extends": "locale",
                     "description": "The locale of the translation to retrieve",
-                    "$ref": "locale.uri"
+                    "required": true,
+                    "location": "uri"
                 }
             }
         },
@@ -707,7 +726,7 @@
             "uri": "cases/{case_id}/message",
             "responseClass": "CaseMessageModel",
             "parameters": {
-                "case_id": {"$ref": "id.uri"}
+                "case_id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
         "ShowCaseReply": {
@@ -716,8 +735,8 @@
             "uri": "cases/{case_id}/replies/{reply_id}",
             "responseClass": "CaseReplyModel",
             "parameters": {
-                "case_id": {"$ref": "id.uri"},
-                "reply_id": {"$ref": "id.uri"}
+                "case_id": {"extends": "id", "required": "true", "location": "uri"},
+                "reply_id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
         "ShowCaseNote": {
@@ -726,8 +745,8 @@
             "uri": "cases/{case_id}/notes/{note_id}",
             "responseClass": "CaseNoteModel",
             "parameters": {
-                "case_id": {"$ref": "id.uri"},
-                "note_id": {"$ref": "id.uri"}
+                "case_id": {"extends": "id", "required": "true", "location": "uri"},
+                "note_id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
         "ShowMacroAction": {
@@ -736,8 +755,8 @@
             "uri": "macros/{macro_id}/actions/{action_id}",
             "responseClass": "MacroActionModel",
             "parameters": {
-                "macro_id": {"$ref": "id.uri"},
-                "action_id": {"$ref": "id.uri"}
+                "macro_id": {"extends": "id", "required": "true", "location": "uri"},
+                "action_id": {"extends": "id", "required": "true", "location": "uri"}
             }
         },
         "ShowTopicTranslation": {
@@ -747,12 +766,16 @@
             "responseClass": "TopicTranslationModel",
             "parameters": {
                 "topic_id": {
+                    "extends": "id",
                     "description": "The ID of the topic to retrieve the translation for",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 },
                 "locale": {
+                    "extends": "locale",
                     "description": "The locale of the translation to retrieve",
-                    "$ref": "locale.uri"
+                    "required": true,
+                    "location": "uri"
                 }
             }
         },
@@ -788,12 +811,16 @@
             "uri": "topics/{topic_id}/translations/{locale}",
             "parameters": {
                 "topic_id": {
+                    "extends": "id",
                     "description": "The ID of the topic to delete the translation from",
-                    "$ref": "id.uri"
+                    "required": "true",
+                    "location": "uri"
                 },
                 "locale": {
+                    "extends": "locale",
                     "description": "The locale of the translation to delete",
-                    "$ref": "locale.uri"
+                    "required": true,
+                    "location": "uri"
                 }
             }
         }
@@ -803,53 +830,26 @@
             "type": "string",
             "enum": ["chat", "twitter", "email", "qna", "facebook", "phone"]
         },
-        "channel.json": {
-            "extends": "channel",
-            "location": "json"
-        },
         "custom_fields": {
             "type": "object",
             "additionalProperties": "true"
         },
-        "custom_fields.json": {
-            "extends": "custom_fields",
-            "location": "json"
-        },
-        "date.json": {
+        "date.output": {
             "type": "string",
-            "location": "json",
             "filters": "Desk\\Filter\\Date::stringToObject"
         },
-        "date.parameter": {
+        "date.input": {
             "type": "object",
-            "instanceOf": "DateTime"
-        },
-        "date.query": {
-            "extends": "date.parameter",
-            "location": "query"
-        },
-        "date.query.timestamp": {
-            "extends": "date.query",
+            "instanceOf": "DateTime",
             "filters": "Desk\\Filter\\Date::objectToTimestamp"
         },
-        "date.query.relative": {
+        "interval": {
             "type": "string",
-            "enum": ["today", "yesterday", "week", "month", "year"],
-            "location": "query"
+            "enum": ["today", "yesterday", "week", "month", "year"]
         },
         "id": {
-            "description": "The Desk ID of the item",
             "type": "integer",
             "minimum": 1
-        },
-        "id.query": {
-            "extends": "id",
-            "location": "query"
-        },
-        "id.uri": {
-            "extends": "id",
-            "location": "uri",
-            "required": "true"
         },
         "labels": {
             "type": "array",
@@ -857,42 +857,17 @@
                 "type": "string"
             }
         },
-        "labels.json": {
-            "extends": "labels",
-            "location": "json"
-        },
-        "labels.query": {
-            "extends": "labels",
-            "location": "query"
-        },
         "locale": {
             "type": "string"
-        },
-        "locale.json": {
-            "extends": "locale",
-            "location": "json"
-        },
-        "locale.uri": {
-            "extends": "locale",
-            "required": "true",
-            "location": "uri"
         },
         "priority": {
             "type": "integer",
             "minimum": 1,
             "maximum": 10
         },
-        "priority.json": {
-            "extends": "priority",
-            "location": "json"
-        },
         "status": {
             "type": "string",
             "enum": ["new", "open", "pending", "resolved", "closed"]
-        },
-        "status.json": {
-            "extends": "status",
-            "location": "json"
         },
 
 
@@ -903,8 +878,8 @@
             "properties": {
                 "total_entries": {
                     "description": "Total number of entries on all pages of the result",
-                    "location": "json",
-                    "type": "integer"
+                    "type": "integer",
+                    "location": "json"
                 }
             }
         },
@@ -914,28 +889,45 @@
 
         "ArticlesPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "ArticleModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "ArticleModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticles",
                         "pattern": "#/articles\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticles",
                         "pattern": "#/articles\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticles",
                         "pattern": "#/articles\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticles",
                         "pattern": "#/articles\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticles",
                         "pattern": "#/articles\\??(?P<_query>.*)$#"
                     }
@@ -944,28 +936,45 @@
         },
         "CasesPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CaseModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CaseModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCases",
                         "pattern": "#/cases\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCases",
                         "pattern": "#/cases\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCases",
                         "pattern": "#/cases\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCases",
                         "pattern": "#/cases\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCases",
                         "pattern": "#/cases\\??(?P<_query>.*)$#"
                     }
@@ -974,28 +983,45 @@
         },
         "CompaniesPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CompanyModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CompanyModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanies",
                         "pattern": "#/companies\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanies",
                         "pattern": "#/companies\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanies",
                         "pattern": "#/companies\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanies",
                         "pattern": "#/companies\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanies",
                         "pattern": "#/companies\\??(?P<_query>.*)$#"
                     }
@@ -1004,28 +1030,45 @@
         },
         "CustomFieldsPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CustomFieldModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CustomFieldModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomFields",
                         "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomFields",
                         "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomFields",
                         "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomFields",
                         "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomFields",
                         "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
                     }
@@ -1034,28 +1077,45 @@
         },
         "CustomersPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CustomerModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CustomerModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomers",
                         "pattern": "#/customers\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomers",
                         "pattern": "#/customers\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomers",
                         "pattern": "#/customers\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomers",
                         "pattern": "#/customers\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomers",
                         "pattern": "#/customers\\??(?P<_query>.*)$#"
                     }
@@ -1064,28 +1124,45 @@
         },
         "FiltersPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "FilterModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "FilterModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListFilters",
                         "pattern": "#/filters\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListFilters",
                         "pattern": "#/filters\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListFilters",
                         "pattern": "#/filters\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListFilters",
                         "pattern": "#/filters\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListFilters",
                         "pattern": "#/filters\\??(?P<_query>.*)$#"
                     }
@@ -1094,28 +1171,45 @@
         },
         "GroupsPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "GroupModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "GroupModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroups",
                         "pattern": "#/groups\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroups",
                         "pattern": "#/groups\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroups",
                         "pattern": "#/groups\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroups",
                         "pattern": "#/groups\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroups",
                         "pattern": "#/groups\\??(?P<_query>.*)$#"
                     }
@@ -1124,28 +1218,45 @@
         },
         "IntegrationUrlsPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "IntegrationUrlModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "IntegrationUrlModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListIntegrationUrls",
                         "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListIntegrationUrls",
                         "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListIntegrationUrls",
                         "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListIntegrationUrls",
                         "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListIntegrationUrls",
                         "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
                     }
@@ -1154,29 +1265,46 @@
         },
         "MacrosPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "MacroModel"
-                    },
-                    "self": {
-                        "operation": "MacroModel",
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "MacroModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
+                        "operation": "ListMacros",
                         "pattern": "#/macros\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
-                        "operation": "MacroModel",
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
+                        "operation": "ListMacros",
                         "pattern": "#/macros\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
-                        "operation": "MacroModel",
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
+                        "operation": "ListMacros",
                         "pattern": "#/macros\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
-                        "operation": "MacroModel",
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
+                        "operation": "ListMacros",
                         "pattern": "#/macros\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
-                        "operation": "MacroModel",
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
+                        "operation": "ListMacros",
                         "pattern": "#/macros\\??(?P<_query>.*)$#"
                     }
                 }
@@ -1184,28 +1312,45 @@
         },
         "TopicsPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "TopicModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "TopicModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopics",
                         "pattern": "#/topics\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopics",
                         "pattern": "#/topics\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopics",
                         "pattern": "#/topics\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopics",
                         "pattern": "#/topics\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopics",
                         "pattern": "#/topics\\??(?P<_query>.*)$#"
                     }
@@ -1214,28 +1359,45 @@
         },
         "UsersPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "UserModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "UserModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListUsers",
                         "pattern": "#/users\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListUsers",
                         "pattern": "#/users\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListUsers",
                         "pattern": "#/users\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListUsers",
                         "pattern": "#/users\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListUsers",
                         "pattern": "#/users\\??(?P<_query>.*)$#"
                     }
@@ -1248,28 +1410,45 @@
 
         "ArticleTranslationsPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "ArticleTranslationModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "ArticleTranslationModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticleTranslations",
                         "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticleTranslations",
                         "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticleTranslations",
                         "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticleTranslations",
                         "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticleTranslations",
                         "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     }
@@ -1278,28 +1457,45 @@
         },
         "CaseRepliesPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CaseReplyModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CaseReplyModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseReplies",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseReplies",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseReplies",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseReplies",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseReplies",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
                     }
@@ -1308,28 +1504,45 @@
         },
         "CaseNotesPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CaseNoteModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CaseNoteModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseNotes",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseNotes",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseNotes",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseNotes",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseNotes",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
                     }
@@ -1338,28 +1551,45 @@
         },
         "CompanyCustomersPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CustomerModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CustomerModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanyCustomers",
                         "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanyCustomers",
                         "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanyCustomers",
                         "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanyCustomers",
                         "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanyCustomers",
                         "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
                     }
@@ -1368,28 +1598,45 @@
         },
         "CustomerCasesPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CaseModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CaseModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomerCases",
                         "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomerCases",
                         "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomerCases",
                         "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomerCases",
                         "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomerCases",
                         "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     }
@@ -1398,28 +1645,45 @@
         },
         "FilterCasesPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CaseModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CaseModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListFilterCases",
                         "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListFilterCases",
                         "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListFilterCases",
                         "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListFilterCases",
                         "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListFilterCases",
                         "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
                     }
@@ -1428,28 +1692,45 @@
         },
         "GroupFiltersPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "FilterModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "FilterModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupFilters",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupFilters",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupFilters",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupFilters",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupFilters",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
                     }
@@ -1458,28 +1739,45 @@
         },
         "GroupUsersPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "UserModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "UserModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupUsers",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupUsers",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupUsers",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupUsers",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupUsers",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
                     }
@@ -1488,28 +1786,45 @@
         },
         "MacroActionsPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "MacroActionModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "MacroActionModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListMacroActions",
                         "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListMacroActions",
                         "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListMacroActions",
                         "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListMacroActions",
                         "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListMacroActions",
                         "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
                     }
@@ -1518,28 +1833,45 @@
         },
         "TopicArticlesPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "ArticleModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "ArticleModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicArticles",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicArticles",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicArticles",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicArticles",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicArticles",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
                     }
@@ -1548,28 +1880,45 @@
         },
         "TopicTranslationsPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "TopicTranslationModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "TopicTranslationModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicTranslations",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicTranslations",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicTranslations",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicTranslations",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicTranslations",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
                     }
@@ -1582,28 +1931,45 @@
 
         "SearchArticlesPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "ArticleModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "ArticleModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchArticles",
                         "pattern": "#/articles/search\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchArticles",
                         "pattern": "#/articles/search\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchArticles",
                         "pattern": "#/articles/search\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchArticles",
                         "pattern": "#/articles/search\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchArticles",
                         "pattern": "#/articles/search\\??(?P<_query>.*)$#"
                     }
@@ -1612,28 +1978,45 @@
         },
         "SearchCasesPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CaseModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CaseModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchCases",
                         "pattern": "#/cases/search\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchCases",
                         "pattern": "#/cases/search\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchCases",
                         "pattern": "#/cases/search\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchCases",
                         "pattern": "#/cases/search\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchCases",
                         "pattern": "#/cases/search\\??(?P<_query>.*)$#"
                     }
@@ -1642,28 +2025,45 @@
         },
         "SearchCustomersPage": {
             "extends": "page",
-            "data": {
-                "links": {
-                    "entries": {
-                        "model": "CustomerModel"
-                    },
-                    "self": {
+            "properties": {
+                "entries": {
+                    "location": "embedded",
+                    "type": "array",
+                    "items": {
+                        "extends": "CustomerModel"
+                    }
+                },
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchCustomers",
                         "pattern": "#/customers/search\\??(?P<_query>.*)$#"
-                    },
-                    "first": {
+                    }
+                },
+                "first": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchCustomers",
                         "pattern": "#/customers/search\\??(?P<_query>.*)$#"
-                    },
-                    "last": {
+                    }
+                },
+                "last": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchCustomers",
                         "pattern": "#/customers/search\\??(?P<_query>.*)$#"
-                    },
-                    "next": {
+                    }
+                },
+                "next": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchCustomers",
                         "pattern": "#/customers/search\\??(?P<_query>.*)$#"
-                    },
-                    "previous": {
+                    }
+                },
+                "previous": {
+                    "location": "links",
+                    "data": {
                         "operation": "SearchCustomers",
                         "pattern": "#/customers/search\\??(?P<_query>.*)$#"
                     }
@@ -1674,138 +2074,701 @@
 
 
 
+        "body_auto": {
+            "description": "Whether to just use the content from 'body'",
+            "type": "boolean"
+        },
+
+
+        "ArticleModel.subject": {
+            "description": "The subject of the article",
+            "type": "string"
+        },
+        "ArticleModel.in_support_center": {
+            "description": "Whether to display the article in the support center",
+            "type": "boolean"
+        },
+        "ArticleModel.position": {
+            "description": "The position of the article as displayed in the support center",
+            "type": "integer"
+        },
+        "ArticleModel.quickcode": {
+            "description": "Code used by the agent to quickly add article content to a case",
+            "type": "string"
+        },
+        "ArticleModel.keywords": {
+            "description": "Keywords in the article",
+            "type": "string"
+        },
+        "ArticleModel.publish_at.output": {
+            "description": "Date the article is to be published",
+            "extends": "date.output"
+        },
+        "ArticleModel.created_at.output": {
+            "description": "Date the article was created",
+            "extends": "date.output"
+        },
+        "ArticleModel.updated_at.output": {
+            "description": "Date the article was updated",
+            "extends": "date.output"
+        },
+        "ArticleModel.body": {
+            "description": "The content of the article (HTML formatted)",
+            "type": "string"
+        },
+        "ArticleModel.body_email": {
+            "description": "Email-specific body content",
+            "type": "string"
+        },
+        "ArticleModel.body_email_auto": {"extends": "body_auto"},
+        "ArticleModel.body_chat": {
+            "description": "Chat-specific body content",
+            "type": "string"
+        },
+        "ArticleModel.body_chat_auto": {"extends": "body_auto"},
+        "ArticleModel.body_web_callback": {
+            "description": "Chat-specific body content",
+            "type": "string"
+        },
+        "ArticleModel.body_web_callback_auto": {"extends": "body_auto"},
+        "ArticleModel.body_twitter": {
+            "description": "Twitter-specific body content",
+            "type": "string"
+        },
+        "ArticleModel.body_twitter_auto": {"extends": "body_auto"},
+        "ArticleModel.body_qna": {
+            "description": "QNA-specific body content",
+            "type": "string"
+        },
+        "ArticleModel.body_qna_auto": {"extends": "body_auto"},
+        "ArticleModel.body_phone": {
+            "description": "Phone-specific body content",
+            "type": "string"
+        },
+        "ArticleModel.body_phone_auto": {"extends": "body_auto"},
+        "ArticleModel.body_facebook": {
+            "description": "Facebook-specific body content",
+            "type": "string"
+        },
+        "ArticleModel.body_facebook_auto": {"extends": "body_auto"},
+        "ArticleModel.internal_notes": {
+            "description": "Notes to the agent using the article",
+            "type": "string"
+        },
+
+
+        "ArticleTranslation.locale": {
+            "extends": "locale",
+            "description": "Article translation's locale"
+        },
+        "ArticleTranslation.subject": {
+            "description": "The subject of the article",
+            "type": "string"
+        },
+        "ArticleTranslation.body": {
+            "description": "The content of the article (HTML formatted)",
+            "type": "string"
+        },
+        "ArticleTranslation.body_email": {
+            "description": "Email-specific body content",
+            "type": "string"
+        },
+        "ArticleTranslation.body_email_auto": {"extends": "body_auto"},
+        "ArticleTranslation.body_chat": {
+            "description": "Chat-specific body content",
+            "type": "string"
+        },
+        "ArticleTranslation.body_chat_auto": {"extends": "body_auto"},
+        "ArticleTranslation.body_web_callback": {
+            "description": "Chat-specific body content",
+            "type": "string"
+        },
+        "ArticleTranslation.body_web_callback_auto": {"extends": "body_auto"},
+        "ArticleTranslation.body_twitter": {
+            "description": "Twitter-specific body content",
+            "type": "string"
+        },
+        "ArticleTranslation.body_twitter_auto": {"extends": "body_auto"},
+        "ArticleTranslation.body_qna": {
+            "description": "QNA-specific body content",
+            "type": "string"
+        },
+        "ArticleTranslation.body_qna_auto": {"extends": "body_auto"},
+        "ArticleTranslation.body_phone": {
+            "description": "Phone-specific body content",
+            "type": "string"
+        },
+        "ArticleTranslation.body_phone_auto": {"extends": "body_auto"},
+        "ArticleTranslation.body_facebook": {
+            "description": "Facebook-specific body content",
+            "type": "string"
+        },
+        "ArticleTranslation.body_facebook_auto": {"extends": "body_auto"},
+        "ArticleTranslation.publish_at": {
+            "extends": "date.output",
+            "description": "Date the article is to be published"
+        },
+        "ArticleTranslation.created_at": {
+            "extends": "date.output",
+            "description": "Date the article was created"
+        },
+        "ArticleTranslation.updated_at": {
+            "extends": "date.output",
+            "description": "Date the article was updated"
+        },
+
+
+        "CaseModel.external_id": {
+            "description": "Unique external identifier to reference this case to an external system",
+            "type": "string"
+        },
+        "CaseModel.subject": {
+            "description": "The subject of the case",
+            "type": "string"
+        },
+        "CaseModel.priority": {
+            "extends": "priority",
+            "description": "Priority of the case (1-10, 1 is lowest priority)"
+        },
+        "CaseModel.description": {
+            "description": "Description or background information",
+            "type": "string"
+        },
+        "CaseModel.status": {
+            "extends": "status",
+            "description": "Current state of the case"
+        },
+        "CaseModel.type": {
+            "extends": "channel",
+            "description": "Channel of the case"
+        },
+        "CaseModel.labels": {
+            "extends": "labels",
+            "description": "Array of labels associated with this case"
+        },
+        "CaseModel.custom_fields": {
+            "extends": "custom_fields",
+            "description": "Hash of values for custom fields"
+        },
+        "CaseModel.created_at": {
+            "extends": "date.output",
+            "description": "Time of creation"
+        },
+        "CaseModel.updated_at": {
+            "extends": "date.output",
+            "description": "Time last updated"
+        },
+        "CaseModel.active_at": {
+            "extends": "date.output",
+            "description": "Time the case was last active"
+        },
+        "CaseModel.received_at": {
+            "extends": "date.output",
+            "description": "Time the most recent message was received"
+        },
+        "CaseModel.locked_until": {
+            "extends": "date.output",
+            "description": "Time at which the lock on this case will expire"
+        },
+
+
+        "CaseMessageModel.direction": {
+            "description": "Direction of the message",
+            "type": "string",
+            "enum": ["in", "out"]
+        },
+        "CaseMessageModel.body": {
+            "description": "Body of the message",
+            "type": "string"
+        },
+        "CaseMessageModel.created_at": {
+            "extends": "date.output",
+            "description": "Time of creation"
+        },
+        "CaseMessageModel.updated_at": {
+            "extends": "date.output",
+            "description": "Time last updated"
+        },
+        "CaseMessageModel.status": {
+            "description": "The message's current status",
+            "type": "string",
+            "enum": ["received", "pending", "sent", "failed"]
+        },
+        "CaseMessageModel.subject": {
+            "description": "The subject of the message",
+            "type": "string"
+        },
+        "CaseMessageModel.from": {
+            "description": "The from address of the message",
+            "type": "string"
+        },
+        "CaseMessageModel.to": {
+            "description": "The to address of the message",
+            "type": "string"
+        },
+        "CaseMessageModel.cc": {
+            "description": "The CC address(es) of the message",
+            "type": "string"
+        },
+        "CaseMessageModel.bcc": {
+            "description": "The BCC address(es) of the message",
+            "type": "string"
+        },
+        "CaseMessageModel.type": {
+            "description": "The type of tweet",
+            "type": "string",
+            "enum": ["mention", "dm"]
+        },
+        "CaseMessageModel.hidden_at": {
+            "extends": "date.output",
+            "description": "Time at which this answer was hidden from the support center"
+        },
+
+
+        "CaseReplyModel.direction": {
+            "description": "Direction of the message",
+            "type": "string",
+            "enum": ["in", "out"]
+        },
+        "CaseReplyModel.body": {
+            "description": "Body of the message",
+            "type": "string"
+        },
+        "CaseReplyModel.created_at": {
+            "extends": "date.output",
+            "description": "Time of creation"
+        },
+        "CaseReplyModel.updated_at": {
+            "extends": "date.output",
+            "description": "Time last updated"
+        },
+        "CaseReplyModel.status": {
+            "description": "The message's current status",
+            "type": "string",
+            "enum": ["received", "pending", "sent", "failed"]
+        },
+        "CaseReplyModel.subject": {
+            "description": "The subject of the message",
+            "type": "string"
+        },
+        "CaseReplyModel.from": {
+            "description": "The from address of the message",
+            "type": "string"
+        },
+        "CaseReplyModel.to": {
+            "description": "The to address of the message",
+            "type": "string"
+        },
+        "CaseReplyModel.cc": {
+            "description": "The CC address(es) of the message",
+            "type": "string"
+        },
+        "CaseReplyModel.bcc": {
+            "description": "The BCC address(es) of the message",
+            "type": "string"
+        },
+        "CaseReplyModel.type": {
+            "description": "The type of tweet",
+            "type": "string",
+            "enum": ["mention", "dm"]
+        },
+        "CaseReplyModel.hidden_at": {
+            "extends": "date.output",
+            "description": "Time at which this answer was hidden from the support center"
+        },
+
+
+        "CaseNoteModel.body": {
+            "description": "The body of the note",
+            "type": "string"
+        },
+        "CaseNoteModel.created_at": {
+            "extends": "date.output",
+            "description": "Time of creation"
+        },
+        "CaseNoteModel.updated_at": {
+            "extends": "date.output",
+            "description": "Time last updated"
+        },
+        "CaseNoteModel.erased_at": {
+            "extends": "date.output",
+            "description": "Time at which an agent erased this note"
+        },
+
+
+        "CompanyModel.name": {
+            "description": "Name of the company",
+            "type": "string"
+        },
+        "CompanyModel.domains": {
+            "description": "Array of top-level domain names for the company",
+            "type": "string"
+        },
+        "CompanyModel.created_at": {
+            "extends": "date.output",
+            "description": "Date the company was created"
+        },
+        "CompanyModel.updated_at": {
+            "extends": "date.output",
+            "description": "Date the company was updated"
+        },
+        "CompanyModel.custom_fields": {
+            "description": "Hash of values for custom fields",
+            "type": "object"
+        },
+
+
+        "CustomFieldModel.name": {
+            "description": "Custom field name",
+            "type": "string"
+        },
+        "CustomFieldModel.label": {
+            "description": "Custom field label",
+            "type": "string"
+        },
+        "CustomFieldModel.type": {
+            "description": "The type of custom field",
+            "type": "string",
+            "enum": ["ticket", "customer"]
+        },
+        "CustomFieldModel.active": {
+            "description": "Whether or not this custom field is active",
+            "type": "string"
+        },
+        "CustomFieldModel.data": {
+            "description": "The custom field's data type",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": ["string", "boolean", "integer", "date.output", "list"]
+                }
+            }
+        },
+
+
+        "CustomerModel.first_name": {
+            "description": "The customer's first name",
+            "type": "string"
+        },
+        "CustomerModel.last_name": {
+            "description": "The customer's last name",
+            "type": "string"
+        },
+        "CustomerModel.company": {
+            "description": "The customer's company",
+            "type": "string"
+        },
+        "CustomerModel.title": {
+            "description": "The customer's title",
+            "type": "string"
+        },
+        "CustomerModel.external_id": {
+            "description": "The customer's unique external identifier to reference this customer in an external system",
+            "type": "string"
+        },
+        "CustomerModel.background": {
+            "description": "Any background information for the customer",
+            "type": "string"
+        },
+        "CustomerModel.language": {
+            "description": "The customer's language code -- NULL unless multi-lingual support is enabled",
+            "type": "string"
+        },
+        "CustomerModel.locked_until": {
+            "description": "Time at which the lock on the customer will expire",
+            "type": "string"
+        },
+        "CustomerModel.created_at": {
+            "extends": "date.output",
+            "description": "Time at which the customer was created"
+        },
+        "CustomerModel.updated_at": {
+            "extends": "date.output",
+            "description": "Time at which the customer was last updated at"
+        },
+        "CustomerModel.emails": {
+            "description": "Array of e-mail objects, each specifying the contact type and value of the e-mail address",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "The type of e-mail address",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "The e-mail address itself",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "CustomerModel.phone_numbers": {
+            "description": "Array of phone number objects, each specifying the contact type and value of the phone number",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "The type of phone number",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "The phone number itself",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "CustomerModel.addresses": {
+            "description": "Array of address objects, each specifying the contact type and value of the location",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "The type of address",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "The address itself",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "CustomerModel.custom_fields": {
+            "description": "Associative array of values for custom fields",
+            "type": "object",
+            "additionalProperties": true,
+            "location": "json"
+        },
+
+
+        "FilterModel.name": {
+            "description": "The name of the filter",
+            "type": "string"
+        },
+        "FilterModel.sort": {
+            "description": "What to sort by",
+            "type": "string",
+            "enum": ["priority", "created", "updated", "active"]
+        },
+        "FilterModel.sort_direction": {
+            "description": "The direction to sort",
+            "type": "string",
+            "enum": ["asc", "desc"]
+        },
+        "FilterModel.position": {
+            "description": "The position of the filter in the list of filters",
+            "type": "integer"
+        },
+        "FilterModel.active": {
+            "description": "Whether or not this filter is active",
+            "type": "boolean"
+        },
+
+
+        "GroupModel.name": {
+            "description": "The name of the group",
+            "type": "string"
+        },
+
+
+        "IntegrationUrlModel.name": {
+            "description": "Name of the integration URL",
+            "type": "string"
+        },
+        "IntegrationUrlModel.description": {
+            "description": "An optional description",
+            "type": "string"
+        },
+        "IntegrationUrlModel.enabled": {
+            "description": "Whether or not the integration URL is enabled for use",
+            "type": "boolean"
+        },
+        "IntegrationUrlModel.markup": {
+            "description": "Liquid code to parse which creates the rendered URL",
+            "type": "string"
+        },
+        "IntegrationUrlModel.rendered": {
+            "description": "The rendered URL",
+            "type": "string"
+        },
+        "IntegrationUrlModel.created_at": {
+            "extends": "date.output",
+            "description": "When the integration URL was created"
+        },
+        "IntegrationUrlModel.updated_at": {
+            "extends": "date.output",
+            "description": "When the integration URL was last updated"
+        },
+
+
+        "MacroModel.name": {
+            "description": "Name of the macro",
+            "type": "string"
+        },
+        "MacroModel.description": {
+            "description": "An optional description",
+            "type": "string"
+        },
+        "MacroModel.enabled": {
+            "description": "Whether or not the macro is enabled for use",
+            "type": "boolean"
+        },
+        "MacroModel.position": {
+            "description": "Placement in the UI",
+            "type": "integer"
+        },
+        "MacroModel.folders": {
+            "description": "Array of folders associated with this macro",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+
+
+        "MacroActionModel.type": {
+            "description": "The type of action to be performed",
+            "type": "string"
+        },
+        "MacroActionModel.value": {
+            "description": "Value to set for the given type",
+            "type": "string"
+        },
+        "MacroActionModel.enabled": {
+            "description": "Whether or not the action is enabled",
+            "type": "boolean"
+        },
+        "MacroActionModel.created_at": {
+            "extends": "date.output",
+            "description": "When the action was created"
+        },
+        "MacroActionModel.updated_at": {
+            "extends": "date.output",
+            "description": "When the action was last updated"
+        },
+
+
+        "TopicModel.name": {
+            "description": "Subject of the topic in the default locale",
+            "type": "string"
+        },
+        "TopicModel.description": {
+            "description": "An optional description of the topic",
+            "type": "string"
+        },
+        "TopicModel.position": {
+            "description": "The topic's position in the admin UI",
+            "type": "integer"
+        },
+        "TopicModel.allow_questions": {
+            "description": "Whether to allow customers to post questions about this topic in your support center",
+            "type": "boolean"
+        },
+        "TopicModel.in_support_center": {
+            "description": "Whether to show this topic in the support center",
+            "type": "boolean"
+        },
+        "TopicModel.created_at": {
+            "extends": "date.output",
+            "description": "Time when the topic was created"
+        },
+        "TopicModel.updated_at": {
+            "extends": "date.output",
+            "description": "Time when the topic was updated"
+        },
+
+
+        "TopicTranslationModel.name": {
+            "description": "The topic's name translated in the locale",
+            "type": "string"
+        },
+        "TopicTranslationModel.locale": {
+            "description": "Language code of the translation",
+            "type": "string"
+        },
+        "TopicTranslationModel.created_at": {
+            "extends": "date.output",
+            "description": "Time when the translation was created"
+        },
+        "TopicTranslationModel.updated_at": {
+            "extends": "date.output",
+            "description": "Time when the translation was last updated"
+        },
+
+
+        "UserModel.name": {
+            "description": "Name of the user",
+            "type": "string",
+            "location": "json"
+        },
+        "UserModel.public_name": {
+            "description": "Public facing name of the user",
+            "type": "string",
+            "location": "json"
+        },
+        "UserModel.email": {
+            "description": "User's email",
+            "type": "string",
+            "location": "json"
+        },
+        "UserModel.level": {
+            "description": "User's permission level",
+            "type": "string",
+            "location": "json"
+        },
+
+
+
+
         "ArticleModel": {
             "type": "object",
             "properties": {
-                "subject": {
-                    "description": "The subject of the article",
-                    "location": "json",
-                    "type": "string"
-                },
-                "in_support_center": {
-                    "description": "Whether to display the article in the support center",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "position": {
-                    "description": "The position of the article as displayed in the support center",
-                    "location": "json",
-                    "type": "integer"
-                },
-                "quickcode": {
-                    "description": "Code used by the agent to quickly add article content to a case",
-                    "location": "json",
-                    "type": "string"
-                },
-                "keywords": {
-                    "description": "Keywords in the article",
-                    "location": "json",
-                    "type": "string"
-                },
-                "publish_at": {
-                    "description": "Date the article is to be published",
-                    "$ref": "date.json"
-                },
-                "created_at": {
-                    "description": "Date the article was created",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "Date the article was updated",
-                    "$ref": "date.json"
-                },
-                "body": {
-                    "description": "The content of the article (HTML formatted)",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_email": {
-                    "description": "Email-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_email_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_chat": {
-                    "description": "Chat-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_chat_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_web_callback": {
-                    "description": "Chat-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_web_callback_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_twitter": {
-                    "description": "Twitter-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_twitter_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_qna": {
-                    "description": "QNA-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_qna_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_phone": {
-                    "description": "Phone-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_phone_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_facebook": {
-                    "description": "Facebook-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_facebook_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "internal_notes": {
-                    "description": "Notes to the agent using the article",
-                    "location": "json",
-                    "type": "string"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "subject": {"extends": "ArticleModel.subject", "location": "json"},
+                "in_support_center": {"extends": "ArticleModel.in_support_center", "location": "json"},
+                "position": {"extends": "ArticleModel.position", "location": "json"},
+                "quickcode": {"extends": "ArticleModel.quickcode", "location": "json"},
+                "keywords": {"extends": "ArticleModel.keywords", "location": "json"},
+                "publish_at": {"extends": "ArticleModel.publish_at.output", "location": "json"},
+                "created_at": {"extends": "ArticleModel.created_at.output", "location": "json"},
+                "updated_at": {"extends": "ArticleModel.updated_at.output", "location": "json"},
+                "body": {"extends": "ArticleModel.body", "location": "json"},
+                "body_email": {"extends": "ArticleModel.body_email", "location": "json"},
+                "body_email_auto": {"extends": "ArticleModel.body_email_auto", "location": "json"},
+                "body_chat": {"extends": "ArticleModel.body_chat", "location": "json"},
+                "body_chat_auto": {"extends": "ArticleModel.body_chat_auto", "location": "json"},
+                "body_web_callback": {"extends": "ArticleModel.body_web_callback", "location": "json"},
+                "body_web_callback_auto": {"extends": "ArticleModel.body_web_callback_auto", "location": "json"},
+                "body_twitter": {"extends": "ArticleModel.body_twitter", "location": "json"},
+                "body_twitter_auto": {"extends": "ArticleModel.body_twitter_auto", "location": "json"},
+                "body_qna": {"extends": "ArticleModel.body_qna", "location": "json"},
+                "body_qna_auto": {"extends": "ArticleModel.body_qna_auto", "location": "json"},
+                "body_phone": {"extends": "ArticleModel.body_phone", "location": "json"},
+                "body_phone_auto": {"extends": "ArticleModel.body_phone_auto", "location": "json"},
+                "body_facebook": {"extends": "ArticleModel.body_facebook", "location": "json"},
+                "body_facebook_auto": {"extends": "ArticleModel.body_facebook_auto", "location": "json"},
+                "internal_notes": {"extends": "ArticleModel.internal_notes", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowArticle",
                         "pattern": "#/articles/(?P<id>[0-9]+)$#"
-                    },
-                    "topic": {
+                    }
+                },
+                "topic": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowTopic",
                         "pattern": "#/topics/(?P<id>[0-9]+)$#"
-                    },
-                    "translations": {
+                    }
+                },
+                "translations": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListArticleTranslations",
                         "pattern": "#/articles/(?P<article_id>[0-9]+)/translations$#"
                     }
@@ -1815,106 +2778,29 @@
         "ArticleTranslationModel": {
             "type": "object",
             "properties": {
-                "locale": {
-                    "description": "Article translation's locale",
-                    "$ref": "locale.json"
-                },
-                "subject": {
-                    "description": "The subject of the article",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body": {
-                    "description": "The content of the article (HTML formatted)",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_email": {
-                    "description": "Email-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_email_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_chat": {
-                    "description": "Chat-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_chat_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_web_callback": {
-                    "description": "Chat-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_web_callback_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_twitter": {
-                    "description": "Twitter-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_twitter_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_qna": {
-                    "description": "QNA-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_qna_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_phone": {
-                    "description": "Phone-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_phone_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "body_facebook": {
-                    "description": "Facebook-specific body content",
-                    "location": "json",
-                    "type": "string"
-                },
-                "body_facebook_auto": {
-                    "description": "Whether to just use the content from 'body'",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "publish_at": {
-                    "description": "Date the article is to be published",
-                    "$ref": "date.json"
-                },
-                "created_at": {
-                    "description": "Date the article was created",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "Date the article was updated",
-                    "$ref": "date.json"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "locale": {"extends": "ArticleTranslation.locale", "location": "json"},
+                "subject": {"extends": "ArticleTranslation.subject", "location": "json"},
+                "body": {"extends": "ArticleTranslation.body", "location": "json"},
+                "body_email": {"extends": "ArticleTranslation.body_email", "location": "json"},
+                "body_email_auto": {"extends": "ArticleTranslation.body_email_auto", "location": "json"},
+                "body_chat": {"extends": "ArticleTranslation.body_chat", "location": "json"},
+                "body_chat_auto": {"extends": "ArticleTranslation.body_chat_auto", "location": "json"},
+                "body_web_callback": {"extends": "ArticleTranslation.body_web_callback", "location": "json"},
+                "body_web_callback_auto": {"extends": "ArticleTranslation.body_web_callback_auto", "location": "json"},
+                "body_twitter": {"extends": "ArticleTranslation.body_twitter", "location": "json"},
+                "body_twitter_auto": {"extends": "ArticleTranslation.body_twitter_auto", "location": "json"},
+                "body_qna": {"extends": "ArticleTranslation.body_qna", "location": "json"},
+                "body_qna_auto": {"extends": "ArticleTranslation.body_qna_auto", "location": "json"},
+                "body_phone": {"extends": "ArticleTranslation.body_phone", "location": "json"},
+                "body_phone_auto": {"extends": "ArticleTranslation.body_phone_auto", "location": "json"},
+                "body_facebook": {"extends": "ArticleTranslation.body_facebook", "location": "json"},
+                "body_facebook_auto": {"extends": "ArticleTranslation.body_facebook_auto", "location": "json"},
+                "publish_at": {"extends": "ArticleTranslation.publish_at", "location": "json"},
+                "created_at": {"extends": "ArticleTranslation.created_at", "location": "json"},
+                "updated_at": {"extends": "ArticleTranslation.updated_at", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowArticleTranslation",
                         "pattern": "#/articles/(?P<article_id>[0-9]+)/translations/(?P<locale>[a-zA-Z_-]+)$#"
                     }
@@ -1924,93 +2810,71 @@
         "CaseModel": {
             "type": "object",
             "properties": {
-                "external_id": {
-                    "description": "Unique external identifier to reference this case to an external system",
-                    "location": "json",
-                    "type": "string"
-                },
-                "subject": {
-                    "description": "The subject of the case",
-                    "location": "json",
-                    "type": "string"
-                },
-                "priority": {
-                    "description": "Priority of the case (1-10, 1 is lowest priority)",
-                    "$ref": "priority.json"
-                },
-                "description": {
-                    "description": "Description or background information",
-                    "location": "json",
-                    "type": "string"
-                },
-                "status": {
-                    "description": "Current state of the case",
-                    "$ref": "status.json"
-                },
-                "type": {
-                    "description": "Channel of the case",
-                    "$ref": "channel.json"
-                },
-                "labels": {
-                    "description": "Array of labels associated with this case",
-                    "$ref": "labels.json"
-                },
-                "custom_fields": {
-                    "description": "Hash of values for custom fields",
-                    "$ref": "custom_fields.json"
-                },
-                "created_at": {
-                    "description": "Time of creation",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "Time last updated",
-                    "$ref": "date.json"
-                },
-                "active_at": {
-                    "description": "Time the case was last active",
-                    "$ref": "date.json"
-                },
-                "received_at": {
-                    "description": "Time the most recent message was received",
-                    "$ref": "date.json"
-                },
-                "locked_until": {
-                    "description": "Time at which the lock on this case will expire",
-                    "$ref": "date.json"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "external_id": {"extends": "CaseModel.external_id", "location": "json"},
+                "subject": {"extends": "CaseModel.subject", "location": "json"},
+                "priority": {"extends": "CaseModel.priority", "location": "json"},
+                "description": {"extends": "CaseModel.description", "location": "json"},
+                "status": {"extends": "CaseModel.status", "location": "json"},
+                "type": {"extends": "CaseModel.type", "location": "json"},
+                "labels": {"extends": "CaseModel.labels", "location": "json"},
+                "custom_fields": {"extends": "CaseModel.custom_fields", "location": "json"},
+                "created_at": {"extends": "CaseModel.created_at", "location": "json"},
+                "updated_at": {"extends": "CaseModel.updated_at", "location": "json"},
+                "active_at": {"extends": "CaseModel.active_at", "location": "json"},
+                "received_at": {"extends": "CaseModel.received_at", "location": "json"},
+                "locked_until": {"extends": "CaseModel.locked_until", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCase",
                         "pattern": "#/cases/(?P<id>[0-9]+)$#"
-                    },
-                    "message": {
+                    }
+                },
+                "message": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCaseMessage",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/message$#"
-                    },
-                    "customer": {
+                    }
+                },
+                "customer": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCustomer",
                         "pattern": "#/customers/(?P<id>[0-9]+)$#"
-                    },
-                    "assigned_user": {
+                    }
+                },
+                "assigned_user": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowUser",
                         "pattern": "#/users/(?P<id>[0-9]+)$#"
-                    },
-                    "assigned_group": {
+                    }
+                },
+                "assigned_group": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowGroup",
                         "pattern": "#/groups/(?P<id>[0-9]+)$#"
-                    },
-                    "locked_by": {
+                    }
+                },
+                "locked_by": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowUser",
                         "pattern": "#/users/(?P<id>[0-9]+)$#"
-                    },
-                    "replies": {
+                    }
+                },
+                "replies": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseReplies",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/replies$#"
-                    },
-                    "notes": {
+                    }
+                },
+                "notes": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCaseNotes",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/notes$#"
                     }
@@ -2020,74 +2884,28 @@
         "CaseMessageModel": {
             "type": "object",
             "properties": {
-                "direction": {
-                    "description": "Direction of the message",
-                    "location": "json",
-                    "type": "string",
-                    "enum": ["in", "out"]
-                },
-                "body": {
-                    "description": "Body of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "created_at": {
-                    "description": "Time of creation",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "Time last updated",
-                    "$ref": "date.json"
-                },
-                "status": {
-                    "description": "The message's current status",
-                    "location": "json",
-                    "type": "string",
-                    "enum": ["received", "pending", "sent", "failed"]
-                },
-                "subject": {
-                    "description": "The subject of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "from": {
-                    "description": "The from address of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "to": {
-                    "description": "The to address of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "cc": {
-                    "description": "The CC address(es) of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "bcc": {
-                    "description": "The BCC address(es) of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "type": {
-                    "description": "The type of tweet",
-                    "location": "json",
-                    "type": "string",
-                    "enum": ["mention", "dm"]
-                },
-                "hidden_at": {
-                    "description": "Time at which this answer was hidden from the support center",
-                    "$ref": "date.json"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "direction": {"extends": "CaseMessageModel.direction", "location": "json"},
+                "body": {"extends": "CaseMessageModel.body", "location": "json"},
+                "created_at": {"extends": "CaseMessageModel.created_at", "location": "json"},
+                "updated_at": {"extends": "CaseMessageModel.updated_at", "location": "json"},
+                "status": {"extends": "CaseMessageModel.status", "location": "json"},
+                "subject": {"extends": "CaseMessageModel.subject", "location": "json"},
+                "from": {"extends": "CaseMessageModel.from", "location": "json"},
+                "to": {"extends": "CaseMessageModel.to", "location": "json"},
+                "cc": {"extends": "CaseMessageModel.cc", "location": "json"},
+                "bcc": {"extends": "CaseMessageModel.bcc", "location": "json"},
+                "type": {"extends": "CaseMessageModel.type", "location": "json"},
+                "hidden_at": {"extends": "CaseMessageModel.hidden_at", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCaseMessage",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/message$#"
-                    },
-                    "case": {
+                    }
+                },
+                "case": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCase",
                         "pattern": "#/cases/(?P<id>[0-9]+)$#"
                     }
@@ -2097,74 +2915,28 @@
         "CaseReplyModel": {
             "type": "object",
             "properties": {
-                "direction": {
-                    "description": "Direction of the message",
-                    "location": "json",
-                    "type": "string",
-                    "enum": ["in", "out"]
-                },
-                "body": {
-                    "description": "Body of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "created_at": {
-                    "description": "Time of creation",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "Time last updated",
-                    "$ref": "date.json"
-                },
-                "status": {
-                    "description": "The message's current status",
-                    "location": "json",
-                    "type": "string",
-                    "enum": ["received", "pending", "sent", "failed"]
-                },
-                "subject": {
-                    "description": "The subject of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "from": {
-                    "description": "The from address of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "to": {
-                    "description": "The to address of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "cc": {
-                    "description": "The CC address(es) of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "bcc": {
-                    "description": "The BCC address(es) of the message",
-                    "location": "json",
-                    "type": "string"
-                },
-                "type": {
-                    "description": "The type of tweet",
-                    "location": "json",
-                    "type": "string",
-                    "enum": ["mention", "dm"]
-                },
-                "hidden_at": {
-                    "description": "Time at which this answer was hidden from the support center",
-                    "$ref": "date.json"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "direction": {"extends": "CaseReplyModel.direction", "location": "json"},
+                "body": {"extends": "CaseReplyModel.body", "location": "json"},
+                "created_at": {"extends": "CaseReplyModel.created_at", "location": "json"},
+                "updated_at": {"extends": "CaseReplyModel.updated_at", "location": "json"},
+                "status": {"extends": "CaseReplyModel.status", "location": "json"},
+                "subject": {"extends": "CaseReplyModel.subject", "location": "json"},
+                "from": {"extends": "CaseReplyModel.from", "location": "json"},
+                "to": {"extends": "CaseReplyModel.to", "location": "json"},
+                "cc": {"extends": "CaseReplyModel.cc", "location": "json"},
+                "bcc": {"extends": "CaseReplyModel.bcc", "location": "json"},
+                "type": {"extends": "CaseReplyModel.type", "location": "json"},
+                "hidden_at": {"extends": "CaseReplyModel.hidden_at", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCaseReply",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/replies/(?P<reply_id>[0-9]+)$#"
-                    },
-                    "case": {
+                    }
+                },
+                "case": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCase",
                         "pattern": "#/cases/(?P<id>[0-9]+)$#"
                     }
@@ -2174,39 +2946,34 @@
         "CaseNoteModel": {
             "type": "object",
             "properties": {
-                "body": {
-                    "description": "The body of the note",
-                    "location": "json",
-                    "type": "string"
-                },
-                "created_at": {
-                    "description": "Time of creation",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "Time last updated",
-                    "$ref": "date.json"
-                },
-                "erased_at": {
-                    "description": "Time at which an agent erased this note",
-                    "$ref": "date.json"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "body": {"extends": "CaseNoteModel.body", "location": "json"},
+                "created_at": {"extends": "CaseNoteModel.created_at", "location": "json"},
+                "updated_at": {"extends": "CaseNoteModel.updated_at", "location": "json"},
+                "erased_at": {"extends": "CaseNoteModel.erased_at", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCaseNote",
                         "pattern": "#/cases/(?P<case_id>[0-9]+)/notes/(?P<note_id>[0-9]+)$#"
-                    },
-                    "user": {
+                    }
+                },
+                "user": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowUser",
                         "pattern": "#/users/(?P<id>[0-9]+)$#"
-                    },
-                    "erased_by": {
+                    }
+                },
+                "erased_by": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowUser",
                         "pattern": "#/users/(?P<id>[0-9]+)$#"
-                    },
-                    "case": {
+                    }
+                },
+                "case": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCase",
                         "pattern": "#/cases/(?P<id>[0-9]+)$#"
                     }
@@ -2216,37 +2983,21 @@
         "CompanyModel": {
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "Name of the company",
-                    "location": "json",
-                    "type": "string"
-                },
-                "domains": {
-                    "description": "Array of top-level domain names for the company",
-                    "location": "json",
-                    "type": "string"
-                },
-                "created_at": {
-                    "description": "Date the company was created",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "Date the company was updated",
-                    "$ref": "date.json"
-                },
-                "custom_fields": {
-                    "description": "Hash of values for custom fields",
-                    "location": "json",
-                    "type": "object"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "name": {"extends": "CompanyModel.name", "location": "json"},
+                "domains": {"extends": "CompanyModel.domains", "location": "json"},
+                "created_at": {"extends": "CompanyModel.created_at", "location": "json"},
+                "updated_at": {"extends": "CompanyModel.updated_at", "location": "json"},
+                "custom_fields": {"extends": "CompanyModel.custom_fields", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCompany",
                         "pattern": "#/companies/(?P<id>[0-9]+)$#"
-                    },
-                    "customers": {
+                    }
+                },
+                "customers": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCompanyCustomers",
                         "pattern": "#/companies/(?P<company_id>[0-9]+)/customers$#"
                     }
@@ -2254,43 +3005,16 @@
             }
         },
         "CustomFieldModel": {
+            "type": "object",
             "properties": {
-                "name": {
-                    "description": "Custom field name",
-                    "location": "json",
-                    "type": "string"
-                },
-                "label": {
-                    "description": "Custom field label",
-                    "location": "json",
-                    "type": "string"
-                },
-                "type": {
-                    "description": "The type of custom field",
-                    "location": "json",
-                    "type": "string",
-                    "enum": ["ticket", "customer"]
-                },
-                "active": {
-                    "description": "Whether or not this custom field is active",
-                    "location": "json",
-                    "type": "string"
-                },
-                "data": {
-                    "description": "The custom field's data type",
-                    "location": "json",
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "enum": ["string", "boolean", "integer", "date", "list"]
-                        }
-                    }
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "name": {"extends": "CustomFieldModel.name", "location": "json"},
+                "label": {"extends": "CustomFieldModel.label", "location": "json"},
+                "type": {"extends": "CustomFieldModel.type", "location": "json"},
+                "active": {"extends": "CustomFieldModel.active", "location": "json"},
+                "data": {"extends": "CustomFieldModel.data", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCustomField",
                         "pattern": "#/custom_fields/(?P<id>[0-9]+)$#"
                     }
@@ -2300,130 +3024,44 @@
         "CustomerModel": {
             "type": "object",
             "properties": {
-                "first_name": {
-                    "description": "The customer's first name",
-                    "location": "json",
-                    "type": "string"
-                },
-                "last_name": {
-                    "description": "The customer's last name",
-                    "location": "json",
-                    "type": "string"
-                },
-                "company": {
-                    "description": "The customer's company",
-                    "location": "json",
-                    "type": "string"
-                },
-                "title": {
-                    "description": "The customer's title",
-                    "location": "json",
-                    "type": "string"
-                },
-                "external_id": {
-                    "description": "The customer's unique external identifier to reference this customer in an external system",
-                    "location": "json",
-                    "type": "string"
-                },
-                "background": {
-                    "description": "Any background information for the customer",
-                    "location": "json",
-                    "type": "string"
-                },
-                "language": {
-                    "description": "The customer's language code -- NULL unless multi-lingual support is enabled",
-                    "location": "json",
-                    "type": "string"
-                },
-                "locked_until": {
-                    "description": "Time at which the lock on the customer will expire",
-                    "location": "json",
-                    "type": "string"
-                },
-                "created_at": {
-                    "description": "Time at which the customer was created",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "Time at which the customer was last updated at",
-                    "$ref": "date.json"
-                },
-                "emails": {
-                    "description": "Array of e-mail objects, each specifying the contact type and value of the e-mail address",
-                    "location": "json",
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "description": "The type of e-mail address",
-                                "type": "string"
-                            },
-                            "value": {
-                                "description": "The e-mail address itself",
-                                "type": "string"
-                            }
-                        }
-                    }
-                },
-                "phone_numbers": {
-                    "description": "Array of phone number objects, each specifying the contact type and value of the phone number",
-                    "location": "json",
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "description": "The type of phone number",
-                                "type": "string"
-                            },
-                            "value": {
-                                "description": "The phone number itself",
-                                "type": "string"
-                            }
-                        }
-                    }
-                },
-                "addresses": {
-                    "description": "Array of address objects, each specifying the contact type and value of the location",
-                    "location": "json",
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "description": "The type of address",
-                                "type": "string"
-                            },
-                            "value": {
-                                "description": "The address itself",
-                                "type": "string"
-                            }
-                        }
-                    }
-                },
-                "custom_fields": {
-                    "description": "Associative array of values for custom fields",
-                    "location": "json",
-                    "type": "object",
-                    "additionalProperties": true
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "first_name": {"extends": "CustomerModel.first_name", "location": "json"},
+                "last_name": {"extends": "CustomerModel.last_name", "location": "json"},
+                "company": {"extends": "CustomerModel.company", "location": "json"},
+                "title": {"extends": "CustomerModel.title", "location": "json"},
+                "external_id": {"extends": "CustomerModel.external_id", "location": "json"},
+                "background": {"extends": "CustomerModel.background", "location": "json"},
+                "language": {"extends": "CustomerModel.language", "location": "json"},
+                "locked_until": {"extends": "CustomerModel.locked_until", "location": "json"},
+                "created_at": {"extends": "CustomerModel.created_at", "location": "json"},
+                "updated_at": {"extends": "CustomerModel.updated_at", "location": "json"},
+                "emails": {"extends": "CustomerModel.emails", "location": "json"},
+                "phone_numbers": {"extends": "CustomerModel.phone_numbers", "location": "json"},
+                "addresses": {"extends": "CustomerModel.addresses", "location": "json"},
+                "custom_fields": {"extends": "CustomerModel.custom_fields", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCustomer",
                         "pattern": "#/customers/(?P<id>[0-9]+)$#"
-                    },
-                    "locked_by": {
+                    }
+                },
+                "locked_by": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowUser",
                         "pattern": "#/users/(?P<id>[0-9]+)$#"
-                    },
-                    "cases": {
+                    }
+                },
+                "cases": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListCustomerCases",
                         "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases#"
-                    },
-                    "company": {
+                    }
+                },
+                "company": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowCompany",
                         "pattern": "#/companies/(?P<company_id>[0-9]+)$#"
                     }
@@ -2433,45 +3071,28 @@
         "FilterModel": {
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "The name of the filter",
-                    "location": "json",
-                    "type": "string"
-                },
-                "sort": {
-                    "description": "What to sort by",
-                    "location": "json",
-                    "type": "string",
-                    "enum": ["priority", "created", "updated", "active"]
-                },
-                "sort_direction": {
-                    "description": "The direction to sort",
-                    "location": "json",
-                    "type": "string",
-                    "enum": ["asc", "desc"]
-                },
-                "position": {
-                    "description": "The position of the filter in the list of filters",
-                    "location": "json",
-                    "type": "integer"
-                },
-                "active": {
-                    "description": "Whether or not this filter is active",
-                    "location": "json",
-                    "type": "boolean"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "name": {"extends": "FilterModel.name", "location": "json"},
+                "sort": {"extends": "FilterModel.sort", "location": "json"},
+                "sort_direction": {"extends": "FilterModel.sort_direction", "location": "json"},
+                "position": {"extends": "FilterModel.position", "location": "json"},
+                "active": {"extends": "FilterModel.active", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowFilter",
                         "pattern": "#/filters/(?P<id>[0-9]+)$#"
-                    },
-                    "user": {
+                    }
+                },
+                "user": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowUser",
                         "pattern": "#/users/(?P<id>[0-9]+)$#"
-                    },
-                    "group": {
+                    }
+                },
+                "group": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowGroup",
                         "pattern": "#/groups/(?P<id>[0-9]+)$#"
                     }
@@ -2481,23 +3102,24 @@
         "GroupModel": {
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "The name of the group",
-                    "location": "json",
-                    "type": "string"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "name": {"extends": "GroupModel.name", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowGroup",
                         "pattern": "#/groups/(?P<id>[0-9]+)$#"
-                    },
-                    "users": {
+                    }
+                },
+                "users": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupUsers",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/users#"
-                    },
-                    "filters": {
+                    }
+                },
+                "filters": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListGroupFilters",
                         "pattern": "#/groups/(?P<group_id>[0-9]+)/filters#"
                     }
@@ -2507,51 +3129,30 @@
         "IntegrationUrlModel": {
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "Name of the integration URL",
-                    "location": "json",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "An optional description",
-                    "location": "json",
-                    "type": "string"
-                },
-                "enabled": {
-                    "description": "Whether or not the integration URL is enabled for use",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "markup": {
-                    "description": "Liquid code to parse which creates the rendered URL",
-                    "location": "json",
-                    "type": "string"
-                },
-                "rendered": {
-                    "description": "The rendered URL",
-                    "location": "json",
-                    "type": "string"
-                },
-                "created_at": {
-                    "description": "When the integration URL was created",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "When the integration URL was last updated",
-                    "$ref": "date.json"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "name": {"extends": "IntegrationUrlModel.name", "location": "json"},
+                "description": {"extends": "IntegrationUrlModel.description", "location": "json"},
+                "enabled": {"extends": "IntegrationUrlModel.enabled", "location": "json"},
+                "markup": {"extends": "IntegrationUrlModel.markup", "location": "json"},
+                "rendered": {"extends": "IntegrationUrlModel.rendered", "location": "json"},
+                "created_at": {"extends": "IntegrationUrlModel.created_at", "location": "json"},
+                "updated_at": {"extends": "IntegrationUrlModel.updated_at", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowIntegrationUrl",
                         "pattern": "#/integration_urls/(?P<id>[0-9]+)$#"
-                    },
-                    "user": {
+                    }
+                },
+                "user": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowUser",
                         "pattern": "#/users/(?P<id>[0-9]+)$#"
-                    },
-                    "group": {
+                    }
+                },
+                "group": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowGroup",
                         "pattern": "#/groups/(?P<id>[0-9]+)$#"
                     }
@@ -2561,42 +3162,21 @@
         "MacroModel": {
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "Name of the macro",
-                    "location": "json",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "An optional description",
-                    "location": "json",
-                    "type": "string"
-                },
-                "enabled": {
-                    "description": "Whether or not the macro is enabled for use",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "position": {
-                    "description": "Placement in the UI",
-                    "location": "json",
-                    "type": "integer"
-                },
-                "folders": {
-                    "description": "Array of folders associated with this macro",
-                    "location": "json",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "name": {"extends": "MacroModel.name", "location": "json"},
+                "description": {"extends": "MacroModel.description", "location": "json"},
+                "enabled": {"extends": "MacroModel.enabled", "location": "json"},
+                "position": {"extends": "MacroModel.position", "location": "json"},
+                "folders": {"extends": "MacroModel.folders", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowMacro",
                         "pattern": "#/macros/(?P<id>[0-9]+)$#"
-                    },
-                    "actions": {
+                    }
+                },
+                "actions": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListMacroActions",
                         "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions$#"
                     }
@@ -2606,37 +3186,21 @@
         "MacroActionModel": {
             "type": "object",
             "properties": {
-                "type": {
-                    "description": "The type of action to be performed",
-                    "location": "json",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "Value to set for the given type",
-                    "location": "json",
-                    "type": "string"
-                },
-                "enabled": {
-                    "description": "Whether or not the action is enabled",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "created_at": {
-                    "description": "When the action was created",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "When the action was last updated",
-                    "$ref": "date.json"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "type": {"extends": "MacroActionModel.type", "location": "json"},
+                "value": {"extends": "MacroActionModel.value", "location": "json"},
+                "enabled": {"extends": "MacroActionModel.enabled", "location": "json"},
+                "created_at": {"extends": "MacroActionModel.created_at", "location": "json"},
+                "updated_at": {"extends": "MacroActionModel.updated_at", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowMacroAction",
                         "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions/(?P<action_id>[0-9]+)$#"
-                    },
-                    "macro": {
+                    }
+                },
+                "macro": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowMacro",
                         "pattern": "#/macros/(?P<id>[0-9]+)$#"
                     }
@@ -2646,47 +3210,23 @@
         "TopicModel": {
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "Subject of the topic in the default locale",
-                    "location": "json",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "An optional description of the topic",
-                    "location": "json",
-                    "type": "string"
-                },
-                "position": {
-                    "description": "The topic's position in the admin UI",
-                    "location": "json",
-                    "type": "integer"
-                },
-                "allow_questions": {
-                    "description": "Whether to allow customers to post questions about this topic in your support center",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "in_support_center": {
-                    "description": "Whether to show this topic in the support center",
-                    "location": "json",
-                    "type": "boolean"
-                },
-                "created_at": {
-                    "description": "Time when the topic was created",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "Time when the topic was updated",
-                    "$ref": "date.json"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "name": {"extends": "TopicModel.name", "location": "json"},
+                "description": {"extends": "TopicModel.description", "location": "json"},
+                "position": {"extends": "TopicModel.position", "location": "json"},
+                "allow_questions": {"extends": "TopicModel.allow_questions", "location": "json"},
+                "in_support_center": {"extends": "TopicModel.in_support_center", "location": "json"},
+                "created_at": {"extends": "TopicModel.created_at", "location": "json"},
+                "updated_at": {"extends": "TopicModel.updated_at", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowTopic",
                         "pattern": "#/topics/(?P<id>[0-9]+)$#"
-                    },
-                    "articles": {
+                    }
+                },
+                "articles": {
+                    "location": "links",
+                    "data": {
                         "operation": "ListTopicArticles",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles$#"
                     }
@@ -2696,28 +3236,13 @@
         "TopicTranslationModel": {
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "The topic's name translated in the locale",
-                    "location": "json",
-                    "type": "string"
-                },
-                "locale": {
-                    "description": "Language code of the translation",
-                    "location": "json",
-                    "type": "string"
-                },
-                "created_at": {
-                    "description": "Time when the translation was created",
-                    "$ref": "date.json"
-                },
-                "updated_at": {
-                    "description": "Time when the translation was last updated",
-                    "$ref": "date.json"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "name": {"extends": "TopicTranslationModel.name", "location": "json"},
+                "locale": {"extends": "TopicTranslationModel.locale", "location": "json"},
+                "created_at": {"extends": "TopicTranslationModel.created_at", "location": "json"},
+                "updated_at": {"extends": "TopicTranslationModel.updated_at", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowTopicTranslation",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations/(?P<locale>[a-zA-Z_-]+)$#"
                     }
@@ -2727,30 +3252,13 @@
         "UserModel": {
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "Name of the user",
-                    "location": "json",
-                    "type": "string"
-                },
-                "public_name": {
-                    "description": "Public facing name of the user",
-                    "location": "json",
-                    "type": "string"
-                },
-                "email": {
-                    "description": "User's email",
-                    "location": "json",
-                    "type": "string"
-                },
-                "level": {
-                    "description": "User's permission level",
-                    "location": "json",
-                    "type": "string"
-                }
-            },
-            "data": {
-                "links": {
-                    "self": {
+                "name": {"extends": "UserModel.name", "location": "json"},
+                "public_name": {"extends": "UserModel.public_name", "location": "json"},
+                "email": {"extends": "UserModel.email", "location": "json"},
+                "level": {"extends": "UserModel.level", "location": "json"},
+                "self": {
+                    "location": "links",
+                    "data": {
                         "operation": "ShowUser",
                         "pattern": "#/users/(?P<id>[0-9]+)$#"
                     }

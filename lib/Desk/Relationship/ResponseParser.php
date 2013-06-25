@@ -2,7 +2,6 @@
 
 namespace Desk\Relationship;
 
-use Desk\Relationship\ResourceBuilderInterface;
 use Guzzle\Http\Message\Response;
 use Guzzle\Service\Command\AbstractCommand;
 use Guzzle\Service\Command\LocationVisitor\VisitorFlyweight;
@@ -21,15 +20,8 @@ class ResponseParser extends OperationResponseParser
      *
      * @var string
      */
-    const MODEL_CLASS = 'Desk\\Relationship\\Model';
+    const MODEL_CLASS = 'Desk\\Relationship\\Resource\\Model';
 
-
-    /**
-     * Resource builder which is passed to each constructed model
-     *
-     * @var Desk\Relationship\ResourceBuilderInterface
-     */
-    private $builder;
 
     /**
      * Cached singleton instance of this class
@@ -55,24 +47,11 @@ class ResponseParser extends OperationResponseParser
     public static function getInstance()
     {
         if (!self::$relationshipInstance) {
-            self::$relationshipInstance = new self(VisitorFlyweight::getInstance());
+            $instance = new self(VisitorFlyweight::getInstance());
+            self::$relationshipInstance = $instance;
         }
 
         return self::$relationshipInstance;
-    }
-
-    /**
-     * Sets the resource builder to pass to each constructed model
-     *
-     * @param Desk\Relationship\ResourceBuilderInterface $builder
-     *
-     * @return Desk\Relationship\ResponseParser $this
-     * @chainable
-     */
-    public function setResourceBuilder(ResourceBuilderInterface $builder)
-    {
-        $this->builder = $builder;
-        return $this;
     }
 
     /**
@@ -81,9 +60,7 @@ class ResponseParser extends OperationResponseParser
     protected function handleParsing(AbstractCommand $command, Response $response, $contentType)
     {
         // Only use overridden behaviour if response type is a model
-        // and we have a resource builder (needed to create a
-        // relationship-aware model)
-        if (!$this->builder || !$this->responseTypeIsModel($command)) {
+        if (!$this->responseTypeIsModel($command)) {
             return parent::handleParsing($command, $response, $contentType);
         }
 
@@ -97,7 +74,7 @@ class ResponseParser extends OperationResponseParser
 
         return $this->createClass(
             static::MODEL_CLASS,
-            array($this->builder, $data, $structure)
+            array($data, $structure)
         );
     }
 

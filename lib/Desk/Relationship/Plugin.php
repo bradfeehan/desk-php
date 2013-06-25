@@ -3,7 +3,11 @@
 namespace Desk\Relationship;
 
 use Desk\Relationship\ResponseParser;
+use Desk\Relationship\Visitor\Response\EmbeddedVisitor;
+use Desk\Relationship\Visitor\Response\LinksVisitor;
 use Guzzle\Common\Event;
+use Guzzle\Service\Command\OperationCommand;
+use Guzzle\Service\Command\ResponseParserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -13,6 +17,14 @@ class Plugin implements EventSubscriberInterface
 {
 
     /**
+     * The ResponseParser to set on newly created commands
+     *
+     * @var Guzzle\Service\Command\ResponseParserInterface
+     */
+    private $parser;
+
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
@@ -20,6 +32,34 @@ class Plugin implements EventSubscriberInterface
         return array('client.command.create' => 'onCreateCommand');
     }
 
+
+    /**
+     * Allow overriding the ResponseParser that gets set on commands
+     *
+     * @param Guzzle\Service\Command\ResponseParserInterface $parser
+     */
+    public function __construct(ResponseParserInterface $parser = null)
+    {
+        $this->parser = $parser;
+    }
+
+    /**
+     * Gets the response parser to set on commands
+     *
+     * @return Guzzle\Service\Command\ResponseParserInterface
+     */
+    public function getResponseParser()
+    {
+        // @codeCoverageIgnoreStart
+        if (!$this->parser) {
+            $this->parser = ResponseParser::getInstance();
+            $this->parser->addVisitor('links', new LinksVisitor());
+            $this->parser->addVisitor('embedded', new EmbeddedVisitor());
+        }
+        // @codeCoverageIgnoreEnd
+
+        return $this->parser;
+    }
 
     /**
      * Event listener for the "client.command.create" event
@@ -33,9 +73,9 @@ class Plugin implements EventSubscriberInterface
      */
     public function onCreateCommand(Event $event)
     {
-        $resourceBuilder = new ResourceBuilder($event['client']);
-        $responseParser = ResponseParser::getInstance();
-        $responseParser->setResourceBuilder($resourceBuilder);
-        $event['command']->setResponseParser($responseParser);
+        $command = $event['command'];
+        if ($command instanceof OperationCommand) {
+            $command->setResponseParser($this->getResponseParser());
+        }
     }
 }

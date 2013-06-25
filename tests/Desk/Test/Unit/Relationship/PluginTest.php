@@ -2,6 +2,7 @@
 
 namespace Desk\Test\Unit\Relationship;
 
+use Desk\Relationship\Plugin;
 use Desk\Relationship\ResponseParser;
 use Desk\Test\Helper\UnitTestCase;
 
@@ -21,9 +22,31 @@ class PluginTest extends UnitTestCase
      */
     public function testGetSubscribedEvents()
     {
-        $plugin = $this->mock('getSubscribedEvents');
-        $events = $plugin->getSubscribedEvents();
+        $events = Plugin::getSubscribedEvents();
         $this->assertInternalType('array', $events);
+    }
+
+    /**
+     * @covers Desk\Relationship\Plugin::__construct
+     */
+    public function testConstruct()
+    {
+        $plugin = new Plugin();
+        $parser = $this->getPrivateProperty($plugin, 'parser');
+        $this->assertNull($parser);
+    }
+
+    /**
+     * @covers Desk\Relationship\Plugin::getResponseParser
+     */
+    public function testGetResponseParserWithOverriddenParser()
+    {
+        $parserClass = 'Guzzle\\Service\\Command\\ResponseParserInterface';
+        $parser = \Mockery::mock($parserClass);
+        $plugin = $this->mock('getResponseParser', array($parser));
+
+        $result = $plugin->getResponseParser();
+        $this->assertSame($parser, $result);
     }
 
     /**
@@ -31,43 +54,44 @@ class PluginTest extends UnitTestCase
      */
     public function testOnCreateCommand()
     {
-        $parser = null;
-
-        $client = \Mockery::mock('Guzzle\\Service\\Client');
+        $parserClass = 'Guzzle\\Service\\Command\\ResponseParserInterface';
+        $parser = \Mockery::mock($parserClass);
 
         $command = \Mockery::mock('Guzzle\\Service\\Command\\OperationCommand')
             ->shouldReceive('setResponseParser')
-                ->with(
-                    \Mockery::on(
-                        function ($arg) use (&$parser) {
-                            if ($arg instanceof ResponseParser) {
-                                $parser = $arg; // save for later
-                                return true;
-                            }
-
-                            return false;
-                        }
-                    )
-                )
+                ->with($parser)
             ->getMock();
 
         $event = \Mockery::mock('Guzzle\\Common\\Event')
             ->shouldReceive('offsetGet')
                 ->with('command')
                 ->andReturn($command)
+            ->getMock();
+
+        $plugin = $this->mock('onCreateCommand')
+            ->shouldReceive('getResponseParser')
+                ->andReturn($parser)
+            ->getMock();
+
+        $plugin->onCreateCommand($event);
+
+        $this->assertSame($command, $event['command']);
+    }
+
+    /**
+     * @covers Desk\Relationship\Plugin::onCreateCommand
+     */
+    public function testOnCreateCommandWithNonOperationCommand()
+    {
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\CommandInterface');
+        $event = \Mockery::mock('Guzzle\\Common\\Event')
             ->shouldReceive('offsetGet')
-                ->with('client')
-                ->andReturn($client)
+                ->with('command')
+                ->andReturn($command)
             ->getMock();
 
         $this->mock('onCreateCommand')->onCreateCommand($event);
 
-        if ($parser instanceof ResponseParser) {
-            $builder = $this->getPrivateProperty($parser, 'builder');
-            $this->assertInstanceOf('Desk\\Relationship\\ResourceBuilder', $builder);
-
-            $builderClient = $this->getPrivateProperty($builder, 'client');
-            $this->assertSame($client, $builderClient);
-        }
+        $this->assertSame($command, $event['command']);
     }
 }

@@ -26,27 +26,13 @@ class ResponseParserTest extends UnitTestCase
     {
         // Clear instance to start with, so we hit the code path where
         // it is unset
-        $class = new ReflectionClass('Desk\\Relationship\\ResponseParser');
+        $class = new ReflectionClass($this->getMockedClass());
         $property = $class->getProperty('relationshipInstance');
         $property->setAccessible(true);
         $property->setValue(null);
 
         $instance = ResponseParser::getInstance();
         $this->assertInstanceOf($this->getMockedClass(), $instance);
-    }
-
-    /**
-     * @covers Desk\Relationship\ResponseParser::setResourceBuilder
-     */
-    public function testSetResourceBuilder()
-    {
-        $builder = \Mockery::mock('Desk\\Relationship\\ResourceBuilder');
-
-        $parser = $this->mock('setResourceBuilder');
-        $parser->setResourceBuilder($builder);
-
-        $parserBuilder = $this->getPrivateProperty($parser, 'builder');
-        $this->assertSame($builder, $parserBuilder);
     }
 
     /**
@@ -80,24 +66,19 @@ class ResponseParserTest extends UnitTestCase
         $contentType = 'content_type';
         $builder = \Mockery::mock('Desk\\Relationship\\ResourceBuilder');
 
-        $parser = $this->mock('setResourceBuilder')
+        $parser = $this->mock()
             ->shouldReceive('responseTypeIsModel')
                 ->with($command)
                 ->andReturn(true)
             ->shouldReceive('createClass')
                 ->with(
-                    'Desk\\Relationship\\Model',
-                    array($builder, array(), $structure)
+                    'Desk\\Relationship\\Resource\\Model',
+                    array(array(), $structure)
                 )
                 ->andReturn('return_value')
             ->getMock();
 
-        $parser->setResourceBuilder($builder);
-
-        $reflectionParser = new ReflectionObject($parser);
-        $handleParsing = $reflectionParser->getMethod('handleParsing');
-        $handleParsing->setAccessible(true);
-        $result = $handleParsing->invoke($parser, $command, $response, $contentType);
+        $result = $this->invokeHandleParsing($parser, $command, $response, $contentType);
 
         $this->assertSame('return_value', $result);
     }
@@ -128,12 +109,18 @@ class ResponseParserTest extends UnitTestCase
 
         $contentType = 'content_type';
 
-        $parser = ResponseParser::getInstance();
+        $parser = $this->mock('handleParsing')
+            ->shouldReceive('responseTypeIsModel')
+                ->with($command)
+                ->andReturn(false)
+            ->getMock();
 
-        $reflectionParser = new ReflectionObject($parser);
-        $handleParsing = $reflectionParser->getMethod('handleParsing');
-        $handleParsing->setAccessible(true);
-        $result = $handleParsing->invoke($parser, $command, $response, $contentType);
+        $result = $this->invokeHandleParsing(
+            $parser,
+            $command,
+            $response,
+            $contentType
+        );
 
         $this->assertSame($response, $result);
     }
@@ -200,5 +187,28 @@ class ResponseParserTest extends UnitTestCase
 
         $parser = $this->mock('responseTypeIsModel');
         $this->assertFalse($parser->responseTypeIsModel($command));
+    }
+
+    /**
+     * Calls the protected handleParsing() method on $parser
+     *
+     * Additional arguments to this function (other than $parser) will
+     * be passed on as the arguments to the handleParsing() function.
+     *
+     * @param Desk\Relationship\ResponseParser $parser
+     *
+     * @return mixed
+     */
+    private function invokeHandleParsing(ResponseParser $parser)
+    {
+        $reflectionParser = new ReflectionObject($parser);
+        $handleParsing = $reflectionParser->getMethod('handleParsing');
+        $handleParsing->setAccessible(true);
+
+        // get all arguments after the first
+        $args = func_get_args();
+        array_shift($args);
+
+        return $handleParsing->invokeArgs($parser, $args);
     }
 }

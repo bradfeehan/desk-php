@@ -14,6 +14,46 @@ use Guzzle\Service\Description\ServiceDescriptionLoader as GuzzleServiceDescript
  */
 class ServiceDescriptionLoader extends GuzzleServiceDescriptionLoader
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected function build($config, array $options)
+    {
+        $description = $this->parentBuild($config, $options);
+
+        // merge parameters of models which have been extended
+        foreach ($description->getModels() as $model) {
+            if (!isset($model->extends) || !$model->getProperties()) {
+                continue;
+            }
+
+            $parent = $description->getModel($model->extends);
+            if (!$parent || !$parent->getProperties()) {
+                continue;
+            }
+
+            foreach ($parent->getProperties() as $property) {
+                if (!$model->getProperty($property->getName())) {
+                    $model->addProperty($property);
+                }
+            }
+        }
+
+        return $description;
+    }
+
+    /**
+     * Calls the parent class' build() function
+     *
+     * @param array $config
+     * @param array $options
+     *
+     * @return Guzzle\Service\Description\ServiceDescription
+     */
+    public function parentBuild($config, array $options)
+    {
+        return parent::build($config, $options);
+    }
 
     /**
      * {@inheritdoc}

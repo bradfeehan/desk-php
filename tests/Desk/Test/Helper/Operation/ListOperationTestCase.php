@@ -130,7 +130,7 @@ abstract class ListOperationTestCase extends OperationTestCase
         );
 
         $results = $command->execute();
-        $this->assertInstanceOf('Desk\\Relationship\\Model', $results);
+        $this->assertInstanceOf('Desk\\Relationship\\Resource\\Model', $results);
 
         $models = $results->getEmbedded('entries');
 
@@ -139,7 +139,7 @@ abstract class ListOperationTestCase extends OperationTestCase
         $this->assertSame(count($models), $results->get('total_entries'));
 
         foreach ($models as $model) {
-            $this->assertInstanceOf('Desk\\Relationship\\Model', $model);
+            $this->assertInstanceOf('Desk\\Relationship\\Resource\\Model', $model);
         }
 
         // Perform child class assertions on the resulting models

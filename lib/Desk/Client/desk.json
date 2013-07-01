@@ -959,6 +959,18 @@
                 }
             }
         },
+        "CreateIntegrationUrl": {
+            "extends": "create",
+            "summary": "Create a new integration URL",
+            "uri": "integration_urls",
+            "responseClass": "IntegrationUrlModel",
+            "parameters": {
+                "name": {"extends": "IntegrationUrlModel.name"},
+                "description": {"extends": "IntegrationUrlModel.description"},
+                "enabled": {"extends": "IntegrationUrlModel.enabled"},
+                "markup": {"extends": "IntegrationUrlModel.markup"}
+            }
+        },
 
 
 
@@ -2893,7 +2905,9 @@
         "IntegrationUrlModel.name": {
             "extends": "parameter",
             "description": "Name of the integration URL",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 2
         },
         "IntegrationUrlModel.description": {
             "extends": "parameter",
@@ -2908,7 +2922,9 @@
         "IntegrationUrlModel.markup": {
             "extends": "parameter",
             "description": "Liquid code to parse which creates the rendered URL",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 1
         },
         "IntegrationUrlModel.rendered": {
             "extends": "parameter",

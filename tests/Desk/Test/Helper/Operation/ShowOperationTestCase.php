@@ -121,7 +121,7 @@ abstract class ShowOperationTestCase extends OperationTestCase
         $properties = array();
 
         foreach ($this->getIntegerIdProperties() as $property) {
-            $properties[$property] = 9; // valid integer
+            $properties[$property] = 1;
         }
 
         foreach ($overrides as $key => $value) {
@@ -204,7 +204,7 @@ abstract class ShowOperationTestCase extends OperationTestCase
     {
         return array_merge(
             array(
-                array('self', $this->getOperationName()),
+                array('self', $this->getOperationName(), $this->getExampleParameters()),
             ),
             $this->dataLinksAdditional()
         );

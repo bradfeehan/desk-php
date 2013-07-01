@@ -44,6 +44,20 @@ class ShowCaseReplyOperationTest extends ShowOperationTestCase
     /**
      * {@inheritdoc}
      */
+    protected function getExampleParameters(array $overrides = array())
+    {
+        $properties = array('case_id' => 1, 'reply_id' => 2);
+
+        foreach ($overrides as $key => $value) {
+            $properties[$key] = $value;
+        }
+
+        return $properties;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function assertSystem(Model $reply)
     {
         $this->assertSame('CaseReplyModel', $reply->getStructure()->getName());

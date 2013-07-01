@@ -914,6 +914,19 @@
                 }
             }
         },
+        "CreateCompany": {
+            "extends": "create",
+            "summary": "Create a new company",
+            "uri": "companies",
+            "responseClass": "CompanyModel",
+            "parameters": {
+                "name": {"extends": "CompanyModel.name", "required": true},
+                "domains": {"extends": "CompanyModel.domains"},
+                "created_at": {"extends": "CompanyModel.created_at.input"},
+                "updated_at": {"extends": "CompanyModel.updated_at.input"},
+                "custom_fields": {"extends": "CompanyModel.custom_fields"}
+            }
+        },
 
 
 
@@ -2636,14 +2649,25 @@
         "CompanyModel.domains": {
             "extends": "parameter",
             "description": "Array of top-level domain names for the company",
-            "type": "string"
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         },
-        "CompanyModel.created_at": {
+        "CompanyModel.created_at.output": {
             "extends": "date.output",
             "description": "Date the company was created"
         },
-        "CompanyModel.updated_at": {
+        "CompanyModel.created_at.input": {
+            "extends": "date.input",
+            "description": "Date the company was created"
+        },
+        "CompanyModel.updated_at.output": {
             "extends": "date.output",
+            "description": "Date the company was updated"
+        },
+        "CompanyModel.updated_at.input": {
+            "extends": "date.input",
             "description": "Date the company was updated"
         },
         "CompanyModel.custom_fields": {
@@ -3263,8 +3287,8 @@
             "properties": {
                 "name": {"extends": "CompanyModel.name"},
                 "domains": {"extends": "CompanyModel.domains"},
-                "created_at": {"extends": "CompanyModel.created_at"},
-                "updated_at": {"extends": "CompanyModel.updated_at"},
+                "created_at": {"extends": "CompanyModel.created_at.output"},
+                "updated_at": {"extends": "CompanyModel.updated_at.output"},
                 "custom_fields": {"extends": "CompanyModel.custom_fields"},
                 "self": {
                     "location": "links",

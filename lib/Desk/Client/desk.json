@@ -904,11 +904,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "ArticleModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -951,11 +951,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -998,11 +998,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CompanyModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1045,11 +1045,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CustomFieldModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1092,11 +1092,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CustomerModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1139,11 +1139,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "FilterModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1186,11 +1186,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "GroupModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1233,11 +1233,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "IntegrationUrlModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1280,11 +1280,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "MacroModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1327,11 +1327,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "TopicModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1374,11 +1374,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "UserModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1425,11 +1425,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "ArticleTranslationModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1472,11 +1472,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseReplyModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1519,11 +1519,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseNoteModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1566,11 +1566,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CustomerModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1613,11 +1613,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1660,11 +1660,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1707,11 +1707,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "FilterModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1754,11 +1754,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "UserModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1801,11 +1801,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "MacroActionModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1848,11 +1848,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "ArticleModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1895,11 +1895,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "TopicTranslationModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1946,11 +1946,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "ArticleModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1993,11 +1993,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -2040,11 +2040,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CustomerModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",

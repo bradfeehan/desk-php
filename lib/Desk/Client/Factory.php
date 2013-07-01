@@ -52,9 +52,9 @@ class Factory implements FactoryInterface
 
         $this->addAuthentication($client);
         $this->addServiceDescription($client);
-        $this->addRelationshipPlugin($client);
         $this->addCommaAggregatorListener($client);
         $this->addPreValidator($client);
+        $this->addRelationshipPlugin($client);
 
         return $client;
     }
@@ -156,16 +156,6 @@ class Factory implements FactoryInterface
     }
 
     /**
-     * Adds a relationship plugin to a client
-     *
-     * @param Desk\Client $client The client to add the plugin to
-     */
-    public function addRelationshipPlugin(Client &$client)
-    {
-        $client->addSubscriber(new RelationshipPlugin());
-    }
-
-    /**
      * Adds a listener so that all created requests use CommaAggregator
      *
      * @param Desk\Client $client The client to add the listener to
@@ -183,5 +173,15 @@ class Factory implements FactoryInterface
     public function addPreValidator(Client &$client)
     {
         $client->addSubscriber(new PreValidator());
+    }
+
+    /**
+     * Adds a relationship plugin to the client
+     *
+     * @param Desk\Client $client The client to add the Plugin to
+     */
+    public function addRelationshipPlugin(Client &$client)
+    {
+        $client->addSubscriber(new RelationshipPlugin());
     }
 }

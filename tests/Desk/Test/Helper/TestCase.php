@@ -133,14 +133,14 @@ abstract class TestCase extends GuzzleTestCase
     }
 
     /**
-     * Gets the value of a private or protected property on any object
+     * Gets the ReflectionProperty for a private property on any object
      *
      * @param mixed  $object       The object with the property to get
      * @param string $propertyName The name of the property to get
      *
-     * @return mixed
+     * @return ReflectionProperty
      */
-    public function getPrivateProperty($object, $propertyName)
+    private function getProperty($object, $propertyName)
     {
         $className = get_class($object);
         $class = new ReflectionClass($className);
@@ -161,7 +161,36 @@ abstract class TestCase extends GuzzleTestCase
 
         $property = $class->getProperty($propertyName);
         $property->setAccessible(true);
+        return $property;
+    }
+
+    /**
+     * Gets the value of a private or protected property on any object
+     *
+     * @param mixed  $object       The object with the property to get
+     * @param string $propertyName The name of the property to get
+     *
+     * @return mixed
+     */
+    public function getPrivateProperty($object, $propertyName)
+    {
+        $property = $this->getProperty($object, $propertyName);
         return $property->getValue($object);
+    }
+
+    /**
+     * Gets the value of a private or protected property on any object
+     *
+     * @param mixed  $object       The object with the property to get
+     * @param string $propertyName The name of the property to get
+     * @param mixed  $value        The new value to set the property to
+     *
+     * @return mixed
+     */
+    public function setPrivateProperty($object, $propertyName, $value)
+    {
+        $property = $this->getProperty($object, $propertyName);
+        return $property->setValue($object, $value);
     }
 
     /**

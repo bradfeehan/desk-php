@@ -1,124 +1,64 @@
 <?php
 
-namespace Desk\Relationship;
+namespace Desk\Relationship\Resource;
 
-use Desk\Exception\InvalidArgumentException;
 use Desk\Exception\UnexpectedValueException;
 use Desk\Relationship\Exception\InvalidLinkFormatException;
-use Desk\Relationship\Model;
-use Desk\Relationship\ResourceBuilderInterface;
+use Desk\Relationship\Resource\CommandBuilderInterface;
 use Guzzle\Http\QueryString;
-use Guzzle\Service\Client;
+use Guzzle\Service\Command\CommandInterface;
+use Guzzle\Service\Description\Parameter;
 
-class ResourceBuilder implements ResourceBuilderInterface
+class CommandBuilder implements CommandBuilderInterface
 {
 
     /**
-     * The client used to create link commands
-     *
-     * @var Guzzle\Service\Client
-     */
-    private $client;
-
-
-    /**
-     * @param Guzzle\Service\Client $client Used to create link models
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
-    /**
      * {@inheritdoc}
      */
-    public function createCommandFromLink($name, array $data, array $description)
+    public function createLinkCommand(CommandInterface $command, Parameter $structure, array $data)
     {
         $this->validateLink($data);
-        $this->validateLinkDescription($description);
+        $this->validateLinkStructure($structure);
 
-        $params = $this->parseHref($data['href'], $description['pattern']);
-        return $this->client->getCommand($description['operation'], $params);
+        $operation = $structure->getData('operation');
+        $pattern = $structure->getData('pattern');
+        $params = $this->parseHref($data['href'], $pattern);
+
+        return $command->getClient()->getCommand($operation, $params);
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function createModelFromEmbedded($name, array $data, array $description)
-    {
-        $this->validateEmbedDescription($description);
-
-        // recursively process numerical-indexed arrays into an array
-        // of models created by this same function
-        if (isset($data[0])) {
-            $models = array();
-
-            foreach ($data as $element) {
-                $models[] = $this->createModelFromEmbedded(
-                    $name,
-                    $element,
-                    $description
-                );
-            }
-
-            return $models;
-        }
-
-        $structure = $this->client->getDescription()
-            ->getModel($description['model']);
-
-        // TODO: ResponseParser::visitResult() should go over $data first
-        return new Model($this, $data, $structure);
-    }
-
-    /**
-     * Validates a link array (from the API)
+     * Validates link data (from an API response)
      *
      * @param array $data The link data from the API response
      *
      * @throws Desk\Relationship\Exception\InvalidLinkFormatException
      */
-    public function validateLink(array $link)
+    public function validateLink(array $data)
     {
-        if (empty($link['href'])) {
-            throw InvalidLinkFormatException::fromLink($link);
+        if (empty($data['href'])) {
+            throw InvalidLinkFormatException::fromLink($data);
         }
     }
 
     /**
-     * Validates a link description (from the model description)
+     * Validates the structure of a link (from the service description)
      *
-     * @param array $description The link description from the model
-     *
-     * @throws Desk\Exception\UnexpectedValueException If it's invalid
-     */
-    public function validateLinkDescription(array $description)
-    {
-        if (empty($description['operation'])) {
-            throw new UnexpectedValueException(
-                "Missing operation for link description"
-            );
-        }
-
-        if (empty($description['pattern'])) {
-            throw new UnexpectedValueException(
-                "Missing pattern for link description"
-            );
-        }
-    }
-
-    /**
-     * Validates an embed description (from the model description)
-     *
-     * @param array $description The embed description from the model
+     * @param Guzzle\Service\Description\Parameter $structure
      *
      * @throws Desk\Exception\UnexpectedValueException If it's invalid
      */
-    public function validateEmbedDescription(array $description)
+    public function validateLinkStructure(Parameter $structure)
     {
-        if (empty($description['model'])) {
+        if (!$structure->getData('operation')) {
             throw new UnexpectedValueException(
-                "Missing model for embed description"
+                "Parameter with 'links' location requires 'operation'"
+            );
+        }
+
+        if (!$structure->getData('pattern')) {
+            throw new UnexpectedValueException(
+                "Parameter with 'links' location requires 'pattern'"
             );
         }
     }
@@ -135,10 +75,13 @@ class ResourceBuilder implements ResourceBuilderInterface
      */
     public function parseHref($href, $pattern)
     {
+        $parameters = array();
+
         // Parse href using pattern
         if (!($result = preg_match($pattern, $href, $parameters))) {
             throw new UnexpectedValueException(
-                "Couldn't parse parameters from link href"
+                "Couldn't parse parameters from link href " .
+                "(pattern given was '$pattern', href was '$href')"
             );
         }
 

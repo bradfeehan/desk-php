@@ -826,6 +826,94 @@
                 }
             }
         },
+        "CreateCase": {
+            "extends": "create",
+            "summary": "Create a new case",
+            "uri": "cases",
+            "responseClass": "CaseModel",
+            "parameters": {
+                "external_id": {"extends": "CaseModel.external_id"},
+                "subject": {"extends": "CaseModel.subject"},
+                "priority": {"extends": "CaseModel.priority"},
+                "description": {"extends": "CaseModel.description"},
+                "status": {"extends": "CaseModel.status"},
+                "type": {"extends": "CaseModel.type", "required": true},
+                "labels": {"extends": "CaseModel.labels"},
+                "custom_fields": {"extends": "CaseModel.custom_fields"},
+                "created_at": {"extends": "CaseModel.created_at.input"},
+                "updated_at": {"extends": "CaseModel.updated_at.input"},
+                "active_at": {"extends": "CaseModel.active_at.input"},
+                "received_at": {"extends": "CaseModel.received_at.input"},
+                "locked_until": {"extends": "CaseModel.locked_until.input"},
+                "customer_id": {
+                    "description": "The customer that submitted this case",
+                    "required": true,
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "customer",
+                    "data": {
+                        "class": "customer",
+                        "href": "/api/v2/customers/{value}"
+                    }
+                },
+                "assigned_user_id": {
+                    "description": "The user assigned to this case",
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "assigned_user",
+                    "data": {
+                        "class": "user",
+                        "href": "/api/v2/users/{value}"
+                    }
+                },
+                "assigned_group_id": {
+                    "description": "The group assigned to this case",
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "assigned_group",
+                    "data": {
+                        "class": "group",
+                        "href": "/api/v2/groups/{value}"
+                    }
+                },
+                "locked_by_id": {
+                    "description": "User currently working on this case",
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "locked_by",
+                    "data": {
+                        "class": "user",
+                        "href": "/api/v2/users/{value}"
+                    }
+                },
+                "entered_by_id": {
+                    "description": "The support agent that entered the first phone interaction",
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "entered_by",
+                    "data": {
+                        "class": "user",
+                        "href": "/api/v2/users/{value}"
+                    }
+                },
+                "message": {
+                    "type": "object",
+                    "properties": {
+                        "direction": {"extends": "CaseMessageModel.direction", "required": true},
+                        "status": {"extends": "CaseMessageModel.status"},
+                        "body": {"extends": "CaseMessageModel.body"},
+                        "subject": {"extends": "CaseMessageModel.subject"},
+                        "from": {"extends": "CaseMessageModel.from"},
+                        "to": {"extends": "CaseMessageModel.to"},
+                        "cc": {"extends": "CaseMessageModel.cc"},
+                        "bcc": {"extends": "CaseMessageModel.bcc"},
+                        "created_at": {"extends": "CaseMessageModel.created_at.input"},
+                        "entered_at": {"extends": "CaseMessageModel.entered_at.input"}
+                    },
+                    "location": "json"
+                }
+            }
+        },
 
 
 
@@ -2351,24 +2439,44 @@
             "extends": "custom_fields",
             "description": "Hash of values for custom fields"
         },
-        "CaseModel.created_at": {
+        "CaseModel.created_at.output": {
             "extends": "date.output",
             "description": "Time of creation"
         },
-        "CaseModel.updated_at": {
+        "CaseModel.created_at.input": {
+            "extends": "date.input",
+            "description": "Time of creation"
+        },
+        "CaseModel.updated_at.output": {
             "extends": "date.output",
             "description": "Time last updated"
         },
-        "CaseModel.active_at": {
+        "CaseModel.updated_at.input": {
+            "extends": "date.input",
+            "description": "Time last updated"
+        },
+        "CaseModel.active_at.output": {
             "extends": "date.output",
             "description": "Time the case was last active"
         },
-        "CaseModel.received_at": {
+        "CaseModel.active_at.input": {
+            "extends": "date.input",
+            "description": "Time the case was last active"
+        },
+        "CaseModel.received_at.output": {
             "extends": "date.output",
             "description": "Time the most recent message was received"
         },
-        "CaseModel.locked_until": {
+        "CaseModel.received_at.input": {
+            "extends": "date.input",
+            "description": "Time the most recent message was received"
+        },
+        "CaseModel.locked_until.output": {
             "extends": "date.output",
+            "description": "Time at which the lock on this case will expire"
+        },
+        "CaseModel.locked_until.input": {
+            "extends": "date.input",
             "description": "Time at which the lock on this case will expire"
         },
 
@@ -2384,8 +2492,12 @@
             "description": "Body of the message",
             "type": "string"
         },
-        "CaseMessageModel.created_at": {
+        "CaseMessageModel.created_at.output": {
             "extends": "date.output",
+            "description": "Time of creation"
+        },
+        "CaseMessageModel.created_at.input": {
+            "extends": "date.input",
             "description": "Time of creation"
         },
         "CaseMessageModel.updated_at": {
@@ -2984,11 +3096,11 @@
                 "type": {"extends": "CaseModel.type"},
                 "labels": {"extends": "CaseModel.labels"},
                 "custom_fields": {"extends": "CaseModel.custom_fields"},
-                "created_at": {"extends": "CaseModel.created_at"},
-                "updated_at": {"extends": "CaseModel.updated_at"},
-                "active_at": {"extends": "CaseModel.active_at"},
-                "received_at": {"extends": "CaseModel.received_at"},
-                "locked_until": {"extends": "CaseModel.locked_until"},
+                "created_at": {"extends": "CaseModel.created_at.output"},
+                "updated_at": {"extends": "CaseModel.updated_at.output"},
+                "active_at": {"extends": "CaseModel.active_at.output"},
+                "received_at": {"extends": "CaseModel.received_at.output"},
+                "locked_until": {"extends": "CaseModel.locked_until.output"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3052,7 +3164,7 @@
             "properties": {
                 "direction": {"extends": "CaseMessageModel.direction"},
                 "body": {"extends": "CaseMessageModel.body"},
-                "created_at": {"extends": "CaseMessageModel.created_at"},
+                "created_at": {"extends": "CaseMessageModel.created_at.output"},
                 "updated_at": {"extends": "CaseMessageModel.updated_at"},
                 "status": {"extends": "CaseMessageModel.status"},
                 "subject": {"extends": "CaseMessageModel.subject"},

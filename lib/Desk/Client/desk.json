@@ -826,46 +826,59 @@
         }
     },
     "models": {
+        "parameter": {
+            "location": "json"
+        },
         "channel": {
+            "extends": "parameter",
             "type": "string",
             "enum": ["chat", "twitter", "email", "qna", "facebook", "phone"]
         },
         "custom_fields": {
+            "extends": "parameter",
             "type": "object",
             "additionalProperties": "true"
         },
         "date.output": {
+            "extends": "parameter",
             "type": "string",
             "filters": "Desk\\Filter\\Date::stringToObject"
         },
         "date.input": {
+            "extends": "parameter",
             "type": "object",
             "instanceOf": "DateTime",
             "filters": "Desk\\Filter\\Date::objectToTimestamp"
         },
         "interval": {
+            "extends": "parameter",
             "type": "string",
             "enum": ["today", "yesterday", "week", "month", "year"]
         },
         "id": {
+            "extends": "parameter",
             "type": "integer",
             "minimum": 1
         },
         "labels": {
+            "extends": "parameter",
             "type": "array",
             "items": {
                 "type": "string"
             }
         },
         "locale": {
+            "extends": "parameter",
             "type": "string"
         },
         "priority": {
+            "extends": "parameter",
             "type": "integer",
             "minimum": 1,
             "maximum": 10
         },
         "status": {
+            "extends": "parameter",
             "type": "string",
             "enum": ["new", "open", "pending", "resolved", "closed"]
         },
@@ -2075,83 +2088,98 @@
 
 
         "body_auto": {
+            "extends": "parameter",
             "description": "Whether to just use the content from 'body'",
             "type": "boolean"
         },
 
 
         "ArticleModel.subject": {
+            "extends": "parameter",
             "description": "The subject of the article",
             "type": "string"
         },
         "ArticleModel.in_support_center": {
+            "extends": "parameter",
             "description": "Whether to display the article in the support center",
             "type": "boolean"
         },
         "ArticleModel.position": {
+            "extends": "parameter",
             "description": "The position of the article as displayed in the support center",
             "type": "integer"
         },
         "ArticleModel.quickcode": {
+            "extends": "parameter",
             "description": "Code used by the agent to quickly add article content to a case",
             "type": "string"
         },
         "ArticleModel.keywords": {
+            "extends": "parameter",
             "description": "Keywords in the article",
             "type": "string"
         },
         "ArticleModel.publish_at.output": {
-            "description": "Date the article is to be published",
-            "extends": "date.output"
+            "extends": "date.output",
+            "description": "Date the article is to be published"
         },
         "ArticleModel.created_at.output": {
-            "description": "Date the article was created",
-            "extends": "date.output"
+            "extends": "date.output",
+            "description": "Date the article was created"
         },
         "ArticleModel.updated_at.output": {
-            "description": "Date the article was updated",
-            "extends": "date.output"
+            "extends": "date.output",
+            "description": "Date the article was updated"
         },
         "ArticleModel.body": {
+            "extends": "parameter",
             "description": "The content of the article (HTML formatted)",
             "type": "string"
         },
         "ArticleModel.body_email": {
+            "extends": "parameter",
             "description": "Email-specific body content",
             "type": "string"
         },
         "ArticleModel.body_email_auto": {"extends": "body_auto"},
         "ArticleModel.body_chat": {
+            "extends": "parameter",
             "description": "Chat-specific body content",
             "type": "string"
         },
         "ArticleModel.body_chat_auto": {"extends": "body_auto"},
         "ArticleModel.body_web_callback": {
+            "extends": "parameter",
             "description": "Chat-specific body content",
             "type": "string"
         },
         "ArticleModel.body_web_callback_auto": {"extends": "body_auto"},
         "ArticleModel.body_twitter": {
+            "extends": "parameter",
             "description": "Twitter-specific body content",
             "type": "string"
         },
         "ArticleModel.body_twitter_auto": {"extends": "body_auto"},
         "ArticleModel.body_qna": {
+            "extends": "parameter",
             "description": "QNA-specific body content",
             "type": "string"
         },
         "ArticleModel.body_qna_auto": {"extends": "body_auto"},
         "ArticleModel.body_phone": {
+            "extends": "parameter",
             "description": "Phone-specific body content",
             "type": "string"
         },
         "ArticleModel.body_phone_auto": {"extends": "body_auto"},
         "ArticleModel.body_facebook": {
+            "extends": "parameter",
             "description": "Facebook-specific body content",
             "type": "string"
         },
         "ArticleModel.body_facebook_auto": {"extends": "body_auto"},
         "ArticleModel.internal_notes": {
+            "extends": "parameter",
             "description": "Notes to the agent using the article",
             "type": "string"
         },
@@ -2162,44 +2190,53 @@
             "description": "Article translation's locale"
         },
         "ArticleTranslation.subject": {
+            "extends": "parameter",
             "description": "The subject of the article",
             "type": "string"
         },
         "ArticleTranslation.body": {
+            "extends": "parameter",
             "description": "The content of the article (HTML formatted)",
             "type": "string"
         },
         "ArticleTranslation.body_email": {
+            "extends": "parameter",
             "description": "Email-specific body content",
             "type": "string"
         },
         "ArticleTranslation.body_email_auto": {"extends": "body_auto"},
         "ArticleTranslation.body_chat": {
+            "extends": "parameter",
             "description": "Chat-specific body content",
             "type": "string"
         },
         "ArticleTranslation.body_chat_auto": {"extends": "body_auto"},
         "ArticleTranslation.body_web_callback": {
+            "extends": "parameter",
             "description": "Chat-specific body content",
             "type": "string"
         },
         "ArticleTranslation.body_web_callback_auto": {"extends": "body_auto"},
         "ArticleTranslation.body_twitter": {
+            "extends": "parameter",
             "description": "Twitter-specific body content",
             "type": "string"
         },
         "ArticleTranslation.body_twitter_auto": {"extends": "body_auto"},
         "ArticleTranslation.body_qna": {
+            "extends": "parameter",
             "description": "QNA-specific body content",
             "type": "string"
         },
         "ArticleTranslation.body_qna_auto": {"extends": "body_auto"},
         "ArticleTranslation.body_phone": {
+            "extends": "parameter",
             "description": "Phone-specific body content",
             "type": "string"
         },
         "ArticleTranslation.body_phone_auto": {"extends": "body_auto"},
         "ArticleTranslation.body_facebook": {
+            "extends": "parameter",
             "description": "Facebook-specific body content",
             "type": "string"
         },
@@ -2219,10 +2256,12 @@
 
 
         "CaseModel.external_id": {
+            "extends": "parameter",
             "description": "Unique external identifier to reference this case to an external system",
             "type": "string"
         },
         "CaseModel.subject": {
+            "extends": "parameter",
             "description": "The subject of the case",
             "type": "string"
         },
@@ -2231,6 +2270,7 @@
             "description": "Priority of the case (1-10, 1 is lowest priority)"
         },
         "CaseModel.description": {
+            "extends": "parameter",
             "description": "Description or background information",
             "type": "string"
         },
@@ -2273,11 +2313,13 @@
 
 
         "CaseMessageModel.direction": {
+            "extends": "parameter",
             "description": "Direction of the message",
             "type": "string",
             "enum": ["in", "out"]
         },
         "CaseMessageModel.body": {
+            "extends": "parameter",
             "description": "Body of the message",
             "type": "string"
         },
@@ -2290,31 +2332,38 @@
             "description": "Time last updated"
         },
         "CaseMessageModel.status": {
+            "extends": "parameter",
             "description": "The message's current status",
             "type": "string",
             "enum": ["received", "pending", "sent", "failed"]
         },
         "CaseMessageModel.subject": {
+            "extends": "parameter",
             "description": "The subject of the message",
             "type": "string"
         },
         "CaseMessageModel.from": {
+            "extends": "parameter",
             "description": "The from address of the message",
             "type": "string"
         },
         "CaseMessageModel.to": {
+            "extends": "parameter",
             "description": "The to address of the message",
             "type": "string"
         },
         "CaseMessageModel.cc": {
+            "extends": "parameter",
             "description": "The CC address(es) of the message",
             "type": "string"
         },
         "CaseMessageModel.bcc": {
+            "extends": "parameter",
             "description": "The BCC address(es) of the message",
             "type": "string"
         },
         "CaseMessageModel.type": {
+            "extends": "parameter",
             "description": "The type of tweet",
             "type": "string",
             "enum": ["mention", "dm"]
@@ -2326,11 +2375,13 @@
 
 
         "CaseReplyModel.direction": {
+            "extends": "parameter",
             "description": "Direction of the message",
             "type": "string",
             "enum": ["in", "out"]
         },
         "CaseReplyModel.body": {
+            "extends": "parameter",
             "description": "Body of the message",
             "type": "string"
         },
@@ -2343,31 +2394,38 @@
             "description": "Time last updated"
         },
         "CaseReplyModel.status": {
+            "extends": "parameter",
             "description": "The message's current status",
             "type": "string",
             "enum": ["received", "pending", "sent", "failed"]
         },
         "CaseReplyModel.subject": {
+            "extends": "parameter",
             "description": "The subject of the message",
             "type": "string"
         },
         "CaseReplyModel.from": {
+            "extends": "parameter",
             "description": "The from address of the message",
             "type": "string"
         },
         "CaseReplyModel.to": {
+            "extends": "parameter",
             "description": "The to address of the message",
             "type": "string"
         },
         "CaseReplyModel.cc": {
+            "extends": "parameter",
             "description": "The CC address(es) of the message",
             "type": "string"
         },
         "CaseReplyModel.bcc": {
+            "extends": "parameter",
             "description": "The BCC address(es) of the message",
             "type": "string"
         },
         "CaseReplyModel.type": {
+            "extends": "parameter",
             "description": "The type of tweet",
             "type": "string",
             "enum": ["mention", "dm"]
@@ -2379,6 +2437,7 @@
 
 
         "CaseNoteModel.body": {
+            "extends": "parameter",
             "description": "The body of the note",
             "type": "string"
         },
@@ -2397,10 +2456,12 @@
 
 
         "CompanyModel.name": {
+            "extends": "parameter",
             "description": "Name of the company",
             "type": "string"
         },
         "CompanyModel.domains": {
+            "extends": "parameter",
             "description": "Array of top-level domain names for the company",
             "type": "string"
         },
@@ -2413,29 +2474,35 @@
             "description": "Date the company was updated"
         },
         "CompanyModel.custom_fields": {
+            "extends": "parameter",
             "description": "Hash of values for custom fields",
             "type": "object"
         },
 
 
         "CustomFieldModel.name": {
+            "extends": "parameter",
             "description": "Custom field name",
             "type": "string"
         },
         "CustomFieldModel.label": {
+            "extends": "parameter",
             "description": "Custom field label",
             "type": "string"
         },
         "CustomFieldModel.type": {
+            "extends": "parameter",
             "description": "The type of custom field",
             "type": "string",
             "enum": ["ticket", "customer"]
         },
         "CustomFieldModel.active": {
+            "extends": "parameter",
             "description": "Whether or not this custom field is active",
             "type": "string"
         },
         "CustomFieldModel.data": {
+            "extends": "parameter",
             "description": "The custom field's data type",
             "type": "object",
             "properties": {
@@ -2448,34 +2515,42 @@
 
 
         "CustomerModel.first_name": {
+            "extends": "parameter",
             "description": "The customer's first name",
             "type": "string"
         },
         "CustomerModel.last_name": {
+            "extends": "parameter",
             "description": "The customer's last name",
             "type": "string"
         },
         "CustomerModel.company": {
+            "extends": "parameter",
             "description": "The customer's company",
             "type": "string"
         },
         "CustomerModel.title": {
+            "extends": "parameter",
             "description": "The customer's title",
             "type": "string"
         },
         "CustomerModel.external_id": {
+            "extends": "parameter",
             "description": "The customer's unique external identifier to reference this customer in an external system",
             "type": "string"
         },
         "CustomerModel.background": {
+            "extends": "parameter",
             "description": "Any background information for the customer",
             "type": "string"
         },
         "CustomerModel.language": {
+            "extends": "parameter",
             "description": "The customer's language code -- NULL unless multi-lingual support is enabled",
             "type": "string"
         },
         "CustomerModel.locked_until": {
+            "extends": "parameter",
             "description": "Time at which the lock on the customer will expire",
             "type": "string"
         },
@@ -2488,6 +2563,7 @@
             "description": "Time at which the customer was last updated at"
         },
         "CustomerModel.emails": {
+            "extends": "parameter",
             "description": "Array of e-mail objects, each specifying the contact type and value of the e-mail address",
             "type": "array",
             "items": {
@@ -2505,6 +2581,7 @@
             }
         },
         "CustomerModel.phone_numbers": {
+            "extends": "parameter",
             "description": "Array of phone number objects, each specifying the contact type and value of the phone number",
             "type": "array",
             "items": {
@@ -2522,6 +2599,7 @@
             }
         },
         "CustomerModel.addresses": {
+            "extends": "parameter",
             "description": "Array of address objects, each specifying the contact type and value of the location",
             "type": "array",
             "items": {
@@ -2539,6 +2617,7 @@
             }
         },
         "CustomerModel.custom_fields": {
+            "extends": "parameter",
             "description": "Associative array of values for custom fields",
             "type": "object",
             "additionalProperties": true,
@@ -2547,52 +2626,63 @@
 
 
         "FilterModel.name": {
+            "extends": "parameter",
             "description": "The name of the filter",
             "type": "string"
         },
         "FilterModel.sort": {
+            "extends": "parameter",
             "description": "What to sort by",
             "type": "string",
             "enum": ["priority", "created", "updated", "active"]
         },
         "FilterModel.sort_direction": {
+            "extends": "parameter",
             "description": "The direction to sort",
             "type": "string",
             "enum": ["asc", "desc"]
         },
         "FilterModel.position": {
+            "extends": "parameter",
             "description": "The position of the filter in the list of filters",
             "type": "integer"
         },
         "FilterModel.active": {
+            "extends": "parameter",
             "description": "Whether or not this filter is active",
             "type": "boolean"
         },
 
 
         "GroupModel.name": {
+            "extends": "parameter",
             "description": "The name of the group",
             "type": "string"
         },
 
 
         "IntegrationUrlModel.name": {
+            "extends": "parameter",
             "description": "Name of the integration URL",
             "type": "string"
         },
         "IntegrationUrlModel.description": {
+            "extends": "parameter",
             "description": "An optional description",
             "type": "string"
         },
         "IntegrationUrlModel.enabled": {
+            "extends": "parameter",
             "description": "Whether or not the integration URL is enabled for use",
             "type": "boolean"
         },
         "IntegrationUrlModel.markup": {
+            "extends": "parameter",
             "description": "Liquid code to parse which creates the rendered URL",
             "type": "string"
         },
         "IntegrationUrlModel.rendered": {
+            "extends": "parameter",
             "description": "The rendered URL",
             "type": "string"
         },
@@ -2607,22 +2697,27 @@
 
 
         "MacroModel.name": {
+            "extends": "parameter",
             "description": "Name of the macro",
             "type": "string"
         },
         "MacroModel.description": {
+            "extends": "parameter",
             "description": "An optional description",
             "type": "string"
         },
         "MacroModel.enabled": {
+            "extends": "parameter",
             "description": "Whether or not the macro is enabled for use",
             "type": "boolean"
         },
         "MacroModel.position": {
+            "extends": "parameter",
             "description": "Placement in the UI",
             "type": "integer"
         },
         "MacroModel.folders": {
+            "extends": "parameter",
             "description": "Array of folders associated with this macro",
             "type": "array",
             "items": {
@@ -2632,14 +2727,17 @@
 
 
         "MacroActionModel.type": {
+            "extends": "parameter",
             "description": "The type of action to be performed",
             "type": "string"
         },
         "MacroActionModel.value": {
+            "extends": "parameter",
             "description": "Value to set for the given type",
             "type": "string"
         },
         "MacroActionModel.enabled": {
+            "extends": "parameter",
             "description": "Whether or not the action is enabled",
             "type": "boolean"
         },
@@ -2654,22 +2752,27 @@
 
 
         "TopicModel.name": {
+            "extends": "parameter",
             "description": "Subject of the topic in the default locale",
             "type": "string"
         },
         "TopicModel.description": {
+            "extends": "parameter",
             "description": "An optional description of the topic",
             "type": "string"
         },
         "TopicModel.position": {
+            "extends": "parameter",
             "description": "The topic's position in the admin UI",
             "type": "integer"
         },
         "TopicModel.allow_questions": {
+            "extends": "parameter",
             "description": "Whether to allow customers to post questions about this topic in your support center",
             "type": "boolean"
         },
         "TopicModel.in_support_center": {
+            "extends": "parameter",
             "description": "Whether to show this topic in the support center",
             "type": "boolean"
         },
@@ -2684,10 +2787,12 @@
 
 
         "TopicTranslationModel.name": {
+            "extends": "parameter",
             "description": "The topic's name translated in the locale",
             "type": "string"
         },
         "TopicTranslationModel.locale": {
+            "extends": "parameter",
             "description": "Language code of the translation",
             "type": "string"
         },
@@ -2702,24 +2807,24 @@
 
 
         "UserModel.name": {
+            "extends": "parameter",
             "description": "Name of the user",
-            "type": "string",
-            "location": "json"
+            "type": "string"
         },
         "UserModel.public_name": {
+            "extends": "parameter",
             "description": "Public facing name of the user",
-            "type": "string",
-            "location": "json"
+            "type": "string"
         },
         "UserModel.email": {
+            "extends": "parameter",
             "description": "User's email",
-            "type": "string",
-            "location": "json"
+            "type": "string"
         },
         "UserModel.level": {
+            "extends": "parameter",
             "description": "User's permission level",
-            "type": "string",
-            "location": "json"
+            "type": "string"
         },
 
 
@@ -2728,30 +2833,30 @@
         "ArticleModel": {
             "type": "object",
             "properties": {
-                "subject": {"extends": "ArticleModel.subject", "location": "json"},
-                "in_support_center": {"extends": "ArticleModel.in_support_center", "location": "json"},
-                "position": {"extends": "ArticleModel.position", "location": "json"},
-                "quickcode": {"extends": "ArticleModel.quickcode", "location": "json"},
-                "keywords": {"extends": "ArticleModel.keywords", "location": "json"},
-                "publish_at": {"extends": "ArticleModel.publish_at.output", "location": "json"},
-                "created_at": {"extends": "ArticleModel.created_at.output", "location": "json"},
-                "updated_at": {"extends": "ArticleModel.updated_at.output", "location": "json"},
-                "body": {"extends": "ArticleModel.body", "location": "json"},
-                "body_email": {"extends": "ArticleModel.body_email", "location": "json"},
-                "body_email_auto": {"extends": "ArticleModel.body_email_auto", "location": "json"},
-                "body_chat": {"extends": "ArticleModel.body_chat", "location": "json"},
-                "body_chat_auto": {"extends": "ArticleModel.body_chat_auto", "location": "json"},
-                "body_web_callback": {"extends": "ArticleModel.body_web_callback", "location": "json"},
-                "body_web_callback_auto": {"extends": "ArticleModel.body_web_callback_auto", "location": "json"},
-                "body_twitter": {"extends": "ArticleModel.body_twitter", "location": "json"},
-                "body_twitter_auto": {"extends": "ArticleModel.body_twitter_auto", "location": "json"},
-                "body_qna": {"extends": "ArticleModel.body_qna", "location": "json"},
-                "body_qna_auto": {"extends": "ArticleModel.body_qna_auto", "location": "json"},
-                "body_phone": {"extends": "ArticleModel.body_phone", "location": "json"},
-                "body_phone_auto": {"extends": "ArticleModel.body_phone_auto", "location": "json"},
-                "body_facebook": {"extends": "ArticleModel.body_facebook", "location": "json"},
-                "body_facebook_auto": {"extends": "ArticleModel.body_facebook_auto", "location": "json"},
-                "internal_notes": {"extends": "ArticleModel.internal_notes", "location": "json"},
+                "subject": {"extends": "ArticleModel.subject"},
+                "in_support_center": {"extends": "ArticleModel.in_support_center"},
+                "position": {"extends": "ArticleModel.position"},
+                "quickcode": {"extends": "ArticleModel.quickcode"},
+                "keywords": {"extends": "ArticleModel.keywords"},
+                "publish_at": {"extends": "ArticleModel.publish_at.output"},
+                "created_at": {"extends": "ArticleModel.created_at.output"},
+                "updated_at": {"extends": "ArticleModel.updated_at.output"},
+                "body": {"extends": "ArticleModel.body"},
+                "body_email": {"extends": "ArticleModel.body_email"},
+                "body_email_auto": {"extends": "ArticleModel.body_email_auto"},
+                "body_chat": {"extends": "ArticleModel.body_chat"},
+                "body_chat_auto": {"extends": "ArticleModel.body_chat_auto"},
+                "body_web_callback": {"extends": "ArticleModel.body_web_callback"},
+                "body_web_callback_auto": {"extends": "ArticleModel.body_web_callback_auto"},
+                "body_twitter": {"extends": "ArticleModel.body_twitter"},
+                "body_twitter_auto": {"extends": "ArticleModel.body_twitter_auto"},
+                "body_qna": {"extends": "ArticleModel.body_qna"},
+                "body_qna_auto": {"extends": "ArticleModel.body_qna_auto"},
+                "body_phone": {"extends": "ArticleModel.body_phone"},
+                "body_phone_auto": {"extends": "ArticleModel.body_phone_auto"},
+                "body_facebook": {"extends": "ArticleModel.body_facebook"},
+                "body_facebook_auto": {"extends": "ArticleModel.body_facebook_auto"},
+                "internal_notes": {"extends": "ArticleModel.internal_notes"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -2778,26 +2883,26 @@
         "ArticleTranslationModel": {
             "type": "object",
             "properties": {
-                "locale": {"extends": "ArticleTranslation.locale", "location": "json"},
-                "subject": {"extends": "ArticleTranslation.subject", "location": "json"},
-                "body": {"extends": "ArticleTranslation.body", "location": "json"},
-                "body_email": {"extends": "ArticleTranslation.body_email", "location": "json"},
-                "body_email_auto": {"extends": "ArticleTranslation.body_email_auto", "location": "json"},
-                "body_chat": {"extends": "ArticleTranslation.body_chat", "location": "json"},
-                "body_chat_auto": {"extends": "ArticleTranslation.body_chat_auto", "location": "json"},
-                "body_web_callback": {"extends": "ArticleTranslation.body_web_callback", "location": "json"},
-                "body_web_callback_auto": {"extends": "ArticleTranslation.body_web_callback_auto", "location": "json"},
-                "body_twitter": {"extends": "ArticleTranslation.body_twitter", "location": "json"},
-                "body_twitter_auto": {"extends": "ArticleTranslation.body_twitter_auto", "location": "json"},
-                "body_qna": {"extends": "ArticleTranslation.body_qna", "location": "json"},
-                "body_qna_auto": {"extends": "ArticleTranslation.body_qna_auto", "location": "json"},
-                "body_phone": {"extends": "ArticleTranslation.body_phone", "location": "json"},
-                "body_phone_auto": {"extends": "ArticleTranslation.body_phone_auto", "location": "json"},
-                "body_facebook": {"extends": "ArticleTranslation.body_facebook", "location": "json"},
-                "body_facebook_auto": {"extends": "ArticleTranslation.body_facebook_auto", "location": "json"},
-                "publish_at": {"extends": "ArticleTranslation.publish_at", "location": "json"},
-                "created_at": {"extends": "ArticleTranslation.created_at", "location": "json"},
-                "updated_at": {"extends": "ArticleTranslation.updated_at", "location": "json"},
+                "locale": {"extends": "ArticleTranslation.locale"},
+                "subject": {"extends": "ArticleTranslation.subject"},
+                "body": {"extends": "ArticleTranslation.body"},
+                "body_email": {"extends": "ArticleTranslation.body_email"},
+                "body_email_auto": {"extends": "ArticleTranslation.body_email_auto"},
+                "body_chat": {"extends": "ArticleTranslation.body_chat"},
+                "body_chat_auto": {"extends": "ArticleTranslation.body_chat_auto"},
+                "body_web_callback": {"extends": "ArticleTranslation.body_web_callback"},
+                "body_web_callback_auto": {"extends": "ArticleTranslation.body_web_callback_auto"},
+                "body_twitter": {"extends": "ArticleTranslation.body_twitter"},
+                "body_twitter_auto": {"extends": "ArticleTranslation.body_twitter_auto"},
+                "body_qna": {"extends": "ArticleTranslation.body_qna"},
+                "body_qna_auto": {"extends": "ArticleTranslation.body_qna_auto"},
+                "body_phone": {"extends": "ArticleTranslation.body_phone"},
+                "body_phone_auto": {"extends": "ArticleTranslation.body_phone_auto"},
+                "body_facebook": {"extends": "ArticleTranslation.body_facebook"},
+                "body_facebook_auto": {"extends": "ArticleTranslation.body_facebook_auto"},
+                "publish_at": {"extends": "ArticleTranslation.publish_at"},
+                "created_at": {"extends": "ArticleTranslation.created_at"},
+                "updated_at": {"extends": "ArticleTranslation.updated_at"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -2810,19 +2915,19 @@
         "CaseModel": {
             "type": "object",
             "properties": {
-                "external_id": {"extends": "CaseModel.external_id", "location": "json"},
-                "subject": {"extends": "CaseModel.subject", "location": "json"},
-                "priority": {"extends": "CaseModel.priority", "location": "json"},
-                "description": {"extends": "CaseModel.description", "location": "json"},
-                "status": {"extends": "CaseModel.status", "location": "json"},
-                "type": {"extends": "CaseModel.type", "location": "json"},
-                "labels": {"extends": "CaseModel.labels", "location": "json"},
-                "custom_fields": {"extends": "CaseModel.custom_fields", "location": "json"},
-                "created_at": {"extends": "CaseModel.created_at", "location": "json"},
-                "updated_at": {"extends": "CaseModel.updated_at", "location": "json"},
-                "active_at": {"extends": "CaseModel.active_at", "location": "json"},
-                "received_at": {"extends": "CaseModel.received_at", "location": "json"},
-                "locked_until": {"extends": "CaseModel.locked_until", "location": "json"},
+                "external_id": {"extends": "CaseModel.external_id"},
+                "subject": {"extends": "CaseModel.subject"},
+                "priority": {"extends": "CaseModel.priority"},
+                "description": {"extends": "CaseModel.description"},
+                "status": {"extends": "CaseModel.status"},
+                "type": {"extends": "CaseModel.type"},
+                "labels": {"extends": "CaseModel.labels"},
+                "custom_fields": {"extends": "CaseModel.custom_fields"},
+                "created_at": {"extends": "CaseModel.created_at"},
+                "updated_at": {"extends": "CaseModel.updated_at"},
+                "active_at": {"extends": "CaseModel.active_at"},
+                "received_at": {"extends": "CaseModel.received_at"},
+                "locked_until": {"extends": "CaseModel.locked_until"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -2884,18 +2989,18 @@
         "CaseMessageModel": {
             "type": "object",
             "properties": {
-                "direction": {"extends": "CaseMessageModel.direction", "location": "json"},
-                "body": {"extends": "CaseMessageModel.body", "location": "json"},
-                "created_at": {"extends": "CaseMessageModel.created_at", "location": "json"},
-                "updated_at": {"extends": "CaseMessageModel.updated_at", "location": "json"},
-                "status": {"extends": "CaseMessageModel.status", "location": "json"},
-                "subject": {"extends": "CaseMessageModel.subject", "location": "json"},
-                "from": {"extends": "CaseMessageModel.from", "location": "json"},
-                "to": {"extends": "CaseMessageModel.to", "location": "json"},
-                "cc": {"extends": "CaseMessageModel.cc", "location": "json"},
-                "bcc": {"extends": "CaseMessageModel.bcc", "location": "json"},
-                "type": {"extends": "CaseMessageModel.type", "location": "json"},
-                "hidden_at": {"extends": "CaseMessageModel.hidden_at", "location": "json"},
+                "direction": {"extends": "CaseMessageModel.direction"},
+                "body": {"extends": "CaseMessageModel.body"},
+                "created_at": {"extends": "CaseMessageModel.created_at"},
+                "updated_at": {"extends": "CaseMessageModel.updated_at"},
+                "status": {"extends": "CaseMessageModel.status"},
+                "subject": {"extends": "CaseMessageModel.subject"},
+                "from": {"extends": "CaseMessageModel.from"},
+                "to": {"extends": "CaseMessageModel.to"},
+                "cc": {"extends": "CaseMessageModel.cc"},
+                "bcc": {"extends": "CaseMessageModel.bcc"},
+                "type": {"extends": "CaseMessageModel.type"},
+                "hidden_at": {"extends": "CaseMessageModel.hidden_at"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -2915,18 +3020,18 @@
         "CaseReplyModel": {
             "type": "object",
             "properties": {
-                "direction": {"extends": "CaseReplyModel.direction", "location": "json"},
-                "body": {"extends": "CaseReplyModel.body", "location": "json"},
-                "created_at": {"extends": "CaseReplyModel.created_at", "location": "json"},
-                "updated_at": {"extends": "CaseReplyModel.updated_at", "location": "json"},
-                "status": {"extends": "CaseReplyModel.status", "location": "json"},
-                "subject": {"extends": "CaseReplyModel.subject", "location": "json"},
-                "from": {"extends": "CaseReplyModel.from", "location": "json"},
-                "to": {"extends": "CaseReplyModel.to", "location": "json"},
-                "cc": {"extends": "CaseReplyModel.cc", "location": "json"},
-                "bcc": {"extends": "CaseReplyModel.bcc", "location": "json"},
-                "type": {"extends": "CaseReplyModel.type", "location": "json"},
-                "hidden_at": {"extends": "CaseReplyModel.hidden_at", "location": "json"},
+                "direction": {"extends": "CaseReplyModel.direction"},
+                "body": {"extends": "CaseReplyModel.body"},
+                "created_at": {"extends": "CaseReplyModel.created_at"},
+                "updated_at": {"extends": "CaseReplyModel.updated_at"},
+                "status": {"extends": "CaseReplyModel.status"},
+                "subject": {"extends": "CaseReplyModel.subject"},
+                "from": {"extends": "CaseReplyModel.from"},
+                "to": {"extends": "CaseReplyModel.to"},
+                "cc": {"extends": "CaseReplyModel.cc"},
+                "bcc": {"extends": "CaseReplyModel.bcc"},
+                "type": {"extends": "CaseReplyModel.type"},
+                "hidden_at": {"extends": "CaseReplyModel.hidden_at"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -2946,10 +3051,10 @@
         "CaseNoteModel": {
             "type": "object",
             "properties": {
-                "body": {"extends": "CaseNoteModel.body", "location": "json"},
-                "created_at": {"extends": "CaseNoteModel.created_at", "location": "json"},
-                "updated_at": {"extends": "CaseNoteModel.updated_at", "location": "json"},
-                "erased_at": {"extends": "CaseNoteModel.erased_at", "location": "json"},
+                "body": {"extends": "CaseNoteModel.body"},
+                "created_at": {"extends": "CaseNoteModel.created_at"},
+                "updated_at": {"extends": "CaseNoteModel.updated_at"},
+                "erased_at": {"extends": "CaseNoteModel.erased_at"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -2983,11 +3088,11 @@
         "CompanyModel": {
             "type": "object",
             "properties": {
-                "name": {"extends": "CompanyModel.name", "location": "json"},
-                "domains": {"extends": "CompanyModel.domains", "location": "json"},
-                "created_at": {"extends": "CompanyModel.created_at", "location": "json"},
-                "updated_at": {"extends": "CompanyModel.updated_at", "location": "json"},
-                "custom_fields": {"extends": "CompanyModel.custom_fields", "location": "json"},
+                "name": {"extends": "CompanyModel.name"},
+                "domains": {"extends": "CompanyModel.domains"},
+                "created_at": {"extends": "CompanyModel.created_at"},
+                "updated_at": {"extends": "CompanyModel.updated_at"},
+                "custom_fields": {"extends": "CompanyModel.custom_fields"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3007,11 +3112,11 @@
         "CustomFieldModel": {
             "type": "object",
             "properties": {
-                "name": {"extends": "CustomFieldModel.name", "location": "json"},
-                "label": {"extends": "CustomFieldModel.label", "location": "json"},
-                "type": {"extends": "CustomFieldModel.type", "location": "json"},
-                "active": {"extends": "CustomFieldModel.active", "location": "json"},
-                "data": {"extends": "CustomFieldModel.data", "location": "json"},
+                "name": {"extends": "CustomFieldModel.name"},
+                "label": {"extends": "CustomFieldModel.label"},
+                "type": {"extends": "CustomFieldModel.type"},
+                "active": {"extends": "CustomFieldModel.active"},
+                "data": {"extends": "CustomFieldModel.data"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3024,20 +3129,20 @@
         "CustomerModel": {
             "type": "object",
             "properties": {
-                "first_name": {"extends": "CustomerModel.first_name", "location": "json"},
-                "last_name": {"extends": "CustomerModel.last_name", "location": "json"},
-                "company": {"extends": "CustomerModel.company", "location": "json"},
-                "title": {"extends": "CustomerModel.title", "location": "json"},
-                "external_id": {"extends": "CustomerModel.external_id", "location": "json"},
-                "background": {"extends": "CustomerModel.background", "location": "json"},
-                "language": {"extends": "CustomerModel.language", "location": "json"},
-                "locked_until": {"extends": "CustomerModel.locked_until", "location": "json"},
-                "created_at": {"extends": "CustomerModel.created_at", "location": "json"},
-                "updated_at": {"extends": "CustomerModel.updated_at", "location": "json"},
-                "emails": {"extends": "CustomerModel.emails", "location": "json"},
-                "phone_numbers": {"extends": "CustomerModel.phone_numbers", "location": "json"},
-                "addresses": {"extends": "CustomerModel.addresses", "location": "json"},
-                "custom_fields": {"extends": "CustomerModel.custom_fields", "location": "json"},
+                "first_name": {"extends": "CustomerModel.first_name"},
+                "last_name": {"extends": "CustomerModel.last_name"},
+                "company": {"extends": "CustomerModel.company"},
+                "title": {"extends": "CustomerModel.title"},
+                "external_id": {"extends": "CustomerModel.external_id"},
+                "background": {"extends": "CustomerModel.background"},
+                "language": {"extends": "CustomerModel.language"},
+                "locked_until": {"extends": "CustomerModel.locked_until"},
+                "created_at": {"extends": "CustomerModel.created_at"},
+                "updated_at": {"extends": "CustomerModel.updated_at"},
+                "emails": {"extends": "CustomerModel.emails"},
+                "phone_numbers": {"extends": "CustomerModel.phone_numbers"},
+                "addresses": {"extends": "CustomerModel.addresses"},
+                "custom_fields": {"extends": "CustomerModel.custom_fields"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3071,11 +3176,11 @@
         "FilterModel": {
             "type": "object",
             "properties": {
-                "name": {"extends": "FilterModel.name", "location": "json"},
-                "sort": {"extends": "FilterModel.sort", "location": "json"},
-                "sort_direction": {"extends": "FilterModel.sort_direction", "location": "json"},
-                "position": {"extends": "FilterModel.position", "location": "json"},
-                "active": {"extends": "FilterModel.active", "location": "json"},
+                "name": {"extends": "FilterModel.name"},
+                "sort": {"extends": "FilterModel.sort"},
+                "sort_direction": {"extends": "FilterModel.sort_direction"},
+                "position": {"extends": "FilterModel.position"},
+                "active": {"extends": "FilterModel.active"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3102,7 +3207,7 @@
         "GroupModel": {
             "type": "object",
             "properties": {
-                "name": {"extends": "GroupModel.name", "location": "json"},
+                "name": {"extends": "GroupModel.name"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3129,13 +3234,13 @@
         "IntegrationUrlModel": {
             "type": "object",
             "properties": {
-                "name": {"extends": "IntegrationUrlModel.name", "location": "json"},
-                "description": {"extends": "IntegrationUrlModel.description", "location": "json"},
-                "enabled": {"extends": "IntegrationUrlModel.enabled", "location": "json"},
-                "markup": {"extends": "IntegrationUrlModel.markup", "location": "json"},
-                "rendered": {"extends": "IntegrationUrlModel.rendered", "location": "json"},
-                "created_at": {"extends": "IntegrationUrlModel.created_at", "location": "json"},
-                "updated_at": {"extends": "IntegrationUrlModel.updated_at", "location": "json"},
+                "name": {"extends": "IntegrationUrlModel.name"},
+                "description": {"extends": "IntegrationUrlModel.description"},
+                "enabled": {"extends": "IntegrationUrlModel.enabled"},
+                "markup": {"extends": "IntegrationUrlModel.markup"},
+                "rendered": {"extends": "IntegrationUrlModel.rendered"},
+                "created_at": {"extends": "IntegrationUrlModel.created_at"},
+                "updated_at": {"extends": "IntegrationUrlModel.updated_at"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3162,11 +3267,11 @@
         "MacroModel": {
             "type": "object",
             "properties": {
-                "name": {"extends": "MacroModel.name", "location": "json"},
-                "description": {"extends": "MacroModel.description", "location": "json"},
-                "enabled": {"extends": "MacroModel.enabled", "location": "json"},
-                "position": {"extends": "MacroModel.position", "location": "json"},
-                "folders": {"extends": "MacroModel.folders", "location": "json"},
+                "name": {"extends": "MacroModel.name"},
+                "description": {"extends": "MacroModel.description"},
+                "enabled": {"extends": "MacroModel.enabled"},
+                "position": {"extends": "MacroModel.position"},
+                "folders": {"extends": "MacroModel.folders"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3186,11 +3291,11 @@
         "MacroActionModel": {
             "type": "object",
             "properties": {
-                "type": {"extends": "MacroActionModel.type", "location": "json"},
-                "value": {"extends": "MacroActionModel.value", "location": "json"},
-                "enabled": {"extends": "MacroActionModel.enabled", "location": "json"},
-                "created_at": {"extends": "MacroActionModel.created_at", "location": "json"},
-                "updated_at": {"extends": "MacroActionModel.updated_at", "location": "json"},
+                "type": {"extends": "MacroActionModel.type"},
+                "value": {"extends": "MacroActionModel.value"},
+                "enabled": {"extends": "MacroActionModel.enabled"},
+                "created_at": {"extends": "MacroActionModel.created_at"},
+                "updated_at": {"extends": "MacroActionModel.updated_at"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3210,13 +3315,13 @@
         "TopicModel": {
             "type": "object",
             "properties": {
-                "name": {"extends": "TopicModel.name", "location": "json"},
-                "description": {"extends": "TopicModel.description", "location": "json"},
-                "position": {"extends": "TopicModel.position", "location": "json"},
-                "allow_questions": {"extends": "TopicModel.allow_questions", "location": "json"},
-                "in_support_center": {"extends": "TopicModel.in_support_center", "location": "json"},
-                "created_at": {"extends": "TopicModel.created_at", "location": "json"},
-                "updated_at": {"extends": "TopicModel.updated_at", "location": "json"},
+                "name": {"extends": "TopicModel.name"},
+                "description": {"extends": "TopicModel.description"},
+                "position": {"extends": "TopicModel.position"},
+                "allow_questions": {"extends": "TopicModel.allow_questions"},
+                "in_support_center": {"extends": "TopicModel.in_support_center"},
+                "created_at": {"extends": "TopicModel.created_at"},
+                "updated_at": {"extends": "TopicModel.updated_at"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3236,10 +3341,10 @@
         "TopicTranslationModel": {
             "type": "object",
             "properties": {
-                "name": {"extends": "TopicTranslationModel.name", "location": "json"},
-                "locale": {"extends": "TopicTranslationModel.locale", "location": "json"},
-                "created_at": {"extends": "TopicTranslationModel.created_at", "location": "json"},
-                "updated_at": {"extends": "TopicTranslationModel.updated_at", "location": "json"},
+                "name": {"extends": "TopicTranslationModel.name"},
+                "locale": {"extends": "TopicTranslationModel.locale"},
+                "created_at": {"extends": "TopicTranslationModel.created_at"},
+                "updated_at": {"extends": "TopicTranslationModel.updated_at"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -3252,10 +3357,10 @@
         "UserModel": {
             "type": "object",
             "properties": {
-                "name": {"extends": "UserModel.name", "location": "json"},
-                "public_name": {"extends": "UserModel.public_name", "location": "json"},
-                "email": {"extends": "UserModel.email", "location": "json"},
-                "level": {"extends": "UserModel.level", "location": "json"},
+                "name": {"extends": "UserModel.name"},
+                "public_name": {"extends": "UserModel.public_name"},
+                "email": {"extends": "UserModel.email"},
+                "level": {"extends": "UserModel.level"},
                 "self": {
                     "location": "links",
                     "data": {

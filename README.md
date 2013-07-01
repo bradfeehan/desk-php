@@ -14,7 +14,7 @@ PHP client for [Desk.com](http://desk.com) v2 API, based on
  * Main resource operations (ListCases, etc)
     * ~~[Show](https://github.com/bradfeehan/desk-php/issues/5)~~
     * ~~[List](https://github.com/bradfeehan/desk-php/issues/3)~~
-    * [Create](https://github.com/bradfeehan/desk-php/issues/8)
+    * ~~[Create](https://github.com/bradfeehan/desk-php/issues/8)~~
     * [Update](https://github.com/bradfeehan/desk-php/issues/11)
     * ~~[Delete](https://github.com/bradfeehan/desk-php/issues/13)~~
     * ~~[Search](https://github.com/bradfeehan/desk-php/issues/15)~~

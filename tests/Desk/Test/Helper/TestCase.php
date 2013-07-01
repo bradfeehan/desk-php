@@ -9,6 +9,7 @@ use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Tests\GuzzleTestCase;
 use InvalidArgumentException;
 use ReflectionClass;
+use ReflectionObject;
 
 abstract class TestCase extends GuzzleTestCase
 {

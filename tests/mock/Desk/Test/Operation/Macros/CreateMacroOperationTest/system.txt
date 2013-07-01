@@ -1,0 +1,35 @@
+HTTP/1.1 201 Created
+Accept-Ranges: bytes
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+Location: http://mock.localhost/macros/1
+Status: 201 Created
+Vary: X-AppVersion
+X-AppVersion: 781247eace915fac36f43a20c87f25019542d2d5.0
+X-Frame-Options: SAMEORIGIN
+X-Rate-Limit-Limit: 60
+X-Rate-Limit-Remaining: 59
+X-Rate-Limit-Reset: 53
+Content-Length: 425
+Connection: keep-alive
+
+{
+    "name": "Assign to Engineering",
+    "description": "It's raining fire!",
+    "enabled": true,
+    "position": 1,
+    "folders": [
+        "Sample Macros",
+        "Favorites"
+    ],
+    "_links": {
+        "self": {
+            "href": "/api/v2/macros/1",
+            "class": "macro"
+        },
+        "actions": {
+            "href": "/api/v2/macros/1/actions",
+            "class": "macro_action"
+        }
+    }
+}

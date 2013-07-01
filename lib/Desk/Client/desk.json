@@ -971,6 +971,18 @@
                 "markup": {"extends": "IntegrationUrlModel.markup"}
             }
         },
+        "CreateMacro": {
+            "extends": "create",
+            "summary": "Create a new macro",
+            "uri": "macros",
+            "responseClass": "MacroModel",
+            "parameters": {
+                "name": {"extends": "MacroModel.name"},
+                "description": {"extends": "MacroModel.description"},
+                "enabled": {"extends": "MacroModel.enabled"},
+                "folders": {"extends": "MacroModel.folders"}
+            }
+        },
 
 
 
@@ -2944,7 +2956,9 @@
         "MacroModel.name": {
             "extends": "parameter",
             "description": "Name of the macro",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 1
         },
         "MacroModel.description": {
             "extends": "parameter",

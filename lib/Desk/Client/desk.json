@@ -783,6 +783,53 @@
 
 
 
+        "CreateArticle": {
+            "extends": "create",
+            "summary": "Create a new article",
+            "uri": "articles",
+            "responseClass": "ArticleModel",
+            "parameters": {
+                "subject": {"extends": "ArticleModel.subject"},
+                "in_support_center": {"extends": "ArticleModel.in_support_center"},
+                "position": {"extends": "ArticleModel.position"},
+                "quickcode": {"extends": "ArticleModel.quickcode"},
+                "keywords": {"extends": "ArticleModel.keywords"},
+                "publish_at": {"extends": "ArticleModel.publish_at.input"},
+                "created_at": {"extends": "ArticleModel.created_at.input"},
+                "updated_at": {"extends": "ArticleModel.updated_at.input"},
+                "body": {"extends": "ArticleModel.body"},
+                "body_email": {"extends": "ArticleModel.body_email"},
+                "body_email_auto": {"extends": "ArticleModel.body_email_auto"},
+                "body_chat": {"extends": "ArticleModel.body_chat"},
+                "body_chat_auto": {"extends": "ArticleModel.body_chat_auto"},
+                "body_web_callback": {"extends": "ArticleModel.body_web_callback"},
+                "body_web_callback_auto": {"extends": "ArticleModel.body_web_callback_auto"},
+                "body_twitter": {"extends": "ArticleModel.body_twitter"},
+                "body_twitter_auto": {"extends": "ArticleModel.body_twitter_auto"},
+                "body_qna": {"extends": "ArticleModel.body_qna"},
+                "body_qna_auto": {"extends": "ArticleModel.body_qna_auto"},
+                "body_phone": {"extends": "ArticleModel.body_phone"},
+                "body_phone_auto": {"extends": "ArticleModel.body_phone_auto"},
+                "body_facebook": {"extends": "ArticleModel.body_facebook"},
+                "body_facebook_auto": {"extends": "ArticleModel.body_facebook_auto"},
+                "internal_notes": {"extends": "ArticleModel.internal_notes"},
+                "topic_id": {
+                    "description": "The topic to which the new article is assigned",
+                    "required": true,
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "topic",
+                    "data": {
+                        "class": "topic",
+                        "href": "/api/v2/topics/{value}"
+                    }
+                }
+            }
+        },
+
+
+
+
         "DeleteArticle": {
             "extends": "delete.main",
             "summary": "Delete a single article by ID",
@@ -2097,7 +2144,9 @@
         "ArticleModel.subject": {
             "extends": "parameter",
             "description": "The subject of the article",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 2
         },
         "ArticleModel.in_support_center": {
             "extends": "parameter",
@@ -2123,12 +2172,24 @@
             "extends": "date.output",
             "description": "Date the article is to be published"
         },
+        "ArticleModel.publish_at.input": {
+            "extends": "date.input",
+            "description": "Date the article is to be published"
+        },
         "ArticleModel.created_at.output": {
             "extends": "date.output",
             "description": "Date the article was created"
         },
+        "ArticleModel.created_at.input": {
+            "extends": "date.input",
+            "description": "Date the article was created"
+        },
         "ArticleModel.updated_at.output": {
             "extends": "date.output",
+            "description": "Date the article was updated"
+        },
+        "ArticleModel.updated_at.input": {
+            "extends": "date.input",
             "description": "Date the article was updated"
         },
         "ArticleModel.body": {

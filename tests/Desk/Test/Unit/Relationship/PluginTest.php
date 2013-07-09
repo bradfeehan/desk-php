@@ -50,6 +50,19 @@ class PluginTest extends UnitTestCase
     }
 
     /**
+     * @covers Desk\Relationship\Plugin::getRequestSerializer
+     */
+    public function testGetRequestSerializerWithOverriddenSerializer()
+    {
+        $serializerClass = 'Guzzle\\Service\\Command\\RequestSerializerInterface';
+        $serializer = \Mockery::mock($serializerClass);
+        $plugin = $this->mock('getRequestSerializer', array(null, $serializer));
+
+        $result = $plugin->getRequestSerializer();
+        $this->assertSame($serializer, $result);
+    }
+
+    /**
      * @covers Desk\Relationship\Plugin::onCreateCommand
      */
     public function testOnCreateCommand()
@@ -57,9 +70,14 @@ class PluginTest extends UnitTestCase
         $parserClass = 'Guzzle\\Service\\Command\\ResponseParserInterface';
         $parser = \Mockery::mock($parserClass);
 
+        $serializerClass = 'Guzzle\\Service\\Command\\RequestSerializerInterface';
+        $serializer = \Mockery::mock($serializerClass);
+
         $command = \Mockery::mock('Guzzle\\Service\\Command\\OperationCommand')
             ->shouldReceive('setResponseParser')
                 ->with($parser)
+            ->shouldReceive('setRequestSerializer')
+                ->with($serializer)
             ->getMock();
 
         $event = \Mockery::mock('Guzzle\\Common\\Event')
@@ -71,6 +89,8 @@ class PluginTest extends UnitTestCase
         $plugin = $this->mock('onCreateCommand')
             ->shouldReceive('getResponseParser')
                 ->andReturn($parser)
+            ->shouldReceive('getRequestSerializer')
+                ->andReturn($serializer)
             ->getMock();
 
         $plugin->onCreateCommand($event);

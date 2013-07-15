@@ -83,25 +83,25 @@ class JsonVisitorTest extends UnitTestCase
             ->getMock();
         $value = \Mockery::mock();
 
-        $visitor = $this->mock('visit');
-        $visitor
-            ->shouldReceive('createLinkParameter')
-                ->andReturn($linkParam)
-            ->shouldReceive('createLinkValue')
-                ->andReturn($linkValue)
-            ->shouldReceive('getDecoratedComponent->visit')
-                ->with($command, $request, $linkParam, $linkValue)
-                ->andReturn('$returnValue');
+        $visitor = $this->mock('visit')
+            ->shouldReceive('addLinkParam')
+                ->with($command, $param)
+                ->once()
+            ->shouldReceive('addLinkValue')
+                ->with($command, $param, $value)
+                ->once()
+            ->getMock();
 
         $result = $visitor->visit($command, $request, $param, $value);
-        $this->assertSame('$returnValue', $result);
+        $this->assertNull($result);
     }
 
     /**
-     * @covers Desk\Relationship\Visitor\Request\JsonVisitor::createLinkParameter
+     * @covers Desk\Relationship\Visitor\Request\JsonVisitor::addLinkParam
      */
-    public function testCreateLinkParameter()
+    public function testAddLinkParam()
     {
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\CommandInterface');
         $parameter = \Mockery::mock('Guzzle\\Service\\Description\\Parameter')
             ->shouldReceive('getName')
                 ->andReturn('$name')
@@ -113,57 +113,165 @@ class JsonVisitorTest extends UnitTestCase
                 ->andReturn('$sentAs')
             ->getMock();
 
-        $visitor = $this->mock('createLinkParameter');
-        $result = $visitor->createLinkParameter($parameter);
+        $fooParam = array(
+            'name' => '$name',
+            'description' => '$description',
+            'required' => true,
+            'sentAs' => '$sentAs',
+            'type' => 'object',
+            'properties' => array(
+                'class' => array(
+                    'type' => 'string',
+                    'required' => true,
+                    'pattern' => '/^[a-z_]+$/'
+                ),
+                'href' => array(
+                    'type' => 'string',
+                    'required' => true,
+                    'pattern' => '#^/api/v2/#'
+                ),
+            ),
+        );
 
-        $this->assertInstanceOf('Guzzle\\Service\\Description\\Parameter', $result);
-        $this->assertSame('$name', $result->getName());
-        $this->assertSame('$description', $result->getDescription());
-        $this->assertSame(true, $result->getRequired());
-        $this->assertSame('$sentAs', $result->getSentAs());
+        $params = \Mockery::mock('SplObjectStorage')
+            ->shouldReceive('offsetExists')
+                ->with($command)
+                ->andReturn(true)
+            ->shouldReceive('offsetGet')
+                ->with($command)
+                ->andReturn(array('foo' => 'bar'))
+            ->shouldReceive('offsetSet')
+                ->with($command, array('foo' => 'bar', '$name' => $fooParam))
+            ->getMock();
 
-        $properties = $result->getProperties();
-        $this->assertSame(2, count($properties));
+        $visitor = $this->mock('addLinkParam');
+        $this->setPrivateProperty($visitor, 'params', $params);
 
-        $class = $properties['class'];
-        $this->assertSame('string', $class->getType());
-        $this->assertSame(true, $class->getRequired());
-        $this->assertSame('/^[a-z_]+$/', $class->getPattern());
-
-        $href = $properties['href'];
-        $this->assertSame('string', $href->getType());
-        $this->assertSame(true, $href->getRequired());
-        $this->assertSame('#^/api/v2/#', $href->getPattern());
+        $result = $visitor->addLinkParam($command, $parameter);
+        $this->assertNull($result);
     }
 
     /**
-     * @covers Desk\Relationship\Visitor\Request\JsonVisitor::createLinkValue
+     * @covers Desk\Relationship\Visitor\Request\JsonVisitor::addLinkValue
      */
-    public function testCreateLinkValue()
+    public function testAddLinkValue()
     {
-        $value = 1;
-
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\CommandInterface');
+        $value = 123;
         $parameter = \Mockery::mock('Guzzle\\Service\\Description\\Parameter')
+            ->shouldReceive('getName')
+                ->andReturn('$name')
             ->shouldReceive('getData')
                 ->with('class')
                 ->andReturn('$class')
             ->shouldReceive('getData')
                 ->with('href')
-                ->andReturn('/foo/bar/{value}/test')
+                ->andReturn('$href_{value}')
             ->shouldReceive('getValue')
                 ->with($value)
-                ->andReturn('$value')
+                ->andReturn(456)
             ->getMock();
 
-        $visitor = $this->mock('createLinkValue');
-        $result = $visitor->createLinkValue($parameter, $value);
-
-        $expected = array(
+        $fooValue = array(
             'class' => '$class',
-            'href' => '/foo/bar/$value/test',
+            'href' => '$href_456',
         );
 
-        $this->assertSame($expected, $result);
+        $values = \Mockery::mock('SplObjectStorage')
+            ->shouldReceive('offsetExists')
+                ->with($command)
+                ->andReturn(true)
+            ->shouldReceive('offsetGet')
+                ->with($command)
+                ->andReturn(array('bar' => 'baz'))
+            ->shouldReceive('offsetSet')
+                ->with($command, array('bar' => 'baz', '$name' => $fooValue))
+            ->getMock();
+
+        $visitor = $this->mock('addLinkValue');
+        $this->setPrivateProperty($visitor, 'values', $values);
+
+        $result = $visitor->addLinkValue($command, $parameter, $value);
+        $this->assertNull($result);
+    }
+
+    /**
+     * @covers Desk\Relationship\Visitor\Request\JsonVisitor::getLinksParameter
+     */
+    public function testGetLinksParameter()
+    {
+        $command = \Mockery::mock('Guzzle\Service\Command\CommandInterface');
+        $params = \Mockery::mock('SplObjectStorage')
+            ->shouldReceive('offsetExists')
+                ->with($command)
+                ->andReturn(true)
+            ->shouldReceive('offsetGet')
+                ->with($command)
+                ->andReturn(array('foo' => array('type' => 'string')))
+            ->shouldReceive('offsetUnset')
+                ->with($command)
+                ->once()
+            ->getMock();
+
+        $visitor = $this->mock('getLinksParameter');
+        $this->setPrivateProperty($visitor, 'params', $params);
+
+        $result = $visitor->getLinksParameter($command);
+        $this->assertInstanceOf('Guzzle\\Service\\Description\\Parameter', $result);
+
+        $this->assertSame('_links', $result->getName());
+        $this->assertSame('json', $result->getLocation());
+        $this->assertSame('object', $result->getType());
+
+        $properties = $result->getProperties();
+        $this->assertSame(1, count($properties));
+
+        $property = $properties['foo'];
+        $this->assertInstanceOf('Guzzle\\Service\\Description\\Parameter', $property);
+    }
+
+    /**
+     * @covers Desk\Relationship\Visitor\Request\JsonVisitor::getLinksValues
+     */
+    public function testGetLinksValues()
+    {
+        $command = \Mockery::mock('Guzzle\Service\Command\CommandInterface');
+        $values = \Mockery::mock('SplObjectStorage')
+            ->shouldReceive('offsetExists')
+                ->with($command)
+                ->andReturn(true)
+            ->shouldReceive('offsetGet')
+                ->with($command)
+                ->andReturn(array('foo' => 'bar'))
+            ->shouldReceive('offsetUnset')
+                ->with($command)
+                ->once()
+            ->getMock();
+
+        $visitor = $this->mock('getLinksValues');
+        $this->setPrivateProperty($visitor, 'values', $values);
+
+        $result = $visitor->getLinksValues($command);
+        $this->assertSame(array('foo' => 'bar'), $result);
+    }
+
+    /**
+     * @covers Desk\Relationship\Visitor\Request\JsonVisitor::getLinksValues
+     */
+    public function testGetLinksValuesWithNoValues()
+    {
+        $command = \Mockery::mock('Guzzle\Service\Command\CommandInterface');
+        $values = \Mockery::mock('SplObjectStorage')
+            ->shouldReceive('offsetExists')
+                ->with($command)
+                ->andReturn(false)
+            ->getMock();
+
+        $visitor = $this->mock('getLinksValues');
+        $this->setPrivateProperty($visitor, 'values', $values);
+
+        $result = $visitor->getLinksValues($command);
+        $this->assertNull($result);
     }
 
     /**
@@ -174,13 +282,48 @@ class JsonVisitorTest extends UnitTestCase
         $command = \Mockery::mock('Guzzle\\Service\\Command\\CommandInterface');
         $request = \Mockery::mock('Guzzle\\Http\\Message\\RequestInterface');
 
-        $component = \Mockery::mock()
-            ->shouldReceive('visit')
+        $param = \Mockery::mock();
+        $values = \Mockery::mock();
+
+        $visitor = $this->mock('after')
+            ->shouldReceive('getLinksValues')
+                ->with($command)
+                ->andReturn($values)
+            ->shouldReceive('getLinksParameter')
+                ->with($command)
+                ->andReturn($param)
             ->getMock();
 
-        $visitor = $this->mock('after');
         $visitor
             ->shouldReceive('getDecoratedComponent->after')
+                ->once()
+                ->with($command, $request)
+                ->andReturn('$returnValue')
+            ->shouldReceive('visit')
+                ->once()
+                ->with($command, $request, $param, $values);
+
+        $result = $visitor->after($command, $request);
+        $this->assertSame('$returnValue', $result);
+    }
+
+    /**
+     * @covers Desk\Relationship\Visitor\Request\JsonVisitor::after
+     */
+    public function testAfterWithNoLinksData()
+    {
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\CommandInterface');
+        $request = \Mockery::mock('Guzzle\\Http\\Message\\RequestInterface');
+
+        $visitor = $this->mock('after')
+            ->shouldReceive('getLinksValues')
+                ->with($command)
+                ->andReturn(null)
+            ->getMock();
+
+        $visitor
+            ->shouldReceive('getDecoratedComponent->after')
+                ->once()
                 ->with($command, $request)
                 ->andReturn('$returnValue');
 

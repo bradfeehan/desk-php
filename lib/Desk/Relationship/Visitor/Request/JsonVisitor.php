@@ -8,6 +8,7 @@ use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Command\LocationVisitor\Request\JsonVisitor as GuzzleJsonVisitor;
 use Guzzle\Service\Command\LocationVisitor\Request\RequestVisitorInterface;
 use Guzzle\Service\Description\Parameter;
+use SplObjectStorage;
 
 /**
  * A RequestVisitor to set up the "_links" key in a request JSON body
@@ -27,14 +28,30 @@ use Guzzle\Service\Description\Parameter;
  *
  * However, if the location of the parameter is "links", then some
  * modifications are made to correctly build the "_links" key of the
- * request's JSON body. In particular, the parameter used is modified
- * before being passed to the default JsonVisitor's implementation.
+ * request's JSON body. In particular, a new parameter is created,
+ * representing the full "_links" key in the request. Values for link
+ * parameters are stored, and then visited together last.
  *
  * Since the same visitor is used for two locations, the after() method
  * will be called twice, so it needs to expect this and only act once.
  */
 class JsonVisitor extends DecoratedRequestVisitor
 {
+
+    /**
+     * Stores parameters for visited links for a given command object
+     *
+     * @var SplObjectStorage
+     */
+    private $params;
+
+    /**
+     * Stores values for visited links for a given command object
+     *
+     * @var SplObjectStorage
+     */
+    private $values;
+
 
     /**
      * Allow construction with default arguments
@@ -48,6 +65,8 @@ class JsonVisitor extends DecoratedRequestVisitor
         }
 
         parent::__construct($visitor);
+        $this->params = new SplObjectStorage();
+        $this->values = new SplObjectStorage();
     }
 
     /**
@@ -58,72 +77,153 @@ class JsonVisitor extends DecoratedRequestVisitor
     public function visit(CommandInterface $command, RequestInterface $request, Parameter $param, $value)
     {
         if ($param->getLocation() === 'links') {
-            $value = $this->createLinkValue($param, $value);
-            $param = $this->createLinkParameter($param);
+            $this->addLinkParam($command, $param);
+            $this->addLinkValue($command, $param, $value);
+        } else {
+            $component = $this->getDecoratedComponent();
+            return $component->visit($command, $request, $param, $value);
         }
-
-        $component = $this->getDecoratedComponent();
-        return $component->visit($command, $request, $param, $value);
     }
 
     /**
-     * Creates a parameter representing a link
+     * Prepares and stores the description for a link parameter
      *
-     * @param Guzzle\Service\Description\Parameter $originalParameter
+     * Prepares and stores the data describing a link parameter, to be
+     * later used by getLinksParameter() to describe all the links.
+     *
+     * @param Guzzle\Service\Command\CommandInterface $command
+     * @param Guzzle\Service\Description\Parameter    $parameter
+     */
+    public function addLinkParam(CommandInterface $command, Parameter $parameter)
+    {
+        $params = array();
+
+        if (isset($this->params[$command])) {
+            $params = $this->params[$command];
+        }
+
+        // Store parameter definition for later
+        $params[$parameter->getName()] = array(
+            'name' => $parameter->getName(),
+            'description' => $parameter->getDescription(),
+            'required' => $parameter->getRequired(),
+            'sentAs' => $parameter->getSentAs(),
+            'type' => 'object',
+            'properties' => array(
+                'class' => array(
+                    'type' => 'string',
+                    'required' => true,
+                    'pattern' => '/^[a-z_]+$/',
+                ),
+                'href' => array(
+                    'type' => 'string',
+                    'required' => true,
+                    'pattern' => '#^/api/v2/#',
+                ),
+            ),
+        );
+
+        $this->params[$command] = $params;
+    }
+
+    /**
+     * Prepares and stores the value for a link
+     *
+     * Creates an link object (with "class" and "href") from the Guzzle
+     * Parameter describing the link, and the value provided by the
+     * user.
+     *
+     * @param Guzzle\Service\Command\CommandInterface $command
+     * @param Guzzle\Service\Description\Parameter    $parameter
+     * @param mixed                                   $value
+     */
+    public function addLinkValue(CommandInterface $command, Parameter $parameter, $value)
+    {
+        $values = array();
+
+        if (isset($this->values[$command])) {
+            $values = $this->values[$command];
+        }
+
+        $values[$parameter->getName()] = array(
+            'class' => $parameter->getData('class'),
+            'href' => preg_replace(
+                '/{value}/',
+                $parameter->getValue($value),
+                $parameter->getData('href')
+            ),
+        );
+
+        $this->values[$command] = $values;
+    }
+
+    /**
+     * Gets the completed links parameter
+     *
+     * Constructs a new Guzzle Parameter object, which will have all of
+     * the visited links parameters as its properties.
+     *
+     * @param Guzzle\Service\Command\CommandInterface $command
      *
      * @return Guzzle\Service\Description\Parameter
      */
-    public function createLinkParameter(Parameter $originalParameter)
+    public function getLinksParameter(CommandInterface $command)
     {
+        $params = array();
+
+        if (isset($this->params[$command])) {
+            $params = $this->params[$command];
+            unset($this->params[$command]);
+        }
+
         return new Parameter(
             array(
-                'name' => $originalParameter->getName(),
-                'description' => $originalParameter->getDescription(),
-                'required' => $originalParameter->getRequired(),
-                'sentAs' => $originalParameter->getSentAs(),
+                'name' => '_links',
                 'location' => 'json',
                 'type' => 'object',
-                'properties' => array(
-                    'class' => array(
-                        'type' => 'string',
-                        'required' => true,
-                        'pattern' => '/^[a-z_]+$/',
-                    ),
-                    'href' => array(
-                        'type' => 'string',
-                        'required' => true,
-                        'pattern' => '#^/api/v2/#',
-                    ),
-                ),
+                'properties' => $params,
             )
         );
     }
 
     /**
-     * Creates the value for a link
+     * Gets and clears all the values for the links visited
      *
-     * @param Guzzle\Service\Description\Parameter $parameter
-     * @param mixed                                $originalValue
+     * Returns the values for the links that have been visited, before
+     * clearing the list of visited link values. If there are no link
+     * values stored, NULL is returned.
+     *
+     * @param Guzzle\Service\Command\CommandInterface $command
      *
      * @return array
      */
-    public function createLinkValue(Parameter $parameter, $originalValue)
+    public function getLinksValues(CommandInterface $command)
     {
-        return array(
-            'class' => $parameter->getData('class'),
-            'href' => preg_replace(
-                '#{value}#',
-                $parameter->getValue($originalValue),
-                $parameter->getData('href')
-            ),
-        );
+        $values = null;
+
+        if (isset($this->values[$command])) {
+            $values = $this->values[$command];
+            unset($this->values[$command]);
+        }
+
+        return $values;
     }
 
     /**
      * {@inheritdoc}
+     *
+     * Overridden to behave differently if link values are stored.
      */
     public function after(CommandInterface $command, RequestInterface $request)
     {
-        return $this->getDecoratedComponent()->after($command, $request);
+        $component = $this->getDecoratedComponent();
+        $values = $this->getLinksValues($command);
+
+        if ($values) {
+            $param = $this->getLinksParameter($command);
+            $component->visit($command, $request, $param, $values);
+        }
+
+        return $component->after($command, $request);
     }
 }

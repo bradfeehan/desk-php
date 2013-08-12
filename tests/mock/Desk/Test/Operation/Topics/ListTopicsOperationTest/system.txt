@@ -47,18 +47,8 @@ Connection: keep-alive
                         "class": "article"
                     },
                     "translations": {
-                        "default": {
-                            "href": "/api/v2/topics/1/translations/en_us",
-                            "class": "topic_translation"
-                        },
-                        "en_us": {
-                            "href": "/api/v2/topics/1/translations/en_us",
-                            "class": "topic_translation"
-                        },
-                        "ja": {
-                            "href": "/api/v2/topics/1/translations/ja",
-                            "class": "topic_translation"
-                        }
+                        "href": "/api/v2/topics/1/translations",
+                        "class": "topic_translation"
                     }
                 }
             },
@@ -80,18 +70,8 @@ Connection: keep-alive
                         "class": "article"
                     },
                     "translations": {
-                        "default": {
-                            "href": "/api/v2/topics/2/translations/en_us",
-                            "class": "topic_translation"
-                        },
-                        "en_us": {
-                            "href": "/api/v2/topics/2/translations/en_us",
-                            "class": "topic_translation"
-                        },
-                        "ja": {
-                            "href": "/api/v2/topics/2/translations/ja",
-                            "class": "topic_translation"
-                        }
+                        "href": "/api/v2/topics/2/translations",
+                        "class": "topic_translation"
                     }
                 }
             }

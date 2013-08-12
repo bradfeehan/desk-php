@@ -3335,6 +3335,13 @@
                         "operation": "ListTopicArticles",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles$#"
                     }
+                },
+                "translations": {
+                    "location": "links",
+                    "data": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations$#"
+                    }
                 }
             }
         },

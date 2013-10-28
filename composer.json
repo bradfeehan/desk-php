@@ -8,7 +8,7 @@
     ],
     "require": {
         "php": ">=5.3",
-        "guzzle/guzzle": "dev-master"
+        "guzzle/guzzle": "~3.5"
     },
     "require-dev": {
         "phpunit/phpunit": "~3.7.0",

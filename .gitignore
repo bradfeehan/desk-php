@@ -9,3 +9,8 @@
 # users to have a local, custom phpunit.xml for use during development
 # which overrides phpunit.xml.dist
 /phpunit.xml
+
+# composer.lock is only used in CI for this project, and is ignored
+# when depending on this package. Ignoring it ensures that our CI is as
+# close as possible to real-world use
+/composer.lock

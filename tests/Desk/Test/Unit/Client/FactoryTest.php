@@ -190,11 +190,12 @@ class FactoryTest extends UnitTestCase
             'http://mock.localhost/',
             new Collection(
                 array(
-                    'authentication'  => 'oauth',
-                    'consumer_key'    => 'foo',
-                    'consumer_secret' => 'bar',
-                    'token'           => 'baz',
-                    'token_secret'    => 'qux',
+                    'authentication'            => 'oauth',
+                    'consumer_key'              => 'foo',
+                    'consumer_secret'           => 'bar',
+                    'token'                     => 'baz',
+                    'token_secret'              => 'qux',
+                    Client::DISABLE_REDIRECTS   => true,
                 )
             )
         );

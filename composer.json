@@ -7,9 +7,6 @@
         { "name": "Brad Feehan", "email": "git@bradfeehan.com" }
     ],
     "minimum-stability": "stable",
-    "config": {
-        "bin-dir": "bin"
-    },
     "require": {
         "php": ">=5.3.3",
         "guzzle/guzzle": "3.5.*"

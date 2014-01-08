@@ -76,12 +76,12 @@ class FactoryTest extends UnitTestCase
                     'password' => 'bar',
                 ),
                 array(
+                    'subdomain' => 'foo',
+                    'username' => 'foo',
+                    'password' => 'bar',
+                    'authentication' => 'basic',
                     'api_version' => 2,
                     'base_url' => 'https://{subdomain}.desk.com/api/v{api_version}/',
-                    'subdomain' => 'foo',
-                    'username' => 'foo',
-                    'password' => 'bar',
-                    'authentication' => 'basic',
                 ),
             ),
             array(
@@ -91,11 +91,11 @@ class FactoryTest extends UnitTestCase
                     'password' => 'bar',
                 ),
                 array(
-                    'api_version' => 2,
                     'base_url' => 'http://example.com/',
                     'username' => 'foo',
                     'password' => 'bar',
                     'authentication' => 'basic',
+                    'api_version' => 2,
                 ),
             ),
             array(
@@ -106,12 +106,12 @@ class FactoryTest extends UnitTestCase
                     'password' => 'bar',
                 ),
                 array(
-                    'api_version' => 2,
                     'base_url' => 'http://{subdomain}.example.com/',
                     'subdomain' => 'foo',
                     'username' => 'foo',
                     'password' => 'bar',
                     'authentication' => 'basic',
+                    'api_version' => 2,
                 ),
             ),
             array(
@@ -123,14 +123,14 @@ class FactoryTest extends UnitTestCase
                     'token_secret'    => '012',
                 ),
                 array(
-                    'api_version' => 2,
-                    'base_url' => 'https://{subdomain}.desk.com/api/v{api_version}/',
                     'subdomain' => 'foo',
                     'consumer_key' => '123',
                     'consumer_secret' => '456',
                     'token' => '789',
                     'token_secret' => '012',
                     'authentication' => 'oauth',
+                    'api_version' => 2,
+                    'base_url' => 'https://{subdomain}.desk.com/api/v{api_version}/',
                 ),
             ),
         );

@@ -17,4 +17,5 @@
 /composer.lock
 
 # IDEs
-.idea
+/.idea
+/nbproject/

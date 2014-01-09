@@ -22,7 +22,7 @@ class EmbeddedCommandFactoryTest extends UnitTestCase
     {
         $client = \Mockery::mock('Guzzle\\Service\\ClientInterface');
         $originalResponse = \Mockery::mock('Guzzle\\Http\\Message\\Response');
-        $embeddedResponse = \Mockery::mock('Guzzle\\Http\\Message\\Response');
+        $embeddedResponse = \Mockery::mock('Desk\\Relationship\\Resource\\EmbeddedResponse');
 
         $command = \Mockery::mock('Guzzle\\Service\\Command\\CommandInterface')
             ->shouldReceive('getClient')
@@ -82,7 +82,7 @@ class EmbeddedCommandFactoryTest extends UnitTestCase
                 ->andReturn($headers)
             ->getMock();
 
-        $embeddedResponse = \Mockery::mock('Guzzle\\Http\\Message\\Response')
+        $embeddedResponse = \Mockery::mock('Desk\\Relationship\\Resource\\EmbeddedResponse')
             ->shouldReceive('setReasonPhrase')
                 ->with('Hello, World!')
             ->getMock();

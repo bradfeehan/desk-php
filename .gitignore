@@ -1,6 +1,7 @@
 # Composer dependencies -- ignore vendor directory in project root, see
 # http://getcomposer.org/doc/01-basic-usage.md#installing-dependencies
 /vendor/
+/bin/
 
 # PHPUnit test coverage data
 /build/logs/
@@ -14,3 +15,7 @@
 # when depending on this package. Ignoring it ensures that our CI is as
 # close as possible to real-world use
 /composer.lock
+
+# IDEs
+/.idea
+/nbproject/

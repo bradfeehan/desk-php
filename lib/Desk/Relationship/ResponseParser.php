@@ -3,6 +3,7 @@
 namespace Desk\Relationship;
 
 use Guzzle\Http\Message\Response;
+use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Command\AbstractCommand;
 use Guzzle\Service\Command\LocationVisitor\VisitorFlyweight;
 use Guzzle\Service\Command\OperationResponseParser;
@@ -57,7 +58,7 @@ class ResponseParser extends OperationResponseParser
     /**
      * {@inheritdoc}
      */
-    protected function handleParsing(AbstractCommand $command, Response $response, $contentType)
+    protected function handleParsing(CommandInterface $command, Response $response, $contentType)
     {
         // Only use overridden behaviour if response type is a model
         if (!$this->responseTypeIsModel($command)) {
@@ -100,19 +101,19 @@ class ResponseParser extends OperationResponseParser
     /**
      * Determines whether a command's response type is a model
      *
-     * @param Guzzle\Service\Command\AbstractCommand $command
+     * @param Guzzle\Service\Command\CommandInterface $command
      *
      * @return boolean
      */
-    public function responseTypeIsModel(AbstractCommand $command)
+    public function responseTypeIsModel(CommandInterface $command)
     {
         $operation = $command->getOperation();
         $processing = $command->get(AbstractCommand::RESPONSE_PROCESSING);
         $description = $operation->getServiceDescription();
 
         return
-            $operation->getResponseType() == OperationInterface::TYPE_MODEL &&
+            OperationInterface::TYPE_MODEL === $operation->getResponseType() &&
             $description->hasModel($operation->getResponseClass()) &&
-            $processing == AbstractCommand::TYPE_MODEL;
+            AbstractCommand::TYPE_MODEL === $processing;
     }
 }

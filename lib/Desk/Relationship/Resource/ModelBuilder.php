@@ -7,6 +7,7 @@ use Desk\Relationship\Resource\EmbeddedCommandFactoryInterface;
 use Desk\Relationship\Resource\Model;
 use Desk\Relationship\Resource\ModelBuilderInterface;
 use Guzzle\Service\Command\CommandInterface;
+use Guzzle\Service\Command\LocationVisitor\Response\ResponseVisitorInterface;
 use Guzzle\Service\Command\LocationVisitor\VisitorFlyweight;
 use Guzzle\Service\Description\Parameter;
 
@@ -98,6 +99,10 @@ class ModelBuilder implements ModelBuilderInterface
         $properties = $schema->getProperties();
 
         foreach ($properties as $property) {
+            if (!$property instanceof Parameter) {
+                continue;
+            }
+
             $location = $property->getLocation();
             if ($location && !isset($visitors[$location])) {
                 // add visitor for this location and trigger before()
@@ -139,7 +144,10 @@ class ModelBuilder implements ModelBuilderInterface
         // Apply the parameter value with the location visitor
         foreach ($properties as $property) {
             $location = $property->getLocation();
-            if ($location) {
+            if ($location
+                    && !empty($visitors[$location])
+                    && $visitors[$location] instanceof ResponseVisitorInterface
+                    ) {
                 $visitors[$location]->visit($command, $response, $property, $result);
             }
         }

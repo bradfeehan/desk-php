@@ -9,7 +9,7 @@ use Guzzle\Service\ClientInterface;
 use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Description\Operation;
 
-class EmbeddedCommand implements CommandInterface
+class EmbeddedCommand extends Collection implements CommandInterface
 {
 
     /**

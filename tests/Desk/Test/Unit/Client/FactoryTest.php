@@ -205,9 +205,7 @@ class FactoryTest extends UnitTestCase
             ->getEventDispatcher()
             ->getListeners('request.before_send');
 
-        $this->assertSame(1, count($listeners));
-
-        list($listener, $method) = $listeners[0];
+        list($listener, $method) = end($listeners);
 
         $this->assertSame('Guzzle\\Plugin\\Oauth\\OauthPlugin', get_class($listener));
         $this->assertSame('onRequestBeforeSend', $method);

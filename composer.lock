@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ff72639ac763f51f0d73e71901852296",
+    "hash": "3d462d292b4670f03b9064603b82b1b5",
     "packages": [
         {
             "name": "guzzle/guzzle",
-            "version": "dev-master",
+            "version": "v3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "037ba252f65eab6b49d6055cdfdd374c15a5a1e7"
+                "reference": "e97207d07d0385eac269a976628b7a5f9eeb4e07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/037ba252f65eab6b49d6055cdfdd374c15a5a1e7",
-                "reference": "037ba252f65eab6b49d6055cdfdd374c15a5a1e7",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/e97207d07d0385eac269a976628b7a5f9eeb4e07",
+                "reference": "e97207d07d0385eac269a976628b7a5f9eeb4e07",
                 "shasum": ""
             },
             "require": {
@@ -54,15 +54,13 @@
                 "phpunit/phpunit": "3.7.*",
                 "psr/log": "1.0.*",
                 "symfony/class-loader": "*",
-                "zend/zend-cache1": "1.12",
-                "zend/zend-log1": "1.12",
                 "zendframework/zend-cache": "2.0.*",
                 "zendframework/zend-log": "2.0.*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "3.5-dev"
                 }
             },
             "autoload": {
@@ -97,7 +95,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-05-06 17:31:20"
+            "time": "2013-05-13 20:17:47"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -981,7 +979,6 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "guzzle/guzzle": 20,
         "mockery/mockery": 20,
         "satooshi/php-coveralls": 20
     },

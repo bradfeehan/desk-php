@@ -63,7 +63,7 @@ class FactoryTest extends UnitTestCase
         $this->assertInstanceOf('Guzzle\\Common\\Collection', $actual);
 
         $actualArray = $actual->toArray();
-        $this->assertSame($expectedArray, $actualArray);
+        $this->assertSame(sort($expectedArray), sort($actualArray));
     }
 
     public function dataProcessConfigValid()

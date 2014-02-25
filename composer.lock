@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3d462d292b4670f03b9064603b82b1b5",
+    "hash": "b57eb70ffe7918982effbc29eee77dda",
     "packages": [
         {
             "name": "guzzle/guzzle",
-            "version": "v3.5.0",
+            "version": "v3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "e97207d07d0385eac269a976628b7a5f9eeb4e07"
+                "reference": "b550d534c9b668c767b6a532bd686d0942505f7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/e97207d07d0385eac269a976628b7a5f9eeb4e07",
-                "reference": "e97207d07d0385eac269a976628b7a5f9eeb4e07",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b550d534c9b668c767b6a532bd686d0942505f7a",
+                "reference": "b550d534c9b668c767b6a532bd686d0942505f7a",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.5-dev"
+                    "dev-master": "3.6-dev"
                 }
             },
             "autoload": {
@@ -95,7 +95,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-05-13 20:17:47"
+            "time": "2013-05-30 07:01:25"
         },
         {
             "name": "symfony/event-dispatcher",

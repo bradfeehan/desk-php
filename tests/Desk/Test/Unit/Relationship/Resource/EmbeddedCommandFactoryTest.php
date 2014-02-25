@@ -71,7 +71,10 @@ class EmbeddedCommandFactoryTest extends UnitTestCase
      */
     public function testCreateResponse()
     {
-        $headers = \Mockery::mock('Guzzle\\Common\\Collection');
+        $headers = \Mockery::mock('Guzzle\\Common\\Collection')
+            ->shouldReceive('toArray')
+                ->andReturn(array('baz' => 'qux'))
+            ->getMock();
 
         $originalResponse = \Mockery::mock('Guzzle\\Http\\Message\\Response')
             ->shouldReceive('getStatusCode')
@@ -91,7 +94,7 @@ class EmbeddedCommandFactoryTest extends UnitTestCase
 
         $factory = $this->mock('createResponse')
             ->shouldReceive('newResponse')
-                ->with(200, $headers, '{"foo":"bar"}')
+                ->with(200, array('baz' => 'qux'), '{"foo":"bar"}')
                 ->andReturn($embeddedResponse)
             ->getMock();
 

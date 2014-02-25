@@ -4,6 +4,7 @@ namespace Desk\Relationship;
 
 use Guzzle\Http\Message\Response;
 use Guzzle\Service\Command\AbstractCommand;
+use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Command\LocationVisitor\VisitorFlyweight;
 use Guzzle\Service\Command\OperationResponseParser;
 use Guzzle\Service\Description\OperationInterface;
@@ -57,7 +58,7 @@ class ResponseParser extends OperationResponseParser
     /**
      * {@inheritdoc}
      */
-    protected function handleParsing(AbstractCommand $command, Response $response, $contentType)
+    protected function handleParsing(CommandInterface $command, Response $response, $contentType)
     {
         // Only use overridden behaviour if response type is a model
         if (!$this->responseTypeIsModel($command)) {

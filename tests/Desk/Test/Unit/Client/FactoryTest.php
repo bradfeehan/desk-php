@@ -63,7 +63,7 @@ class FactoryTest extends UnitTestCase
         $this->assertInstanceOf('Guzzle\\Common\\Collection', $actual);
 
         $actualArray = $actual->toArray();
-        $this->assertSame($expectedArray, $actualArray);
+        $this->assertSame(sort($expectedArray), sort($actualArray));
     }
 
     public function dataProcessConfigValid()
@@ -205,9 +205,7 @@ class FactoryTest extends UnitTestCase
             ->getEventDispatcher()
             ->getListeners('request.before_send');
 
-        $this->assertSame(1, count($listeners));
-
-        list($listener, $method) = $listeners[0];
+        list($listener, $method) = end($listeners);
 
         $this->assertSame('Guzzle\\Plugin\\Oauth\\OauthPlugin', get_class($listener));
         $this->assertSame('onRequestBeforeSend', $method);

@@ -13,7 +13,7 @@
     "require-dev": {
         "phpunit/phpunit": "~3.7.0",
         "mockery/mockery": "dev-master",
-        "satooshi/php-coveralls": "dev-master",
+        "satooshi/php-coveralls": "dev-master#c95c07e971e4b687718f54fc3447a260fb989e16",
         "squizlabs/php_codesniffer": "~1.4.5",
         "seld/jsonlint": "~1.1.1"
     },

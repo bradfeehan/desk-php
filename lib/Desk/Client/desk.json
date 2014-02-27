@@ -783,6 +783,225 @@
 
 
 
+        "CreateArticle": {
+            "extends": "create",
+            "summary": "Create a new article",
+            "uri": "articles",
+            "responseClass": "ArticleModel",
+            "parameters": {
+                "subject": {"extends": "ArticleModel.subject"},
+                "in_support_center": {"extends": "ArticleModel.in_support_center"},
+                "position": {"extends": "ArticleModel.position"},
+                "quickcode": {"extends": "ArticleModel.quickcode"},
+                "keywords": {"extends": "ArticleModel.keywords"},
+                "publish_at": {"extends": "ArticleModel.publish_at.input"},
+                "created_at": {"extends": "ArticleModel.created_at.input"},
+                "updated_at": {"extends": "ArticleModel.updated_at.input"},
+                "body": {"extends": "ArticleModel.body"},
+                "body_email": {"extends": "ArticleModel.body_email"},
+                "body_email_auto": {"extends": "ArticleModel.body_email_auto"},
+                "body_chat": {"extends": "ArticleModel.body_chat"},
+                "body_chat_auto": {"extends": "ArticleModel.body_chat_auto"},
+                "body_web_callback": {"extends": "ArticleModel.body_web_callback"},
+                "body_web_callback_auto": {"extends": "ArticleModel.body_web_callback_auto"},
+                "body_twitter": {"extends": "ArticleModel.body_twitter"},
+                "body_twitter_auto": {"extends": "ArticleModel.body_twitter_auto"},
+                "body_qna": {"extends": "ArticleModel.body_qna"},
+                "body_qna_auto": {"extends": "ArticleModel.body_qna_auto"},
+                "body_phone": {"extends": "ArticleModel.body_phone"},
+                "body_phone_auto": {"extends": "ArticleModel.body_phone_auto"},
+                "body_facebook": {"extends": "ArticleModel.body_facebook"},
+                "body_facebook_auto": {"extends": "ArticleModel.body_facebook_auto"},
+                "internal_notes": {"extends": "ArticleModel.internal_notes"},
+                "topic_id": {
+                    "description": "The topic to which the new article is assigned",
+                    "required": true,
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "topic",
+                    "data": {
+                        "class": "topic",
+                        "href": "/api/v2/topics/{value}"
+                    }
+                }
+            }
+        },
+        "CreateCase": {
+            "extends": "create",
+            "summary": "Create a new case",
+            "uri": "cases",
+            "responseClass": "CaseModel",
+            "parameters": {
+                "external_id": {"extends": "CaseModel.external_id"},
+                "subject": {"extends": "CaseModel.subject"},
+                "priority": {"extends": "CaseModel.priority"},
+                "description": {"extends": "CaseModel.description"},
+                "status": {"extends": "CaseModel.status"},
+                "type": {"extends": "CaseModel.type", "required": true},
+                "labels": {"extends": "CaseModel.labels"},
+                "custom_fields": {"extends": "CaseModel.custom_fields"},
+                "created_at": {"extends": "CaseModel.created_at.input"},
+                "updated_at": {"extends": "CaseModel.updated_at.input"},
+                "active_at": {"extends": "CaseModel.active_at.input"},
+                "received_at": {"extends": "CaseModel.received_at.input"},
+                "locked_until": {"extends": "CaseModel.locked_until.input"},
+                "customer_id": {
+                    "description": "The customer that submitted this case",
+                    "required": true,
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "customer",
+                    "data": {
+                        "class": "customer",
+                        "href": "/api/v2/customers/{value}"
+                    }
+                },
+                "assigned_user_id": {
+                    "description": "The user assigned to this case",
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "assigned_user",
+                    "data": {
+                        "class": "user",
+                        "href": "/api/v2/users/{value}"
+                    }
+                },
+                "assigned_group_id": {
+                    "description": "The group assigned to this case",
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "assigned_group",
+                    "data": {
+                        "class": "group",
+                        "href": "/api/v2/groups/{value}"
+                    }
+                },
+                "locked_by_id": {
+                    "description": "User currently working on this case",
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "locked_by",
+                    "data": {
+                        "class": "user",
+                        "href": "/api/v2/users/{value}"
+                    }
+                },
+                "entered_by_id": {
+                    "description": "The support agent that entered the first phone interaction",
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "entered_by",
+                    "data": {
+                        "class": "user",
+                        "href": "/api/v2/users/{value}"
+                    }
+                },
+                "message": {
+                    "type": "object",
+                    "properties": {
+                        "direction": {"extends": "CaseMessageModel.direction", "required": true},
+                        "status": {"extends": "CaseMessageModel.status"},
+                        "body": {"extends": "CaseMessageModel.body"},
+                        "subject": {"extends": "CaseMessageModel.subject"},
+                        "from": {"extends": "CaseMessageModel.from"},
+                        "to": {"extends": "CaseMessageModel.to"},
+                        "cc": {"extends": "CaseMessageModel.cc"},
+                        "bcc": {"extends": "CaseMessageModel.bcc"},
+                        "created_at": {"extends": "CaseMessageModel.created_at.input"},
+                        "entered_at": {"extends": "CaseMessageModel.entered_at.input"}
+                    },
+                    "location": "json"
+                }
+            }
+        },
+        "CreateCompany": {
+            "extends": "create",
+            "summary": "Create a new company",
+            "uri": "companies",
+            "responseClass": "CompanyModel",
+            "parameters": {
+                "name": {"extends": "CompanyModel.name", "required": true},
+                "domains": {"extends": "CompanyModel.domains"},
+                "created_at": {"extends": "CompanyModel.created_at.input"},
+                "updated_at": {"extends": "CompanyModel.updated_at.input"},
+                "custom_fields": {"extends": "CompanyModel.custom_fields"}
+            }
+        },
+        "CreateCustomer": {
+            "extends": "create",
+            "summary": "Create a new customer",
+            "uri": "customers",
+            "responseClass": "CustomerModel",
+            "parameters": {
+                "first_name": {"extends": "CustomerModel.first_name"},
+                "last_name": {"extends": "CustomerModel.last_name"},
+                "company": {"extends": "CustomerModel.company"},
+                "title": {"extends": "CustomerModel.title"},
+                "external_id": {"extends": "CustomerModel.external_id"},
+                "background": {"extends": "CustomerModel.background"},
+                "language": {"extends": "CustomerModel.language"},
+                "locked_until": {"extends": "CustomerModel.locked_until"},
+                "created_at": {"extends": "CustomerModel.created_at"},
+                "updated_at": {"extends": "CustomerModel.updated_at"},
+                "emails": {"extends": "CustomerModel.emails"},
+                "phone_numbers": {"extends": "CustomerModel.phone_numbers"},
+                "addresses": {"extends": "CustomerModel.addresses"},
+                "custom_fields": {"extends": "CustomerModel.custom_fields"},
+                "company_id": {
+                    "description": "ID of company to assign to this customer",
+                    "type": "integer",
+                    "location": "links",
+                    "sentAs": "company",
+                    "data": {
+                        "class": "company",
+                        "href": "/api/v2/companies/{value}"
+                    }
+                }
+            }
+        },
+        "CreateIntegrationUrl": {
+            "extends": "create",
+            "summary": "Create a new integration URL",
+            "uri": "integration_urls",
+            "responseClass": "IntegrationUrlModel",
+            "parameters": {
+                "name": {"extends": "IntegrationUrlModel.name"},
+                "description": {"extends": "IntegrationUrlModel.description"},
+                "enabled": {"extends": "IntegrationUrlModel.enabled"},
+                "markup": {"extends": "IntegrationUrlModel.markup"}
+            }
+        },
+        "CreateMacro": {
+            "extends": "create",
+            "summary": "Create a new macro",
+            "uri": "macros",
+            "responseClass": "MacroModel",
+            "parameters": {
+                "name": {"extends": "MacroModel.name"},
+                "description": {"extends": "MacroModel.description"},
+                "enabled": {"extends": "MacroModel.enabled"},
+                "folders": {"extends": "MacroModel.folders"}
+            }
+        },
+        "CreateTopic": {
+            "extends": "create",
+            "summary": "Create a new topic",
+            "uri": "topics",
+            "responseClass": "TopicModel",
+            "parameters": {
+                "name": {"extends": "TopicModel.name"},
+                "description": {"extends": "TopicModel.description"},
+                "position": {"extends": "TopicModel.position"},
+                "allow_questions": {"extends": "TopicModel.allow_questions"},
+                "in_support_center": {"extends": "TopicModel.in_support_center"},
+                "created_at": {"extends": "TopicModel.created_at"},
+                "updated_at": {"extends": "TopicModel.updated_at"}
+            }
+        },
+
+
+
+
         "DeleteArticle": {
             "extends": "delete.main",
             "summary": "Delete a single article by ID",
@@ -904,11 +1123,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "ArticleModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -951,11 +1170,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -998,11 +1217,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CompanyModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1045,11 +1264,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CustomFieldModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1092,11 +1311,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CustomerModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1139,11 +1358,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "FilterModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1186,11 +1405,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "GroupModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1233,11 +1452,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "IntegrationUrlModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1280,11 +1499,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "MacroModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1327,11 +1546,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "TopicModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1374,11 +1593,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "UserModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1425,11 +1644,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "ArticleTranslationModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1472,11 +1691,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseReplyModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1519,11 +1738,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseNoteModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1566,11 +1785,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CustomerModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1613,11 +1832,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1660,11 +1879,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1707,11 +1926,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "FilterModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1754,11 +1973,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "UserModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1801,11 +2020,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "MacroActionModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1848,11 +2067,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "ArticleModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1895,11 +2114,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "TopicTranslationModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1946,11 +2165,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "ArticleModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -1993,11 +2212,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CaseModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -2040,11 +2259,11 @@
             "extends": "page",
             "properties": {
                 "entries": {
-                    "location": "embedded",
                     "type": "array",
                     "items": {
                         "extends": "CustomerModel"
-                    }
+                    },
+                    "location": "embedded"
                 },
                 "self": {
                     "location": "links",
@@ -2097,7 +2316,9 @@
         "ArticleModel.subject": {
             "extends": "parameter",
             "description": "The subject of the article",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 2
         },
         "ArticleModel.in_support_center": {
             "extends": "parameter",
@@ -2123,12 +2344,24 @@
             "extends": "date.output",
             "description": "Date the article is to be published"
         },
+        "ArticleModel.publish_at.input": {
+            "extends": "date.input",
+            "description": "Date the article is to be published"
+        },
         "ArticleModel.created_at.output": {
             "extends": "date.output",
             "description": "Date the article was created"
         },
+        "ArticleModel.created_at.input": {
+            "extends": "date.input",
+            "description": "Date the article was created"
+        },
         "ArticleModel.updated_at.output": {
             "extends": "date.output",
+            "description": "Date the article was updated"
+        },
+        "ArticleModel.updated_at.input": {
+            "extends": "date.input",
             "description": "Date the article was updated"
         },
         "ArticleModel.body": {
@@ -2290,24 +2523,44 @@
             "extends": "custom_fields",
             "description": "Hash of values for custom fields"
         },
-        "CaseModel.created_at": {
+        "CaseModel.created_at.output": {
             "extends": "date.output",
             "description": "Time of creation"
         },
-        "CaseModel.updated_at": {
+        "CaseModel.created_at.input": {
+            "extends": "date.input",
+            "description": "Time of creation"
+        },
+        "CaseModel.updated_at.output": {
             "extends": "date.output",
             "description": "Time last updated"
         },
-        "CaseModel.active_at": {
+        "CaseModel.updated_at.input": {
+            "extends": "date.input",
+            "description": "Time last updated"
+        },
+        "CaseModel.active_at.output": {
             "extends": "date.output",
             "description": "Time the case was last active"
         },
-        "CaseModel.received_at": {
+        "CaseModel.active_at.input": {
+            "extends": "date.input",
+            "description": "Time the case was last active"
+        },
+        "CaseModel.received_at.output": {
             "extends": "date.output",
             "description": "Time the most recent message was received"
         },
-        "CaseModel.locked_until": {
+        "CaseModel.received_at.input": {
+            "extends": "date.input",
+            "description": "Time the most recent message was received"
+        },
+        "CaseModel.locked_until.output": {
             "extends": "date.output",
+            "description": "Time at which the lock on this case will expire"
+        },
+        "CaseModel.locked_until.input": {
+            "extends": "date.input",
             "description": "Time at which the lock on this case will expire"
         },
 
@@ -2323,8 +2576,12 @@
             "description": "Body of the message",
             "type": "string"
         },
-        "CaseMessageModel.created_at": {
+        "CaseMessageModel.created_at.output": {
             "extends": "date.output",
+            "description": "Time of creation"
+        },
+        "CaseMessageModel.created_at.input": {
+            "extends": "date.input",
             "description": "Time of creation"
         },
         "CaseMessageModel.updated_at": {
@@ -2463,14 +2720,25 @@
         "CompanyModel.domains": {
             "extends": "parameter",
             "description": "Array of top-level domain names for the company",
-            "type": "string"
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         },
-        "CompanyModel.created_at": {
+        "CompanyModel.created_at.output": {
             "extends": "date.output",
             "description": "Date the company was created"
         },
-        "CompanyModel.updated_at": {
+        "CompanyModel.created_at.input": {
+            "extends": "date.input",
+            "description": "Date the company was created"
+        },
+        "CompanyModel.updated_at.output": {
             "extends": "date.output",
+            "description": "Date the company was updated"
+        },
+        "CompanyModel.updated_at.input": {
+            "extends": "date.input",
             "description": "Date the company was updated"
         },
         "CompanyModel.custom_fields": {
@@ -2664,7 +2932,9 @@
         "IntegrationUrlModel.name": {
             "extends": "parameter",
             "description": "Name of the integration URL",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 2
         },
         "IntegrationUrlModel.description": {
             "extends": "parameter",
@@ -2679,7 +2949,9 @@
         "IntegrationUrlModel.markup": {
             "extends": "parameter",
             "description": "Liquid code to parse which creates the rendered URL",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 1
         },
         "IntegrationUrlModel.rendered": {
             "extends": "parameter",
@@ -2699,7 +2971,9 @@
         "MacroModel.name": {
             "extends": "parameter",
             "description": "Name of the macro",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 1
         },
         "MacroModel.description": {
             "extends": "parameter",
@@ -2754,7 +3028,9 @@
         "TopicModel.name": {
             "extends": "parameter",
             "description": "Subject of the topic in the default locale",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 1
         },
         "TopicModel.description": {
             "extends": "parameter",
@@ -2923,11 +3199,11 @@
                 "type": {"extends": "CaseModel.type"},
                 "labels": {"extends": "CaseModel.labels"},
                 "custom_fields": {"extends": "CaseModel.custom_fields"},
-                "created_at": {"extends": "CaseModel.created_at"},
-                "updated_at": {"extends": "CaseModel.updated_at"},
-                "active_at": {"extends": "CaseModel.active_at"},
-                "received_at": {"extends": "CaseModel.received_at"},
-                "locked_until": {"extends": "CaseModel.locked_until"},
+                "created_at": {"extends": "CaseModel.created_at.output"},
+                "updated_at": {"extends": "CaseModel.updated_at.output"},
+                "active_at": {"extends": "CaseModel.active_at.output"},
+                "received_at": {"extends": "CaseModel.received_at.output"},
+                "locked_until": {"extends": "CaseModel.locked_until.output"},
                 "self": {
                     "location": "links",
                     "data": {
@@ -2991,7 +3267,7 @@
             "properties": {
                 "direction": {"extends": "CaseMessageModel.direction"},
                 "body": {"extends": "CaseMessageModel.body"},
-                "created_at": {"extends": "CaseMessageModel.created_at"},
+                "created_at": {"extends": "CaseMessageModel.created_at.output"},
                 "updated_at": {"extends": "CaseMessageModel.updated_at"},
                 "status": {"extends": "CaseMessageModel.status"},
                 "subject": {"extends": "CaseMessageModel.subject"},
@@ -3090,8 +3366,8 @@
             "properties": {
                 "name": {"extends": "CompanyModel.name"},
                 "domains": {"extends": "CompanyModel.domains"},
-                "created_at": {"extends": "CompanyModel.created_at"},
-                "updated_at": {"extends": "CompanyModel.updated_at"},
+                "created_at": {"extends": "CompanyModel.created_at.output"},
+                "updated_at": {"extends": "CompanyModel.updated_at.output"},
                 "custom_fields": {"extends": "CompanyModel.custom_fields"},
                 "self": {
                     "location": "links",
@@ -3334,6 +3610,13 @@
                     "data": {
                         "operation": "ListTopicArticles",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles$#"
+                    }
+                },
+                "translations": {
+                    "location": "links",
+                    "data": {
+                        "operation": "ListTopicTranslations",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations$#"
                     }
                 }
             }

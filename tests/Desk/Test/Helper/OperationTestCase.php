@@ -3,6 +3,7 @@
 namespace Desk\Test\Helper;
 
 use Desk\Test\Helper\SystemTestCase;
+use Guzzle\Http\Message\EntityEnclosingRequestInterface;
 
 /**
  * @coversNothing
@@ -52,8 +53,8 @@ abstract class OperationTestCase extends SystemTestCase
             $this->assertRegExp($assertions['query'], (string) $request->getQuery());
         }
 
-        if (isset($assertions['postFields'])) {
-            $this->assertRegExp($assertions['postFields'], (string) $request->getPostFields());
+        if (isset($assertions['body']) && ($request instanceof EntityEnclosingRequestInterface)) {
+            $this->assertRegExp($assertions['body'], (string) $request->getBody());
         }
     }
 

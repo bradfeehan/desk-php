@@ -3,6 +3,7 @@
 use Desk\Test\Helper\TestCase;
 use Guzzle\Service\Builder\ServiceBuilder;
 
+ini_set('memory_limit', '256M');
 error_reporting(-1);
 
 $ds = DIRECTORY_SEPARATOR;

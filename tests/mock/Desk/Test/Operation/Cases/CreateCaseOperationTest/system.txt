@@ -1,0 +1,61 @@
+HTTP/1.1 201 Created
+Accept-Ranges: bytes
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+Location: http://mock.localhost/cases/1
+Status: 201 Created
+Vary: X-AppVersion
+X-AppVersion: 781247eace915fac36f43a20c87f25019542d2d5.0
+X-Frame-Options: SAMEORIGIN
+X-Rate-Limit-Limit: 60
+X-Rate-Limit-Remaining: 59
+X-Rate-Limit-Reset: 53
+Content-Length: 1117
+Connection: keep-alive
+
+{
+    "external_id": null,
+    "subject": "Creating a case via the API",
+    "priority": 4,
+    "locked_until": null,
+    "description": null,
+    "status": "open",
+    "type": "email",
+    "labels": [
+        "Spam",
+        "Ignore"
+    ],
+    "created_at": "2013-07-11T19:28:25Z",
+    "updated_at": "2013-07-11T19:28:25Z",
+    "active_at": null,
+    "received_at": "2012-05-02T21:38:48Z",
+    "custom_fields": {
+        "level": "vip"
+    },
+    "_links": {
+        "self": {
+            "href": "/api/v2/cases/1",
+            "class": "case"
+        },
+        "message": {
+            "href": "/api/v2/cases/1/message",
+            "class": "message"
+        },
+        "customer": {
+            "href": "/api/v2/customers/1",
+            "class": "customer"
+        },
+        "assigned_user": {
+            "href": "/api/v2/users/1",
+            "class": "user"
+        },
+        "assigned_group": {
+            "href": "/api/v2/groups/1",
+            "class": "group"
+        },
+        "locked_by": {
+            "href": "/api/v2/users/1",
+            "class": "user"
+        }
+    }
+}

@@ -55,6 +55,7 @@ class ShowTopicOperationTest extends ShowOperationTestCase
     {
         return array(
             array('articles', 'ListTopicArticles', array('topic_id' => 1)),
+            array('translations', 'ListTopicTranslations', array('topic_id' => 1)),
         );
     }
 }

@@ -20,7 +20,6 @@ class Date
      */
     public static function stringToObject($date)
     {
-        $format = DateTime::ISO8601;
         $zone = new DateTimeZone('UTC');
         return DateTime::createFromFormat(DateTime::ISO8601, $date, $zone);
     }

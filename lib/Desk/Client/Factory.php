@@ -10,6 +10,7 @@ use Desk\Command\PreValidator;
 use Desk\Exception\InvalidArgumentException;
 use Desk\Relationship\Plugin as RelationshipPlugin;
 use Guzzle\Common\Collection;
+use Guzzle\Common\ToArrayInterface;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Description\ServiceDescriptionLoader as GuzzleServiceDescriptionLoader;
 
@@ -103,6 +104,10 @@ class Factory implements FactoryInterface
                 // Otherwise, use OAuth if we have enough data
                 $config['authentication'] = 'oauth';
             }
+        }
+
+        if ($config instanceof ToArrayInterface) {
+            $config = $config->toArray();
         }
 
         return Collection::fromConfig($config, $default, $required);

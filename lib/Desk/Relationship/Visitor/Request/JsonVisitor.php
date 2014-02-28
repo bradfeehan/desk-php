@@ -41,14 +41,14 @@ class JsonVisitor extends DecoratedRequestVisitor
     /**
      * Stores parameters for visited links for a given command object
      *
-     * @var SplObjectStorage
+     * @var \SplObjectStorage
      */
     private $params;
 
     /**
      * Stores values for visited links for a given command object
      *
-     * @var SplObjectStorage
+     * @var \SplObjectStorage
      */
     private $values;
 
@@ -91,8 +91,8 @@ class JsonVisitor extends DecoratedRequestVisitor
      * Prepares and stores the data describing a link parameter, to be
      * later used by getLinksParameter() to describe all the links.
      *
-     * @param Guzzle\Service\Command\CommandInterface $command
-     * @param Guzzle\Service\Description\Parameter    $parameter
+     * @param \Guzzle\Service\Command\CommandInterface $command
+     * @param \Guzzle\Service\Description\Parameter    $parameter
      */
     public function addLinkParam(CommandInterface $command, Parameter $parameter)
     {
@@ -133,8 +133,8 @@ class JsonVisitor extends DecoratedRequestVisitor
      * Parameter describing the link, and the value provided by the
      * user.
      *
-     * @param Guzzle\Service\Command\CommandInterface $command
-     * @param Guzzle\Service\Description\Parameter    $parameter
+     * @param \Guzzle\Service\Command\CommandInterface $command
+     * @param \Guzzle\Service\Description\Parameter    $parameter
      * @param mixed                                   $value
      */
     public function addLinkValue(CommandInterface $command, Parameter $parameter, $value)
@@ -163,9 +163,9 @@ class JsonVisitor extends DecoratedRequestVisitor
      * Constructs a new Guzzle Parameter object, which will have all of
      * the visited links parameters as its properties.
      *
-     * @param Guzzle\Service\Command\CommandInterface $command
+     * @param \Guzzle\Service\Command\CommandInterface $command
      *
-     * @return Guzzle\Service\Description\Parameter
+     * @return \Guzzle\Service\Description\Parameter
      */
     public function getLinksParameter(CommandInterface $command)
     {
@@ -193,7 +193,7 @@ class JsonVisitor extends DecoratedRequestVisitor
      * clearing the list of visited link values. If there are no link
      * values stored, NULL is returned.
      *
-     * @param Guzzle\Service\Command\CommandInterface $command
+     * @param \Guzzle\Service\Command\CommandInterface $command
      *
      * @return array
      */

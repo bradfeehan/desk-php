@@ -31,7 +31,7 @@ class ResponseParser extends OperationResponseParser
      * its parent class' instance, otherwise one will be inaccessible
      * (if the other one is instantiated first).
      *
-     * @var Desk\Relationship\ResponseParser
+     * @var \Desk\Relationship\ResponseParser
      */
     private static $relationshipInstance;
 
@@ -43,7 +43,7 @@ class ResponseParser extends OperationResponseParser
      * because otherwise an instance of this child class will be
      * retrieved by a call to the parent method (which is undesirable).
      *
-     * @return Desk\Relationship\ResponseParser
+     * @return \Desk\Relationship\ResponseParser
      */
     public static function getInstance()
     {
@@ -101,7 +101,7 @@ class ResponseParser extends OperationResponseParser
     /**
      * Determines whether a command's response type is a model
      *
-     * @param Guzzle\Service\Command\AbstractCommand $command
+     * @param \Guzzle\Service\Command\AbstractCommand $command
      *
      * @return boolean
      */

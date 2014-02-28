@@ -48,7 +48,7 @@ class ServiceDescriptionLoader extends GuzzleServiceDescriptionLoader
      * @param array $config
      * @param array $options
      *
-     * @return Guzzle\Service\Description\ServiceDescription
+     * @return \Guzzle\Service\Description\ServiceDescription
      */
     public function parentBuild($config, array $options)
     {

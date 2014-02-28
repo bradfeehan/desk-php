@@ -49,7 +49,7 @@ class Model extends GuzzleModel
      *
      * @param string $name The name of the related resource to retrieve
      *
-     * @return Guzzle\Service\Command\OperationCommand
+     * @return \Guzzle\Service\Command\OperationCommand
      */
     public function getLink($name)
     {
@@ -79,7 +79,7 @@ class Model extends GuzzleModel
      *
      * @param string $name The name of the related resource to retrieve
      *
-     * @return Guzzle\Service\Resource\Model
+     * @return \Guzzle\Service\Resource\Model
      */
     public function getEmbedded($name)
     {
@@ -120,7 +120,7 @@ class Model extends GuzzleModel
      *
      * @param string $name The name of the related resource to retrieve
      *
-     * @return Guzzle\Service\Resource\Model
+     * @return \Guzzle\Service\Resource\Model
      */
     public function getResource($name)
     {

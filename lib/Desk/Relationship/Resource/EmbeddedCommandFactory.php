@@ -30,7 +30,7 @@ class EmbeddedCommandFactory implements EmbeddedCommandFactoryInterface
     /**
      * Creates an EmbeddedCommand instance
      *
-     * @return Desk\Relationship\Resource\EmbeddedCommand
+     * @return \Desk\Relationship\Resource\EmbeddedCommand
      */
     public function newCommand()
     {
@@ -40,10 +40,10 @@ class EmbeddedCommandFactory implements EmbeddedCommandFactoryInterface
     /**
      * Prepares an EmbeddedResponse from the original response and data
      *
-     * @param Guzzle\Http\Message\Response $originalResponse
-     * @param array                        $data
+     * @param \Guzzle\Http\Message\Response $originalResponse
+     * @param array                         $data
      *
-     * @return Desk\Relationship\Resource\EmbeddedResponse
+     * @return \Desk\Relationship\Resource\EmbeddedResponse
      */
     public function createResponse(Response $originalResponse, array $data)
     {
@@ -62,7 +62,7 @@ class EmbeddedCommandFactory implements EmbeddedCommandFactoryInterface
     /**
      * Creates an EmbeddedResponse instance
      *
-     * @return Desk\Relationship\Resource\EmbeddedResponse
+     * @return \Desk\Relationship\Resource\EmbeddedResponse
      */
     public function newResponse($statusCode, $headers = null, $body = null)
     {

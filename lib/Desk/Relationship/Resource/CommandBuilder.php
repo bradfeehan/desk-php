@@ -32,7 +32,7 @@ class CommandBuilder implements CommandBuilderInterface
      *
      * @param array $data The link data from the API response
      *
-     * @throws Desk\Relationship\Exception\InvalidLinkFormatException
+     * @throws \Desk\Relationship\Exception\InvalidLinkFormatException
      */
     public function validateLink(array $data)
     {
@@ -44,9 +44,9 @@ class CommandBuilder implements CommandBuilderInterface
     /**
      * Validates the structure of a link (from the service description)
      *
-     * @param Guzzle\Service\Description\Parameter $structure
+     * @param \Guzzle\Service\Description\Parameter $structure
      *
-     * @throws Desk\Exception\UnexpectedValueException If it's invalid
+     * @throws \Desk\Exception\UnexpectedValueException If it's invalid
      */
     public function validateLinkStructure(Parameter $structure)
     {
@@ -70,7 +70,7 @@ class CommandBuilder implements CommandBuilderInterface
      * @param string $pattern
      *
      * @return array
-     * @throws Desk\Exception\UnexpectedValueException If no matches
+     * @throws \Desk\Exception\UnexpectedValueException If no matches
      * are found or there's an error with the regex
      */
     public function parseHref($href, $pattern)
@@ -119,7 +119,7 @@ class CommandBuilder implements CommandBuilderInterface
      *
      * @param string $query
      *
-     * @return Guzzle\Http\QueryString
+     * @return \Guzzle\Http\QueryString
      */
     public function parseQueryString($query)
     {

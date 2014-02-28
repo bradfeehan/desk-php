@@ -28,7 +28,7 @@ class PreValidator implements EventSubscriberInterface
      * array (so $foo becomes array($foo), now satisfying the array
      * type requirement).
      *
-     * @param Guzzle\Common\Event Event object, containing 'command'
+     * @param \Guzzle\Common\Event Event object, containing 'command'
      */
     public function castPrimitivesToArrays(Event $event)
     {

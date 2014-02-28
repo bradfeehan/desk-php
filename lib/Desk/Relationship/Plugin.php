@@ -22,14 +22,14 @@ class Plugin implements EventSubscriberInterface
     /**
      * The ResponseParser to set on newly created commands
      *
-     * @var Guzzle\Service\Command\ResponseParserInterface
+     * @var \Guzzle\Service\Command\ResponseParserInterface
      */
     private $parser;
 
     /**
      * The ResponseParser to set on newly created commands
      *
-     * @var Guzzle\Service\Command\RequestSerializerInterface
+     * @var \Guzzle\Service\Command\RequestSerializerInterface
      */
     private $serializer;
 
@@ -46,8 +46,8 @@ class Plugin implements EventSubscriberInterface
     /**
      * Allow overriding the ResponseParser that gets set on commands
      *
-     * @param Guzzle\Service\Command\ResponseParserInterface $parser
-     * @param Guzzle\Service\Command\RequestSerializerInterface $serializer
+     * @param \Guzzle\Service\Command\ResponseParserInterface $parser
+     * @param \Guzzle\Service\Command\RequestSerializerInterface $serializer
      */
     public function __construct(ResponseParserInterface $parser = null, RequestSerializerInterface $serializer = null)
     {
@@ -58,7 +58,7 @@ class Plugin implements EventSubscriberInterface
     /**
      * Gets the response parser to set on commands
      *
-     * @return Guzzle\Service\Command\ResponseParserInterface
+     * @return \Guzzle\Service\Command\ResponseParserInterface
      */
     public function getResponseParser()
     {
@@ -76,7 +76,7 @@ class Plugin implements EventSubscriberInterface
     /**
      * Gets the request serializer to set on commands
      *
-     * @return Guzzle\Service\Command\RequestSerializerInterface
+     * @return \Guzzle\Service\Command\RequestSerializerInterface
      */
     public function getRequestSerializer()
     {
@@ -98,7 +98,7 @@ class Plugin implements EventSubscriberInterface
      *     - set up the new command to use the relationship-aware
      *       response parser
      *
-     * @param Guzzle\Common\Event $event Event data, including:
+     * @param \Guzzle\Common\Event $event Event data, including:
      *     - client:  The client that created the command
      *     - command: The newly-created command
      */

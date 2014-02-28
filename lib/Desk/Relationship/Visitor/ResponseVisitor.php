@@ -12,7 +12,7 @@ abstract class ResponseVisitor extends AbstractResponseVisitor
     /**
      * Stores data for commands in the process of being parsed
      *
-     * @var SplObjectStorage
+     * @var \SplObjectStorage
      */
     private $data;
 
@@ -23,11 +23,11 @@ abstract class ResponseVisitor extends AbstractResponseVisitor
      * This can be later retrieved using $this->get($command, $key),
      * where $command and $key are the same as passed to this function.
      *
-     * @param Guzzle\Service\Command\CommandInterface $command
-     * @param string                                  $key
-     * @param mixed                                   $value
+     * @param \Guzzle\Service\Command\CommandInterface $command
+     * @param string                                   $key
+     * @param mixed                                    $value
      *
-     * @return Desk\Relationship\Visitor\ResponseVisitor static
+     * @return \Desk\Relationship\Visitor\ResponseVisitor static
      * @chainable
      */
     public function set(CommandInterface $command, $key, $value)
@@ -51,8 +51,8 @@ abstract class ResponseVisitor extends AbstractResponseVisitor
     /**
      * Retrieves a value for a particular command and key
      *
-     * @param Guzzle\Service\Command\CommandInterface $command
-     * @param string                                  $key
+     * @param \Guzzle\Service\Command\CommandInterface $command
+     * @param string                                   $key
      *
      * @return mixed
      */

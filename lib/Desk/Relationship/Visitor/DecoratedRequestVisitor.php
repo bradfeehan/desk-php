@@ -19,7 +19,7 @@ abstract class DecoratedRequestVisitor extends Decorator implements RequestVisit
     /**
      * Overridden to provide type-checking of the decorated component
      *
-     * @param Guzzle\Service\Command\LocationVisitor\Request\RequestVisitorInterface $visitor
+     * @param \Guzzle\Service\Command\LocationVisitor\Request\RequestVisitorInterface $visitor
      */
     public function __construct(RequestVisitorInterface $visitor)
     {

@@ -8,9 +8,9 @@ interface FactoryInterface
     /**
      * Factory method to create a new client
      *
-     * @param array|Collection $config Configuration options
+     * @param array|\Guzzle\Common\Collection $config Configuration options
      *
-     * @return Desk\Client
+     * @return \Desk\Client
      */
     public function factory($config = array());
 }

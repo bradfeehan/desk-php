@@ -16,7 +16,7 @@ class Date
      *
      * @param string $date A date string from the Desk.com API
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public static function stringToObject($date)
     {
@@ -28,7 +28,7 @@ class Date
     /**
      * Converts a DateTime object to a string in the correct format
      *
-     * @param DateTime $date A DateTime object
+     * @param \DateTime $date A DateTime object
      *
      * @return string
      */
@@ -44,7 +44,7 @@ class Date
     /**
      * Converts a DateTime object to a unix timestamp
      *
-     * @param DateTime $date A DateTime object
+     * @param \DateTime $date A DateTime object
      *
      * @return int
      */

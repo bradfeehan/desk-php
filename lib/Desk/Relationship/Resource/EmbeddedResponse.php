@@ -12,7 +12,7 @@ class EmbeddedResponse extends Response
      *
      * @param string $reasonPhrase
      *
-     * @return Desk\Relationship\Resource\EmbeddedResponse
+     * @return \Desk\Relationship\Resource\EmbeddedResponse
      */
     public function setReasonPhrase($reasonPhrase)
     {

@@ -29,7 +29,7 @@ class EmbeddedVisitor extends ResponseVisitor
     /**
      * Builds models from embedded resources
      *
-     * @var Desk\Relationship\Resource\ModelBuilderInterface
+     * @var \Desk\Relationship\Resource\ModelBuilderInterface
      */
     private $builder;
 
@@ -37,7 +37,7 @@ class EmbeddedVisitor extends ResponseVisitor
     /**
      * Accepts a ModelBuilderInterface object, used to build models
      *
-     * @param Desk\Relationship\Resource\ModelBuilderInterface $builder
+     * @param \Desk\Relationship\Resource\ModelBuilderInterface $builder
      */
     public function __construct(ModelBuilderInterface $builder = null)
     {

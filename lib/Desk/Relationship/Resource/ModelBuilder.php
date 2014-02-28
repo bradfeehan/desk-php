@@ -16,14 +16,14 @@ class ModelBuilder implements ModelBuilderInterface
     /**
      * The VisitorFlyweight which contains LocationVisitors
      *
-     * @var Guzzle\Service\Command\LocationVisitor\VisitorFlyweight
+     * @var \Guzzle\Service\Command\LocationVisitor\VisitorFlyweight
      */
     protected $visitors;
 
     /**
      * The EmbeddedCommandFactory which builds EmbeddedCommands
      *
-     * @var Desk\Relationship\Resource\EmbeddedCommandFactoryInterface
+     * @var \Desk\Relationship\Resource\EmbeddedCommandFactoryInterface
      */
     protected $factory;
 
@@ -31,8 +31,8 @@ class ModelBuilder implements ModelBuilderInterface
     /**
      * Accepts a VisitorFlyweight for LocationVisitors
      *
-     * @param Desk\Relationship\Resource\EmbeddedCommandFactoryInterface $factory
-     * @param Guzzle\Service\Command\LocationVisitor\VisitorFlyweight    $visitors
+     * @param \Desk\Relationship\Resource\EmbeddedCommandFactoryInterface $factory
+     * @param \Guzzle\Service\Command\LocationVisitor\VisitorFlyweight    $visitors
      */
     public function __construct(EmbeddedCommandFactoryInterface $factory = null, VisitorFlyweight $visitors = null)
     {
@@ -63,9 +63,9 @@ class ModelBuilder implements ModelBuilderInterface
     /**
      * Creates an array of models from an embedded resource
      *
-     * @param Guzzle\Service\Command\CommandInterface $command
-     * @param Guzzle\Service\Description\Parameter    $structure
-     * @param array                                   $data
+     * @param \Guzzle\Service\Command\CommandInterface $command
+     * @param \Guzzle\Service\Description\Parameter    $structure
+     * @param array                                    $data
      *
      * @return array
      */
@@ -84,9 +84,9 @@ class ModelBuilder implements ModelBuilderInterface
     /**
      * Processes model data according to a parameter schema
      *
-     * @param Desk\Relationship\Resource\EmbeddedCommand $command
-     * @param Guzzle\Service\Description\Parameter       $schema
-     * @param array                                      $data
+     * @param \Desk\Relationship\Resource\EmbeddedCommand $command
+     * @param \Guzzle\Service\Description\Parameter       $schema
+     * @param array                                       $data
      *
      * @return array
      */

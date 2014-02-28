@@ -11,7 +11,7 @@ class Client extends \Guzzle\Service\Client
     /**
      * The client factory that creates instances of this class
      *
-     * @var Desk\Client\FactoryInterface
+     * @var \Desk\Client\FactoryInterface
      */
     private static $factory;
 
@@ -19,7 +19,7 @@ class Client extends \Guzzle\Service\Client
     /**
      * Gets the client factory that creates instances of this class
      *
-     * @return Desk\Client\FactoryInterface
+     * @return \Desk\Client\FactoryInterface
      */
     public static function getFactory()
     {
@@ -36,7 +36,7 @@ class Client extends \Guzzle\Service\Client
      * If called with no argument, this will reset the client factory
      * to an instance of the default Desk\Client\Factory.
      *
-     * @param Desk\Client\FactoryInterface $factory
+     * @param \Desk\Client\FactoryInterface $factory
      */
     public static function setFactory(FactoryInterface $factory = null)
     {
@@ -62,9 +62,9 @@ class Client extends \Guzzle\Service\Client
      *       - token:           OAuth single access token
      *       - token_secret:    OAuth single access token secret
      *
-     * @param array|Collection $config Configuration options
+     * @param array|\Guzzle\Common\Collection $config Configuration options
      *
-     * @return Desk\Client
+     * @return \Desk\Client
      */
     public static function factory($config = array())
     {
@@ -89,7 +89,7 @@ class Client extends \Guzzle\Service\Client
      * @param string $user     The basic auth username
      * @param string $password The basic auth password
      *
-     * @return Desk\Client
+     * @return \Desk\Client
      * @chainable
      */
     public function setAuth($user, $password)
@@ -103,7 +103,7 @@ class Client extends \Guzzle\Service\Client
      * @param string $header The name of the header
      * @param string $value  The value to set the header to
      *
-     * @return Desk\Client
+     * @return \Desk\Client
      * @chainable
      */
     public function addDefaultHeader($header, $value)

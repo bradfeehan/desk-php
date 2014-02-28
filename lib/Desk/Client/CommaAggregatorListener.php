@@ -37,7 +37,7 @@ class CommaAggregatorListener implements EventSubscriberInterface
      *
      * Listens to the 'client.create_request' event.
      *
-     * @param Guzzle\Common\Event $event
+     * @param \Guzzle\Common\Event $event
      */
     public function setQueryAggregator(Event $event)
     {

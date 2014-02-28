@@ -29,7 +29,7 @@ class LinksVisitor extends ResponseVisitor
     /**
      * Builds commands from links
      *
-     * @var Desk\Relationship\Resource\CommandBuilderInterface
+     * @var \Desk\Relationship\Resource\CommandBuilderInterface
      */
     private $builder;
 
@@ -37,7 +37,7 @@ class LinksVisitor extends ResponseVisitor
     /**
      * Accepts a CommandBuilderInterface object, used to build commands
      *
-     * @param Desk\Relationship\Resource\CommandBuilderInterface $builder
+     * @param \Desk\Relationship\Resource\CommandBuilderInterface $builder
      */
     public function __construct(CommandBuilderInterface $builder = null)
     {

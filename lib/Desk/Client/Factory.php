@@ -19,7 +19,7 @@ class Factory implements FactoryInterface
     /**
      * The service description loader used by this factory
      *
-     * @var Guzzle\Service\Description\ServiceDescriptionLoader
+     * @var \Guzzle\Service\Description\ServiceDescriptionLoader
      */
     private $loader;
 
@@ -27,7 +27,7 @@ class Factory implements FactoryInterface
     /**
      * Creates a new Factory
      *
-     * @param Guzzle\Service\Description\ServiceDescriptionLoader $loader
+     * @param \Guzzle\Service\Description\ServiceDescriptionLoader $loader
      */
     public function __construct(GuzzleServiceDescriptionLoader $loader = null)
     {
@@ -38,11 +38,11 @@ class Factory implements FactoryInterface
     /**
      * Factory method to create a new instance of Desk\Client
      *
-     * @see Desk\Client::factory
+     * @see \Desk\Client::factory
      *
-     * @param array|Collection $config Configuration options
+     * @param array|\Guzzle\Common\Collection $config Configuration options
      *
-     * @return Desk\Client
+     * @return \Desk\Client
      */
     public function factory($config = array())
     {
@@ -62,9 +62,9 @@ class Factory implements FactoryInterface
     /**
      * Processes the configuration passed to self::factory()
      *
-     * @param array|Guzzle\Common\Collection $config
+     * @param array|\Guzzle\Common\Collection $config
      *
-     * @return Guzzle\Common\Collection
+     * @return \Guzzle\Common\Collection
      */
     public function processConfig($config)
     {
@@ -111,9 +111,9 @@ class Factory implements FactoryInterface
     /**
      * Adds the correct authentication configuration for a client
      *
-     * @param Desk\Client $client The client (with configuration)
+     * @param \Desk\Client $client The client (with configuration)
      *
-     * @throws InvalidArgumentException If authentication configuration
+     * @throws \InvalidArgumentException If authentication configuration
      * provided is unknown
      */
     public function addAuthentication(Client &$client)
@@ -147,7 +147,7 @@ class Factory implements FactoryInterface
     /**
      * Adds the correct service description to a client
      *
-     * @param Desk\Client $client The client to add the description to
+     * @param \Desk\Client $client The client to add the description to
      */
     public function addServiceDescription(Client &$client)
     {
@@ -158,7 +158,7 @@ class Factory implements FactoryInterface
     /**
      * Adds a listener so that all created requests use CommaAggregator
      *
-     * @param Desk\Client $client The client to add the listener to
+     * @param \Desk\Client $client The client to add the listener to
      */
     public function addCommaAggregatorListener(Client &$client)
     {
@@ -168,7 +168,7 @@ class Factory implements FactoryInterface
     /**
      * Adds a PreValidator plugin to the client
      *
-     * @param Desk\Client $client The client to add the PreValidator to
+     * @param \Desk\Client $client The client to add the PreValidator to
      */
     public function addPreValidator(Client &$client)
     {
@@ -178,7 +178,7 @@ class Factory implements FactoryInterface
     /**
      * Adds a relationship plugin to the client
      *
-     * @param Desk\Client $client The client to add the Plugin to
+     * @param \Desk\Client $client The client to add the Plugin to
      */
     public function addRelationshipPlugin(Client &$client)
     {

@@ -15,14 +15,14 @@ class EmbeddedCommand extends Collection implements CommandInterface
     /**
      * The client associated with this command
      *
-     * @var Guzzle\Service\ClientInterface
+     * @var \Guzzle\Service\ClientInterface
      */
     protected $client;
 
     /**
      * The operation associated with this command
      *
-     * @var Guzzle\Service\Description\Operation
+     * @var \Guzzle\Service\Description\Operation
      */
     protected $operation;
 

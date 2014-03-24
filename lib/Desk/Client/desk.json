@@ -1067,7 +1067,7 @@
             "extends": "parameter",
             "type": "object",
             "instanceOf": "DateTime",
-            "filters": "Desk\\Filter\\Date::objectToTimestamp"
+            "filters": "Desk\\Filter\\Date::objectToString"
         },
         "interval": {
             "extends": "parameter",

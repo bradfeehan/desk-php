@@ -39,20 +39,4 @@ class Date
         $date->setTimezone(new DateTimeZone('UTC'));
         return $date->format("Y-m-d\\TH:i:s\\Z");
     }
-
-    /**
-     * Converts a DateTime object to a unix timestamp
-     *
-     * @param \DateTime $date A DateTime object
-     *
-     * @return int
-     */
-    public static function objectToTimestamp(DateTime $date)
-    {
-        // clone before setting timezone to UTC to avoid side-effects
-        // (since all PHP objects are passed by reference)
-        $date = clone $date;
-        $date->setTimezone(new DateTimeZone('UTC'));
-        return $date->getTimestamp();
-    }
 }

@@ -45,7 +45,7 @@ class CreateCompanyOperationTest extends CreateOperationTestCase
             array(array('name' => 'foo'), array('body' => '#^{"name":"foo"}$#')),
             array(
                 array('name' => 'foo', 'created_at' => $date),
-                array('body' => '#^{"name":"foo","created_at":1373570905}$#'),
+                array('body' => '#^{"name":"foo","created_at":"2013-07-11T19:28:25Z"}$#'),
             ),
             array(
                 array('name' => 'foo', 'domains' => 'example.com'),

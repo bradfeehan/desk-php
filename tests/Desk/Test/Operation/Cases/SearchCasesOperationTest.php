@@ -111,19 +111,19 @@ class SearchCasesOperationTest extends ListOperationTestCase
             ),
             array(
                 array('since_created_at' => $date),
-                array('query' => '#^since_created_at=1371214800$#'),
+                array('query' => '#^since_created_at=2013-06-14T13%3A00%3A00Z$#'),
             ),
             array(
                 array('max_created_at' => $date),
-                array('query' => '#^max_created_at=1371214800$#'),
+                array('query' => '#^max_created_at=2013-06-14T13%3A00%3A00Z$#'),
             ),
             array(
                 array('since_updated_at' => $date),
-                array('query' => '#^since_updated_at=1371214800$#'),
+                array('query' => '#^since_updated_at=2013-06-14T13%3A00%3A00Z$#'),
             ),
             array(
                 array('max_updated_at' => $date),
-                array('query' => '#^max_updated_at=1371214800$#'),
+                array('query' => '#^max_updated_at=2013-06-14T13%3A00%3A00Z$#'),
             ),
             array(
                 array('since_id' => 7),

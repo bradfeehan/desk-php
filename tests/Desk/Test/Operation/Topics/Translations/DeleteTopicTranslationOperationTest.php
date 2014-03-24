@@ -34,11 +34,8 @@ class DeleteTopicTranslationOperationTest extends DeleteOperationTestCase
             array($this->getExampleParameters(array('topic_id' => true))),
             array($this->getExampleParameters(array('topic_id' => false))),
             array($this->getExampleParameters(array('topic_id' => null))),
-            array($this->getExampleParameters(array('topic_id' => 0))),
-            array($this->getExampleParameters(array('topic_id' => -12))),
             array($this->getExampleParameters(array('topic_id' => 12.3))),
             array($this->getExampleParameters(array('topic_id' => -12.3))),
-            array($this->getExampleParameters(array('topic_id' => '3'))),
             array($this->getExampleParameters(
                 array('topic_id' => new \stdClass())
             )),

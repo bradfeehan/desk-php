@@ -53,13 +53,9 @@ class SearchArticlesOperationTest extends ListOperationTestCase
             array(array('text' => new \stdClass())),
             array(array('topic_ids' => true)),
             array(array('topic_ids' => false)),
-            array(array('topic_ids' => 0)),
-            array(array('topic_ids' => -12)),
             array(array('topic_ids' => 12.3)),
             array(array('topic_ids' => -12.3)),
-            array(array('topic_ids' => '3')),
             array(array('topic_ids' => new \stdClass())),
-            array(array('topic_ids' => array('1'))),
             array(array('topic_ids' => array(true))),
             array(array('topic_ids' => array(1, true))),
         );

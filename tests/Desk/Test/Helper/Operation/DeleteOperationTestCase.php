@@ -57,11 +57,8 @@ abstract class DeleteOperationTestCase extends OperationTestCase
             array(array('id' => true)),
             array(array('id' => false)),
             array(array('id' => null)),
-            array(array('id' => 0)),
-            array(array('id' => -12)),
             array(array('id' => 12.3)),
             array(array('id' => -12.3)),
-            array(array('id' => '3')),
             array(array('id' => new \stdClass())),
         );
     }

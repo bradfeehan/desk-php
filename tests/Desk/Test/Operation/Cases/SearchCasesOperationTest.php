@@ -166,7 +166,6 @@ class SearchCasesOperationTest extends ListOperationTestCase
             array(array('max_created_at' => 234)),
             array(array('since_updated_at' => 34.5)),
             array(array('max_updated_at' => true)),
-            array(array('since_id' => -2)),
             array(array('max_id' => 56.3)),
         );
     }

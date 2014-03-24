@@ -97,7 +97,6 @@ class SearchCustomersOperationTest extends ListOperationTestCase
             array(array('max_created_at' => 123456)),
             array(array('since_updated_at' => false)),
             array(array('max_updated_at' => new \stdClass())),
-            array(array('since_id' => '4')),
             array(array('max_id' => 12.8)),
             array(array('email' => array('foo@example.com', false))),
             array(array('twitter' => false)),

@@ -72,7 +72,7 @@ abstract class ShowOperationTestCase extends OperationTestCase
 
         // add invalid calls, use non-integer values in integer params
         $nonIntegers = array(
-            true, false, null, 0, -12, 12.3, -12.3, '3', new \stdClass(),
+            true, false, null, 12.3, -12.3, new \stdClass(),
         );
 
         foreach ($this->getIntegerIdProperties() as $name) {

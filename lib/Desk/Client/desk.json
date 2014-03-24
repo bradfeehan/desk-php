@@ -1076,8 +1076,7 @@
         },
         "id": {
             "extends": "parameter",
-            "type": "integer",
-            "minimum": 1
+            "type": "string"
         },
         "labels": {
             "extends": "parameter",

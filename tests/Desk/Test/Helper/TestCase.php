@@ -4,7 +4,7 @@ namespace Desk\Test\Helper;
 
 use Desk\Client as DeskClient;
 use Guzzle\Common\Exception\RuntimeException;
-use Guzzle\Service\Client;
+use Guzzle\Http\Client;
 use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Tests\GuzzleTestCase;
 use InvalidArgumentException;

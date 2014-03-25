@@ -35,10 +35,15 @@ class OauthPluginSystemTest extends SystemTestCase
         $p = new OauthPlugin($this->config);
         $request = $this->getRequest();
         $aggregator = new CommaAggregator();
+
         $query = $request->getQuery()->setAggregator($aggregator)
             ->set('g', array('h', 'i', 'j'))
             ->set('k', array('l'))
             ->set('m', array('n', 'o'));
-        $this->assertContains('a%3Db%26c%3Dd%26e%3Df%26g%3Dh%2Ci%2Cj%26k%3Dl%26m%3Dn%2Co', $p->getStringToSign($request, self::TIMESTAMP, self::NONCE));
+
+        $this->assertContains(
+            'a%3Db%26c%3Dd%26e%3Df%26g%3Dh%2Ci%2Cj%26k%3Dl%26m%3Dn%2Co',
+            $p->getStringToSign($request, self::TIMESTAMP, self::NONCE)
+        );
     }
 }

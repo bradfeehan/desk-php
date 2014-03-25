@@ -85,6 +85,21 @@ class FactoryTest extends UnitTestCase
                 ),
             ),
             array(
+                new Collection(array(
+                    'subdomain' => 'foo',
+                    'username' => 'foo',
+                    'password' => 'bar',
+                )),
+                array(
+                    'api_version' => 2,
+                    'base_url' => 'https://{subdomain}.desk.com/api/v{api_version}/',
+                    'subdomain' => 'foo',
+                    'username' => 'foo',
+                    'password' => 'bar',
+                    'authentication' => 'basic',
+                ),
+            ),
+            array(
                 array(
                     'base_url' => 'http://example.com/',
                     'username' => 'foo',

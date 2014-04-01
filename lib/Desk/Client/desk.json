@@ -1002,6 +1002,26 @@
 
 
 
+        "CreateCaseReply": {
+            "extends": "create",
+            "summary": "Create a new cas reply for a particular case",
+            "uri": "cases/{case_id}/replies",
+            "responseClass": "CaseReplyModel",
+            "parameters": {
+                "case_id": {"extends": "id", "required": true, "location": "uri"},
+                "direction": {"extends": "CaseReplyModel.direction"},
+                "body": {"extends": "CaseReplyModel.body"},
+                "created_at": {"extends": "CaseReplyModel.created_at.input"},
+                "status": {"extends": "CaseReplyModel.status.out"},
+                "subject": {"extends": "CaseReplyModel.subject"},
+                "type": {"extends": "CaseReplyModel.type"},
+                "hidden_at": {"extends": "CaseReplyModel.hidden_at.input"}
+            }
+        },
+
+
+
+
         "DeleteArticle": {
             "extends": "delete.main",
             "summary": "Delete a single article by ID",
@@ -2641,19 +2661,28 @@
             "description": "Body of the message",
             "type": "string"
         },
-        "CaseReplyModel.created_at": {
+        "CaseReplyModel.created_at.input": {
+            "extends": "date.input",
+            "description": "Time of creation"
+        },
+        "CaseReplyModel.created_at.output": {
             "extends": "date.output",
             "description": "Time of creation"
         },
-        "CaseReplyModel.updated_at": {
+        "CaseReplyModel.updated_at.output": {
             "extends": "date.output",
             "description": "Time last updated"
         },
-        "CaseReplyModel.status": {
+        "CaseReplyModel.status.out": {
+            "extends": "parameter",
+            "description": "The message's current status",
+            "type": "string"
+        },
+        "CaseReplyModel.status.in": {
             "extends": "parameter",
             "description": "The message's current status",
             "type": "string",
-            "enum": ["received", "pending", "sent", "failed"]
+            "enum": ["draft", "pending", "sent"]
         },
         "CaseReplyModel.subject": {
             "extends": "parameter",
@@ -2686,8 +2715,12 @@
             "type": "string",
             "enum": ["mention", "dm"]
         },
-        "CaseReplyModel.hidden_at": {
+        "CaseReplyModel.hidden_at.output": {
             "extends": "date.output",
+            "description": "Time at which this answer was hidden from the support center"
+        },
+        "CaseReplyModel.hidden_at.input": {
+            "extends": "date.input",
             "description": "Time at which this answer was hidden from the support center"
         },
 
@@ -3297,16 +3330,16 @@
             "properties": {
                 "direction": {"extends": "CaseReplyModel.direction"},
                 "body": {"extends": "CaseReplyModel.body"},
-                "created_at": {"extends": "CaseReplyModel.created_at"},
-                "updated_at": {"extends": "CaseReplyModel.updated_at"},
-                "status": {"extends": "CaseReplyModel.status"},
+                "created_at": {"extends": "CaseReplyModel.created_at.output"},
+                "updated_at": {"extends": "CaseReplyModel.updated_at.output"},
+                "status": {"extends": "CaseReplyModel.status.out"},
                 "subject": {"extends": "CaseReplyModel.subject"},
                 "from": {"extends": "CaseReplyModel.from"},
                 "to": {"extends": "CaseReplyModel.to"},
                 "cc": {"extends": "CaseReplyModel.cc"},
                 "bcc": {"extends": "CaseReplyModel.bcc"},
                 "type": {"extends": "CaseReplyModel.type"},
-                "hidden_at": {"extends": "CaseReplyModel.hidden_at"},
+                "hidden_at": {"extends": "CaseReplyModel.hidden_at.output"},
                 "self": {
                     "location": "links",
                     "data": {

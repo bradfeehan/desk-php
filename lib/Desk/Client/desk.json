@@ -1014,6 +1014,10 @@
                 "created_at": {"extends": "CaseReplyModel.created_at.input"},
                 "status": {"extends": "CaseReplyModel.status.out"},
                 "subject": {"extends": "CaseReplyModel.subject"},
+                "from": {"extends": "CaseReplyModel.from"},
+                "to": {"extends": "CaseReplyModel.to"},
+                "cc": {"extends": "CaseReplyModel.cc"},
+                "bcc": {"extends": "CaseReplyModel.bcc"},
                 "type": {"extends": "CaseReplyModel.type"},
                 "hidden_at": {"extends": "CaseReplyModel.hidden_at.input"}
             }

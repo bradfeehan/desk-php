@@ -124,7 +124,7 @@ $client = \Desk\Client::factory(array(
     'subdomain' => 'foo'
     'consumer_key' => 'key',
     'consumer_secret' => 'secret',
-    'token_key' => 'key',
+    'token' => 'key',
     'token_secret' => 'secret',
 ));
 ```

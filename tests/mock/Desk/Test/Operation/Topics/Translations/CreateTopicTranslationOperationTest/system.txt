@@ -1,0 +1,27 @@
+HTTP/1.1 201 Created
+Accept-Ranges: bytes
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+Location: http://mock.localhost/cases/1
+Status: 201 Created
+Vary: X-AppVersion
+X-AppVersion: 781247eace915fac36f43a20c87f25019542d2d5.0
+X-Frame-Options: SAMEORIGIN
+X-Rate-Limit-Limit: 60
+X-Rate-Limit-Remaining: 59
+X-Rate-Limit-Reset: 53
+Content-Length: 281
+Connection: keep-alive
+
+{
+    "name": "Japanese",
+    "locale": "ja",
+    "created_at": "2014-04-28T17:28:33Z",
+    "updated_at": "2014-04-28T17:28:33Z",
+    "_links": {
+        "self": {
+            "href": "/api/v2/topics/1/translations/en_us",
+            "class": "topic_translation"
+        }
+    }
+}

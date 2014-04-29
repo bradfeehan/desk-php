@@ -1022,6 +1022,17 @@
                 "hidden_at": {"extends": "CaseReplyModel.hidden_at.input"}
             }
         },
+        "CreateTopicTranslation": {
+            "extends": "create",
+            "summary": "Create a new translation for a particular topic",
+            "uri": "topics/{topic_id}/translations",
+            "responseClass": "TopicTranslationModel",
+            "parameters": {
+                "topic_id": {"extends": "id", "required": true, "location": "uri"},
+                "name": {"extends": "TopicTranslationModel.name"},
+                "locale": {"extends": "TopicTranslationModel.locale", "required": true}
+            }
+        },
 
 
 
@@ -3654,6 +3665,14 @@
                         "operation": "ListTopicTranslations",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations$#"
                     }
+                },
+                "create_translation": {
+                    "location": "links",
+                    "sentAs": "translations",
+                    "data": {
+                        "operation": "CreateTopicTranslation",
+                        "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations$#"
+                    }
                 }
             }
         },
@@ -3669,6 +3688,14 @@
                     "data": {
                         "operation": "ShowTopicTranslation",
                         "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations/(?P<locale>[a-zA-Z_-]+)$#"
+                    }
+                },
+                "topic": {
+                    "location": "links",
+                    "sentAs": "self",
+                    "data": {
+                        "operation": "ShowTopic",
+                        "pattern": "#/topics/(?P<id>[0-9]+)#"
                     }
                 }
             }

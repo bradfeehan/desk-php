@@ -1004,7 +1004,7 @@
 
         "CreateCaseReply": {
             "extends": "create",
-            "summary": "Create a new cas reply for a particular case",
+            "summary": "Create a new case reply for a particular case",
             "uri": "cases/{case_id}/replies",
             "responseClass": "CaseReplyModel",
             "parameters": {

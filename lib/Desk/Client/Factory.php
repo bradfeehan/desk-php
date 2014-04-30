@@ -8,9 +8,11 @@ use Desk\Client\FactoryInterface;
 use Desk\Client\ServiceDescriptionLoader;
 use Desk\Command\PreValidator;
 use Desk\Exception\InvalidArgumentException;
+use Desk\RateLimit\Plugin as DeskRateLimitPlugin;
 use Desk\Relationship\Plugin as RelationshipPlugin;
 use Guzzle\Common\Collection;
 use Guzzle\Common\ToArrayInterface;
+use Guzzle\Plugin\Backoff\BackoffPlugin;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Description\ServiceDescriptionLoader as GuzzleServiceDescriptionLoader;
 
@@ -56,6 +58,7 @@ class Factory implements FactoryInterface
         $this->addCommaAggregatorListener($client);
         $this->addPreValidator($client);
         $this->addRelationshipPlugin($client);
+        $this->addRateLimitPlugin($client);
 
         return $client;
     }
@@ -188,5 +191,15 @@ class Factory implements FactoryInterface
     public function addRelationshipPlugin(Client &$client)
     {
         $client->addSubscriber(new RelationshipPlugin());
+    }
+
+    /**
+     * Adds the rate-limiting plugin to the client
+     *
+     * @param \Desk\Client $client The client to add the Plugin to
+     */
+    public function addRateLimitPlugin(Client &$client)
+    {
+        $client->addSubscriber(new DeskRateLimitPlugin());
     }
 }

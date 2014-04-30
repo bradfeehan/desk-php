@@ -44,6 +44,7 @@ class FactoryTest extends UnitTestCase
             ->shouldReceive('addCommaAggregatorListener')
             ->shouldReceive('addPreValidator')
             ->shouldReceive('addRelationshipPlugin')
+            ->shouldReceive('addRateLimitPlugin')
             ->getMock();
 
         $client = $factory->factory();
@@ -318,6 +319,24 @@ class FactoryTest extends UnitTestCase
 
         $factory = $this->mock('addRelationshipPlugin');
         $factory->addRelationshipPlugin($client);
+        $this->assertSame($originalClient, $client);
+    }
+
+    /**
+     * @covers Desk\Client\Factory::addRateLimitPlugin
+     */
+    public function testAddRateLimitPlugin()
+    {
+        $originalClient = \Mockery::mock('Desk\\Client')
+            ->shouldReceive('addSubscriber')
+                ->with(\Mockery::type('Desk\\RateLimit\\Plugin'))
+                ->once()
+            ->getMock();
+
+        $client = $originalClient;
+
+        $factory = $this->mock('addRateLimitPlugin');
+        $factory->addRateLimitPlugin($client);
         $this->assertSame($originalClient, $client);
     }
 }

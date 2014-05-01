@@ -8,6 +8,7 @@ use Desk\Client\FactoryInterface;
 use Desk\Client\ServiceDescriptionLoader;
 use Desk\Command\PreValidator;
 use Desk\Exception\InvalidArgumentException;
+use Desk\Iterator\Factory as DeskIteratorFactory;
 use Desk\RateLimit\Plugin as DeskRateLimitPlugin;
 use Desk\Relationship\Plugin as RelationshipPlugin;
 use Guzzle\Common\Collection;
@@ -59,6 +60,7 @@ class Factory implements FactoryInterface
         $this->addPreValidator($client);
         $this->addRelationshipPlugin($client);
         $this->addRateLimitPlugin($client);
+        $this->addResourceIteratorFactory($client);
 
         return $client;
     }
@@ -201,5 +203,15 @@ class Factory implements FactoryInterface
     public function addRateLimitPlugin(Client &$client)
     {
         $client->addSubscriber(new DeskRateLimitPlugin());
+    }
+
+    /**
+     * Adds the correct ResourceIteratorFactory to the client
+     *
+     * @param \Desk\Client $client The client to configure
+     */
+    public function addResourceIteratorFactory(Client &$client)
+    {
+        $client->setResourceIteratorFactory(new DeskIteratorFactory());
     }
 }

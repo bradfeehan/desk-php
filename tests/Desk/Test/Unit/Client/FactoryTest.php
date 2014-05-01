@@ -45,6 +45,7 @@ class FactoryTest extends UnitTestCase
             ->shouldReceive('addPreValidator')
             ->shouldReceive('addRelationshipPlugin')
             ->shouldReceive('addRateLimitPlugin')
+            ->shouldReceive('addResourceIteratorFactory')
             ->getMock();
 
         $client = $factory->factory();
@@ -337,6 +338,24 @@ class FactoryTest extends UnitTestCase
 
         $factory = $this->mock('addRateLimitPlugin');
         $factory->addRateLimitPlugin($client);
+        $this->assertSame($originalClient, $client);
+    }
+
+    /**
+     * @covers Desk\Client\Factory::addResourceIteratorFactory
+     */
+    public function testAddResourceIteratorFactory()
+    {
+        $originalClient = \Mockery::mock('Desk\\Client')
+            ->shouldReceive('setResourceIteratorFactory')
+                ->with(\Mockery::type('Desk\\Iterator\\Factory'))
+                ->once()
+            ->getMock();
+
+        $client = $originalClient;
+
+        $factory = $this->mock('addResourceIteratorFactory');
+        $factory->addResourceIteratorFactory($client);
         $this->assertSame($originalClient, $client);
     }
 }

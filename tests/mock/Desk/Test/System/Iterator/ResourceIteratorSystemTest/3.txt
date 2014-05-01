@@ -1,0 +1,59 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: must-revalidate, private, max-age=0
+Content-Type: application/json; charset=utf-8
+Status: 200
+X-Rate-Limit-Limit: 60
+X-Rate-Limit-Remaining: 59
+X-Rate-Limit-Reset: 2
+Content-Length: 1228
+Connection: keep-alive
+
+{
+    "total_entries": 10,
+    "page": 3,
+    "_links": {
+        "self": {
+            "href": "/api/v2/articles?page=3&per_page=2",
+            "class": "page"
+        },
+        "first": {
+            "href": "/api/v2/articles?page=1&per_page=2",
+            "class": "page"
+        },
+        "last": {
+            "href": "/api/v2/articles?page=5&per_page=2",
+            "class": "page"
+        },
+        "next": {
+            "href": "/api/v2/articles?page=4&per_page=2",
+            "class": "page"
+        },
+        "previous": {
+            "href": "/api/v2/articles?page=2&per_page=2",
+            "class": "page"
+        }
+    },
+    "_embedded": {
+        "entries": [
+            {
+                "subject": "Article 5",
+                "_links": {
+                    "self": {
+                        "href": "/api/v2/articles/5",
+                        "class": "article"
+                    }
+                }
+            },
+            {
+                "subject": "Article 6",
+                "_links": {
+                    "self": {
+                        "href": "/api/v2/articles/6",
+                        "class": "article"
+                    }
+                }
+            }
+        ]
+    }
+}

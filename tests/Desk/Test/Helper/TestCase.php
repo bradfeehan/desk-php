@@ -195,6 +195,23 @@ abstract class TestCase extends GuzzleTestCase
     }
 
     /**
+     * Calls a private or protected method on any object
+     *
+     * @param mixed  $object     The object to call the method on
+     * @param string $methodName The name of the method to call
+     * @param mixed  $arguments  An array of arguments to pass
+     *
+     * @return mixed The return value of the method
+     */
+    public function callPrivateMethod($object, $methodName, $arguments = array())
+    {
+        $reflectionObject = new ReflectionObject($object);
+        $method = $reflectionObject->getMethod($methodName);
+        $method->setAccessible(true);
+        return $method->invokeArgs($object, $arguments);
+    }
+
+    /**
      * Determines whether the desk.json service description is valid
      *
      * @return boolean

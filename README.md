@@ -39,9 +39,6 @@ Here's a summary of what's implemented:
     * ~~Embedded resources return models~~
     * ~~Embedded model data type filtering~~
 
-When most of these are complete, there'll be a v0.1 release which will
-be the first tagged release.
-
 
 Project Aims
 ------------

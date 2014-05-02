@@ -9,8 +9,13 @@ desk-php
 PHP client for [Desk.com](http://desk.com) v2 API, based on
 [Guzzle](http://guzzlephp.org)
 
-**Note**: This project is currently under initial development and is
-**nowhere near stable** yet. Here's a summary of the current progress:
+This project is still under development and things may change quickly.
+It'll attempt to adhere to [Semantic Versioning] to minimise any
+issues.
+
+[Semantic Versioning]: <http://semver.org>
+
+Here's a summary of what's implemented:
 
  * Main resource operations (ListCases, etc)
     * ~~[Show](https://github.com/bradfeehan/desk-php/issues/5)~~

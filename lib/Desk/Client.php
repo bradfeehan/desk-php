@@ -79,7 +79,7 @@ class Client extends \Guzzle\Service\Client
     public static function getDescriptionFilename()
     {
         $ds = DIRECTORY_SEPARATOR;
-        return __DIR__ . "{$ds}Client{$ds}desk.json";
+        return __DIR__ . "{$ds}service-description";
     }
 
 

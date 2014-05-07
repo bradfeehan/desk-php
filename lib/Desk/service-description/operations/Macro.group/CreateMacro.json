@@ -1,0 +1,12 @@
+{
+    "extends": "create",
+    "summary": "Create a new macro",
+    "uri": "macros",
+    "responseClass": "MacroModel",
+    "parameters": {
+        "name": {"extends": "MacroModel.name"},
+        "description": {"extends": "MacroModel.description"},
+        "enabled": {"extends": "MacroModel.enabled"},
+        "folders": {"extends": "MacroModel.folders"}
+    }
+}

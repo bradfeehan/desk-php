@@ -1,0 +1,27 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {"extends": "GroupModel.name"},
+        "self": {
+            "location": "links",
+            "data": {
+                "operation": "ShowGroup",
+                "pattern": "#/groups/(?P<id>[0-9]+)$#"
+            }
+        },
+        "users": {
+            "location": "links",
+            "data": {
+                "operation": "ListGroupUsers",
+                "pattern": "#/groups/(?P<group_id>[0-9]+)/users#"
+            }
+        },
+        "filters": {
+            "location": "links",
+            "data": {
+                "operation": "ListGroupFilters",
+                "pattern": "#/groups/(?P<group_id>[0-9]+)/filters#"
+            }
+        }
+    }
+}

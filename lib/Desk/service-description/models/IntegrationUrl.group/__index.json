@@ -1,0 +1,39 @@
+{
+    "IntegrationUrlModel.name": {
+        "extends": "parameter",
+        "description": "Name of the integration URL",
+        "required": true,
+        "type": "string",
+        "minLength": 2
+    },
+    "IntegrationUrlModel.description": {
+        "extends": "parameter",
+        "description": "An optional description",
+        "type": "string"
+    },
+    "IntegrationUrlModel.enabled": {
+        "extends": "parameter",
+        "description": "Whether or not the integration URL is enabled for use",
+        "type": "boolean"
+    },
+    "IntegrationUrlModel.markup": {
+        "extends": "parameter",
+        "description": "Liquid code to parse which creates the rendered URL",
+        "required": true,
+        "type": "string",
+        "minLength": 1
+    },
+    "IntegrationUrlModel.rendered": {
+        "extends": "parameter",
+        "description": "The rendered URL",
+        "type": "string"
+    },
+    "IntegrationUrlModel.created_at": {
+        "extends": "date.output",
+        "description": "When the integration URL was created"
+    },
+    "IntegrationUrlModel.updated_at": {
+        "extends": "date.output",
+        "description": "When the integration URL was last updated"
+    }
+}

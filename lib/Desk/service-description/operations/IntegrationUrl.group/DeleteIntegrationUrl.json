@@ -1,0 +1,5 @@
+{
+    "extends": "delete.main",
+    "summary": "Delete a single integration URL by ID",
+    "uri": "integration_urls/{id}"
+}

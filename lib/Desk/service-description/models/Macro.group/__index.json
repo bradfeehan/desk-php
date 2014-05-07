@@ -1,0 +1,58 @@
+{
+    "MacroModel.name": {
+        "extends": "parameter",
+        "description": "Name of the macro",
+        "required": true,
+        "type": "string",
+        "minLength": 1
+    },
+    "MacroModel.description": {
+        "extends": "parameter",
+        "description": "An optional description",
+        "type": "string"
+    },
+    "MacroModel.enabled": {
+        "extends": "parameter",
+        "description": "Whether or not the macro is enabled for use",
+        "type": "boolean"
+    },
+    "MacroModel.position": {
+        "extends": "parameter",
+        "description": "Placement in the UI",
+        "type": "integer"
+    },
+    "MacroModel.folders": {
+        "extends": "parameter",
+        "description": "Array of folders associated with this macro",
+        "type": "array",
+        "items": {
+            "type": "string"
+        }
+    },
+
+
+
+    "MacroActionModel.type": {
+        "extends": "parameter",
+        "description": "The type of action to be performed",
+        "type": "string"
+    },
+    "MacroActionModel.value": {
+        "extends": "parameter",
+        "description": "Value to set for the given type",
+        "type": "string"
+    },
+    "MacroActionModel.enabled": {
+        "extends": "parameter",
+        "description": "Whether or not the action is enabled",
+        "type": "boolean"
+    },
+    "MacroActionModel.created_at": {
+        "extends": "date.output",
+        "description": "When the action was created"
+    },
+    "MacroActionModel.updated_at": {
+        "extends": "date.output",
+        "description": "When the action was last updated"
+    }
+}

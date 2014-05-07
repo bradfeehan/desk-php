@@ -1,0 +1,33 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {"extends": "IntegrationUrlModel.name"},
+        "description": {"extends": "IntegrationUrlModel.description"},
+        "enabled": {"extends": "IntegrationUrlModel.enabled"},
+        "markup": {"extends": "IntegrationUrlModel.markup"},
+        "rendered": {"extends": "IntegrationUrlModel.rendered"},
+        "created_at": {"extends": "IntegrationUrlModel.created_at"},
+        "updated_at": {"extends": "IntegrationUrlModel.updated_at"},
+        "self": {
+            "location": "links",
+            "data": {
+                "operation": "ShowIntegrationUrl",
+                "pattern": "#/integration_urls/(?P<id>[0-9]+)$#"
+            }
+        },
+        "user": {
+            "location": "links",
+            "data": {
+                "operation": "ShowUser",
+                "pattern": "#/users/(?P<id>[0-9]+)$#"
+            }
+        },
+        "group": {
+            "location": "links",
+            "data": {
+                "operation": "ShowGroup",
+                "pattern": "#/groups/(?P<id>[0-9]+)$#"
+            }
+        }
+    }
+}

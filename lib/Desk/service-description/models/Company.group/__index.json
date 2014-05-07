@@ -1,0 +1,36 @@
+{
+    "CompanyModel.name": {
+        "extends": "parameter",
+        "description": "Name of the company",
+        "type": "string"
+    },
+    "CompanyModel.domains": {
+        "extends": "parameter",
+        "description": "Array of top-level domain names for the company",
+        "type": "array",
+        "items": {
+            "type": "string"
+        }
+    },
+    "CompanyModel.created_at.output": {
+        "extends": "date.output",
+        "description": "Date the company was created"
+    },
+    "CompanyModel.created_at.input": {
+        "extends": "date.input",
+        "description": "Date the company was created"
+    },
+    "CompanyModel.updated_at.output": {
+        "extends": "date.output",
+        "description": "Date the company was updated"
+    },
+    "CompanyModel.updated_at.input": {
+        "extends": "date.input",
+        "description": "Date the company was updated"
+    },
+    "CompanyModel.custom_fields": {
+        "extends": "parameter",
+        "description": "Hash of values for custom fields",
+        "type": "object"
+    }
+}

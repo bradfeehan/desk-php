@@ -1,0 +1,21 @@
+{
+    "extends": "list",
+    "summary": "Retrieve a paginated list of replies for a particular case",
+    "uri": "cases/{case_id}/replies",
+    "responseClass": "CaseRepliesPage",
+    "parameters": {
+        "case_id": {
+            "extends": "id",
+            "description": "The ID of the case to retrieve replies for",
+            "required": true,
+            "location": "uri"
+        }
+    },
+    "data": {
+        "embeds": {
+            "entries": {
+                "model": "CaseReplyModel"
+            }
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "extends": "show.main",
+    "summary": "Retrieve a single custom field by ID",
+    "uri": "custom_fields/{id}",
+    "responseClass": "CustomFieldModel"
+}

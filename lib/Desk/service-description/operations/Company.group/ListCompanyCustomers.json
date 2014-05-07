@@ -1,0 +1,21 @@
+{
+    "extends": "list",
+    "summary": "Retrieve a paginated list of customers for a particular company",
+    "uri": "companies/{company_id}/customers",
+    "responseClass": "CompanyCustomersPage",
+    "parameters": {
+        "company_id": {
+            "extends": "id",
+            "description": "The ID of the company to retrieve customers for",
+            "required": true,
+            "location": "uri"
+        }
+    },
+    "data": {
+        "embeds": {
+            "entries": {
+                "model": "CustomerModel"
+            }
+        }
+    }
+}

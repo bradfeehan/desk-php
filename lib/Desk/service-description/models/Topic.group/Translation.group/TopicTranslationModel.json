@@ -1,0 +1,24 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {"extends": "TopicTranslationModel.name"},
+        "locale": {"extends": "TopicTranslationModel.locale"},
+        "created_at": {"extends": "TopicTranslationModel.created_at"},
+        "updated_at": {"extends": "TopicTranslationModel.updated_at"},
+        "self": {
+            "location": "links",
+            "data": {
+                "operation": "ShowTopicTranslation",
+                "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations/(?P<locale>[a-zA-Z_-]+)$#"
+            }
+        },
+        "topic": {
+            "location": "links",
+            "sentAs": "self",
+            "data": {
+                "operation": "ShowTopic",
+                "pattern": "#/topics/(?P<id>[0-9]+)#"
+            }
+        }
+    }
+}

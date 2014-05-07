@@ -1,0 +1,16 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {"extends": "UserModel.name"},
+        "public_name": {"extends": "UserModel.public_name"},
+        "email": {"extends": "UserModel.email"},
+        "level": {"extends": "UserModel.level"},
+        "self": {
+            "location": "links",
+            "data": {
+                "operation": "ShowUser",
+                "pattern": "#/users/(?P<id>[0-9]+)$#"
+            }
+        }
+    }
+}

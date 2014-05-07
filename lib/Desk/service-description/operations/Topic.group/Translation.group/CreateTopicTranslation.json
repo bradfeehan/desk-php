@@ -1,0 +1,11 @@
+{
+    "extends": "create",
+    "summary": "Create a new translation for a particular topic",
+    "uri": "topics/{topic_id}/translations",
+    "responseClass": "TopicTranslationModel",
+    "parameters": {
+        "topic_id": {"extends": "id", "required": true, "location": "uri"},
+        "name": {"extends": "TopicTranslationModel.name"},
+        "locale": {"extends": "TopicTranslationModel.locale", "required": true}
+    }
+}

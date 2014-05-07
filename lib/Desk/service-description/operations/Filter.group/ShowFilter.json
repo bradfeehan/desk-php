@@ -1,0 +1,6 @@
+{
+    "extends": "show.main",
+    "summary": "Retrieve a single filter by ID",
+    "uri": "filters/{id}",
+    "responseClass": "FilterModel"
+}

@@ -1,0 +1,6 @@
+{
+    "extends": "list",
+    "summary": "Retrieve a paginated list of all macros",
+    "uri": "macros",
+    "responseClass": "MacrosPage"
+}

@@ -1,0 +1,5 @@
+{
+    "extends": "delete.main",
+    "summary": "Delete a single macro by ID",
+    "uri": "macros/{id}"
+}

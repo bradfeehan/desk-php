@@ -1,0 +1,47 @@
+{
+    "extends": "page",
+    "properties": {
+        "entries": {
+            "type": "array",
+            "items": {
+                "extends": "CustomFieldModel"
+            },
+            "location": "embedded"
+        },
+        "self": {
+            "location": "links",
+            "data": {
+                "operation": "ListCustomFields",
+                "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
+            }
+        },
+        "first": {
+            "location": "links",
+            "data": {
+                "operation": "ListCustomFields",
+                "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
+            }
+        },
+        "last": {
+            "location": "links",
+            "data": {
+                "operation": "ListCustomFields",
+                "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
+            }
+        },
+        "next": {
+            "location": "links",
+            "data": {
+                "operation": "ListCustomFields",
+                "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
+            }
+        },
+        "previous": {
+            "location": "links",
+            "data": {
+                "operation": "ListCustomFields",
+                "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
+            }
+        }
+    }
+}

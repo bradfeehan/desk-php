@@ -1,0 +1,57 @@
+{
+    "TopicModel.name": {
+        "extends": "parameter",
+        "description": "Subject of the topic in the default locale",
+        "required": true,
+        "type": "string",
+        "minLength": 1
+    },
+    "TopicModel.description": {
+        "extends": "parameter",
+        "description": "An optional description of the topic",
+        "type": "string"
+    },
+    "TopicModel.position": {
+        "extends": "parameter",
+        "description": "The topic's position in the admin UI",
+        "type": "integer"
+    },
+    "TopicModel.allow_questions": {
+        "extends": "parameter",
+        "description": "Whether to allow customers to post questions about this topic in your support center",
+        "type": "boolean"
+    },
+    "TopicModel.in_support_center": {
+        "extends": "parameter",
+        "description": "Whether to show this topic in the support center",
+        "type": "boolean"
+    },
+    "TopicModel.created_at": {
+        "extends": "date.output",
+        "description": "Time when the topic was created"
+    },
+    "TopicModel.updated_at": {
+        "extends": "date.output",
+        "description": "Time when the topic was updated"
+    },
+
+
+    "TopicTranslationModel.name": {
+        "extends": "parameter",
+        "description": "The topic's name translated in the locale",
+        "type": "string"
+    },
+    "TopicTranslationModel.locale": {
+        "extends": "parameter",
+        "description": "Language code of the translation",
+        "type": "string"
+    },
+    "TopicTranslationModel.created_at": {
+        "extends": "date.output",
+        "description": "Time when the translation was created"
+    },
+    "TopicTranslationModel.updated_at": {
+        "extends": "date.output",
+        "description": "Time when the translation was last updated"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "extends": "create",
+    "summary": "Create a new integration URL",
+    "uri": "integration_urls",
+    "responseClass": "IntegrationUrlModel",
+    "parameters": {
+        "name": {"extends": "IntegrationUrlModel.name"},
+        "description": {"extends": "IntegrationUrlModel.description"},
+        "enabled": {"extends": "IntegrationUrlModel.enabled"},
+        "markup": {"extends": "IntegrationUrlModel.markup"}
+    }
+}

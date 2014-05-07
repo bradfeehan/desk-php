@@ -1,0 +1,22 @@
+{
+    "UserModel.name": {
+        "extends": "parameter",
+        "description": "Name of the user",
+        "type": "string"
+    },
+    "UserModel.public_name": {
+        "extends": "parameter",
+        "description": "Public facing name of the user",
+        "type": "string"
+    },
+    "UserModel.email": {
+        "extends": "parameter",
+        "description": "User's email",
+        "type": "string"
+    },
+    "UserModel.level": {
+        "extends": "parameter",
+        "description": "User's permission level",
+        "type": "string"
+    }
+}

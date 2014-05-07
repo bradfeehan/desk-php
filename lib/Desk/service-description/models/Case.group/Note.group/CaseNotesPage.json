@@ -1,0 +1,47 @@
+{
+    "extends": "page",
+    "properties": {
+        "entries": {
+            "type": "array",
+            "items": {
+                "extends": "CaseNoteModel"
+            },
+            "location": "embedded"
+        },
+        "self": {
+            "location": "links",
+            "data": {
+                "operation": "ListCaseNotes",
+                "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+            }
+        },
+        "first": {
+            "location": "links",
+            "data": {
+                "operation": "ListCaseNotes",
+                "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+            }
+        },
+        "last": {
+            "location": "links",
+            "data": {
+                "operation": "ListCaseNotes",
+                "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+            }
+        },
+        "next": {
+            "location": "links",
+            "data": {
+                "operation": "ListCaseNotes",
+                "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+            }
+        },
+        "previous": {
+            "location": "links",
+            "data": {
+                "operation": "ListCaseNotes",
+                "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+            }
+        }
+    }
+}

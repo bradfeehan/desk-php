@@ -1,0 +1,6 @@
+{
+    "extends": "show.main",
+    "summary": "Retrieve a single article by ID",
+    "uri": "articles/{id}",
+    "responseClass": "ArticleModel"
+}

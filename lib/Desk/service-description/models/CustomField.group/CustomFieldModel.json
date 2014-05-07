@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {"extends": "CustomFieldModel.name"},
+        "label": {"extends": "CustomFieldModel.label"},
+        "type": {"extends": "CustomFieldModel.type"},
+        "active": {"extends": "CustomFieldModel.active"},
+        "data": {"extends": "CustomFieldModel.data"},
+        "self": {
+            "location": "links",
+            "data": {
+                "operation": "ShowCustomField",
+                "pattern": "#/custom_fields/(?P<id>[0-9]+)$#"
+            }
+        }
+    }
+}

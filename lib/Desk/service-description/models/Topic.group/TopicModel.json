@@ -1,0 +1,41 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {"extends": "TopicModel.name"},
+        "description": {"extends": "TopicModel.description"},
+        "position": {"extends": "TopicModel.position"},
+        "allow_questions": {"extends": "TopicModel.allow_questions"},
+        "in_support_center": {"extends": "TopicModel.in_support_center"},
+        "created_at": {"extends": "TopicModel.created_at"},
+        "updated_at": {"extends": "TopicModel.updated_at"},
+        "self": {
+            "location": "links",
+            "data": {
+                "operation": "ShowTopic",
+                "pattern": "#/topics/(?P<id>[0-9]+)$#"
+            }
+        },
+        "articles": {
+            "location": "links",
+            "data": {
+                "operation": "ListTopicArticles",
+                "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles$#"
+            }
+        },
+        "translations": {
+            "location": "links",
+            "data": {
+                "operation": "ListTopicTranslations",
+                "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations$#"
+            }
+        },
+        "create_translation": {
+            "location": "links",
+            "sentAs": "translations",
+            "data": {
+                "operation": "CreateTopicTranslation",
+                "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations$#"
+            }
+        }
+    }
+}

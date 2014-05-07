@@ -1,0 +1,5 @@
+{
+    "extends": "delete.main",
+    "summary": "Delete a single topic by ID",
+    "uri": "topics/{id}"
+}

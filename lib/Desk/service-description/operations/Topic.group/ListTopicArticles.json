@@ -1,0 +1,21 @@
+{
+    "extends": "list",
+    "summary": "Retrieve a paginated list of articles for a particular topic",
+    "uri": "topics/{topic_id}/articles",
+    "responseClass": "TopicArticlesPage",
+    "parameters": {
+        "topic_id": {
+            "extends": "id",
+            "description": "The ID of the topic to retrieve articles for",
+            "required": true,
+            "location": "uri"
+        }
+    },
+    "data": {
+        "embeds": {
+            "entries": {
+                "model": "ArticleModel"
+            }
+        }
+    }
+}

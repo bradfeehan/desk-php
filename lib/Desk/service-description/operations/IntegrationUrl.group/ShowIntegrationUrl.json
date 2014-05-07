@@ -1,0 +1,6 @@
+{
+    "extends": "show.main",
+    "summary": "Retrieve a single integration URL by ID",
+    "uri": "integration_urls/{id}",
+    "responseClass": "IntegrationUrlModel"
+}

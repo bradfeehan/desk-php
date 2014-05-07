@@ -1,0 +1,6 @@
+{
+    "extends": "show",
+    "summary": "Retrieve insights meta data for the authenticated site",
+    "uri": "insights/meta",
+    "responseClass": "InsightMetaModel"
+}

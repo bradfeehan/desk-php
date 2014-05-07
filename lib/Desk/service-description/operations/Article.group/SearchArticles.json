@@ -1,0 +1,19 @@
+{
+    "extends": "list",
+    "summary": "Search public articles with pagination",
+    "uri": "articles/search",
+    "responseClass": "SearchArticlesPage",
+    "parameters": {
+        "text": {
+            "description": "Search terms -- will search across subject, body_text, keywords, question, and answer fields",
+            "type": "string",
+            "location": "query"
+        },
+        "topic_ids": {
+            "description": "Topic IDs to filter results by",
+            "type": "array",
+            "items": {"extends": "id"},
+            "location": "query"
+        }
+    }
+}

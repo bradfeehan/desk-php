@@ -1,0 +1,77 @@
+{
+    "extends": "list",
+    "summary": "Search customers based on a combination of parameters with pagination",
+    "uri": "customers/search",
+    "responseClass": "SearchCustomersPage",
+    "parameters": {
+        "first_name": {
+            "description": "Customer's first name to search for",
+            "type": "string",
+            "location": "query"
+        },
+        "last_name": {
+            "description": "Customer's last name to search for",
+            "type": "string",
+            "location": "query"
+        },
+        "full_name": {
+            "description": "Customer's first and last name (concatenated) to search for",
+            "type": "string",
+            "location": "query"
+        },
+        "since_created_at": {
+            "extends": "date.input",
+            "description": "Search for customers created more recently than a particular date",
+            "location": "query"
+        },
+        "max_created_at": {
+            "extends": "date.input",
+            "description": "Search for customers created on or before a particular date",
+            "location": "query"
+        },
+        "since_updated_at": {
+            "extends": "date.input",
+            "description": "Search for customers updated more recently than a particular date",
+            "location": "query"
+        },
+        "max_updated_at": {
+            "extends": "date.input",
+            "description": "Search for customers updated on or before a particular date",
+            "location": "query"
+        },
+        "since_id": {
+            "extends": "id",
+            "description": "Search for customers with an ID greater than a particular ID",
+            "location": "query"
+        },
+        "max_id": {
+            "extends": "id",
+            "description": "Search for customers with an ID less than or equal to a particular ID",
+            "location": "query"
+        },
+        "email": {
+            "description": "Customer's email address to search for",
+            "type": "array",
+            "items": {"type": "string"},
+            "location": "query"
+        },
+        "twitter": {
+            "description": "Customer's twitter handle to search for",
+            "type": "array",
+            "items": {"type": "string"},
+            "location": "query"
+        },
+        "phone": {
+            "description": "Customer's phone number to search for",
+            "type": "array",
+            "items": {"type": "string"},
+            "location": "query"
+        },
+        "external_id": {
+            "description": "Customer's external ID to search for",
+            "type": "array",
+            "items": {"type": "string"},
+            "location": "query"
+        }
+    }
+}

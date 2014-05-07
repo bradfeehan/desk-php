@@ -1,0 +1,9 @@
+{
+    "extends": "show",
+    "summary": "Retrieve the original message for a particular case",
+    "uri": "cases/{case_id}/message",
+    "responseClass": "CaseMessageModel",
+    "parameters": {
+        "case_id": {"extends": "id", "required": true, "location": "uri"}
+    }
+}

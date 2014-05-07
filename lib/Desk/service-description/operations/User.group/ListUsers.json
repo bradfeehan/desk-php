@@ -1,0 +1,6 @@
+{
+    "extends": "list",
+    "summary": "Retrieve a paginated list of all users",
+    "uri": "users",
+    "responseClass": "UsersPage"
+}

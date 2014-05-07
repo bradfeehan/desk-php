@@ -1,0 +1,31 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {"extends": "FilterModel.name"},
+        "sort": {"extends": "FilterModel.sort"},
+        "sort_direction": {"extends": "FilterModel.sort_direction"},
+        "position": {"extends": "FilterModel.position"},
+        "active": {"extends": "FilterModel.active"},
+        "self": {
+            "location": "links",
+            "data": {
+                "operation": "ShowFilter",
+                "pattern": "#/filters/(?P<id>[0-9]+)$#"
+            }
+        },
+        "user": {
+            "location": "links",
+            "data": {
+                "operation": "ShowUser",
+                "pattern": "#/users/(?P<id>[0-9]+)$#"
+            }
+        },
+        "group": {
+            "location": "links",
+            "data": {
+                "operation": "ShowGroup",
+                "pattern": "#/groups/(?P<id>[0-9]+)$#"
+            }
+        }
+    }
+}

@@ -1,0 +1,1077 @@
+{
+    "embeddable": {
+        "responseType": "model",
+        "parameters": {
+            "embed": {
+                "description": "Which relationships should be embedded in the response",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "type": "string",
+                    "enum": ["none"]
+                },
+                "location": "query"
+            }
+        }
+    },
+    "list": {
+        "extends": "embeddable",
+        "httpMethod": "GET",
+        "parameters": {
+            "per_page": {
+                "description": "Number of entries returned per page",
+                "type": "integer",
+                "minimum": 1,
+                "location": "query"
+            },
+            "page": {
+                "description": "The page number of results to retrieve",
+                "type": "integer",
+                "minimum": 1,
+                "location": "query"
+            }
+        }
+    },
+    "show": {
+        "extends": "embeddable",
+        "httpMethod": "GET"
+    },
+    "show.main": {
+        "extends": "show",
+        "parameters": {
+            "id": {"extends": "id", "required": true, "location": "uri"}
+        }
+    },
+    "create": {
+        "httpMethod": "POST",
+        "parameters": {
+            "content_type": {
+                "default": "application/json",
+                "location": "header",
+                "sentAs": "Content-Type"
+            }
+        }
+    },
+    "delete": {
+        "httpMethod": "DELETE",
+        "class": "Desk\\Command\\NullResponseCommand",
+        "responseType": "primitive",
+        "responseClass": "null"
+    },
+    "delete.main": {
+        "extends": "delete",
+        "parameters": {
+            "id": {"extends": "id", "required": true, "location": "uri"}
+        }
+    },
+
+
+
+
+    "ListArticles": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all articles",
+        "uri": "articles",
+        "responseClass": "ArticlesPage"
+    },
+    "ListCases": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all cases",
+        "uri": "cases",
+        "responseClass": "CasesPage"
+    },
+    "ListCompanies": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all companies",
+        "uri": "companies",
+        "responseClass": "CompaniesPage"
+    },
+    "ListCustomFields": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all custom fields",
+        "uri": "custom_fields",
+        "responseClass": "CustomFieldsPage"
+    },
+    "ListCustomers": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all customers",
+        "uri": "customers",
+        "responseClass": "CustomersPage"
+    },
+    "ListFilters": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all filters",
+        "uri": "filters",
+        "responseClass": "FiltersPage"
+    },
+    "ListGroups": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all groups",
+        "uri": "groups",
+        "responseClass": "GroupsPage"
+    },
+    "ListIntegrationUrls": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all integration URLs",
+        "uri": "integration_urls",
+        "responseClass": "IntegrationUrlsPage"
+    },
+    "ListMacros": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all macros",
+        "uri": "macros",
+        "responseClass": "MacrosPage"
+    },
+    "ListTopics": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all topics",
+        "uri": "topics",
+        "responseClass": "TopicsPage"
+    },
+    "ListUsers": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of all users",
+        "uri": "users",
+        "responseClass": "UsersPage"
+    },
+
+
+    "ListArticleTranslations": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of translations for a particular article",
+        "uri": "articles/{article_id}/translations",
+        "responseClass": "ArticleTranslationsPage",
+        "parameters": {
+            "article_id": {
+                "extends": "id",
+                "description": "The ID of the article to retrieve translations for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "ArticleTranslationModel"
+                }
+            }
+        }
+    },
+    "ListCaseReplies": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of replies for a particular case",
+        "uri": "cases/{case_id}/replies",
+        "responseClass": "CaseRepliesPage",
+        "parameters": {
+            "case_id": {
+                "extends": "id",
+                "description": "The ID of the case to retrieve replies for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "CaseReplyModel"
+                }
+            }
+        }
+    },
+    "ListCaseNotes": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of notes for a particular case",
+        "uri": "cases/{case_id}/notes",
+        "responseClass": "CaseNotesPage",
+        "parameters": {
+            "case_id": {
+                "extends": "id",
+                "description": "The ID of the case to retrieve notes for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "CaseNoteModel"
+                }
+            }
+        }
+    },
+    "ListCompanyCustomers": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of customers for a particular company",
+        "uri": "companies/{company_id}/customers",
+        "responseClass": "CompanyCustomersPage",
+        "parameters": {
+            "company_id": {
+                "extends": "id",
+                "description": "The ID of the company to retrieve customers for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "CustomerModel"
+                }
+            }
+        }
+    },
+    "ListCustomerCases": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of cases for a particular customer",
+        "uri": "customers/{customer_id}/cases",
+        "responseClass": "CustomerCasesPage",
+        "parameters": {
+            "customer_id": {
+                "extends": "id",
+                "description": "The ID of the customer to retrieve cases for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "CaseModel"
+                }
+            }
+        }
+    },
+    "ListFilterCases": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of cases for a particular filter",
+        "uri": "filters/{filter_id}/cases",
+        "responseClass": "FilterCasesPage",
+        "parameters": {
+            "filter_id": {
+                "extends": "id",
+                "description": "The ID of the filter to retrieve cases for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "CaseModel"
+                }
+            }
+        }
+    },
+    "ListGroupFilters": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of filters for a particular group",
+        "uri": "groups/{group_id}/filters",
+        "responseClass": "GroupFiltersPage",
+        "parameters": {
+            "group_id": {
+                "extends": "id",
+                "description": "The ID of the group to retrieve filters for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "FilterModel"
+                }
+            }
+        }
+    },
+    "ListGroupUsers": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of users for a particular group",
+        "uri": "groups/{group_id}/users",
+        "responseClass": "GroupUsersPage",
+        "parameters": {
+            "group_id": {
+                "extends": "id",
+                "description": "The ID of the group to retrieve users for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "UserModel"
+                }
+            }
+        }
+    },
+    "ListMacroActions": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of actions for a particular macro",
+        "uri": "macros/{macro_id}/actions",
+        "responseClass": "MacroActionsPage",
+        "parameters": {
+            "macro_id": {
+                "extends": "id",
+                "description": "The ID of the macro to retrieve actions for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "MacroActionModel"
+                }
+            }
+        }
+    },
+    "ListTopicArticles": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of articles for a particular topic",
+        "uri": "topics/{topic_id}/articles",
+        "responseClass": "TopicArticlesPage",
+        "parameters": {
+            "topic_id": {
+                "extends": "id",
+                "description": "The ID of the topic to retrieve articles for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "ArticleModel"
+                }
+            }
+        }
+    },
+    "ListTopicTranslations": {
+        "extends": "list",
+        "summary": "Retrieve a paginated list of translations for a particular topic",
+        "uri": "topics/{topic_id}/translations",
+        "responseClass": "TopicTranslationsPage",
+        "parameters": {
+            "topic_id": {
+                "extends": "id",
+                "description": "The ID of the topic to retrieve translations for",
+                "required": true,
+                "location": "uri"
+            }
+        },
+        "data": {
+            "embeds": {
+                "entries": {
+                    "model": "TopicTranslationModel"
+                }
+            }
+        }
+    },
+
+
+
+
+    "SearchArticles": {
+        "extends": "list",
+        "summary": "Search public articles with pagination",
+        "uri": "articles/search",
+        "responseClass": "SearchArticlesPage",
+        "parameters": {
+            "text": {
+                "description": "Search terms -- will search across subject, body_text, keywords, question, and answer fields",
+                "type": "string",
+                "location": "query"
+            },
+            "topic_ids": {
+                "description": "Topic IDs to filter results by",
+                "type": "array",
+                "items": {"extends": "id"},
+                "location": "query"
+            }
+        }
+    },
+    "SearchCases": {
+        "extends": "list",
+        "summary": "Search cases based on a combination of parameters with pagination",
+        "uri": "cases/search",
+        "responseClass": "SearchCasesPage",
+        "parameters": {
+            "name": {
+                "description": "Search for cases from customers with particular names",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            },
+            "first_name": {
+                "description": "Search for cases from customers with particular first names",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            },
+            "last_name": {
+                "description": "Search for cases from customers with particular last names",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            },
+            "email": {
+                "description": "Search for cases from customers with particular email addresses",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            },
+            "phone": {
+                "description": "Search for cases from customers with particular phone numbers",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            },
+            "company": {
+                "description": "Search for cases from customers with particular company names",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            },
+            "twitter": {
+                "description": "Search for cases from customers with particular twitter handles",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            },
+            "labels": {
+                "extends": "labels",
+                "description": "Search for cases from customers with particular labels",
+                "location": "query"
+            },
+            "case_id": {
+                "description": "Case IDs to filter by",
+                "type": "array",
+                "items": {"extends": "id"},
+                "location": "query"
+            },
+            "subject": {
+                "description": "Case subject to search for",
+                "type": "string",
+                "location": "query"
+            },
+            "description": {
+                "description": "Case description to search for",
+                "type": "string",
+                "location": "query"
+            },
+            "status": {
+                "description": "Case statuses to filter by",
+                "type": "array",
+                "items": {"extends": "status"},
+                "location": "query"
+            },
+            "priority": {
+                "description": "Case priorities to filter by",
+                "type": "array",
+                "items": {"extends": "priority"},
+                "location": "query"
+            },
+            "assigned_group": {
+                "description": "Assigned group name to filter by",
+                "type": "string",
+                "location": "query"
+            },
+            "assigned_user": {
+                "description": "Assigned user name to filter by",
+                "type": "string",
+                "location": "query"
+            },
+            "channels": {
+                "description": "Case channel types to filter by",
+                "type": "array",
+                "items": {"extends": "channel"},
+                "location": "query"
+            },
+            "notes": {
+                "description": "Case notes to search for",
+                "type": "string",
+                "location": "query"
+            },
+            "attachments": {
+                "description": "Case attachment file names to search for",
+                "type": "string",
+                "location": "query"
+            },
+            "created": {
+                "extends": "interval",
+                "description": "Creation date range to filter by",
+                "location": "query"
+            },
+            "updated": {
+                "extends": "interval",
+                "description": "Updated date range to filter by",
+                "location": "query"
+            },
+            "since_created_at": {
+                "extends": "date.input",
+                "description": "Search for cases created more recently than a particular date",
+                "location": "query"
+            },
+            "max_created_at": {
+                "extends": "date.input",
+                "description": "Search for cases created on or before a particular date",
+                "location": "query"
+            },
+            "since_updated_at": {
+                "extends": "date.input",
+                "description": "Search for cases updated more recently than a particular date",
+                "location": "query"
+            },
+            "max_updated_at": {
+                "extends": "date.input",
+                "description": "Search for cases updated on or before a particular date",
+                "location": "query"
+            },
+            "since_id": {
+                "extends": "id",
+                "description": "Search for cases with an ID greater than a particular ID",
+                "location": "query"
+            },
+            "max_id": {
+                "extends": "id",
+                "description": "Search for cases with an ID less than or equal to a particular ID",
+                "location": "query"
+            }
+        }
+    },
+    "SearchCustomers": {
+        "extends": "list",
+        "summary": "Search customers based on a combination of parameters with pagination",
+        "uri": "customers/search",
+        "responseClass": "SearchCustomersPage",
+        "parameters": {
+            "first_name": {
+                "description": "Customer's first name to search for",
+                "type": "string",
+                "location": "query"
+            },
+            "last_name": {
+                "description": "Customer's last name to search for",
+                "type": "string",
+                "location": "query"
+            },
+            "full_name": {
+                "description": "Customer's first and last name (concatenated) to search for",
+                "type": "string",
+                "location": "query"
+            },
+            "since_created_at": {
+                "extends": "date.input",
+                "description": "Search for customers created more recently than a particular date",
+                "location": "query"
+            },
+            "max_created_at": {
+                "extends": "date.input",
+                "description": "Search for customers created on or before a particular date",
+                "location": "query"
+            },
+            "since_updated_at": {
+                "extends": "date.input",
+                "description": "Search for customers updated more recently than a particular date",
+                "location": "query"
+            },
+            "max_updated_at": {
+                "extends": "date.input",
+                "description": "Search for customers updated on or before a particular date",
+                "location": "query"
+            },
+            "since_id": {
+                "extends": "id",
+                "description": "Search for customers with an ID greater than a particular ID",
+                "location": "query"
+            },
+            "max_id": {
+                "extends": "id",
+                "description": "Search for customers with an ID less than or equal to a particular ID",
+                "location": "query"
+            },
+            "email": {
+                "description": "Customer's email address to search for",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            },
+            "twitter": {
+                "description": "Customer's twitter handle to search for",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            },
+            "phone": {
+                "description": "Customer's phone number to search for",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            },
+            "external_id": {
+                "description": "Customer's external ID to search for",
+                "type": "array",
+                "items": {"type": "string"},
+                "location": "query"
+            }
+        }
+    },
+
+
+
+
+    "ShowArticle": {
+        "extends": "show.main",
+        "summary": "Retrieve a single article by ID",
+        "uri": "articles/{id}",
+        "responseClass": "ArticleModel"
+    },
+    "ShowCase": {
+        "extends": "show.main",
+        "summary": "Retrieve a single case by ID",
+        "uri": "cases/{id}",
+        "responseClass": "CaseModel"
+    },
+    "ShowCompany": {
+        "extends": "show.main",
+        "summary": "Retrieve a single company by ID",
+        "uri": "companies/{id}",
+        "responseClass": "CompanyModel"
+    },
+    "ShowCustomField": {
+        "extends": "show.main",
+        "summary": "Retrieve a single custom field by ID",
+        "uri": "custom_fields/{id}",
+        "responseClass": "CustomFieldModel"
+    },
+    "ShowCustomer": {
+        "extends": "show.main",
+        "summary": "Retrieve a single customer by ID",
+        "uri": "customers/{id}",
+        "responseClass": "CustomerModel"
+    },
+    "ShowFilter": {
+        "extends": "show.main",
+        "summary": "Retrieve a single filter by ID",
+        "uri": "filters/{id}",
+        "responseClass": "FilterModel"
+    },
+    "ShowGroup": {
+        "extends": "show.main",
+        "summary": "Retrieve a single group by ID",
+        "uri": "groups/{id}",
+        "responseClass": "GroupModel"
+    },
+    "ShowIntegrationUrl": {
+        "extends": "show.main",
+        "summary": "Retrieve a single integration URL by ID",
+        "uri": "integration_urls/{id}",
+        "responseClass": "IntegrationUrlModel"
+    },
+    "ShowMacro": {
+        "extends": "show.main",
+        "summary": "Retrieve a single macro by ID",
+        "uri": "macros/{id}",
+        "responseClass": "MacroModel"
+    },
+    "ShowTopic": {
+        "extends": "show.main",
+        "summary": "Retrieve a single topic by ID",
+        "uri": "topics/{id}",
+        "responseClass": "TopicModel"
+    },
+    "ShowUser": {
+        "extends": "show.main",
+        "summary": "Retrieve a single user by ID",
+        "uri": "users/{id}",
+        "responseClass": "UserModel"
+    },
+
+
+    "ShowInsightMeta": {
+        "extends": "show",
+        "summary": "Retrieve insights meta data for the authenticated site",
+        "uri": "insights/meta",
+        "responseClass": "InsightMetaModel"
+    },
+
+
+    "ShowArticleTranslation": {
+        "extends": "show",
+        "summary": "Retrieve a single article translation by article ID and locale",
+        "uri": "articles/{article_id}/translations/{locale}",
+        "responseClass": "ArticleTranslationModel",
+        "parameters": {
+            "article_id": {
+                "extends": "id",
+                "description": "The ID of the article to retrieve the translation for",
+                "required": true,
+                "location": "uri"
+            },
+            "locale": {
+                "extends": "locale",
+                "description": "The locale of the translation to retrieve",
+                "required": true,
+                "location": "uri"
+            }
+        }
+    },
+    "ShowCaseMessage": {
+        "extends": "show",
+        "summary": "Retrieve the original message for a particular case",
+        "uri": "cases/{case_id}/message",
+        "responseClass": "CaseMessageModel",
+        "parameters": {
+            "case_id": {"extends": "id", "required": true, "location": "uri"}
+        }
+    },
+    "ShowCaseReply": {
+        "extends": "show",
+        "summary": "Retrieve a single case reply by case ID and reply ID",
+        "uri": "cases/{case_id}/replies/{reply_id}",
+        "responseClass": "CaseReplyModel",
+        "parameters": {
+            "case_id": {"extends": "id", "required": true, "location": "uri"},
+            "reply_id": {"extends": "id", "required": true, "location": "uri"}
+        }
+    },
+    "ShowCaseNote": {
+        "extends": "show",
+        "summary": "Retrieve a single private case note by case ID and note ID",
+        "uri": "cases/{case_id}/notes/{note_id}",
+        "responseClass": "CaseNoteModel",
+        "parameters": {
+            "case_id": {"extends": "id", "required": true, "location": "uri"},
+            "note_id": {"extends": "id", "required": true, "location": "uri"}
+        }
+    },
+    "ShowMacroAction": {
+        "extends": "show",
+        "summary": "Retrieve a single macro action by macro ID and action ID",
+        "uri": "macros/{macro_id}/actions/{action_id}",
+        "responseClass": "MacroActionModel",
+        "parameters": {
+            "macro_id": {"extends": "id", "required": true, "location": "uri"},
+            "action_id": {"extends": "id", "required": true, "location": "uri"}
+        }
+    },
+    "ShowTopicTranslation": {
+        "extends": "show",
+        "summary": "Retrieve a single topic translation by article ID and locale",
+        "uri": "topics/{topic_id}/translations/{locale}",
+        "responseClass": "TopicTranslationModel",
+        "parameters": {
+            "topic_id": {
+                "extends": "id",
+                "description": "The ID of the topic to retrieve the translation for",
+                "required": true,
+                "location": "uri"
+            },
+            "locale": {
+                "extends": "locale",
+                "description": "The locale of the translation to retrieve",
+                "required": true,
+                "location": "uri"
+            }
+        }
+    },
+
+
+
+
+    "CreateArticle": {
+        "extends": "create",
+        "summary": "Create a new article",
+        "uri": "articles",
+        "responseClass": "ArticleModel",
+        "parameters": {
+            "subject": {"extends": "ArticleModel.subject"},
+            "in_support_center": {"extends": "ArticleModel.in_support_center"},
+            "position": {"extends": "ArticleModel.position"},
+            "quickcode": {"extends": "ArticleModel.quickcode"},
+            "keywords": {"extends": "ArticleModel.keywords"},
+            "publish_at": {"extends": "ArticleModel.publish_at.input"},
+            "created_at": {"extends": "ArticleModel.created_at.input"},
+            "updated_at": {"extends": "ArticleModel.updated_at.input"},
+            "body": {"extends": "ArticleModel.body"},
+            "body_email": {"extends": "ArticleModel.body_email"},
+            "body_email_auto": {"extends": "ArticleModel.body_email_auto"},
+            "body_chat": {"extends": "ArticleModel.body_chat"},
+            "body_chat_auto": {"extends": "ArticleModel.body_chat_auto"},
+            "body_web_callback": {"extends": "ArticleModel.body_web_callback"},
+            "body_web_callback_auto": {"extends": "ArticleModel.body_web_callback_auto"},
+            "body_twitter": {"extends": "ArticleModel.body_twitter"},
+            "body_twitter_auto": {"extends": "ArticleModel.body_twitter_auto"},
+            "body_qna": {"extends": "ArticleModel.body_qna"},
+            "body_qna_auto": {"extends": "ArticleModel.body_qna_auto"},
+            "body_phone": {"extends": "ArticleModel.body_phone"},
+            "body_phone_auto": {"extends": "ArticleModel.body_phone_auto"},
+            "body_facebook": {"extends": "ArticleModel.body_facebook"},
+            "body_facebook_auto": {"extends": "ArticleModel.body_facebook_auto"},
+            "internal_notes": {"extends": "ArticleModel.internal_notes"},
+            "topic_id": {
+                "description": "The topic to which the new article is assigned",
+                "required": true,
+                "type": "integer",
+                "location": "links",
+                "sentAs": "topic",
+                "data": {
+                    "class": "topic",
+                    "href": "/api/v2/topics/{value}"
+                }
+            }
+        }
+    },
+    "CreateCase": {
+        "extends": "create",
+        "summary": "Create a new case",
+        "uri": "cases",
+        "responseClass": "CaseModel",
+        "parameters": {
+            "external_id": {"extends": "CaseModel.external_id"},
+            "subject": {"extends": "CaseModel.subject"},
+            "priority": {"extends": "CaseModel.priority"},
+            "description": {"extends": "CaseModel.description"},
+            "status": {"extends": "CaseModel.status"},
+            "type": {"extends": "CaseModel.type", "required": true},
+            "labels": {"extends": "CaseModel.labels"},
+            "custom_fields": {"extends": "CaseModel.custom_fields"},
+            "created_at": {"extends": "CaseModel.created_at.input"},
+            "updated_at": {"extends": "CaseModel.updated_at.input"},
+            "active_at": {"extends": "CaseModel.active_at.input"},
+            "received_at": {"extends": "CaseModel.received_at.input"},
+            "locked_until": {"extends": "CaseModel.locked_until.input"},
+            "customer_id": {
+                "description": "The customer that submitted this case",
+                "required": true,
+                "type": "integer",
+                "location": "links",
+                "sentAs": "customer",
+                "data": {
+                    "class": "customer",
+                    "href": "/api/v2/customers/{value}"
+                }
+            },
+            "assigned_user_id": {
+                "description": "The user assigned to this case",
+                "type": "integer",
+                "location": "links",
+                "sentAs": "assigned_user",
+                "data": {
+                    "class": "user",
+                    "href": "/api/v2/users/{value}"
+                }
+            },
+            "assigned_group_id": {
+                "description": "The group assigned to this case",
+                "type": "integer",
+                "location": "links",
+                "sentAs": "assigned_group",
+                "data": {
+                    "class": "group",
+                    "href": "/api/v2/groups/{value}"
+                }
+            },
+            "locked_by_id": {
+                "description": "User currently working on this case",
+                "type": "integer",
+                "location": "links",
+                "sentAs": "locked_by",
+                "data": {
+                    "class": "user",
+                    "href": "/api/v2/users/{value}"
+                }
+            },
+            "entered_by_id": {
+                "description": "The support agent that entered the first phone interaction",
+                "type": "integer",
+                "location": "links",
+                "sentAs": "entered_by",
+                "data": {
+                    "class": "user",
+                    "href": "/api/v2/users/{value}"
+                }
+            },
+            "message": {
+                "type": "object",
+                "properties": {
+                    "direction": {"extends": "CaseMessageModel.direction", "required": true},
+                    "status": {"extends": "CaseMessageModel.status"},
+                    "body": {"extends": "CaseMessageModel.body"},
+                    "subject": {"extends": "CaseMessageModel.subject"},
+                    "from": {"extends": "CaseMessageModel.from"},
+                    "to": {"extends": "CaseMessageModel.to"},
+                    "cc": {"extends": "CaseMessageModel.cc"},
+                    "bcc": {"extends": "CaseMessageModel.bcc"},
+                    "created_at": {"extends": "CaseMessageModel.created_at.input"},
+                    "entered_at": {"extends": "CaseMessageModel.entered_at.input"}
+                },
+                "location": "json"
+            }
+        }
+    },
+    "CreateCompany": {
+        "extends": "create",
+        "summary": "Create a new company",
+        "uri": "companies",
+        "responseClass": "CompanyModel",
+        "parameters": {
+            "name": {"extends": "CompanyModel.name", "required": true},
+            "domains": {"extends": "CompanyModel.domains"},
+            "created_at": {"extends": "CompanyModel.created_at.input"},
+            "updated_at": {"extends": "CompanyModel.updated_at.input"},
+            "custom_fields": {"extends": "CompanyModel.custom_fields"}
+        }
+    },
+    "CreateCustomer": {
+        "extends": "create",
+        "summary": "Create a new customer",
+        "uri": "customers",
+        "responseClass": "CustomerModel",
+        "parameters": {
+            "first_name": {"extends": "CustomerModel.first_name"},
+            "last_name": {"extends": "CustomerModel.last_name"},
+            "company": {"extends": "CustomerModel.company"},
+            "title": {"extends": "CustomerModel.title"},
+            "external_id": {"extends": "CustomerModel.external_id"},
+            "background": {"extends": "CustomerModel.background"},
+            "language": {"extends": "CustomerModel.language"},
+            "locked_until": {"extends": "CustomerModel.locked_until"},
+            "created_at": {"extends": "CustomerModel.created_at"},
+            "updated_at": {"extends": "CustomerModel.updated_at"},
+            "emails": {"extends": "CustomerModel.emails"},
+            "phone_numbers": {"extends": "CustomerModel.phone_numbers"},
+            "addresses": {"extends": "CustomerModel.addresses"},
+            "custom_fields": {"extends": "CustomerModel.custom_fields"},
+            "company_id": {
+                "description": "ID of company to assign to this customer",
+                "type": "integer",
+                "location": "links",
+                "sentAs": "company",
+                "data": {
+                    "class": "company",
+                    "href": "/api/v2/companies/{value}"
+                }
+            }
+        }
+    },
+    "CreateIntegrationUrl": {
+        "extends": "create",
+        "summary": "Create a new integration URL",
+        "uri": "integration_urls",
+        "responseClass": "IntegrationUrlModel",
+        "parameters": {
+            "name": {"extends": "IntegrationUrlModel.name"},
+            "description": {"extends": "IntegrationUrlModel.description"},
+            "enabled": {"extends": "IntegrationUrlModel.enabled"},
+            "markup": {"extends": "IntegrationUrlModel.markup"}
+        }
+    },
+    "CreateMacro": {
+        "extends": "create",
+        "summary": "Create a new macro",
+        "uri": "macros",
+        "responseClass": "MacroModel",
+        "parameters": {
+            "name": {"extends": "MacroModel.name"},
+            "description": {"extends": "MacroModel.description"},
+            "enabled": {"extends": "MacroModel.enabled"},
+            "folders": {"extends": "MacroModel.folders"}
+        }
+    },
+    "CreateTopic": {
+        "extends": "create",
+        "summary": "Create a new topic",
+        "uri": "topics",
+        "responseClass": "TopicModel",
+        "parameters": {
+            "name": {"extends": "TopicModel.name"},
+            "description": {"extends": "TopicModel.description"},
+            "position": {"extends": "TopicModel.position"},
+            "allow_questions": {"extends": "TopicModel.allow_questions"},
+            "in_support_center": {"extends": "TopicModel.in_support_center"},
+            "created_at": {"extends": "TopicModel.created_at"},
+            "updated_at": {"extends": "TopicModel.updated_at"}
+        }
+    },
+
+
+
+
+    "CreateCaseReply": {
+        "extends": "create",
+        "summary": "Create a new case reply for a particular case",
+        "uri": "cases/{case_id}/replies",
+        "responseClass": "CaseReplyModel",
+        "parameters": {
+            "case_id": {"extends": "id", "required": true, "location": "uri"},
+            "direction": {"extends": "CaseReplyModel.direction"},
+            "body": {"extends": "CaseReplyModel.body"},
+            "created_at": {"extends": "CaseReplyModel.created_at.input"},
+            "status": {"extends": "CaseReplyModel.status.out"},
+            "subject": {"extends": "CaseReplyModel.subject"},
+            "from": {"extends": "CaseReplyModel.from"},
+            "to": {"extends": "CaseReplyModel.to"},
+            "cc": {"extends": "CaseReplyModel.cc"},
+            "bcc": {"extends": "CaseReplyModel.bcc"},
+            "type": {"extends": "CaseReplyModel.type"},
+            "hidden_at": {"extends": "CaseReplyModel.hidden_at.input"}
+        }
+    },
+    "CreateTopicTranslation": {
+        "extends": "create",
+        "summary": "Create a new translation for a particular topic",
+        "uri": "topics/{topic_id}/translations",
+        "responseClass": "TopicTranslationModel",
+        "parameters": {
+            "topic_id": {"extends": "id", "required": true, "location": "uri"},
+            "name": {"extends": "TopicTranslationModel.name"},
+            "locale": {"extends": "TopicTranslationModel.locale", "required": true}
+        }
+    },
+
+
+
+
+    "DeleteArticle": {
+        "extends": "delete.main",
+        "summary": "Delete a single article by ID",
+        "uri": "articles/{id}"
+    },
+    "DeleteIntegrationUrl": {
+        "extends": "delete.main",
+        "summary": "Delete a single integration URL by ID",
+        "uri": "integration_urls/{id}"
+    },
+    "DeleteMacro": {
+        "extends": "delete.main",
+        "summary": "Delete a single macro by ID",
+        "uri": "macros/{id}"
+    },
+    "DeleteTopic": {
+        "extends": "delete.main",
+        "summary": "Delete a single topic by ID",
+        "uri": "topics/{id}"
+    },
+
+
+    "DeleteTopicTranslation": {
+        "extends": "delete",
+        "summary": "Delete a single topic translation by topic ID and locale",
+        "uri": "topics/{topic_id}/translations/{locale}",
+        "parameters": {
+            "topic_id": {
+                "extends": "id",
+                "description": "The ID of the topic to delete the translation from",
+                "required": true,
+                "location": "uri"
+            },
+            "locale": {
+                "extends": "locale",
+                "description": "The locale of the translation to delete",
+                "required": true,
+                "location": "uri"
+            }
+        }
+    }
+}

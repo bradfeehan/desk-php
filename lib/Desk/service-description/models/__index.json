@@ -1,0 +1,2638 @@
+{
+    "parameter": {
+        "location": "json"
+    },
+    "channel": {
+        "extends": "parameter",
+        "type": "string",
+        "enum": ["chat", "twitter", "email", "qna", "facebook", "phone"]
+    },
+    "custom_fields": {
+        "extends": "parameter",
+        "type": "object",
+        "additionalProperties": true
+    },
+    "date.output": {
+        "extends": "parameter",
+        "type": "string",
+        "filters": "Desk\\Filter\\Date::stringToObject"
+    },
+    "date.input": {
+        "extends": "parameter",
+        "type": "object",
+        "instanceOf": "DateTime",
+        "filters": "Desk\\Filter\\Date::objectToString"
+    },
+    "interval": {
+        "extends": "parameter",
+        "type": "string",
+        "enum": ["today", "yesterday", "week", "month", "year"]
+    },
+    "id": {
+        "extends": "parameter",
+        "type": "string"
+    },
+    "labels": {
+        "extends": "parameter",
+        "type": "array",
+        "items": {
+            "type": "string"
+        }
+    },
+    "locale": {
+        "extends": "parameter",
+        "type": "string"
+    },
+    "priority": {
+        "extends": "parameter",
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 10
+    },
+    "status": {
+        "extends": "parameter",
+        "type": "string",
+        "enum": ["new", "open", "pending", "resolved", "closed"]
+    },
+
+
+
+
+    "page": {
+        "type": "object",
+        "properties": {
+            "total_entries": {
+                "description": "Total number of entries on all pages of the result",
+                "type": "integer",
+                "location": "json"
+            }
+        }
+    },
+
+
+
+
+    "ArticlesPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "ArticleModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticles",
+                    "pattern": "#/articles\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticles",
+                    "pattern": "#/articles\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticles",
+                    "pattern": "#/articles\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticles",
+                    "pattern": "#/articles\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticles",
+                    "pattern": "#/articles\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "CasesPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CaseModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCases",
+                    "pattern": "#/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCases",
+                    "pattern": "#/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCases",
+                    "pattern": "#/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCases",
+                    "pattern": "#/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCases",
+                    "pattern": "#/cases\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "CompaniesPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CompanyModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanies",
+                    "pattern": "#/companies\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanies",
+                    "pattern": "#/companies\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanies",
+                    "pattern": "#/companies\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanies",
+                    "pattern": "#/companies\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanies",
+                    "pattern": "#/companies\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "CustomFieldsPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CustomFieldModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomFields",
+                    "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomFields",
+                    "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomFields",
+                    "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomFields",
+                    "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomFields",
+                    "pattern": "#/custom_fields\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "CustomersPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CustomerModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomers",
+                    "pattern": "#/customers\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomers",
+                    "pattern": "#/customers\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomers",
+                    "pattern": "#/customers\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomers",
+                    "pattern": "#/customers\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomers",
+                    "pattern": "#/customers\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "FiltersPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "FilterModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListFilters",
+                    "pattern": "#/filters\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListFilters",
+                    "pattern": "#/filters\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListFilters",
+                    "pattern": "#/filters\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListFilters",
+                    "pattern": "#/filters\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListFilters",
+                    "pattern": "#/filters\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "GroupsPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "GroupModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroups",
+                    "pattern": "#/groups\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroups",
+                    "pattern": "#/groups\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroups",
+                    "pattern": "#/groups\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroups",
+                    "pattern": "#/groups\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroups",
+                    "pattern": "#/groups\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "IntegrationUrlsPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "IntegrationUrlModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListIntegrationUrls",
+                    "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListIntegrationUrls",
+                    "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListIntegrationUrls",
+                    "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListIntegrationUrls",
+                    "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListIntegrationUrls",
+                    "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "MacrosPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "MacroModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacros",
+                    "pattern": "#/macros\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacros",
+                    "pattern": "#/macros\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacros",
+                    "pattern": "#/macros\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacros",
+                    "pattern": "#/macros\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacros",
+                    "pattern": "#/macros\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "TopicsPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "TopicModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopics",
+                    "pattern": "#/topics\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopics",
+                    "pattern": "#/topics\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopics",
+                    "pattern": "#/topics\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopics",
+                    "pattern": "#/topics\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopics",
+                    "pattern": "#/topics\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "UsersPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "UserModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListUsers",
+                    "pattern": "#/users\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListUsers",
+                    "pattern": "#/users\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListUsers",
+                    "pattern": "#/users\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListUsers",
+                    "pattern": "#/users\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListUsers",
+                    "pattern": "#/users\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+
+
+
+
+    "ArticleTranslationsPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "ArticleTranslationModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticleTranslations",
+                    "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticleTranslations",
+                    "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticleTranslations",
+                    "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticleTranslations",
+                    "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticleTranslations",
+                    "pattern": "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "CaseRepliesPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CaseReplyModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseReplies",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseReplies",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseReplies",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseReplies",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseReplies",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "CaseNotesPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CaseNoteModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseNotes",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseNotes",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseNotes",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseNotes",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseNotes",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "CompanyCustomersPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CustomerModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanyCustomers",
+                    "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanyCustomers",
+                    "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanyCustomers",
+                    "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanyCustomers",
+                    "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanyCustomers",
+                    "pattern": "#/companies/(?P<company_id>[0-9]+)/customers\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "CustomerCasesPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CaseModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomerCases",
+                    "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomerCases",
+                    "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomerCases",
+                    "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomerCases",
+                    "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomerCases",
+                    "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "FilterCasesPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CaseModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListFilterCases",
+                    "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListFilterCases",
+                    "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListFilterCases",
+                    "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListFilterCases",
+                    "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListFilterCases",
+                    "pattern": "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "GroupFiltersPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "FilterModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupFilters",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupFilters",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupFilters",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupFilters",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupFilters",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "GroupUsersPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "UserModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupUsers",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupUsers",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupUsers",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupUsers",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupUsers",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/users\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "MacroActionsPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "MacroActionModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacroActions",
+                    "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacroActions",
+                    "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacroActions",
+                    "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacroActions",
+                    "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacroActions",
+                    "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "TopicArticlesPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "ArticleModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicArticles",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicArticles",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicArticles",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicArticles",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicArticles",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "TopicTranslationsPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "TopicTranslationModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicTranslations",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicTranslations",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicTranslations",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicTranslations",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicTranslations",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+
+
+
+
+    "SearchArticlesPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "ArticleModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchArticles",
+                    "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchArticles",
+                    "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchArticles",
+                    "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchArticles",
+                    "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchArticles",
+                    "pattern": "#/articles/search\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "SearchCasesPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CaseModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchCases",
+                    "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchCases",
+                    "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchCases",
+                    "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchCases",
+                    "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchCases",
+                    "pattern": "#/cases/search\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+    "SearchCustomersPage": {
+        "extends": "page",
+        "properties": {
+            "entries": {
+                "type": "array",
+                "items": {
+                    "extends": "CustomerModel"
+                },
+                "location": "embedded"
+            },
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchCustomers",
+                    "pattern": "#/customers/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "first": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchCustomers",
+                    "pattern": "#/customers/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "last": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchCustomers",
+                    "pattern": "#/customers/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "next": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchCustomers",
+                    "pattern": "#/customers/search\\??(?P<_query>.*)$#"
+                }
+            },
+            "previous": {
+                "location": "links",
+                "data": {
+                    "operation": "SearchCustomers",
+                    "pattern": "#/customers/search\\??(?P<_query>.*)$#"
+                }
+            }
+        }
+    },
+
+
+
+
+    "body_auto": {
+        "extends": "parameter",
+        "description": "Whether to just use the content from 'body'",
+        "type": "boolean"
+    },
+
+
+    "ArticleModel.subject": {
+        "extends": "parameter",
+        "description": "The subject of the article",
+        "required": true,
+        "type": "string",
+        "minLength": 2
+    },
+    "ArticleModel.in_support_center": {
+        "extends": "parameter",
+        "description": "Whether to display the article in the support center",
+        "type": "boolean"
+    },
+    "ArticleModel.position": {
+        "extends": "parameter",
+        "description": "The position of the article as displayed in the support center",
+        "type": "integer"
+    },
+    "ArticleModel.quickcode": {
+        "extends": "parameter",
+        "description": "Code used by the agent to quickly add article content to a case",
+        "type": "string"
+    },
+    "ArticleModel.keywords": {
+        "extends": "parameter",
+        "description": "Keywords in the article",
+        "type": "string"
+    },
+    "ArticleModel.publish_at.output": {
+        "extends": "date.output",
+        "description": "Date the article is to be published"
+    },
+    "ArticleModel.publish_at.input": {
+        "extends": "date.input",
+        "description": "Date the article is to be published"
+    },
+    "ArticleModel.created_at.output": {
+        "extends": "date.output",
+        "description": "Date the article was created"
+    },
+    "ArticleModel.created_at.input": {
+        "extends": "date.input",
+        "description": "Date the article was created"
+    },
+    "ArticleModel.updated_at.output": {
+        "extends": "date.output",
+        "description": "Date the article was updated"
+    },
+    "ArticleModel.updated_at.input": {
+        "extends": "date.input",
+        "description": "Date the article was updated"
+    },
+    "ArticleModel.body": {
+        "extends": "parameter",
+        "description": "The content of the article (HTML formatted)",
+        "type": "string"
+    },
+    "ArticleModel.body_email": {
+        "extends": "parameter",
+        "description": "Email-specific body content",
+        "type": "string"
+    },
+    "ArticleModel.body_email_auto": {"extends": "body_auto"},
+    "ArticleModel.body_chat": {
+        "extends": "parameter",
+        "description": "Chat-specific body content",
+        "type": "string"
+    },
+    "ArticleModel.body_chat_auto": {"extends": "body_auto"},
+    "ArticleModel.body_web_callback": {
+        "extends": "parameter",
+        "description": "Chat-specific body content",
+        "type": "string"
+    },
+    "ArticleModel.body_web_callback_auto": {"extends": "body_auto"},
+    "ArticleModel.body_twitter": {
+        "extends": "parameter",
+        "description": "Twitter-specific body content",
+        "type": "string"
+    },
+    "ArticleModel.body_twitter_auto": {"extends": "body_auto"},
+    "ArticleModel.body_qna": {
+        "extends": "parameter",
+        "description": "QNA-specific body content",
+        "type": "string"
+    },
+    "ArticleModel.body_qna_auto": {"extends": "body_auto"},
+    "ArticleModel.body_phone": {
+        "extends": "parameter",
+        "description": "Phone-specific body content",
+        "type": "string"
+    },
+    "ArticleModel.body_phone_auto": {"extends": "body_auto"},
+    "ArticleModel.body_facebook": {
+        "extends": "parameter",
+        "description": "Facebook-specific body content",
+        "type": "string"
+    },
+    "ArticleModel.body_facebook_auto": {"extends": "body_auto"},
+    "ArticleModel.internal_notes": {
+        "extends": "parameter",
+        "description": "Notes to the agent using the article",
+        "type": "string"
+    },
+
+
+    "ArticleTranslation.locale": {
+        "extends": "locale",
+        "description": "Article translation's locale"
+    },
+    "ArticleTranslation.subject": {
+        "extends": "parameter",
+        "description": "The subject of the article",
+        "type": "string"
+    },
+    "ArticleTranslation.body": {
+        "extends": "parameter",
+        "description": "The content of the article (HTML formatted)",
+        "type": "string"
+    },
+    "ArticleTranslation.body_email": {
+        "extends": "parameter",
+        "description": "Email-specific body content",
+        "type": "string"
+    },
+    "ArticleTranslation.body_email_auto": {"extends": "body_auto"},
+    "ArticleTranslation.body_chat": {
+        "extends": "parameter",
+        "description": "Chat-specific body content",
+        "type": "string"
+    },
+    "ArticleTranslation.body_chat_auto": {"extends": "body_auto"},
+    "ArticleTranslation.body_web_callback": {
+        "extends": "parameter",
+        "description": "Chat-specific body content",
+        "type": "string"
+    },
+    "ArticleTranslation.body_web_callback_auto": {"extends": "body_auto"},
+    "ArticleTranslation.body_twitter": {
+        "extends": "parameter",
+        "description": "Twitter-specific body content",
+        "type": "string"
+    },
+    "ArticleTranslation.body_twitter_auto": {"extends": "body_auto"},
+    "ArticleTranslation.body_qna": {
+        "extends": "parameter",
+        "description": "QNA-specific body content",
+        "type": "string"
+    },
+    "ArticleTranslation.body_qna_auto": {"extends": "body_auto"},
+    "ArticleTranslation.body_phone": {
+        "extends": "parameter",
+        "description": "Phone-specific body content",
+        "type": "string"
+    },
+    "ArticleTranslation.body_phone_auto": {"extends": "body_auto"},
+    "ArticleTranslation.body_facebook": {
+        "extends": "parameter",
+        "description": "Facebook-specific body content",
+        "type": "string"
+    },
+    "ArticleTranslation.body_facebook_auto": {"extends": "body_auto"},
+    "ArticleTranslation.publish_at": {
+        "extends": "date.output",
+        "description": "Date the article is to be published"
+    },
+    "ArticleTranslation.created_at": {
+        "extends": "date.output",
+        "description": "Date the article was created"
+    },
+    "ArticleTranslation.updated_at": {
+        "extends": "date.output",
+        "description": "Date the article was updated"
+    },
+
+
+    "CaseModel.external_id": {
+        "extends": "parameter",
+        "description": "Unique external identifier to reference this case to an external system",
+        "type": "string"
+    },
+    "CaseModel.subject": {
+        "extends": "parameter",
+        "description": "The subject of the case",
+        "type": "string"
+    },
+    "CaseModel.priority": {
+        "extends": "priority",
+        "description": "Priority of the case (1-10, 1 is lowest priority)"
+    },
+    "CaseModel.description": {
+        "extends": "parameter",
+        "description": "Description or background information",
+        "type": "string"
+    },
+    "CaseModel.status": {
+        "extends": "status",
+        "description": "Current state of the case"
+    },
+    "CaseModel.type": {
+        "extends": "channel",
+        "description": "Channel of the case"
+    },
+    "CaseModel.labels": {
+        "extends": "labels",
+        "description": "Array of labels associated with this case"
+    },
+    "CaseModel.custom_fields": {
+        "extends": "custom_fields",
+        "description": "Hash of values for custom fields"
+    },
+    "CaseModel.created_at.output": {
+        "extends": "date.output",
+        "description": "Time of creation"
+    },
+    "CaseModel.created_at.input": {
+        "extends": "date.input",
+        "description": "Time of creation"
+    },
+    "CaseModel.updated_at.output": {
+        "extends": "date.output",
+        "description": "Time last updated"
+    },
+    "CaseModel.updated_at.input": {
+        "extends": "date.input",
+        "description": "Time last updated"
+    },
+    "CaseModel.active_at.output": {
+        "extends": "date.output",
+        "description": "Time the case was last active"
+    },
+    "CaseModel.active_at.input": {
+        "extends": "date.input",
+        "description": "Time the case was last active"
+    },
+    "CaseModel.received_at.output": {
+        "extends": "date.output",
+        "description": "Time the most recent message was received"
+    },
+    "CaseModel.received_at.input": {
+        "extends": "date.input",
+        "description": "Time the most recent message was received"
+    },
+    "CaseModel.locked_until.output": {
+        "extends": "date.output",
+        "description": "Time at which the lock on this case will expire"
+    },
+    "CaseModel.locked_until.input": {
+        "extends": "date.input",
+        "description": "Time at which the lock on this case will expire"
+    },
+
+
+    "CaseMessageModel.direction": {
+        "extends": "parameter",
+        "description": "Direction of the message",
+        "type": "string",
+        "enum": ["in", "out"]
+    },
+    "CaseMessageModel.body": {
+        "extends": "parameter",
+        "description": "Body of the message",
+        "type": "string"
+    },
+    "CaseMessageModel.created_at.output": {
+        "extends": "date.output",
+        "description": "Time of creation"
+    },
+    "CaseMessageModel.created_at.input": {
+        "extends": "date.input",
+        "description": "Time of creation"
+    },
+    "CaseMessageModel.updated_at": {
+        "extends": "date.output",
+        "description": "Time last updated"
+    },
+    "CaseMessageModel.status": {
+        "extends": "parameter",
+        "description": "The message's current status",
+        "type": "string",
+        "enum": ["received", "pending", "sent", "failed"]
+    },
+    "CaseMessageModel.subject": {
+        "extends": "parameter",
+        "description": "The subject of the message",
+        "type": "string"
+    },
+    "CaseMessageModel.from": {
+        "extends": "parameter",
+        "description": "The from address of the message",
+        "type": "string"
+    },
+    "CaseMessageModel.to": {
+        "extends": "parameter",
+        "description": "The to address of the message",
+        "type": "string"
+    },
+    "CaseMessageModel.cc": {
+        "extends": "parameter",
+        "description": "The CC address(es) of the message",
+        "type": "string"
+    },
+    "CaseMessageModel.bcc": {
+        "extends": "parameter",
+        "description": "The BCC address(es) of the message",
+        "type": "string"
+    },
+    "CaseMessageModel.type": {
+        "extends": "parameter",
+        "description": "The type of tweet",
+        "type": "string",
+        "enum": ["mention", "dm"]
+    },
+    "CaseMessageModel.hidden_at": {
+        "extends": "date.output",
+        "description": "Time at which this answer was hidden from the support center"
+    },
+
+
+    "CaseReplyModel.direction": {
+        "extends": "parameter",
+        "description": "Direction of the message",
+        "type": "string",
+        "enum": ["in", "out"]
+    },
+    "CaseReplyModel.body": {
+        "extends": "parameter",
+        "description": "Body of the message",
+        "type": "string"
+    },
+    "CaseReplyModel.created_at.input": {
+        "extends": "date.input",
+        "description": "Time of creation"
+    },
+    "CaseReplyModel.created_at.output": {
+        "extends": "date.output",
+        "description": "Time of creation"
+    },
+    "CaseReplyModel.updated_at.output": {
+        "extends": "date.output",
+        "description": "Time last updated"
+    },
+    "CaseReplyModel.status.out": {
+        "extends": "parameter",
+        "description": "The message's current status",
+        "type": "string"
+    },
+    "CaseReplyModel.status.in": {
+        "extends": "parameter",
+        "description": "The message's current status",
+        "type": "string",
+        "enum": ["draft", "pending", "sent"]
+    },
+    "CaseReplyModel.subject": {
+        "extends": "parameter",
+        "description": "The subject of the message",
+        "type": "string"
+    },
+    "CaseReplyModel.from": {
+        "extends": "parameter",
+        "description": "The from address of the message",
+        "type": "string"
+    },
+    "CaseReplyModel.to": {
+        "extends": "parameter",
+        "description": "The to address of the message",
+        "type": "string"
+    },
+    "CaseReplyModel.cc": {
+        "extends": "parameter",
+        "description": "The CC address(es) of the message",
+        "type": "string"
+    },
+    "CaseReplyModel.bcc": {
+        "extends": "parameter",
+        "description": "The BCC address(es) of the message",
+        "type": "string"
+    },
+    "CaseReplyModel.type": {
+        "extends": "parameter",
+        "description": "The type of tweet",
+        "type": "string",
+        "enum": ["mention", "dm"]
+    },
+    "CaseReplyModel.hidden_at.output": {
+        "extends": "date.output",
+        "description": "Time at which this answer was hidden from the support center"
+    },
+    "CaseReplyModel.hidden_at.input": {
+        "extends": "date.input",
+        "description": "Time at which this answer was hidden from the support center"
+    },
+
+
+    "CaseNoteModel.body": {
+        "extends": "parameter",
+        "description": "The body of the note",
+        "type": "string"
+    },
+    "CaseNoteModel.created_at": {
+        "extends": "date.output",
+        "description": "Time of creation"
+    },
+    "CaseNoteModel.updated_at": {
+        "extends": "date.output",
+        "description": "Time last updated"
+    },
+    "CaseNoteModel.erased_at": {
+        "extends": "date.output",
+        "description": "Time at which an agent erased this note"
+    },
+
+
+    "CompanyModel.name": {
+        "extends": "parameter",
+        "description": "Name of the company",
+        "type": "string"
+    },
+    "CompanyModel.domains": {
+        "extends": "parameter",
+        "description": "Array of top-level domain names for the company",
+        "type": "array",
+        "items": {
+            "type": "string"
+        }
+    },
+    "CompanyModel.created_at.output": {
+        "extends": "date.output",
+        "description": "Date the company was created"
+    },
+    "CompanyModel.created_at.input": {
+        "extends": "date.input",
+        "description": "Date the company was created"
+    },
+    "CompanyModel.updated_at.output": {
+        "extends": "date.output",
+        "description": "Date the company was updated"
+    },
+    "CompanyModel.updated_at.input": {
+        "extends": "date.input",
+        "description": "Date the company was updated"
+    },
+    "CompanyModel.custom_fields": {
+        "extends": "parameter",
+        "description": "Hash of values for custom fields",
+        "type": "object"
+    },
+
+
+    "CustomFieldModel.name": {
+        "extends": "parameter",
+        "description": "Custom field name",
+        "type": "string"
+    },
+    "CustomFieldModel.label": {
+        "extends": "parameter",
+        "description": "Custom field label",
+        "type": "string"
+    },
+    "CustomFieldModel.type": {
+        "extends": "parameter",
+        "description": "The type of custom field",
+        "type": "string",
+        "enum": ["ticket", "customer"]
+    },
+    "CustomFieldModel.active": {
+        "extends": "parameter",
+        "description": "Whether or not this custom field is active",
+        "type": "string"
+    },
+    "CustomFieldModel.data": {
+        "extends": "parameter",
+        "description": "The custom field's data type",
+        "type": "object",
+        "properties": {
+            "type": {
+                "type": "string",
+                "enum": ["string", "boolean", "integer", "date.output", "list"]
+            }
+        }
+    },
+
+
+    "CustomerModel.first_name": {
+        "extends": "parameter",
+        "description": "The customer's first name",
+        "type": "string"
+    },
+    "CustomerModel.last_name": {
+        "extends": "parameter",
+        "description": "The customer's last name",
+        "type": "string"
+    },
+    "CustomerModel.company": {
+        "extends": "parameter",
+        "description": "The customer's company",
+        "type": "string"
+    },
+    "CustomerModel.title": {
+        "extends": "parameter",
+        "description": "The customer's title",
+        "type": "string"
+    },
+    "CustomerModel.external_id": {
+        "extends": "parameter",
+        "description": "The customer's unique external identifier to reference this customer in an external system",
+        "type": "string"
+    },
+    "CustomerModel.background": {
+        "extends": "parameter",
+        "description": "Any background information for the customer",
+        "type": "string"
+    },
+    "CustomerModel.language": {
+        "extends": "parameter",
+        "description": "The customer's language code -- NULL unless multi-lingual support is enabled",
+        "type": "string"
+    },
+    "CustomerModel.locked_until": {
+        "extends": "parameter",
+        "description": "Time at which the lock on the customer will expire",
+        "type": "string"
+    },
+    "CustomerModel.created_at": {
+        "extends": "date.output",
+        "description": "Time at which the customer was created"
+    },
+    "CustomerModel.updated_at": {
+        "extends": "date.output",
+        "description": "Time at which the customer was last updated at"
+    },
+    "CustomerModel.emails": {
+        "extends": "parameter",
+        "description": "Array of e-mail objects, each specifying the contact type and value of the e-mail address",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "description": "The type of e-mail address",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The e-mail address itself",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "CustomerModel.phone_numbers": {
+        "extends": "parameter",
+        "description": "Array of phone number objects, each specifying the contact type and value of the phone number",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "description": "The type of phone number",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The phone number itself",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "CustomerModel.addresses": {
+        "extends": "parameter",
+        "description": "Array of address objects, each specifying the contact type and value of the location",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "description": "The type of address",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The address itself",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "CustomerModel.custom_fields": {
+        "extends": "parameter",
+        "description": "Associative array of values for custom fields",
+        "type": "object",
+        "additionalProperties": true,
+        "location": "json"
+    },
+
+
+    "FilterModel.name": {
+        "extends": "parameter",
+        "description": "The name of the filter",
+        "type": "string"
+    },
+    "FilterModel.sort": {
+        "extends": "parameter",
+        "description": "What to sort by",
+        "type": "string",
+        "enum": ["priority", "created", "updated", "active"]
+    },
+    "FilterModel.sort_direction": {
+        "extends": "parameter",
+        "description": "The direction to sort",
+        "type": "string",
+        "enum": ["asc", "desc"]
+    },
+    "FilterModel.position": {
+        "extends": "parameter",
+        "description": "The position of the filter in the list of filters",
+        "type": "integer"
+    },
+    "FilterModel.active": {
+        "extends": "parameter",
+        "description": "Whether or not this filter is active",
+        "type": "boolean"
+    },
+
+
+    "GroupModel.name": {
+        "extends": "parameter",
+        "description": "The name of the group",
+        "type": "string"
+    },
+
+
+    "IntegrationUrlModel.name": {
+        "extends": "parameter",
+        "description": "Name of the integration URL",
+        "required": true,
+        "type": "string",
+        "minLength": 2
+    },
+    "IntegrationUrlModel.description": {
+        "extends": "parameter",
+        "description": "An optional description",
+        "type": "string"
+    },
+    "IntegrationUrlModel.enabled": {
+        "extends": "parameter",
+        "description": "Whether or not the integration URL is enabled for use",
+        "type": "boolean"
+    },
+    "IntegrationUrlModel.markup": {
+        "extends": "parameter",
+        "description": "Liquid code to parse which creates the rendered URL",
+        "required": true,
+        "type": "string",
+        "minLength": 1
+    },
+    "IntegrationUrlModel.rendered": {
+        "extends": "parameter",
+        "description": "The rendered URL",
+        "type": "string"
+    },
+    "IntegrationUrlModel.created_at": {
+        "extends": "date.output",
+        "description": "When the integration URL was created"
+    },
+    "IntegrationUrlModel.updated_at": {
+        "extends": "date.output",
+        "description": "When the integration URL was last updated"
+    },
+
+
+    "MacroModel.name": {
+        "extends": "parameter",
+        "description": "Name of the macro",
+        "required": true,
+        "type": "string",
+        "minLength": 1
+    },
+    "MacroModel.description": {
+        "extends": "parameter",
+        "description": "An optional description",
+        "type": "string"
+    },
+    "MacroModel.enabled": {
+        "extends": "parameter",
+        "description": "Whether or not the macro is enabled for use",
+        "type": "boolean"
+    },
+    "MacroModel.position": {
+        "extends": "parameter",
+        "description": "Placement in the UI",
+        "type": "integer"
+    },
+    "MacroModel.folders": {
+        "extends": "parameter",
+        "description": "Array of folders associated with this macro",
+        "type": "array",
+        "items": {
+            "type": "string"
+        }
+    },
+
+
+    "MacroActionModel.type": {
+        "extends": "parameter",
+        "description": "The type of action to be performed",
+        "type": "string"
+    },
+    "MacroActionModel.value": {
+        "extends": "parameter",
+        "description": "Value to set for the given type",
+        "type": "string"
+    },
+    "MacroActionModel.enabled": {
+        "extends": "parameter",
+        "description": "Whether or not the action is enabled",
+        "type": "boolean"
+    },
+    "MacroActionModel.created_at": {
+        "extends": "date.output",
+        "description": "When the action was created"
+    },
+    "MacroActionModel.updated_at": {
+        "extends": "date.output",
+        "description": "When the action was last updated"
+    },
+
+
+    "TopicModel.name": {
+        "extends": "parameter",
+        "description": "Subject of the topic in the default locale",
+        "required": true,
+        "type": "string",
+        "minLength": 1
+    },
+    "TopicModel.description": {
+        "extends": "parameter",
+        "description": "An optional description of the topic",
+        "type": "string"
+    },
+    "TopicModel.position": {
+        "extends": "parameter",
+        "description": "The topic's position in the admin UI",
+        "type": "integer"
+    },
+    "TopicModel.allow_questions": {
+        "extends": "parameter",
+        "description": "Whether to allow customers to post questions about this topic in your support center",
+        "type": "boolean"
+    },
+    "TopicModel.in_support_center": {
+        "extends": "parameter",
+        "description": "Whether to show this topic in the support center",
+        "type": "boolean"
+    },
+    "TopicModel.created_at": {
+        "extends": "date.output",
+        "description": "Time when the topic was created"
+    },
+    "TopicModel.updated_at": {
+        "extends": "date.output",
+        "description": "Time when the topic was updated"
+    },
+
+
+    "TopicTranslationModel.name": {
+        "extends": "parameter",
+        "description": "The topic's name translated in the locale",
+        "type": "string"
+    },
+    "TopicTranslationModel.locale": {
+        "extends": "parameter",
+        "description": "Language code of the translation",
+        "type": "string"
+    },
+    "TopicTranslationModel.created_at": {
+        "extends": "date.output",
+        "description": "Time when the translation was created"
+    },
+    "TopicTranslationModel.updated_at": {
+        "extends": "date.output",
+        "description": "Time when the translation was last updated"
+    },
+
+
+    "UserModel.name": {
+        "extends": "parameter",
+        "description": "Name of the user",
+        "type": "string"
+    },
+    "UserModel.public_name": {
+        "extends": "parameter",
+        "description": "Public facing name of the user",
+        "type": "string"
+    },
+    "UserModel.email": {
+        "extends": "parameter",
+        "description": "User's email",
+        "type": "string"
+    },
+    "UserModel.level": {
+        "extends": "parameter",
+        "description": "User's permission level",
+        "type": "string"
+    },
+
+
+
+
+    "ArticleModel": {
+        "type": "object",
+        "properties": {
+            "subject": {"extends": "ArticleModel.subject"},
+            "in_support_center": {"extends": "ArticleModel.in_support_center"},
+            "position": {"extends": "ArticleModel.position"},
+            "quickcode": {"extends": "ArticleModel.quickcode"},
+            "keywords": {"extends": "ArticleModel.keywords"},
+            "publish_at": {"extends": "ArticleModel.publish_at.output"},
+            "created_at": {"extends": "ArticleModel.created_at.output"},
+            "updated_at": {"extends": "ArticleModel.updated_at.output"},
+            "body": {"extends": "ArticleModel.body"},
+            "body_email": {"extends": "ArticleModel.body_email"},
+            "body_email_auto": {"extends": "ArticleModel.body_email_auto"},
+            "body_chat": {"extends": "ArticleModel.body_chat"},
+            "body_chat_auto": {"extends": "ArticleModel.body_chat_auto"},
+            "body_web_callback": {"extends": "ArticleModel.body_web_callback"},
+            "body_web_callback_auto": {"extends": "ArticleModel.body_web_callback_auto"},
+            "body_twitter": {"extends": "ArticleModel.body_twitter"},
+            "body_twitter_auto": {"extends": "ArticleModel.body_twitter_auto"},
+            "body_qna": {"extends": "ArticleModel.body_qna"},
+            "body_qna_auto": {"extends": "ArticleModel.body_qna_auto"},
+            "body_phone": {"extends": "ArticleModel.body_phone"},
+            "body_phone_auto": {"extends": "ArticleModel.body_phone_auto"},
+            "body_facebook": {"extends": "ArticleModel.body_facebook"},
+            "body_facebook_auto": {"extends": "ArticleModel.body_facebook_auto"},
+            "internal_notes": {"extends": "ArticleModel.internal_notes"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowArticle",
+                    "pattern": "#/articles/(?P<id>[0-9]+)$#"
+                }
+            },
+            "topic": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowTopic",
+                    "pattern": "#/topics/(?P<id>[0-9]+)$#"
+                }
+            },
+            "translations": {
+                "location": "links",
+                "data": {
+                    "operation": "ListArticleTranslations",
+                    "pattern": "#/articles/(?P<article_id>[0-9]+)/translations$#"
+                }
+            }
+        }
+    },
+    "ArticleTranslationModel": {
+        "type": "object",
+        "properties": {
+            "locale": {"extends": "ArticleTranslation.locale"},
+            "subject": {"extends": "ArticleTranslation.subject"},
+            "body": {"extends": "ArticleTranslation.body"},
+            "body_email": {"extends": "ArticleTranslation.body_email"},
+            "body_email_auto": {"extends": "ArticleTranslation.body_email_auto"},
+            "body_chat": {"extends": "ArticleTranslation.body_chat"},
+            "body_chat_auto": {"extends": "ArticleTranslation.body_chat_auto"},
+            "body_web_callback": {"extends": "ArticleTranslation.body_web_callback"},
+            "body_web_callback_auto": {"extends": "ArticleTranslation.body_web_callback_auto"},
+            "body_twitter": {"extends": "ArticleTranslation.body_twitter"},
+            "body_twitter_auto": {"extends": "ArticleTranslation.body_twitter_auto"},
+            "body_qna": {"extends": "ArticleTranslation.body_qna"},
+            "body_qna_auto": {"extends": "ArticleTranslation.body_qna_auto"},
+            "body_phone": {"extends": "ArticleTranslation.body_phone"},
+            "body_phone_auto": {"extends": "ArticleTranslation.body_phone_auto"},
+            "body_facebook": {"extends": "ArticleTranslation.body_facebook"},
+            "body_facebook_auto": {"extends": "ArticleTranslation.body_facebook_auto"},
+            "publish_at": {"extends": "ArticleTranslation.publish_at"},
+            "created_at": {"extends": "ArticleTranslation.created_at"},
+            "updated_at": {"extends": "ArticleTranslation.updated_at"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowArticleTranslation",
+                    "pattern": "#/articles/(?P<article_id>[0-9]+)/translations/(?P<locale>[a-zA-Z_-]+)$#"
+                }
+            }
+        }
+    },
+    "CaseModel": {
+        "type": "object",
+        "properties": {
+            "external_id": {"extends": "CaseModel.external_id"},
+            "subject": {"extends": "CaseModel.subject"},
+            "priority": {"extends": "CaseModel.priority"},
+            "description": {"extends": "CaseModel.description"},
+            "status": {"extends": "CaseModel.status"},
+            "type": {"extends": "CaseModel.type"},
+            "labels": {"extends": "CaseModel.labels"},
+            "custom_fields": {"extends": "CaseModel.custom_fields"},
+            "created_at": {"extends": "CaseModel.created_at.output"},
+            "updated_at": {"extends": "CaseModel.updated_at.output"},
+            "active_at": {"extends": "CaseModel.active_at.output"},
+            "received_at": {"extends": "CaseModel.received_at.output"},
+            "locked_until": {"extends": "CaseModel.locked_until.output"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCase",
+                    "pattern": "#/cases/(?P<id>[0-9]+)$#"
+                }
+            },
+            "message": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCaseMessage",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/message$#"
+                }
+            },
+            "customer": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCustomer",
+                    "pattern": "#/customers/(?P<id>[0-9]+)$#"
+                }
+            },
+            "assigned_user": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowUser",
+                    "pattern": "#/users/(?P<id>[0-9]+)$#"
+                }
+            },
+            "assigned_group": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowGroup",
+                    "pattern": "#/groups/(?P<id>[0-9]+)$#"
+                }
+            },
+            "locked_by": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowUser",
+                    "pattern": "#/users/(?P<id>[0-9]+)$#"
+                }
+            },
+            "replies": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseReplies",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/replies$#"
+                }
+            },
+            "notes": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCaseNotes",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/notes$#"
+                }
+            }
+        }
+    },
+    "CaseMessageModel": {
+        "type": "object",
+        "properties": {
+            "direction": {"extends": "CaseMessageModel.direction"},
+            "body": {"extends": "CaseMessageModel.body"},
+            "created_at": {"extends": "CaseMessageModel.created_at.output"},
+            "updated_at": {"extends": "CaseMessageModel.updated_at"},
+            "status": {"extends": "CaseMessageModel.status"},
+            "subject": {"extends": "CaseMessageModel.subject"},
+            "from": {"extends": "CaseMessageModel.from"},
+            "to": {"extends": "CaseMessageModel.to"},
+            "cc": {"extends": "CaseMessageModel.cc"},
+            "bcc": {"extends": "CaseMessageModel.bcc"},
+            "type": {"extends": "CaseMessageModel.type"},
+            "hidden_at": {"extends": "CaseMessageModel.hidden_at"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCaseMessage",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/message$#"
+                }
+            },
+            "case": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCase",
+                    "pattern": "#/cases/(?P<id>[0-9]+)$#"
+                }
+            }
+        }
+    },
+    "CaseReplyModel": {
+        "type": "object",
+        "properties": {
+            "direction": {"extends": "CaseReplyModel.direction"},
+            "body": {"extends": "CaseReplyModel.body"},
+            "created_at": {"extends": "CaseReplyModel.created_at.output"},
+            "updated_at": {"extends": "CaseReplyModel.updated_at.output"},
+            "status": {"extends": "CaseReplyModel.status.out"},
+            "subject": {"extends": "CaseReplyModel.subject"},
+            "from": {"extends": "CaseReplyModel.from"},
+            "to": {"extends": "CaseReplyModel.to"},
+            "cc": {"extends": "CaseReplyModel.cc"},
+            "bcc": {"extends": "CaseReplyModel.bcc"},
+            "type": {"extends": "CaseReplyModel.type"},
+            "hidden_at": {"extends": "CaseReplyModel.hidden_at.output"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCaseReply",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/replies/(?P<reply_id>[0-9]+)$#"
+                }
+            },
+            "case": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCase",
+                    "pattern": "#/cases/(?P<id>[0-9]+)$#"
+                }
+            }
+        }
+    },
+    "CaseNoteModel": {
+        "type": "object",
+        "properties": {
+            "body": {"extends": "CaseNoteModel.body"},
+            "created_at": {"extends": "CaseNoteModel.created_at"},
+            "updated_at": {"extends": "CaseNoteModel.updated_at"},
+            "erased_at": {"extends": "CaseNoteModel.erased_at"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCaseNote",
+                    "pattern": "#/cases/(?P<case_id>[0-9]+)/notes/(?P<note_id>[0-9]+)$#"
+                }
+            },
+            "user": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowUser",
+                    "pattern": "#/users/(?P<id>[0-9]+)$#"
+                }
+            },
+            "erased_by": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowUser",
+                    "pattern": "#/users/(?P<id>[0-9]+)$#"
+                }
+            },
+            "case": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCase",
+                    "pattern": "#/cases/(?P<id>[0-9]+)$#"
+                }
+            }
+        }
+    },
+    "CompanyModel": {
+        "type": "object",
+        "properties": {
+            "name": {"extends": "CompanyModel.name"},
+            "domains": {"extends": "CompanyModel.domains"},
+            "created_at": {"extends": "CompanyModel.created_at.output"},
+            "updated_at": {"extends": "CompanyModel.updated_at.output"},
+            "custom_fields": {"extends": "CompanyModel.custom_fields"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCompany",
+                    "pattern": "#/companies/(?P<id>[0-9]+)$#"
+                }
+            },
+            "customers": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCompanyCustomers",
+                    "pattern": "#/companies/(?P<company_id>[0-9]+)/customers$#"
+                }
+            }
+        }
+    },
+    "CustomFieldModel": {
+        "type": "object",
+        "properties": {
+            "name": {"extends": "CustomFieldModel.name"},
+            "label": {"extends": "CustomFieldModel.label"},
+            "type": {"extends": "CustomFieldModel.type"},
+            "active": {"extends": "CustomFieldModel.active"},
+            "data": {"extends": "CustomFieldModel.data"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCustomField",
+                    "pattern": "#/custom_fields/(?P<id>[0-9]+)$#"
+                }
+            }
+        }
+    },
+    "CustomerModel": {
+        "type": "object",
+        "properties": {
+            "first_name": {"extends": "CustomerModel.first_name"},
+            "last_name": {"extends": "CustomerModel.last_name"},
+            "company": {"extends": "CustomerModel.company"},
+            "title": {"extends": "CustomerModel.title"},
+            "external_id": {"extends": "CustomerModel.external_id"},
+            "background": {"extends": "CustomerModel.background"},
+            "language": {"extends": "CustomerModel.language"},
+            "locked_until": {"extends": "CustomerModel.locked_until"},
+            "created_at": {"extends": "CustomerModel.created_at"},
+            "updated_at": {"extends": "CustomerModel.updated_at"},
+            "emails": {"extends": "CustomerModel.emails"},
+            "phone_numbers": {"extends": "CustomerModel.phone_numbers"},
+            "addresses": {"extends": "CustomerModel.addresses"},
+            "custom_fields": {"extends": "CustomerModel.custom_fields"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCustomer",
+                    "pattern": "#/customers/(?P<id>[0-9]+)$#"
+                }
+            },
+            "locked_by": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowUser",
+                    "pattern": "#/users/(?P<id>[0-9]+)$#"
+                }
+            },
+            "cases": {
+                "location": "links",
+                "data": {
+                    "operation": "ListCustomerCases",
+                    "pattern": "#/customers/(?P<customer_id>[0-9]+)/cases#"
+                }
+            },
+            "company": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowCompany",
+                    "pattern": "#/companies/(?P<company_id>[0-9]+)$#"
+                }
+            }
+        }
+    },
+    "FilterModel": {
+        "type": "object",
+        "properties": {
+            "name": {"extends": "FilterModel.name"},
+            "sort": {"extends": "FilterModel.sort"},
+            "sort_direction": {"extends": "FilterModel.sort_direction"},
+            "position": {"extends": "FilterModel.position"},
+            "active": {"extends": "FilterModel.active"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowFilter",
+                    "pattern": "#/filters/(?P<id>[0-9]+)$#"
+                }
+            },
+            "user": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowUser",
+                    "pattern": "#/users/(?P<id>[0-9]+)$#"
+                }
+            },
+            "group": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowGroup",
+                    "pattern": "#/groups/(?P<id>[0-9]+)$#"
+                }
+            }
+        }
+    },
+    "GroupModel": {
+        "type": "object",
+        "properties": {
+            "name": {"extends": "GroupModel.name"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowGroup",
+                    "pattern": "#/groups/(?P<id>[0-9]+)$#"
+                }
+            },
+            "users": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupUsers",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/users#"
+                }
+            },
+            "filters": {
+                "location": "links",
+                "data": {
+                    "operation": "ListGroupFilters",
+                    "pattern": "#/groups/(?P<group_id>[0-9]+)/filters#"
+                }
+            }
+        }
+    },
+    "IntegrationUrlModel": {
+        "type": "object",
+        "properties": {
+            "name": {"extends": "IntegrationUrlModel.name"},
+            "description": {"extends": "IntegrationUrlModel.description"},
+            "enabled": {"extends": "IntegrationUrlModel.enabled"},
+            "markup": {"extends": "IntegrationUrlModel.markup"},
+            "rendered": {"extends": "IntegrationUrlModel.rendered"},
+            "created_at": {"extends": "IntegrationUrlModel.created_at"},
+            "updated_at": {"extends": "IntegrationUrlModel.updated_at"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowIntegrationUrl",
+                    "pattern": "#/integration_urls/(?P<id>[0-9]+)$#"
+                }
+            },
+            "user": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowUser",
+                    "pattern": "#/users/(?P<id>[0-9]+)$#"
+                }
+            },
+            "group": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowGroup",
+                    "pattern": "#/groups/(?P<id>[0-9]+)$#"
+                }
+            }
+        }
+    },
+    "MacroModel": {
+        "type": "object",
+        "properties": {
+            "name": {"extends": "MacroModel.name"},
+            "description": {"extends": "MacroModel.description"},
+            "enabled": {"extends": "MacroModel.enabled"},
+            "position": {"extends": "MacroModel.position"},
+            "folders": {"extends": "MacroModel.folders"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowMacro",
+                    "pattern": "#/macros/(?P<id>[0-9]+)$#"
+                }
+            },
+            "actions": {
+                "location": "links",
+                "data": {
+                    "operation": "ListMacroActions",
+                    "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions$#"
+                }
+            }
+        }
+    },
+    "MacroActionModel": {
+        "type": "object",
+        "properties": {
+            "type": {"extends": "MacroActionModel.type"},
+            "value": {"extends": "MacroActionModel.value"},
+            "enabled": {"extends": "MacroActionModel.enabled"},
+            "created_at": {"extends": "MacroActionModel.created_at"},
+            "updated_at": {"extends": "MacroActionModel.updated_at"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowMacroAction",
+                    "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions/(?P<action_id>[0-9]+)$#"
+                }
+            },
+            "macro": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowMacro",
+                    "pattern": "#/macros/(?P<id>[0-9]+)$#"
+                }
+            }
+        }
+    },
+    "TopicModel": {
+        "type": "object",
+        "properties": {
+            "name": {"extends": "TopicModel.name"},
+            "description": {"extends": "TopicModel.description"},
+            "position": {"extends": "TopicModel.position"},
+            "allow_questions": {"extends": "TopicModel.allow_questions"},
+            "in_support_center": {"extends": "TopicModel.in_support_center"},
+            "created_at": {"extends": "TopicModel.created_at"},
+            "updated_at": {"extends": "TopicModel.updated_at"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowTopic",
+                    "pattern": "#/topics/(?P<id>[0-9]+)$#"
+                }
+            },
+            "articles": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicArticles",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/articles$#"
+                }
+            },
+            "translations": {
+                "location": "links",
+                "data": {
+                    "operation": "ListTopicTranslations",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations$#"
+                }
+            },
+            "create_translation": {
+                "location": "links",
+                "sentAs": "translations",
+                "data": {
+                    "operation": "CreateTopicTranslation",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations$#"
+                }
+            }
+        }
+    },
+    "TopicTranslationModel": {
+        "type": "object",
+        "properties": {
+            "name": {"extends": "TopicTranslationModel.name"},
+            "locale": {"extends": "TopicTranslationModel.locale"},
+            "created_at": {"extends": "TopicTranslationModel.created_at"},
+            "updated_at": {"extends": "TopicTranslationModel.updated_at"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowTopicTranslation",
+                    "pattern": "#/topics/(?P<topic_id>[0-9]+)/translations/(?P<locale>[a-zA-Z_-]+)$#"
+                }
+            },
+            "topic": {
+                "location": "links",
+                "sentAs": "self",
+                "data": {
+                    "operation": "ShowTopic",
+                    "pattern": "#/topics/(?P<id>[0-9]+)#"
+                }
+            }
+        }
+    },
+    "UserModel": {
+        "type": "object",
+        "properties": {
+            "name": {"extends": "UserModel.name"},
+            "public_name": {"extends": "UserModel.public_name"},
+            "email": {"extends": "UserModel.email"},
+            "level": {"extends": "UserModel.level"},
+            "self": {
+                "location": "links",
+                "data": {
+                    "operation": "ShowUser",
+                    "pattern": "#/users/(?P<id>[0-9]+)$#"
+                }
+            }
+        }
+    }
+}

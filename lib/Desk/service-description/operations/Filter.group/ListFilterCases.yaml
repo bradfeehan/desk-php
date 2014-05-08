@@ -1,21 +1,14 @@
-{
-    "extends": "list",
-    "summary": "Retrieve a paginated list of cases for a particular filter",
-    "uri": "filters/{filter_id}/cases",
-    "responseClass": "FilterCasesPage",
-    "parameters": {
-        "filter_id": {
-            "extends": "id",
-            "description": "The ID of the filter to retrieve cases for",
-            "required": true,
-            "location": "uri"
-        }
-    },
-    "data": {
-        "embeds": {
-            "entries": {
-                "model": "CaseModel"
-            }
-        }
-    }
-}
+extends: list
+summary: Retrieve a paginated list of cases for a particular filter
+uri: "filters/{filter_id}/cases"
+responseClass: FilterCasesPage
+parameters:
+    filter_id:
+        extends: id
+        description: The ID of the filter to retrieve cases for
+        required: true
+        location: uri
+data:
+    embeds:
+        entries:
+            model: CaseModel

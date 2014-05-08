@@ -1,10 +1,7 @@
-{
-    "extends": "show",
-    "summary": "Retrieve a single private case note by case ID and note ID",
-    "uri": "cases/{case_id}/notes/{note_id}",
-    "responseClass": "CaseNoteModel",
-    "parameters": {
-        "case_id": {"extends": "id", "required": true, "location": "uri"},
-        "note_id": {"extends": "id", "required": true, "location": "uri"}
-    }
-}
+extends: show
+summary: Retrieve a single private case note by case ID and note ID
+uri: "cases/{case_id}/notes/{note_id}"
+responseClass: CaseNoteModel
+parameters:
+    case_id: { extends: id, required: true, location: uri }
+    note_id: { extends: id, required: true, location: uri }

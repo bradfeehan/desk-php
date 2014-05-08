@@ -1,24 +1,17 @@
-{
-    "type": "object",
-    "properties": {
-        "name": {"extends": "MacroModel.name"},
-        "description": {"extends": "MacroModel.description"},
-        "enabled": {"extends": "MacroModel.enabled"},
-        "position": {"extends": "MacroModel.position"},
-        "folders": {"extends": "MacroModel.folders"},
-        "self": {
-            "location": "links",
-            "data": {
-                "operation": "ShowMacro",
-                "pattern": "#/macros/(?P<id>[0-9]+)$#"
-            }
-        },
-        "actions": {
-            "location": "links",
-            "data": {
-                "operation": "ListMacroActions",
-                "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions$#"
-            }
-        }
-    }
-}
+type: object
+properties:
+    name:        { extends: MacroModel.name }
+    description: { extends: MacroModel.description }
+    enabled:     { extends: MacroModel.enabled }
+    position:    { extends: MacroModel.position }
+    folders:     { extends: MacroModel.folders }
+    self:
+        location: links
+        data:
+            operation: ShowMacro
+            pattern: "#/macros/(?P<id>[0-9]+)$#"
+    actions:
+        location: links
+        data:
+            operation: ListMacroActions
+            pattern: "#/macros/(?P<macro_id>[0-9]+)/actions$#"

@@ -1,21 +1,14 @@
-{
-    "extends": "list",
-    "summary": "Retrieve a paginated list of translations for a particular topic",
-    "uri": "topics/{topic_id}/translations",
-    "responseClass": "TopicTranslationsPage",
-    "parameters": {
-        "topic_id": {
-            "extends": "id",
-            "description": "The ID of the topic to retrieve translations for",
-            "required": true,
-            "location": "uri"
-        }
-    },
-    "data": {
-        "embeds": {
-            "entries": {
-                "model": "TopicTranslationModel"
-            }
-        }
-    }
-}
+extends: list
+summary: Retrieve a paginated list of translations for a particular topic
+uri: "topics/{topic_id}/translations"
+responseClass: TopicTranslationsPage
+parameters:
+    topic_id:
+        extends: id
+        description: The ID of the topic to retrieve translations for
+        required: true
+        location: uri
+data:
+    embeds:
+        entries:
+            model: TopicTranslationModel

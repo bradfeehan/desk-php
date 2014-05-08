@@ -1,47 +1,31 @@
-{
-    "extends": "page",
-    "properties": {
-        "entries": {
-            "type": "array",
-            "items": {
-                "extends": "CaseModel"
-            },
-            "location": "embedded"
-        },
-        "self": {
-            "location": "links",
-            "data": {
-                "operation": "ListCases",
-                "pattern": "#/cases\\??(?P<_query>.*)$#"
-            }
-        },
-        "first": {
-            "location": "links",
-            "data": {
-                "operation": "ListCases",
-                "pattern": "#/cases\\??(?P<_query>.*)$#"
-            }
-        },
-        "last": {
-            "location": "links",
-            "data": {
-                "operation": "ListCases",
-                "pattern": "#/cases\\??(?P<_query>.*)$#"
-            }
-        },
-        "next": {
-            "location": "links",
-            "data": {
-                "operation": "ListCases",
-                "pattern": "#/cases\\??(?P<_query>.*)$#"
-            }
-        },
-        "previous": {
-            "location": "links",
-            "data": {
-                "operation": "ListCases",
-                "pattern": "#/cases\\??(?P<_query>.*)$#"
-            }
-        }
-    }
-}
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: CaseModel }
+        location: embedded
+    self:
+        location: links
+        data:
+            operation: ListCases
+            pattern: "#/cases\\??(?P<_query>.*)$#"
+    first:
+        location: links
+        data:
+            operation: ListCases
+            pattern: "#/cases\\??(?P<_query>.*)$#"
+    last:
+        location: links
+        data:
+            operation: ListCases
+            pattern: "#/cases\\??(?P<_query>.*)$#"
+    next:
+        location: links
+        data:
+            operation: ListCases
+            pattern: "#/cases\\??(?P<_query>.*)$#"
+    previous:
+        location: links
+        data:
+            operation: ListCases
+            pattern: "#/cases\\??(?P<_query>.*)$#"

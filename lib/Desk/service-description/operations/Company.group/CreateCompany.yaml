@@ -1,13 +1,10 @@
-{
-    "extends": "create",
-    "summary": "Create a new company",
-    "uri": "companies",
-    "responseClass": "CompanyModel",
-    "parameters": {
-        "name": {"extends": "CompanyModel.name", "required": true},
-        "domains": {"extends": "CompanyModel.domains"},
-        "created_at": {"extends": "CompanyModel.created_at.input"},
-        "updated_at": {"extends": "CompanyModel.updated_at.input"},
-        "custom_fields": {"extends": "CompanyModel.custom_fields"}
-    }
-}
+extends: create
+summary: Create a new company
+uri: companies
+responseClass: CompanyModel
+parameters:
+    name:          { extends: CompanyModel.name, required: true }
+    domains:       { extends: CompanyModel.domains }
+    created_at:    { extends: CompanyModel.created_at.input }
+    updated_at:    { extends: CompanyModel.updated_at.input }
+    custom_fields: { extends: CompanyModel.custom_fields }

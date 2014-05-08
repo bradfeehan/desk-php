@@ -1,10 +1,7 @@
-{
-    "extends": "show",
-    "summary": "Retrieve a single macro action by macro ID and action ID",
-    "uri": "macros/{macro_id}/actions/{action_id}",
-    "responseClass": "MacroActionModel",
-    "parameters": {
-        "macro_id": {"extends": "id", "required": true, "location": "uri"},
-        "action_id": {"extends": "id", "required": true, "location": "uri"}
-    }
-}
+extends: show
+summary: Retrieve a single macro action by macro ID and action ID
+uri: "macros/{macro_id}/actions/{action_id}"
+responseClass: MacroActionModel
+parameters:
+    macro_id:  { extends: id, required: true, location: uri }
+    action_id: { extends: id, required: true, location: uri }

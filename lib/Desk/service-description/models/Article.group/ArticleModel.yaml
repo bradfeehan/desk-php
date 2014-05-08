@@ -1,50 +1,41 @@
-{
-    "type": "object",
-    "properties": {
-        "subject": {"extends": "ArticleModel.subject"},
-        "in_support_center": {"extends": "ArticleModel.in_support_center"},
-        "position": {"extends": "ArticleModel.position"},
-        "quickcode": {"extends": "ArticleModel.quickcode"},
-        "keywords": {"extends": "ArticleModel.keywords"},
-        "publish_at": {"extends": "ArticleModel.publish_at.output"},
-        "created_at": {"extends": "ArticleModel.created_at.output"},
-        "updated_at": {"extends": "ArticleModel.updated_at.output"},
-        "body": {"extends": "ArticleModel.body"},
-        "body_email": {"extends": "ArticleModel.body_email"},
-        "body_email_auto": {"extends": "ArticleModel.body_email_auto"},
-        "body_chat": {"extends": "ArticleModel.body_chat"},
-        "body_chat_auto": {"extends": "ArticleModel.body_chat_auto"},
-        "body_web_callback": {"extends": "ArticleModel.body_web_callback"},
-        "body_web_callback_auto": {"extends": "ArticleModel.body_web_callback_auto"},
-        "body_twitter": {"extends": "ArticleModel.body_twitter"},
-        "body_twitter_auto": {"extends": "ArticleModel.body_twitter_auto"},
-        "body_qna": {"extends": "ArticleModel.body_qna"},
-        "body_qna_auto": {"extends": "ArticleModel.body_qna_auto"},
-        "body_phone": {"extends": "ArticleModel.body_phone"},
-        "body_phone_auto": {"extends": "ArticleModel.body_phone_auto"},
-        "body_facebook": {"extends": "ArticleModel.body_facebook"},
-        "body_facebook_auto": {"extends": "ArticleModel.body_facebook_auto"},
-        "internal_notes": {"extends": "ArticleModel.internal_notes"},
-        "self": {
-            "location": "links",
-            "data": {
-                "operation": "ShowArticle",
-                "pattern": "#/articles/(?P<id>[0-9]+)$#"
-            }
-        },
-        "topic": {
-            "location": "links",
-            "data": {
-                "operation": "ShowTopic",
-                "pattern": "#/topics/(?P<id>[0-9]+)$#"
-            }
-        },
-        "translations": {
-            "location": "links",
-            "data": {
-                "operation": "ListArticleTranslations",
-                "pattern": "#/articles/(?P<article_id>[0-9]+)/translations$#"
-            }
-        }
-    }
-}
+type: object
+properties:
+    subject:                { extends: ArticleModel.subject }
+    in_support_center:      { extends: ArticleModel.in_support_center }
+    position:               { extends: ArticleModel.position }
+    quickcode:              { extends: ArticleModel.quickcode }
+    keywords:               { extends: ArticleModel.keywords }
+    publish_at:             { extends: ArticleModel.publish_at.output }
+    created_at:             { extends: ArticleModel.created_at.output }
+    updated_at:             { extends: ArticleModel.updated_at.output }
+    body:                   { extends: ArticleModel.body }
+    body_email:             { extends: ArticleModel.body_email }
+    body_email_auto:        { extends: ArticleModel.body_email_auto }
+    body_chat:              { extends: ArticleModel.body_chat }
+    body_chat_auto:         { extends: ArticleModel.body_chat_auto }
+    body_web_callback:      { extends: ArticleModel.body_web_callback }
+    body_web_callback_auto: { extends: ArticleModel.body_web_callback_auto }
+    body_twitter:           { extends: ArticleModel.body_twitter }
+    body_twitter_auto:      { extends: ArticleModel.body_twitter_auto }
+    body_qna:               { extends: ArticleModel.body_qna }
+    body_qna_auto:          { extends: ArticleModel.body_qna_auto }
+    body_phone:             { extends: ArticleModel.body_phone }
+    body_phone_auto:        { extends: ArticleModel.body_phone_auto }
+    body_facebook:          { extends: ArticleModel.body_facebook }
+    body_facebook_auto:     { extends: ArticleModel.body_facebook_auto }
+    internal_notes:         { extends: ArticleModel.internal_notes }
+    self:
+        location: links
+        data:
+            operation: ShowArticle
+            pattern: "#/articles/(?P<id>[0-9]+)$#"
+    topic:
+        location: links
+        data:
+            operation: ShowTopic
+            pattern: "#/topics/(?P<id>[0-9]+)$#"
+    translations:
+        location: links
+        data:
+            operation: ListArticleTranslations
+            pattern: "#/articles/(?P<article_id>[0-9]+)/translations$#"

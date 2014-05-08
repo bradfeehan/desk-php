@@ -1,47 +1,31 @@
-{
-    "extends": "page",
-    "properties": {
-        "entries": {
-            "type": "array",
-            "items": {
-                "extends": "MacroActionModel"
-            },
-            "location": "embedded"
-        },
-        "self": {
-            "location": "links",
-            "data": {
-                "operation": "ListMacroActions",
-                "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
-            }
-        },
-        "first": {
-            "location": "links",
-            "data": {
-                "operation": "ListMacroActions",
-                "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
-            }
-        },
-        "last": {
-            "location": "links",
-            "data": {
-                "operation": "ListMacroActions",
-                "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
-            }
-        },
-        "next": {
-            "location": "links",
-            "data": {
-                "operation": "ListMacroActions",
-                "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
-            }
-        },
-        "previous": {
-            "location": "links",
-            "data": {
-                "operation": "ListMacroActions",
-                "pattern": "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
-            }
-        }
-    }
-}
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: MacroActionModel }
+        location: embedded
+    self:
+        location: links
+        data:
+            operation: ListMacroActions
+            pattern: "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
+    first:
+        location: links
+        data:
+            operation: ListMacroActions
+            pattern: "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
+    last:
+        location: links
+        data:
+            operation: ListMacroActions
+            pattern: "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
+    next:
+        location: links
+        data:
+            operation: ListMacroActions
+            pattern: "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"
+    previous:
+        location: links
+        data:
+            operation: ListMacroActions
+            pattern: "#/macros/(?P<macro_id>[0-9]+)/actions\\??(?P<_query>.*)$#"

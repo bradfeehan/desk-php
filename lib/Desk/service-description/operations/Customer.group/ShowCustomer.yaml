@@ -1,6 +1,4 @@
-{
-    "extends": "show.main",
-    "summary": "Retrieve a single customer by ID",
-    "uri": "customers/{id}",
-    "responseClass": "CustomerModel"
-}
+extends: show.main
+summary: Retrieve a single customer by ID
+uri: "customers/{id}"
+responseClass: CustomerModel

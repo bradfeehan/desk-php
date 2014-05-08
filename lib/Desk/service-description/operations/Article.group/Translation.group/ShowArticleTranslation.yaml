@@ -1,20 +1,15 @@
-{
-    "extends": "show",
-    "summary": "Retrieve a single article translation by article ID and locale",
-    "uri": "articles/{article_id}/translations/{locale}",
-    "responseClass": "ArticleTranslationModel",
-    "parameters": {
-        "article_id": {
-            "extends": "id",
-            "description": "The ID of the article to retrieve the translation for",
-            "required": true,
-            "location": "uri"
-        },
-        "locale": {
-            "extends": "locale",
-            "description": "The locale of the translation to retrieve",
-            "required": true,
-            "location": "uri"
-        }
-    }
-}
+extends: show
+summary: Retrieve a single article translation by article ID and locale
+uri: "articles/{article_id}/translations/{locale}"
+responseClass: ArticleTranslationModel
+parameters:
+    article_id:
+        extends: id
+        description: The ID of the article to retrieve the translation for
+        required: true
+        location: uri
+    locale:
+        extends: locale
+        description: The locale of the translation to retrieve
+        required: true
+        location: uri

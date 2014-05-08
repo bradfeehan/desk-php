@@ -1,21 +1,14 @@
-{
-    "extends": "list",
-    "summary": "Retrieve a paginated list of cases for a particular customer",
-    "uri": "customers/{customer_id}/cases",
-    "responseClass": "CustomerCasesPage",
-    "parameters": {
-        "customer_id": {
-            "extends": "id",
-            "description": "The ID of the customer to retrieve cases for",
-            "required": true,
-            "location": "uri"
-        }
-    },
-    "data": {
-        "embeds": {
-            "entries": {
-                "model": "CaseModel"
-            }
-        }
-    }
-}
+extends: list
+summary: Retrieve a paginated list of cases for a particular customer
+uri: "customers/{customer_id}/cases"
+responseClass: CustomerCasesPage
+parameters:
+    customer_id:
+        extends: id
+        description: The ID of the customer to retrieve cases for
+        required: true
+        location: uri
+data:
+    embeds:
+        entries:
+            model: CaseModel

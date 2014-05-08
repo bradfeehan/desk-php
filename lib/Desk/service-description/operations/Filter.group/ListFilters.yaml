@@ -1,6 +1,4 @@
-{
-    "extends": "list",
-    "summary": "Retrieve a paginated list of all filters",
-    "uri": "filters",
-    "responseClass": "FiltersPage"
-}
+extends: list
+summary: Retrieve a paginated list of all filters
+uri: filters
+responseClass: FiltersPage

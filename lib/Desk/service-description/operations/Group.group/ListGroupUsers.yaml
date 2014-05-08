@@ -1,21 +1,14 @@
-{
-    "extends": "list",
-    "summary": "Retrieve a paginated list of users for a particular group",
-    "uri": "groups/{group_id}/users",
-    "responseClass": "GroupUsersPage",
-    "parameters": {
-        "group_id": {
-            "extends": "id",
-            "description": "The ID of the group to retrieve users for",
-            "required": true,
-            "location": "uri"
-        }
-    },
-    "data": {
-        "embeds": {
-            "entries": {
-                "model": "UserModel"
-            }
-        }
-    }
-}
+extends: list
+summary: Retrieve a paginated list of users for a particular group
+uri: "groups/{group_id}/users"
+responseClass: GroupUsersPage
+parameters:
+    group_id:
+        extends: id
+        description: The ID of the group to retrieve users for
+        required: true
+        location: uri
+data:
+    embeds:
+        entries:
+            model: UserModel

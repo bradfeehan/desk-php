@@ -1,6 +1,4 @@
-{
-    "extends": "list",
-    "summary": "Retrieve a paginated list of all cases",
-    "uri": "cases",
-    "responseClass": "CasesPage"
-}
+extends: list
+summary: Retrieve a paginated list of all cases
+uri: cases
+responseClass: CasesPage

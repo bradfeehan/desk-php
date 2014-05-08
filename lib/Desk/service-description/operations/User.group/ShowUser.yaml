@@ -1,6 +1,4 @@
-{
-    "extends": "show.main",
-    "summary": "Retrieve a single user by ID",
-    "uri": "users/{id}",
-    "responseClass": "UserModel"
-}
+extends: show.main
+summary: Retrieve a single user by ID
+uri: "users/{id}"
+responseClass: UserModel

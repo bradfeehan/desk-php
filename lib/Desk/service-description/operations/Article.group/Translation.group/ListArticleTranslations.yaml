@@ -1,21 +1,14 @@
-{
-    "extends": "list",
-    "summary": "Retrieve a paginated list of translations for a particular article",
-    "uri": "articles/{article_id}/translations",
-    "responseClass": "ArticleTranslationsPage",
-    "parameters": {
-        "article_id": {
-            "extends": "id",
-            "description": "The ID of the article to retrieve translations for",
-            "required": true,
-            "location": "uri"
-        }
-    },
-    "data": {
-        "embeds": {
-            "entries": {
-                "model": "ArticleTranslationModel"
-            }
-        }
-    }
-}
+extends: list
+summary: Retrieve a paginated list of translations for a particular article
+uri: "articles/{article_id}/translations"
+responseClass: ArticleTranslationsPage
+parameters:
+    article_id:
+        extends: id
+        description: The ID of the article to retrieve translations for
+        required: true
+        location: uri
+data:
+    embeds:
+        entries:
+            model: ArticleTranslationModel

@@ -1,15 +1,12 @@
-{
-    "extends": "create",
-    "summary": "Create a new topic",
-    "uri": "topics",
-    "responseClass": "TopicModel",
-    "parameters": {
-        "name": {"extends": "TopicModel.name"},
-        "description": {"extends": "TopicModel.description"},
-        "position": {"extends": "TopicModel.position"},
-        "allow_questions": {"extends": "TopicModel.allow_questions"},
-        "in_support_center": {"extends": "TopicModel.in_support_center"},
-        "created_at": {"extends": "TopicModel.created_at"},
-        "updated_at": {"extends": "TopicModel.updated_at"}
-    }
-}
+extends: create
+summary: Create a new topic
+uri: topics
+responseClass: TopicModel
+parameters:
+    name:              { extends: TopicModel.name }
+    description:       { extends: TopicModel.description }
+    position:          { extends: TopicModel.position }
+    allow_questions:   { extends: TopicModel.allow_questions }
+    in_support_center: { extends: TopicModel.in_support_center }
+    created_at:        { extends: TopicModel.created_at }
+    updated_at:        { extends: TopicModel.updated_at }

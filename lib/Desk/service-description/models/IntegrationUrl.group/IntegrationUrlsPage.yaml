@@ -1,47 +1,31 @@
-{
-    "extends": "page",
-    "properties": {
-        "entries": {
-            "type": "array",
-            "items": {
-                "extends": "IntegrationUrlModel"
-            },
-            "location": "embedded"
-        },
-        "self": {
-            "location": "links",
-            "data": {
-                "operation": "ListIntegrationUrls",
-                "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
-            }
-        },
-        "first": {
-            "location": "links",
-            "data": {
-                "operation": "ListIntegrationUrls",
-                "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
-            }
-        },
-        "last": {
-            "location": "links",
-            "data": {
-                "operation": "ListIntegrationUrls",
-                "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
-            }
-        },
-        "next": {
-            "location": "links",
-            "data": {
-                "operation": "ListIntegrationUrls",
-                "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
-            }
-        },
-        "previous": {
-            "location": "links",
-            "data": {
-                "operation": "ListIntegrationUrls",
-                "pattern": "#/integration_urls\\??(?P<_query>.*)$#"
-            }
-        }
-    }
-}
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: IntegrationUrlModel }
+        location: embedded
+    self:
+        location: links
+        data:
+            operation: ListIntegrationUrls
+            pattern: "#/integration_urls\\??(?P<_query>.*)$#"
+    first:
+        location: links
+        data:
+            operation: ListIntegrationUrls
+            pattern: "#/integration_urls\\??(?P<_query>.*)$#"
+    last:
+        location: links
+        data:
+            operation: ListIntegrationUrls
+            pattern: "#/integration_urls\\??(?P<_query>.*)$#"
+    next:
+        location: links
+        data:
+            operation: ListIntegrationUrls
+            pattern: "#/integration_urls\\??(?P<_query>.*)$#"
+    previous:
+        location: links
+        data:
+            operation: ListIntegrationUrls
+            pattern: "#/integration_urls\\??(?P<_query>.*)$#"

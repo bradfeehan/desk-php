@@ -1,7 +1,4 @@
-{
-    "GroupModel.name": {
-        "extends": "parameter",
-        "description": "The name of the group",
-        "type": "string"
-    }
-}
+GroupModel.name:
+    extends: parameter
+    description: The name of the group
+    type: string

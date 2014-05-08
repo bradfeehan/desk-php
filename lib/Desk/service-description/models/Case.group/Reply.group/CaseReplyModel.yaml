@@ -1,31 +1,24 @@
-{
-    "type": "object",
-    "properties": {
-        "direction": {"extends": "CaseReplyModel.direction"},
-        "body": {"extends": "CaseReplyModel.body"},
-        "created_at": {"extends": "CaseReplyModel.created_at.output"},
-        "updated_at": {"extends": "CaseReplyModel.updated_at.output"},
-        "status": {"extends": "CaseReplyModel.status.out"},
-        "subject": {"extends": "CaseReplyModel.subject"},
-        "from": {"extends": "CaseReplyModel.from"},
-        "to": {"extends": "CaseReplyModel.to"},
-        "cc": {"extends": "CaseReplyModel.cc"},
-        "bcc": {"extends": "CaseReplyModel.bcc"},
-        "type": {"extends": "CaseReplyModel.type"},
-        "hidden_at": {"extends": "CaseReplyModel.hidden_at.output"},
-        "self": {
-            "location": "links",
-            "data": {
-                "operation": "ShowCaseReply",
-                "pattern": "#/cases/(?P<case_id>[0-9]+)/replies/(?P<reply_id>[0-9]+)$#"
-            }
-        },
-        "case": {
-            "location": "links",
-            "data": {
-                "operation": "ShowCase",
-                "pattern": "#/cases/(?P<id>[0-9]+)$#"
-            }
-        }
-    }
-}
+type: object
+properties:
+    direction:  { extends: CaseReplyModel.direction }
+    body:       { extends: CaseReplyModel.body }
+    created_at: { extends: CaseReplyModel.created_at.output }
+    updated_at: { extends: CaseReplyModel.updated_at.output }
+    status:     { extends: CaseReplyModel.status.out }
+    subject:    { extends: CaseReplyModel.subject }
+    from:       { extends: CaseReplyModel.from }
+    to:         { extends: CaseReplyModel.to }
+    cc:         { extends: CaseReplyModel.cc }
+    bcc:        { extends: CaseReplyModel.bcc }
+    type:       { extends: CaseReplyModel.type }
+    hidden_at:  { extends: CaseReplyModel.hidden_at.output }
+    self:
+        location: links
+        data:
+            operation: ShowCaseReply
+            pattern: "#/cases/(?P<case_id>[0-9]+)/replies/(?P<reply_id>[0-9]+)$#"
+    case:
+        location: links
+        data:
+            operation: ShowCase
+            pattern: "#/cases/(?P<id>[0-9]+)$#"

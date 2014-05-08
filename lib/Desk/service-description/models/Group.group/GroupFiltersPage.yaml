@@ -1,47 +1,31 @@
-{
-    "extends": "page",
-    "properties": {
-        "entries": {
-            "type": "array",
-            "items": {
-                "extends": "FilterModel"
-            },
-            "location": "embedded"
-        },
-        "self": {
-            "location": "links",
-            "data": {
-                "operation": "ListGroupFilters",
-                "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
-            }
-        },
-        "first": {
-            "location": "links",
-            "data": {
-                "operation": "ListGroupFilters",
-                "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
-            }
-        },
-        "last": {
-            "location": "links",
-            "data": {
-                "operation": "ListGroupFilters",
-                "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
-            }
-        },
-        "next": {
-            "location": "links",
-            "data": {
-                "operation": "ListGroupFilters",
-                "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
-            }
-        },
-        "previous": {
-            "location": "links",
-            "data": {
-                "operation": "ListGroupFilters",
-                "pattern": "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
-            }
-        }
-    }
-}
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: FilterModel }
+        location: embedded
+    self:
+        location: links
+        data:
+            operation: ListGroupFilters
+            pattern: "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
+    first:
+        location: links
+        data:
+            operation: ListGroupFilters
+            pattern: "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
+    last:
+        location: links
+        data:
+            operation: ListGroupFilters
+            pattern: "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
+    next:
+        location: links
+        data:
+            operation: ListGroupFilters
+            pattern: "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"
+    previous:
+        location: links
+        data:
+            operation: ListGroupFilters
+            pattern: "#/groups/(?P<group_id>[0-9]+)/filters\\??(?P<_query>.*)$#"

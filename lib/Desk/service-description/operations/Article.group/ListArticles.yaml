@@ -1,6 +1,4 @@
-{
-    "extends": "list",
-    "summary": "Retrieve a paginated list of all articles",
-    "uri": "articles",
-    "responseClass": "ArticlesPage"
-}
+extends: list
+summary: Retrieve a paginated list of all articles
+uri: articles
+responseClass: ArticlesPage

@@ -1,19 +1,14 @@
-{
-    "extends": "delete",
-    "summary": "Delete a single topic translation by topic ID and locale",
-    "uri": "topics/{topic_id}/translations/{locale}",
-    "parameters": {
-        "topic_id": {
-            "extends": "id",
-            "description": "The ID of the topic to delete the translation from",
-            "required": true,
-            "location": "uri"
-        },
-        "locale": {
-            "extends": "locale",
-            "description": "The locale of the translation to delete",
-            "required": true,
-            "location": "uri"
-        }
-    }
-}
+extends: delete
+summary: Delete a single topic translation by topic ID and locale
+uri: "topics/{topic_id}/translations/{locale}"
+parameters:
+    topic_id:
+        extends: id
+        description: The ID of the topic to delete the translation from
+        required: true
+        location: uri
+    locale:
+        extends: locale
+        description: The locale of the translation to delete
+        required: true
+        location: uri

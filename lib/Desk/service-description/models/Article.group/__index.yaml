@@ -1,175 +1,140 @@
-{
-    "ArticleModel.subject": {
-        "extends": "parameter",
-        "description": "The subject of the article",
-        "required": true,
-        "type": "string",
-        "minLength": 2
-    },
-    "ArticleModel.in_support_center": {
-        "extends": "parameter",
-        "description": "Whether to display the article in the support center",
-        "type": "boolean"
-    },
-    "ArticleModel.position": {
-        "extends": "parameter",
-        "description": "The position of the article as displayed in the support center",
-        "type": "integer"
-    },
-    "ArticleModel.quickcode": {
-        "extends": "parameter",
-        "description": "Code used by the agent to quickly add article content to a case",
-        "type": "string"
-    },
-    "ArticleModel.keywords": {
-        "extends": "parameter",
-        "description": "Keywords in the article",
-        "type": "string"
-    },
-    "ArticleModel.publish_at.output": {
-        "extends": "date.output",
-        "description": "Date the article is to be published"
-    },
-    "ArticleModel.publish_at.input": {
-        "extends": "date.input",
-        "description": "Date the article is to be published"
-    },
-    "ArticleModel.created_at.output": {
-        "extends": "date.output",
-        "description": "Date the article was created"
-    },
-    "ArticleModel.created_at.input": {
-        "extends": "date.input",
-        "description": "Date the article was created"
-    },
-    "ArticleModel.updated_at.output": {
-        "extends": "date.output",
-        "description": "Date the article was updated"
-    },
-    "ArticleModel.updated_at.input": {
-        "extends": "date.input",
-        "description": "Date the article was updated"
-    },
-    "ArticleModel.body": {
-        "extends": "parameter",
-        "description": "The content of the article (HTML formatted)",
-        "type": "string"
-    },
-    "ArticleModel.body_email": {
-        "extends": "parameter",
-        "description": "Email-specific body content",
-        "type": "string"
-    },
-    "ArticleModel.body_email_auto": {"extends": "body_auto"},
-    "ArticleModel.body_chat": {
-        "extends": "parameter",
-        "description": "Chat-specific body content",
-        "type": "string"
-    },
-    "ArticleModel.body_chat_auto": {"extends": "body_auto"},
-    "ArticleModel.body_web_callback": {
-        "extends": "parameter",
-        "description": "Chat-specific body content",
-        "type": "string"
-    },
-    "ArticleModel.body_web_callback_auto": {"extends": "body_auto"},
-    "ArticleModel.body_twitter": {
-        "extends": "parameter",
-        "description": "Twitter-specific body content",
-        "type": "string"
-    },
-    "ArticleModel.body_twitter_auto": {"extends": "body_auto"},
-    "ArticleModel.body_qna": {
-        "extends": "parameter",
-        "description": "QNA-specific body content",
-        "type": "string"
-    },
-    "ArticleModel.body_qna_auto": {"extends": "body_auto"},
-    "ArticleModel.body_phone": {
-        "extends": "parameter",
-        "description": "Phone-specific body content",
-        "type": "string"
-    },
-    "ArticleModel.body_phone_auto": {"extends": "body_auto"},
-    "ArticleModel.body_facebook": {
-        "extends": "parameter",
-        "description": "Facebook-specific body content",
-        "type": "string"
-    },
-    "ArticleModel.body_facebook_auto": {"extends": "body_auto"},
-    "ArticleModel.internal_notes": {
-        "extends": "parameter",
-        "description": "Notes to the agent using the article",
-        "type": "string"
-    },
+ArticleModel.subject:
+    extends: parameter
+    description: The subject of the article
+    required: true
+    type: string
+    minLength: 2
+ArticleModel.in_support_center:
+    extends: parameter
+    description: Whether to display the article in the support center
+    type: boolean
+ArticleModel.position:
+    extends: parameter
+    description: The position of the article as displayed in the support center
+    type: integer
+ArticleModel.quickcode:
+    extends: parameter
+    description: Code used by the agent to quickly add article content to a case
+    type: string
+ArticleModel.keywords:
+    extends: parameter
+    description: Keywords in the article
+    type: string
+ArticleModel.publish_at.output:
+    extends: date.output
+    description: Date the article is to be published
+ArticleModel.publish_at.input:
+    extends: date.input
+    description: Date the article is to be published
+ArticleModel.created_at.output:
+    extends: date.output
+    description: Date the article was created
+ArticleModel.created_at.input:
+    extends: date.input
+    description: Date the article was created
+ArticleModel.updated_at.output:
+    extends: date.output
+    description: Date the article was updated
+ArticleModel.updated_at.input:
+    extends: date.input
+    description: Date the article was updated
+ArticleModel.body:
+    extends: parameter
+    description: The content of the article (HTML formatted)
+    type: string
+ArticleModel.body_email:
+    extends: parameter
+    description: Email-specific body content
+    type: string
+ArticleModel.body_email_auto: { extends: body_auto }
+ArticleModel.body_chat:
+    extends: parameter
+    description: Chat-specific body content
+    type: string
+ArticleModel.body_chat_auto: { extends: body_auto }
+ArticleModel.body_web_callback:
+    extends: parameter
+    description: Chat-specific body content
+    type: string
+ArticleModel.body_web_callback_auto: { extends: body_auto }
+ArticleModel.body_twitter:
+    extends: parameter
+    description: Twitter-specific body content
+    type: string
+ArticleModel.body_twitter_auto: { extends: body_auto }
+ArticleModel.body_qna:
+    extends: parameter
+    description: QNA-specific body content
+    type: string
+ArticleModel.body_qna_auto: { extends: body_auto }
+ArticleModel.body_phone:
+    extends: parameter
+    description: Phone-specific body content
+    type: string
+ArticleModel.body_phone_auto: { extends: body_auto }
+ArticleModel.body_facebook:
+    extends: parameter
+    description: Facebook-specific body content
+    type: string
+ArticleModel.body_facebook_auto: { extends: body_auto }
+ArticleModel.internal_notes:
+    extends: parameter
+    description: Notes to the agent using the article
+    type: string
 
 
-    "ArticleTranslation.locale": {
-        "extends": "locale",
-        "description": "Article translation's locale"
-    },
-    "ArticleTranslation.subject": {
-        "extends": "parameter",
-        "description": "The subject of the article",
-        "type": "string"
-    },
-    "ArticleTranslation.body": {
-        "extends": "parameter",
-        "description": "The content of the article (HTML formatted)",
-        "type": "string"
-    },
-    "ArticleTranslation.body_email": {
-        "extends": "parameter",
-        "description": "Email-specific body content",
-        "type": "string"
-    },
-    "ArticleTranslation.body_email_auto": {"extends": "body_auto"},
-    "ArticleTranslation.body_chat": {
-        "extends": "parameter",
-        "description": "Chat-specific body content",
-        "type": "string"
-    },
-    "ArticleTranslation.body_chat_auto": {"extends": "body_auto"},
-    "ArticleTranslation.body_web_callback": {
-        "extends": "parameter",
-        "description": "Chat-specific body content",
-        "type": "string"
-    },
-    "ArticleTranslation.body_web_callback_auto": {"extends": "body_auto"},
-    "ArticleTranslation.body_twitter": {
-        "extends": "parameter",
-        "description": "Twitter-specific body content",
-        "type": "string"
-    },
-    "ArticleTranslation.body_twitter_auto": {"extends": "body_auto"},
-    "ArticleTranslation.body_qna": {
-        "extends": "parameter",
-        "description": "QNA-specific body content",
-        "type": "string"
-    },
-    "ArticleTranslation.body_qna_auto": {"extends": "body_auto"},
-    "ArticleTranslation.body_phone": {
-        "extends": "parameter",
-        "description": "Phone-specific body content",
-        "type": "string"
-    },
-    "ArticleTranslation.body_phone_auto": {"extends": "body_auto"},
-    "ArticleTranslation.body_facebook": {
-        "extends": "parameter",
-        "description": "Facebook-specific body content",
-        "type": "string"
-    },
-    "ArticleTranslation.body_facebook_auto": {"extends": "body_auto"},
-    "ArticleTranslation.publish_at": {
-        "extends": "date.output",
-        "description": "Date the article is to be published"
-    },
-    "ArticleTranslation.created_at": {
-        "extends": "date.output",
-        "description": "Date the article was created"
-    },
-    "ArticleTranslation.updated_at": {
-        "extends": "date.output",
-        "description": "Date the article was updated"
-    }
-}
+ArticleTranslation.locale:
+    extends: locale
+    description: "Article translation's locale"
+ArticleTranslation.subject:
+    extends: parameter
+    description: The subject of the article
+    type: string
+ArticleTranslation.body:
+    extends: parameter
+    description: The content of the article (HTML formatted)
+    type: string
+ArticleTranslation.body_email:
+    extends: parameter
+    description: Email-specific body content
+    type: string
+ArticleTranslation.body_email_auto: { extends: body_auto }
+ArticleTranslation.body_chat:
+    extends: parameter
+    description: Chat-specific body content
+    type: string
+ArticleTranslation.body_chat_auto: { extends: body_auto }
+ArticleTranslation.body_web_callback:
+    extends: parameter
+    description: Chat-specific body content
+    type: string
+ArticleTranslation.body_web_callback_auto: { extends: body_auto }
+ArticleTranslation.body_twitter:
+    extends: parameter
+    description: Twitter-specific body content
+    type: string
+ArticleTranslation.body_twitter_auto: { extends: body_auto }
+ArticleTranslation.body_qna:
+    extends: parameter
+    description: QNA-specific body content
+    type: string
+ArticleTranslation.body_qna_auto: { extends: body_auto }
+ArticleTranslation.body_phone:
+    extends: parameter
+    description: Phone-specific body content
+    type: string
+ArticleTranslation.body_phone_auto: { extends: body_auto }
+ArticleTranslation.body_facebook:
+    extends: parameter
+    description: Facebook-specific body content
+    type: string
+ArticleTranslation.body_facebook_auto: { extends: body_auto }
+ArticleTranslation.publish_at:
+    extends: date.output
+    description: Date the article is to be published
+ArticleTranslation.created_at:
+    extends: date.output
+    description: Date the article was created
+ArticleTranslation.updated_at:
+    extends: date.output
+    description: Date the article was updated

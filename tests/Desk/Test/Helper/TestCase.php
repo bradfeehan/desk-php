@@ -224,12 +224,12 @@ abstract class TestCase extends GuzzleTestCase
             $filename = DeskClient::getDescriptionFilename();
             $loader = new ServiceDescriptionLoader();
 
-            try {
+            // try {
                 $description = $loader->load($filename);
                 self::$serviceDescriptionCanBeLoaded = true;
-            } catch (RuntimeException $e) {
-                // leave it as false
-            }
+            // } catch (RuntimeException $e) {
+            //     // leave it as false
+            // }
         }
 
         return self::$serviceDescriptionCanBeLoaded;

@@ -1,6 +1,4 @@
-{
-    "extends": "list",
-    "summary": "Retrieve a paginated list of all companies",
-    "uri": "companies",
-    "responseClass": "CompaniesPage"
-}
+extends: list
+summary: Retrieve a paginated list of all companies
+uri: companies
+responseClass: CompaniesPage

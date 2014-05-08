@@ -1,6 +1,4 @@
-{
-    "extends": "list",
-    "summary": "Retrieve a paginated list of all custom fields",
-    "uri": "custom_fields",
-    "responseClass": "CustomFieldsPage"
-}
+extends: list
+summary: Retrieve a paginated list of all custom fields
+uri: custom_fields
+responseClass: CustomFieldsPage

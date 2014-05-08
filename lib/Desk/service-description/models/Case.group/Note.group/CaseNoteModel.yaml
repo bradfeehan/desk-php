@@ -1,37 +1,26 @@
-{
-    "type": "object",
-    "properties": {
-        "body": {"extends": "CaseNoteModel.body"},
-        "created_at": {"extends": "CaseNoteModel.created_at"},
-        "updated_at": {"extends": "CaseNoteModel.updated_at"},
-        "erased_at": {"extends": "CaseNoteModel.erased_at"},
-        "self": {
-            "location": "links",
-            "data": {
-                "operation": "ShowCaseNote",
-                "pattern": "#/cases/(?P<case_id>[0-9]+)/notes/(?P<note_id>[0-9]+)$#"
-            }
-        },
-        "user": {
-            "location": "links",
-            "data": {
-                "operation": "ShowUser",
-                "pattern": "#/users/(?P<id>[0-9]+)$#"
-            }
-        },
-        "erased_by": {
-            "location": "links",
-            "data": {
-                "operation": "ShowUser",
-                "pattern": "#/users/(?P<id>[0-9]+)$#"
-            }
-        },
-        "case": {
-            "location": "links",
-            "data": {
-                "operation": "ShowCase",
-                "pattern": "#/cases/(?P<id>[0-9]+)$#"
-            }
-        }
-    }
-}
+type: object
+properties:
+    body:       { extends: CaseNoteModel.body }
+    created_at: { extends: CaseNoteModel.created_at }
+    updated_at: { extends: CaseNoteModel.updated_at }
+    erased_at:  { extends: CaseNoteModel.erased_at }
+    self:
+        location: links
+        data:
+            operation: ShowCaseNote
+            pattern: "#/cases/(?P<case_id>[0-9]+)/notes/(?P<note_id>[0-9]+)$#"
+    user:
+        location: links
+        data:
+            operation: ShowUser
+            pattern: "#/users/(?P<id>[0-9]+)$#"
+    erased_by:
+        location: links
+        data:
+            operation: ShowUser
+            pattern: "#/users/(?P<id>[0-9]+)$#"
+    case:
+        location: links
+        data:
+            operation: ShowCase
+            pattern: "#/cases/(?P<id>[0-9]+)$#"

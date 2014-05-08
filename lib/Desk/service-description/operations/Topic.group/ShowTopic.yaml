@@ -1,6 +1,4 @@
-{
-    "extends": "show.main",
-    "summary": "Retrieve a single topic by ID",
-    "uri": "topics/{id}",
-    "responseClass": "TopicModel"
-}
+extends: show.main
+summary: Retrieve a single topic by ID
+uri: "topics/{id}"
+responseClass: TopicModel

@@ -31,21 +31,12 @@ abstract class UnitTestCase extends TestCase
      */
     protected function mock($methods = array(), array $constructorArgs = array())
     {
-        $class = $this->getMockedClass();
-        $reflection = new ReflectionClass($class);
+        $mock = \Mockery::mock($this->getMockedClass(), $constructorArgs);
 
-        // Populate $mockedMethods with all methods defined on $class
-        // excluding any passed in to $methods
-        $mockedMethods = array();
-
-        $allMethods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
-        foreach ($allMethods as $method) {
-            if (!in_array($method->getName(), (array) $methods)) {
-                $mockedMethods[] = $method->getName();
-            }
+        foreach ((array) $methods as $method) {
+            $mock->shouldReceive($method)->passthru();
         }
 
-        $methods = implode(',', (array) $mockedMethods);
-        return \Mockery::mock("{$class}[{$methods}]", $constructorArgs);
+        return $mock;
     }
 }

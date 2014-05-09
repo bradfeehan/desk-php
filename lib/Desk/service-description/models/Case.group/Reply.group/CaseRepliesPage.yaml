@@ -4,28 +4,12 @@ properties:
         type: array
         items: { extends: CaseReplyModel }
         location: embedded
-    self:
+    self: &SELF
         location: links
         data:
             operation: ListCaseReplies
             pattern: "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
-    first:
-        location: links
-        data:
-            operation: ListCaseReplies
-            pattern: "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
-    last:
-        location: links
-        data:
-            operation: ListCaseReplies
-            pattern: "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
-    next:
-        location: links
-        data:
-            operation: ListCaseReplies
-            pattern: "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
-    previous:
-        location: links
-        data:
-            operation: ListCaseReplies
-            pattern: "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

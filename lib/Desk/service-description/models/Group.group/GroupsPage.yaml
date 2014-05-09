@@ -4,28 +4,12 @@ properties:
         type: array
         items: { extends: GroupModel }
         location: embedded
-    self:
+    self: &SELF
         location: links
         data:
             operation: ListGroups
             pattern: "#/groups\\??(?P<_query>.*)$#"
-    first:
-        location: links
-        data:
-            operation: ListGroups
-            pattern: "#/groups\\??(?P<_query>.*)$#"
-    last:
-        location: links
-        data:
-            operation: ListGroups
-            pattern: "#/groups\\??(?P<_query>.*)$#"
-    next:
-        location: links
-        data:
-            operation: ListGroups
-            pattern: "#/groups\\??(?P<_query>.*)$#"
-    previous:
-        location: links
-        data:
-            operation: ListGroups
-            pattern: "#/groups\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

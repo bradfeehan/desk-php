@@ -4,28 +4,12 @@ properties:
         type: array
         items: { extends: ArticleTranslationModel }
         location: embedded
-    self:
+    self: &SELF
         location: links
         data:
             operation: ListArticleTranslations
             pattern: "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-    first:
-        location: links
-        data:
-            operation: ListArticleTranslations
-            pattern: "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-    last:
-        location: links
-        data:
-            operation: ListArticleTranslations
-            pattern: "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-    next:
-        location: links
-        data:
-            operation: ListArticleTranslations
-            pattern: "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
-    previous:
-        location: links
-        data:
-            operation: ListArticleTranslations
-            pattern: "#/articles/(?P<article_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

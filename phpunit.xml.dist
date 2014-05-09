@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
     verbose="true"
-    strict="true"
+    beStrictAboutTestsThatDoNotTestAnything="true"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTestSize="true"
     bootstrap="tests/bootstrap.php"
     colors="true"
 >
@@ -39,7 +41,7 @@
 
     <!-- Test listeners -->
     <listeners>
-        <listener class="\Mockery\Adapter\Phpunit\TestListener" file="vendor/mockery/mockery/library/Mockery/Adapter/Phpunit/TestListener.php"></listener>
+        <listener class="\Desk\Test\Helper\MockeryTestListener" file="tests/Desk/Test/Helper/MockeryTestListener.php"></listener>
     </listeners>
 
     <php>

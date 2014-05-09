@@ -1,0 +1,27 @@
+type: object
+properties:
+    locale:                 { extends: ArticleTranslation.locale }
+    subject:                { extends: ArticleTranslation.subject }
+    body:                   { extends: ArticleTranslation.body }
+    body_email:             { extends: ArticleTranslation.body_email }
+    body_email_auto:        { extends: ArticleTranslation.body_email_auto }
+    body_chat:              { extends: ArticleTranslation.body_chat }
+    body_chat_auto:         { extends: ArticleTranslation.body_chat_auto }
+    body_web_callback:      { extends: ArticleTranslation.body_web_callback }
+    body_web_callback_auto: { extends: ArticleTranslation.body_web_callback_auto }
+    body_twitter:           { extends: ArticleTranslation.body_twitter }
+    body_twitter_auto:      { extends: ArticleTranslation.body_twitter_auto }
+    body_qna:               { extends: ArticleTranslation.body_qna }
+    body_qna_auto:          { extends: ArticleTranslation.body_qna_auto }
+    body_phone:             { extends: ArticleTranslation.body_phone }
+    body_phone_auto:        { extends: ArticleTranslation.body_phone_auto }
+    body_facebook:          { extends: ArticleTranslation.body_facebook }
+    body_facebook_auto:     { extends: ArticleTranslation.body_facebook_auto }
+    publish_at:             { extends: ArticleTranslation.publish_at }
+    created_at:             { extends: ArticleTranslation.created_at }
+    updated_at:             { extends: ArticleTranslation.updated_at }
+    self:
+        location: links
+        data:
+            operation: ShowArticleTranslation
+            pattern: "#/articles/(?P<article_id>[0-9]+)/translations/(?P<locale>[a-zA-Z_-]+)$#"

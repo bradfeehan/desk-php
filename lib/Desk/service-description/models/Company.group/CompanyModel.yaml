@@ -1,0 +1,17 @@
+type: object
+properties:
+    name:          { extends: CompanyModel.name }
+    domains:       { extends: CompanyModel.domains }
+    created_at:    { extends: CompanyModel.created_at.output }
+    updated_at:    { extends: CompanyModel.updated_at.output }
+    custom_fields: { extends: CompanyModel.custom_fields }
+    self:
+        location: links
+        data:
+            operation: ShowCompany
+            pattern: "#/companies/(?P<id>[0-9]+)$#"
+    customers:
+        location: links
+        data:
+            operation: ListCompanyCustomers
+            pattern: "#/companies/(?P<company_id>[0-9]+)/customers$#"

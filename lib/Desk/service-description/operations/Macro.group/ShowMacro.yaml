@@ -1,0 +1,4 @@
+extends: show.main
+summary: Retrieve a single macro by ID
+uri: "macros/{id}"
+responseClass: MacroModel

@@ -1,0 +1,14 @@
+extends: list
+summary: Retrieve a paginated list of notes for a particular case
+uri: "cases/{case_id}/notes"
+responseClass: CaseNotesPage
+parameters:
+    case_id:
+        extends: id
+        description: The ID of the case to retrieve notes for
+        required: true
+        location: uri
+data:
+    embeds:
+        entries:
+            model: CaseNoteModel

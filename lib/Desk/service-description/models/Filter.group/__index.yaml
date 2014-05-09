@@ -1,0 +1,22 @@
+FilterModel.name:
+    extends: parameter
+    description: The name of the filter
+    type: string
+FilterModel.sort:
+    extends: parameter
+    description: What to sort by
+    type: string
+    enum: ["priority", "created", "updated", "active"]
+FilterModel.sort_direction:
+    extends: parameter
+    description: The direction to sort
+    type: string
+    enum: ["asc", "desc"]
+FilterModel.position:
+    extends: parameter
+    description: The position of the filter in the list of filters
+    type: integer
+FilterModel.active:
+    extends: parameter
+    description: Whether or not this filter is active
+    type: boolean

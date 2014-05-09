@@ -1,0 +1,55 @@
+type: object
+properties:
+    external_id:   { extends: CaseModel.external_id }
+    subject:       { extends: CaseModel.subject }
+    priority:      { extends: CaseModel.priority }
+    description:   { extends: CaseModel.description }
+    status:        { extends: CaseModel.status }
+    type:          { extends: CaseModel.type }
+    labels:        { extends: CaseModel.labels }
+    custom_fields: { extends: CaseModel.custom_fields }
+    created_at:    { extends: CaseModel.created_at.output }
+    updated_at:    { extends: CaseModel.updated_at.output }
+    active_at:     { extends: CaseModel.active_at.output }
+    received_at:   { extends: CaseModel.received_at.output }
+    locked_until:  { extends: CaseModel.locked_until.output }
+    self:
+        location: links
+        data:
+            operation: ShowCase
+            pattern: "#/cases/(?P<id>[0-9]+)$#"
+    message:
+        location: links
+        data:
+            operation: ShowCaseMessage
+            pattern: "#/cases/(?P<case_id>[0-9]+)/message$#"
+    customer:
+        location: links
+        data:
+            operation: ShowCustomer
+            pattern: "#/customers/(?P<id>[0-9]+)$#"
+    assigned_user:
+        location: links
+        data:
+            operation: ShowUser
+            pattern: "#/users/(?P<id>[0-9]+)$#"
+    assigned_group:
+        location: links
+        data:
+            operation: ShowGroup
+            pattern: "#/groups/(?P<id>[0-9]+)$#"
+    locked_by:
+        location: links
+        data:
+            operation: ShowUser
+            pattern: "#/users/(?P<id>[0-9]+)$#"
+    replies:
+        location: links
+        data:
+            operation: ListCaseReplies
+            pattern: "#/cases/(?P<case_id>[0-9]+)/replies$#"
+    notes:
+        location: links
+        data:
+            operation: ListCaseNotes
+            pattern: "#/cases/(?P<case_id>[0-9]+)/notes$#"

@@ -1,0 +1,4 @@
+extends: show.main
+summary: Retrieve a single group by ID
+uri: "groups/{id}"
+responseClass: GroupModel

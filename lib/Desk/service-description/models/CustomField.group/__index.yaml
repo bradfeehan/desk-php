@@ -1,0 +1,25 @@
+CustomFieldModel.name:
+    extends: parameter
+    description: Custom field name
+    type: string
+CustomFieldModel.label:
+    extends: parameter
+    description: Custom field label
+    type: string
+CustomFieldModel.type:
+    extends: parameter
+    description: The type of custom field
+    type: string
+    enum: ["ticket", "customer"]
+CustomFieldModel.active:
+    extends: parameter
+    description: Whether or not this custom field is active
+    type: string
+CustomFieldModel.data:
+    extends: parameter
+    description: "The custom field's data type"
+    type: object
+    properties:
+        type:
+            type: string
+            enum: ["string", "boolean", "integer", "date.output", "list"]

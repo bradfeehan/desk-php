@@ -1,0 +1,14 @@
+extends: list
+summary: Retrieve a paginated list of actions for a particular macro
+uri: "macros/{macro_id}/actions"
+responseClass: MacroActionsPage
+parameters:
+    macro_id:
+        extends: id
+        description: The ID of the macro to retrieve actions for
+        required: true
+        location: uri
+data:
+    embeds:
+        entries:
+            model: MacroActionModel

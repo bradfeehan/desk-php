@@ -1,0 +1,15 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: CaseModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: ListFilterCases
+            pattern: "#/filters/(?P<filter_id>[0-9]+)/cases\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

@@ -1,0 +1,4 @@
+extends: show.main
+summary: Retrieve a single case by ID
+uri: "cases/{id}"
+responseClass: CaseModel

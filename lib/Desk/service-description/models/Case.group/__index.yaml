@@ -1,0 +1,185 @@
+CaseModel.external_id:
+    extends: parameter
+    description: Unique external identifier to reference this case to an external system
+    type: string
+CaseModel.subject:
+    extends: parameter
+    description: The subject of the case
+    type: string
+CaseModel.priority:
+    extends: priority
+    description: "Priority of the case (1-10, 1 is lowest priority)"
+CaseModel.description:
+    extends: parameter
+    description: Description or background information
+    type: string
+CaseModel.status:
+    extends: status
+    description: Current state of the case
+CaseModel.type:
+    extends: channel
+    description: Channel of the case
+CaseModel.labels:
+    extends: labels
+    description: Array of labels associated with this case
+CaseModel.custom_fields:
+    extends: custom_fields
+    description: Hash of values for custom fields
+CaseModel.created_at.output:
+    extends: date.output
+    description: Time of creation
+CaseModel.created_at.input:
+    extends: date.input
+    description: Time of creation
+CaseModel.updated_at.output:
+    extends: date.output
+    description: Time last updated
+CaseModel.updated_at.input:
+    extends: date.input
+    description: Time last updated
+CaseModel.active_at.output:
+    extends: date.output
+    description: Time the case was last active
+CaseModel.active_at.input:
+    extends: date.input
+    description: Time the case was last active
+CaseModel.received_at.output:
+    extends: date.output
+    description: Time the most recent message was received
+CaseModel.received_at.input:
+    extends: date.input
+    description: Time the most recent message was received
+CaseModel.locked_until.output:
+    extends: date.output
+    description: Time at which the lock on this case will expire
+CaseModel.locked_until.input:
+    extends: date.input
+    description: Time at which the lock on this case will expire
+
+
+CaseMessageModel.direction:
+    extends: parameter
+    description: Direction of the message
+    type: string
+    enum: ["in", "out"]
+CaseMessageModel.body:
+    extends: parameter
+    description: Body of the message
+    type: string
+CaseMessageModel.created_at.output:
+    extends: date.output
+    description: Time of creation
+CaseMessageModel.created_at.input:
+    extends: date.input
+    description: Time of creation
+CaseMessageModel.updated_at:
+    extends: date.output
+    description: Time last updated
+CaseMessageModel.status:
+    extends: parameter
+    description: "The message's current status"
+    type: string
+    enum: ["received", "pending", "sent", "failed"]
+CaseMessageModel.subject:
+    extends: parameter
+    description: The subject of the message
+    type: string
+CaseMessageModel.from:
+    extends: parameter
+    description: The from address of the message
+    type: string
+CaseMessageModel.to:
+    extends: parameter
+    description: The to address of the message
+    type: string
+CaseMessageModel.cc:
+    extends: parameter
+    description: The CC address(es) of the message
+    type: string
+CaseMessageModel.bcc:
+    extends: parameter
+    description: The BCC address(es) of the message
+    type: string
+CaseMessageModel.type:
+    extends: parameter
+    description: The type of tweet
+    type: string
+    enum: ["mention", "dm"]
+CaseMessageModel.hidden_at:
+    extends: date.output
+    description: Time at which this answer was hidden from the support center
+
+
+CaseReplyModel.direction:
+    extends: parameter
+    description: Direction of the message
+    type: string
+    enum: ["in", "out"]
+CaseReplyModel.body:
+    extends: parameter
+    description: Body of the message
+    type: string
+CaseReplyModel.created_at.input:
+    extends: date.input
+    description: Time of creation
+CaseReplyModel.created_at.output:
+    extends: date.output
+    description: Time of creation
+CaseReplyModel.updated_at.output:
+    extends: date.output
+    description: Time last updated
+CaseReplyModel.status.out:
+    extends: parameter
+    description: "The message's current status"
+    type: string
+CaseReplyModel.status.in:
+    extends: parameter
+    description: "The message's current status"
+    type: string
+    enum: ["draft", "pending", "sent"]
+CaseReplyModel.subject:
+    extends: parameter
+    description: The subject of the message
+    type: string
+CaseReplyModel.from:
+    extends: parameter
+    description: The from address of the message
+    type: string
+CaseReplyModel.to:
+    extends: parameter
+    description: The to address of the message
+    type: string
+CaseReplyModel.cc:
+    extends: parameter
+    description: The CC address(es) of the message
+    type: string
+CaseReplyModel.bcc:
+    extends: parameter
+    description: The BCC address(es) of the message
+    type: string
+CaseReplyModel.type:
+    extends: parameter
+    description: The type of tweet
+    type: string
+    enum: ["mention", "dm"]
+CaseReplyModel.hidden_at.output:
+    extends: date.output
+    description: Time at which this answer was hidden from the support center
+CaseReplyModel.hidden_at.input:
+    extends: date.input
+    description: Time at which this answer was hidden from the support center
+
+
+CaseNoteModel.body:
+    extends: parameter
+    description: The body of the note
+    type: string
+CaseNoteModel.created_at:
+    extends: date.output
+    description: Time of creation
+CaseNoteModel.updated_at:
+    extends: date.output
+    description: Time last updated
+CaseNoteModel.erased_at:
+    extends: date.output
+    description: Time at which an agent erased this note

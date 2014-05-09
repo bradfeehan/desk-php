@@ -1,0 +1,17 @@
+type: object
+properties:
+    type:       { extends: MacroActionModel.type }
+    value:      { extends: MacroActionModel.value }
+    enabled:    { extends: MacroActionModel.enabled }
+    created_at: { extends: MacroActionModel.created_at }
+    updated_at: { extends: MacroActionModel.updated_at }
+    self:
+        location: links
+        data:
+            operation: ShowMacroAction
+            pattern: "#/macros/(?P<macro_id>[0-9]+)/actions/(?P<action_id>[0-9]+)$#"
+    macro:
+        location: links
+        data:
+            operation: ShowMacro
+            pattern: "#/macros/(?P<id>[0-9]+)$#"

@@ -1,0 +1,7 @@
+extends: show
+summary: Retrieve a single case reply by case ID and reply ID
+uri: "cases/{case_id}/replies/{reply_id}"
+responseClass: CaseReplyModel
+parameters:
+    case_id:  { extends: id, required: true, location: uri }
+    reply_id: { extends: id, required: true, location: uri }

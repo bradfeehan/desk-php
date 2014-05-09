@@ -1,0 +1,4 @@
+extends: show.main
+summary: Retrieve a single company by ID
+uri: "companies/{id}"
+responseClass: CompanyModel

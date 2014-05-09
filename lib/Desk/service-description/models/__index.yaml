@@ -1,0 +1,60 @@
+parameter:
+    location: json
+channel:
+    extends: parameter
+    type: string
+    enum: ["chat", "twitter", "email", "qna", "facebook", "phone"]
+custom_fields:
+    extends: parameter
+    type: object
+    additionalProperties: true
+date.output:
+    extends: parameter
+    type: string
+    filters: Desk\Filter\Date::stringToObject
+date.input:
+    extends: parameter
+    type: object
+    instanceOf: DateTime
+    filters: Desk\Filter\Date::objectToString
+interval:
+    extends: parameter
+    type: string
+    enum: ["today", "yesterday", "week", "month", "year"]
+id:
+    extends: parameter
+    type: string
+labels:
+    extends: parameter
+    type: array
+    items: { type: string }
+locale:
+    extends: parameter
+    type: string
+priority:
+    extends: parameter
+    type: integer
+    minimum: 1
+    maximum: 10
+status:
+    extends: parameter
+    type: string
+    enum: ["new", "open", "pending", "resolved", "closed"]
+
+
+
+
+page:
+    type: object
+    properties:
+        total_entries:
+            description: Total number of entries on all pages of the result
+            type: integer
+            location: json
+
+
+
+body_auto:
+    extends: parameter
+    description: Whether to just use the content from 'body'
+    type: boolean

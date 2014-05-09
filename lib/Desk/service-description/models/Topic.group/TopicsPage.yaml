@@ -1,0 +1,15 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: TopicModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: ListTopics
+            pattern: "#/topics\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

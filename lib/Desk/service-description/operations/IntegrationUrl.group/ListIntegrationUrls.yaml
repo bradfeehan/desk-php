@@ -1,0 +1,4 @@
+extends: list
+summary: Retrieve a paginated list of all integration URLs
+uri: integration_urls
+responseClass: IntegrationUrlsPage

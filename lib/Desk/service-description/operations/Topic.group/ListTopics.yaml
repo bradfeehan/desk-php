@@ -1,0 +1,4 @@
+extends: list
+summary: Retrieve a paginated list of all topics
+uri: topics
+responseClass: TopicsPage

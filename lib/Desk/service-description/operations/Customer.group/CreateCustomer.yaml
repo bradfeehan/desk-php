@@ -1,0 +1,27 @@
+extends: create
+summary: Create a new customer
+uri: customers
+responseClass: CustomerModel
+parameters:
+    first_name:    { extends: CustomerModel.first_name }
+    last_name:     { extends: CustomerModel.last_name }
+    company:       { extends: CustomerModel.company }
+    title:         { extends: CustomerModel.title }
+    external_id:   { extends: CustomerModel.external_id }
+    background:    { extends: CustomerModel.background }
+    language:      { extends: CustomerModel.language }
+    locked_until:  { extends: CustomerModel.locked_until }
+    created_at:    { extends: CustomerModel.created_at }
+    updated_at:    { extends: CustomerModel.updated_at }
+    emails:        { extends: CustomerModel.emails }
+    phone_numbers: { extends: CustomerModel.phone_numbers }
+    addresses:     { extends: CustomerModel.addresses }
+    custom_fields: { extends: CustomerModel.custom_fields }
+    company_id:
+        description: ID of company to assign to this customer
+        type: integer
+        location: links
+        sentAs: company
+        data:
+            class: company
+            href: "/api/v2/companies/{value}"

@@ -3,9 +3,9 @@
 namespace Desk\Test\Helper;
 
 use Desk\Client as DeskClient;
+use Desk\Client\ServiceDescriptionLoader;
 use Guzzle\Common\Exception\RuntimeException;
 use Guzzle\Http\Client;
-use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Tests\GuzzleTestCase;
 use InvalidArgumentException;
 use ReflectionClass;
@@ -222,13 +222,14 @@ abstract class TestCase extends GuzzleTestCase
             self::$serviceDescriptionCanBeLoaded = false;
 
             $filename = DeskClient::getDescriptionFilename();
+            $loader = new ServiceDescriptionLoader();
 
-            try {
-                $description = ServiceDescription::factory($filename);
+            // try {
+                $description = $loader->load($filename);
                 self::$serviceDescriptionCanBeLoaded = true;
-            } catch (RuntimeException $e) {
-                // leave it as false
-            }
+            // } catch (RuntimeException $e) {
+            //     // leave it as false
+            // }
         }
 
         return self::$serviceDescriptionCanBeLoaded;

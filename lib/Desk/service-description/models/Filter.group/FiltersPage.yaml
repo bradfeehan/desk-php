@@ -1,0 +1,15 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: FilterModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: ListFilters
+            pattern: "#/filters\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

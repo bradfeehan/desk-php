@@ -1,0 +1,15 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: CustomerModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: SearchCustomers
+            pattern: "#/customers/search\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

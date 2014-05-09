@@ -1,0 +1,15 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: CustomFieldModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: ListCustomFields
+            pattern: "#/custom_fields\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

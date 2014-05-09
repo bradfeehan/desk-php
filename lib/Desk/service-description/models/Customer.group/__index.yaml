@@ -1,0 +1,83 @@
+CustomerModel.first_name:
+    extends: parameter
+    description: "The customer's first name"
+    type: string
+CustomerModel.last_name:
+    extends: parameter
+    description: "The customer's last name"
+    type: string
+CustomerModel.company:
+    extends: parameter
+    description: "The customer's company"
+    type: string
+CustomerModel.title:
+    extends: parameter
+    description: "The customer's title"
+    type: string
+CustomerModel.external_id:
+    extends: parameter
+    description: "The customer's unique external identifier to reference this customer in an external system"
+    type: string
+CustomerModel.background:
+    extends: parameter
+    description: Any background information for the customer
+    type: string
+CustomerModel.language:
+    extends: parameter
+    description: "The customer's language code -- NULL unless multi-lingual support is enabled"
+    type: string
+CustomerModel.locked_until:
+    extends: parameter
+    description: Time at which the lock on the customer will expire
+    type: string
+CustomerModel.created_at:
+    extends: date.output
+    description: Time at which the customer was created
+CustomerModel.updated_at:
+    extends: date.output
+    description: Time at which the customer was last updated at
+CustomerModel.emails:
+    extends: parameter
+    description: "Array of e-mail objects, each specifying the contact type and value of the e-mail address"
+    type: array
+    items:
+        type: object
+        properties:
+            type:
+                description: The type of e-mail address
+                type: string
+            value:
+                description: The e-mail address itself
+                type: string
+CustomerModel.phone_numbers:
+    extends: parameter
+    description: "Array of phone number objects, each specifying the contact type and value of the phone number"
+    type: array
+    items:
+        type: object
+        properties:
+            type:
+                description: The type of phone number
+                type: string
+            value:
+                description: The phone number itself
+                type: string
+CustomerModel.addresses:
+    extends: parameter
+    description: "Array of address objects, each specifying the contact type and value of the location"
+    type: array
+    items:
+        type: object
+        properties:
+            type:
+                description: The type of address
+                type: string
+            value:
+                description: The address itself
+                type: string
+CustomerModel.custom_fields:
+    extends: parameter
+    description: Associative array of values for custom fields
+    type: object
+    additionalProperties: true
+    location: json

@@ -1,0 +1,14 @@
+extends: list
+summary: Retrieve a paginated list of filters for a particular group
+uri: "groups/{group_id}/filters"
+responseClass: GroupFiltersPage
+parameters:
+    group_id:
+        extends: id
+        description: The ID of the group to retrieve filters for
+        required: true
+        location: uri
+data:
+    embeds:
+        entries:
+            model: FilterModel

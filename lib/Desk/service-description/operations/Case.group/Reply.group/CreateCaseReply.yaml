@@ -1,0 +1,17 @@
+extends: create
+summary: Create a new case reply for a particular case
+uri: "cases/{case_id}/replies"
+responseClass: CaseReplyModel
+parameters:
+    case_id:    { extends: id, required: true, location: uri }
+    direction:  { extends: CaseReplyModel.direction }
+    body:       { extends: CaseReplyModel.body }
+    created_at: { extends: CaseReplyModel.created_at.input }
+    status:     { extends: CaseReplyModel.status.out }
+    subject:    { extends: CaseReplyModel.subject }
+    from:       { extends: CaseReplyModel.from }
+    to:         { extends: CaseReplyModel.to }
+    cc:         { extends: CaseReplyModel.cc }
+    bcc:        { extends: CaseReplyModel.bcc }
+    type:       { extends: CaseReplyModel.type }
+    hidden_at:  { extends: CaseReplyModel.hidden_at.input }

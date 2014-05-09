@@ -2,7 +2,7 @@
 
 namespace Desk\Client;
 
-use Guzzle\Service\Description\ServiceDescriptionLoader as GuzzleServiceDescriptionLoader;
+use BradFeehan\GuzzleModularServiceDescriptions\ServiceDescriptionLoader as ModularServiceDescriptionLoader;
 
 /**
  * A service description loader that also merges the contents of each
@@ -12,7 +12,7 @@ use Guzzle\Service\Description\ServiceDescriptionLoader as GuzzleServiceDescript
  * of each operation's "parameters" property, but this one applies a
  * similar recursive merging behaviour to the "data" property.
  */
-class ServiceDescriptionLoader extends GuzzleServiceDescriptionLoader
+class ServiceDescriptionLoader extends ModularServiceDescriptionLoader
 {
     /**
      * {@inheritdoc}

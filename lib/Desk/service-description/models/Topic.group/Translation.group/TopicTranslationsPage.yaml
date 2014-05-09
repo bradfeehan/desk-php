@@ -1,0 +1,15 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: TopicTranslationModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: ListTopicTranslations
+            pattern: "#/topics/(?P<topic_id>[0-9]+)/translations\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

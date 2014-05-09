@@ -1,0 +1,15 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: CaseReplyModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: ListCaseReplies
+            pattern: "#/cases/(?P<case_id>[0-9]+)/replies\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

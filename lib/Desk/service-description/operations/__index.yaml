@@ -1,0 +1,48 @@
+embeddable:
+    responseType: model
+    parameters:
+        embed:
+            description: Which relationships should be embedded in the response
+            type: array
+            minItems: 1
+            items:
+                type: string
+                enum: ["none"]
+            location: query
+list:
+    extends: embeddable
+    httpMethod: GET
+    parameters:
+        per_page:
+            description: Number of entries returned per page
+            type: integer
+            minimum: 1
+            location: query
+        page:
+            description: The page number of results to retrieve
+            type: integer
+            minimum: 1
+            location: query
+show:
+    extends: embeddable
+    httpMethod: GET
+show.main:
+    extends: show
+    parameters:
+        id: { extends: id, required: true, location: uri }
+create:
+    httpMethod: POST
+    parameters:
+        content_type:
+            default: application/json
+            location: header
+            sentAs: Content-Type
+delete:
+    httpMethod: DELETE
+    class: Desk\Command\NullResponseCommand
+    responseType: primitive
+    responseClass: null
+delete.main:
+    extends: delete
+    parameters:
+        id: { extends: id, required: true, location: uri }

@@ -1,0 +1,15 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: IntegrationUrlModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: ListIntegrationUrls
+            pattern: "#/integration_urls\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

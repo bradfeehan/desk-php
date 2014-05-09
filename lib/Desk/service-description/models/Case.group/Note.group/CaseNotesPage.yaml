@@ -1,0 +1,15 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: CaseNoteModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: ListCaseNotes
+            pattern: "#/cases/(?P<case_id>[0-9]+)/notes\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

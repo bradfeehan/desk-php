@@ -1,10 +1,19 @@
 desk-php
 ========
 
-[![Build Status](https://travis-ci.org/bradfeehan/desk-php.png?branch=master)](https://travis-ci.org/bradfeehan/desk-php)
-[![Coverage Status](https://coveralls.io/repos/bradfeehan/desk-php/badge.png)](https://coveralls.io/r/bradfeehan/desk-php)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/bradfeehan/desk-php/badges/quality-score.png?s=adb63132e678c70d2c23dd64cb1fde9b9dcd5318)](https://scrutinizer-ci.com/g/bradfeehan/desk-php/)
-[![Dependency Status](https://www.versioneye.com/user/projects/51a6bea6fa4f3d0002004335/badge.png)](https://www.versioneye.com/user/projects/51a6bea6fa4f3d0002004335)
+[![Build Status][build-badge]][build]
+[![Coverage Status][coverage-badge]][coverage]
+[![Scrutinizer Quality Score][quality-badge]][quality]
+[![Dependency Status][dependency-badge]][dependency]
+
+[build-badge]: <https://travis-ci.org/bradfeehan/desk-php.svg?branch=master>
+[build]: <https://travis-ci.org/bradfeehan/desk-php>
+[coverage-badge]: <https://coveralls.io/repos/bradfeehan/desk-php/badge.png>
+[coverage]: <https://coveralls.io/r/bradfeehan/desk-php>
+[quality-badge]: <https://scrutinizer-ci.com/g/bradfeehan/desk-php/badges/quality-score.png?s=adb63132e678c70d2c23dd64cb1fde9b9dcd5318>
+[quality]: <https://scrutinizer-ci.com/g/bradfeehan/desk-php/>
+[dependency-badge]: <https://www.versioneye.com/user/projects/51a6bea6fa4f3d0002004335/badge.png>
+[dependency]: <https://www.versioneye.com/user/projects/51a6bea6fa4f3d0002004335>
 
 PHP client for [Desk.com](http://desk.com) v2 API, based on
 [Guzzle](http://guzzlephp.org)

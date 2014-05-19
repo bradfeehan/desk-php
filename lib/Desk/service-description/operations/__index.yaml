@@ -30,13 +30,22 @@ show.main:
     extends: show
     parameters:
         id: { extends: id, required: true, location: uri }
-create:
-    httpMethod: POST
+mutator:
     parameters:
         content_type:
             default: application/json
             location: header
             sentAs: Content-Type
+create:
+    extends: mutator
+    httpMethod: POST
+update:
+    extends: mutator
+    httpMethod: PATCH
+update.main:
+    extends: update
+    parameters:
+        id: { extends: id, required: true, location: uri }
 delete:
     httpMethod: DELETE
     class: Desk\Command\NullResponseCommand

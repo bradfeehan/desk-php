@@ -29,7 +29,7 @@ parameters:
     internal_notes:         { extends: ArticleModel.internal_notes }
     topic_id:
         description: The topic to which the new article is assigned
-        required: true,
+        required: true
         type: integer
         location: links
         sentAs: topic

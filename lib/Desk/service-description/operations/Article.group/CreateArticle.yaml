@@ -8,9 +8,9 @@ parameters:
     position:               { extends: ArticleModel.position }
     quickcode:              { extends: ArticleModel.quickcode }
     keywords:               { extends: ArticleModel.keywords }
-    publish_at:             { extends: ArticleModel.publish_atinput" }
-    created_at:             { extends: ArticleModel.created_atinput" }
-    updated_at:             { extends: ArticleModel.updated_atinput" }
+    publish_at:             { extends: ArticleModel.publish_at.input }
+    created_at:             { extends: ArticleModel.created_at.input }
+    updated_at:             { extends: ArticleModel.updated_at.input }
     body:                   { extends: ArticleModel.body }
     body_email:             { extends: ArticleModel.body_email }
     body_email_auto:        { extends: ArticleModel.body_email_auto }

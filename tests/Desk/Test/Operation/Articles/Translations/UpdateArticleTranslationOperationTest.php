@@ -40,6 +40,7 @@ class UpdateArticleTranslationOperationTest extends UpdateOperationTestCase
     public function dataParameterValid()
     {
         $body = '{"subject":"Spanish","body":"\\\\u00a1Hola!"}';
+        $date = new DateTime('@1234567890', new DateTimeZone('UTC'));
 
         return array(
             array(
@@ -50,6 +51,14 @@ class UpdateArticleTranslationOperationTest extends UpdateOperationTestCase
                     'body' => '¡Hola!',
                 ),
                 array('body' => "#^$body$#")
+            ),
+            array(
+                array(
+                    'article_id' => 2,
+                    'locale' => 'de',
+                    'publish_at' => $date,
+                ),
+                array('body' => '#2009-02-13T23:31:30Z#')
             ),
         );
     }

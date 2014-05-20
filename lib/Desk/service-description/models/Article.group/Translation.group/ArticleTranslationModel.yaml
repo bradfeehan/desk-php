@@ -17,7 +17,7 @@ properties:
     body_phone_auto:        { extends: ArticleTranslationModel.body_phone_auto }
     body_facebook:          { extends: ArticleTranslationModel.body_facebook }
     body_facebook_auto:     { extends: ArticleTranslationModel.body_facebook_auto }
-    publish_at:             { extends: ArticleTranslationModel.publish_at }
+    publish_at:             { extends: ArticleTranslationModel.publish_at.output }
     created_at:             { extends: ArticleTranslationModel.created_at }
     updated_at:             { extends: ArticleTranslationModel.updated_at }
     self:

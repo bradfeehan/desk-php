@@ -128,8 +128,11 @@ ArticleTranslationModel.body_facebook:
     description: Facebook-specific body content
     type: string
 ArticleTranslationModel.body_facebook_auto: { extends: body_auto }
-ArticleTranslationModel.publish_at:
+ArticleTranslationModel.publish_at.output:
     extends: date.output
+    description: Date the article is to be published
+ArticleTranslationModel.publish_at.input:
+    extends: date.input
     description: Date the article is to be published
 ArticleTranslationModel.created_at:
     extends: date.output

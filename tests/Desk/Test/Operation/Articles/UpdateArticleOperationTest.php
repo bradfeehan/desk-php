@@ -27,9 +27,6 @@ class UpdateArticleOperationTest extends UpdateOperationTestCase
     {
         return array(
             'id' => 1,
-            'subject' => 'How to make your customers happy',
-            'body' => '<strong>Use Desk.com</strong>',
-            'body_email' => 'Custom email body for article',
             'body_email_auto' => false,
             'topic_id' => 2,
         );

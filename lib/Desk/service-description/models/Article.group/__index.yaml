@@ -1,7 +1,6 @@
 ArticleModel.subject:
     extends: parameter
     description: The subject of the article
-    required: true
     type: string
     minLength: 2
 ArticleModel.in_support_center:

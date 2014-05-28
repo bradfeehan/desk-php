@@ -3,6 +3,10 @@ summary: Search customers based on a combination of parameters with pagination
 uri: customers/search
 responseClass: SearchCustomersPage
 parameters:
+    q:
+        description: "Customer's to search across multiple fields with a single string"
+        type: string
+        location: query
     first_name:
         description: "Customer's first name to search for"
         type: string

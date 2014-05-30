@@ -4,7 +4,12 @@ uri: customers/search
 responseClass: SearchCustomersPage
 parameters:
     q:
-        description: "Customer's to search across multiple fields with a single string"
+        description: >
+            Search across multiple fields with a single string. The
+            value of the q param is a string composed of one or more
+            search fields and values, with each set separated by a
+            space, such as group:general+subject:welcome. Note that
+            spaces must be represented as %20 or +.
         type: string
         location: query
     first_name:

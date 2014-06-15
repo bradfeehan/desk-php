@@ -15,3 +15,8 @@ properties:
         data:
             operation: ListCompanyCustomers
             pattern: "#/companies/(?P<company_id>[0-9]+)/customers$#"
+    cases:
+        location: links
+        data:
+            operation: ListCompanyCases
+            pattern: "#/companies/(?P<company_id>[0-9]+)/cases$#"

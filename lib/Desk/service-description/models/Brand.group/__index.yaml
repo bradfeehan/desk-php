@@ -1,0 +1,16 @@
+BrandModel.name:
+    extends: parameter
+    description: The name of the brand
+    type: string
+BrandModel.created_at.output:
+    extends: date.output
+    description: Date the brand was created
+BrandModel.created_at.input:
+    extends: date.input
+    description: Date the brand was created
+BrandModel.updated_at.output:
+    extends: date.output
+    description: Date the brand was updated
+BrandModel.updated_at.input:
+    extends: date.input
+    description: Date the brand was updated

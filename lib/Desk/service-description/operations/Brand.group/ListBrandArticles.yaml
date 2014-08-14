@@ -1,0 +1,14 @@
+extends: list
+summary: Retrieve a paginated list of articles for a brand
+uri: "brands/{brand_id}/articles"
+responseClass: BrandArticlesPage
+parameters:
+    brand_id:
+        extends: id
+        description: The ID of the brand to retrieve articles for
+        required: true
+        location: uri
+data:
+    embeds:
+        entries:
+            model: ArticleModel

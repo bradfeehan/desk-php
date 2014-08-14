@@ -43,4 +43,4 @@ properties:
         location: links
         data:
             operation: ShowBrand
-            pattern: "#/brands/(?P<brand_id>[0-9]+)$#"
+            pattern: "#/brands/(?P<id>[0-9]+)$#"

@@ -57,6 +57,7 @@ class ShowArticleOperationTest extends ShowOperationTestCase
         return array(
             array('topic', 'ShowTopic', array('id' => 1)),
             array('translations', 'ListArticleTranslations', array('article_id' => 1)),
+            array('brands', 'ShowBrand', array('id' => 1)),
         );
     }
 }

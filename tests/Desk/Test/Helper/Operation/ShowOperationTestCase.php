@@ -187,15 +187,20 @@ abstract class ShowOperationTestCase extends OperationTestCase
         $model = $command->execute();
         $link = $model->getLink($linkName);
 
-        $this->assertInstanceOf('Guzzle\\Service\\Command\\OperationCommand', $link);
+        // Some _links fields (e.g. brands in ShowArticle) are arrays. Ensure array for ease of iteration.
+        $link = isset($link[0]) ? $link : array($link);
 
-        if ($commandName) {
-            $this->assertSame($commandName, $link->getName());
-        }
+        foreach ($link as $linkElement) {
+            $this->assertInstanceOf('Guzzle\\Service\\Command\\OperationCommand', $linkElement);
 
-        if ($parameters) {
-            foreach ($parameters as $parameter => $expected) {
-                $this->assertSame($expected, $link->get($parameter));
+            if ($commandName) {
+                $this->assertSame($commandName, $linkElement->getName());
+            }
+
+            if ($parameters) {
+                foreach ($parameters as $parameter => $expected) {
+                    $this->assertSame($expected, $linkElement->get($parameter));
+                }
             }
         }
     }

@@ -6,7 +6,7 @@ Status: 200
 X-Rate-Limit-Limit: 60
 X-Rate-Limit-Remaining: 59
 X-Rate-Limit-Reset: 2
-Content-Length: 1313
+Content-Length: 1041
 Connection: keep-alive
 
 {
@@ -46,12 +46,6 @@ Connection: keep-alive
         "translations": {
             "href": "/api/v2/articles/1/translations",
             "class": "article_translation"
-        },
-        "brands": [
-            {
-                "href": "/api/v2/brands/1",
-                "class": "brand"
-            }
-        ]
+        }
     }
 }

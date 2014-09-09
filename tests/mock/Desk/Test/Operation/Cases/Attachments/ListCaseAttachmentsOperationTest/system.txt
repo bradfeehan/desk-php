@@ -1,0 +1,73 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: must-revalidate, private, max-age=0
+Content-Type: application/json; charset=utf-8
+Status: 200
+X-Rate-Limit-Limit: 60
+X-Rate-Limit-Remaining: 59
+X-Rate-Limit-Reset: 2
+Content-Length: 2023
+Connection: keep-alive
+
+{
+    "total_entries": 2,
+    "page": 1,
+    "_links": {
+        "self": {
+            "href": "/api/v2/cases/1/attachments?page=1&per_page=50",
+            "class": "page"
+        },
+        "first": {
+            "href": "/api/v2/cases/1/attachments?page=1&per_page=50",
+            "class": "page"
+        },
+        "last": {
+            "href": "/api/v2/cases/1/attachments?page=1&per_page=50",
+            "class": "page"
+        },
+        "next": null,
+        "previous": null
+    },
+    "_embedded": {
+        "entries": [
+            {
+                "file_name": "awesome_pic.png",
+                "content_type": "image/png",
+                "size": "500",
+                "url": "http://example.com/short_lived_link_to_the_file_content_1",
+                "erased_at": null,
+                "created_at": "2014-08-29T19:24:20Z",
+                "updated_at": "2014-08-29T19:24:20Z",
+                "_links": {
+                    "self": {
+                        "href": "/api/v2/cases/1/attachments/1",
+                        "class": "attachment"
+                    },
+                    "case": {
+                        "href": "/api/v2/cases/1",
+                        "class": "case"
+                    }
+                }
+            },
+            {
+                "file_name": "another_awesome_pic.png",
+                "content_type": "image/png",
+                "size": "500",
+                "url": "http://example.com/short_lived_link_to_the_file_content_2",
+                "erased_at": null,
+                "created_at": "2014-08-29T19:24:21Z",
+                "updated_at": "2014-08-29T19:24:21Z",
+                "_links": {
+                    "self": {
+                        "href": "/api/v2/cases/1/attachments/2",
+                        "class": "attachment"
+                    },
+                    "case": {
+                        "href": "/api/v2/cases/1",
+                        "class": "case"
+                    }
+                }
+            }
+        ]
+    }
+}

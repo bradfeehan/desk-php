@@ -183,3 +183,30 @@ CaseNoteModel.updated_at:
 CaseNoteModel.erased_at:
     extends: date.output
     description: Time at which an agent erased this note
+
+
+CaseAttachmentModel.file_name:
+    extends: parameter
+    description: The file name of the attachment
+    type: string
+CaseAttachmentModel.content_type:
+    extends: parameter
+    description: The content type of the attachment
+    type: string
+CaseAttachmentModel.size:
+    extends: parameter
+    description: The size of the attachment, in bytes
+    type: string
+CaseAttachmentModel.url:
+    extends: parameter
+    description: The short-lived link to the attachment content
+    type: string
+CaseAttachmentModel.created_at:
+    extends: date.output
+    description: Time of creation
+CaseAttachmentModel.updated_at:
+    extends: date.output
+    description: Time last updated
+CaseAttachmentModel.erased_at:
+    extends: date.output
+    description: Time at which an agent erased this attachment

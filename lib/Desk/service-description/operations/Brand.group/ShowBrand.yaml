@@ -1,4 +1,0 @@
-extends: show.main
-summary: Retrieve a single brand by ID
-uri: "brands/{id}"
-responseClass: BrandModel

@@ -1,4 +1,0 @@
-extends: list
-summary: Retrieve a paginated list of all brands
-uri: brands
-responseClass: BrandsPage

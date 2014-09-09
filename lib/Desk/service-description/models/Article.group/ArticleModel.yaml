@@ -39,8 +39,3 @@ properties:
         data:
             operation: ListArticleTranslations
             pattern: "#/articles/(?P<article_id>[0-9]+)/translations$#"
-    brands:
-        location: links
-        data:
-            operation: ShowBrand
-            pattern: "#/brands/(?P<id>[0-9]+)$#"

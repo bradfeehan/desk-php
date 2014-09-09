@@ -1,0 +1,7 @@
+extends: show
+summary: Retrieve a case attachment by case ID and attachment ID
+uri: "cases/{case_id}/attachments/{attachment_id}"
+responseClass: CaseAttachmentModel
+parameters:
+    case_id: { extends: id, required: true, location: uri }
+    attachment_id: { extends: id, required: true, location: uri }

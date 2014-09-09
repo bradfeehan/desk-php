@@ -1,3 +1,0 @@
-extends: ShowArticle
-responseClass: null
-responseType: primitive

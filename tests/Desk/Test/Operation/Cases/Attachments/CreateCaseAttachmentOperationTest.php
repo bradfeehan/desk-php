@@ -40,7 +40,7 @@ class CreateCaseAttachmentOperationTest extends CreateOperationTestCase
      */
     public function dataParameterValid()
     {
-        $body = '{"content_type":"image\\\\/png","file_name":"awesome_pic.png"}';
+        $body = '{"content_type":"image\\\\/png","file_name":"awesome_pic.png","content":"base64encodedcontent"}';
 
         return array(
             array(

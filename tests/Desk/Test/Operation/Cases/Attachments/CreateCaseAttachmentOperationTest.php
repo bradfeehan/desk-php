@@ -28,6 +28,7 @@ class CreateCaseAttachmentOperationTest extends CreateOperationTestCase
     protected function getDefaultSystemParameters()
     {
         return array(
+            'case_id' => '1',
             'file_name' => 'awesome_pic.png',
             'content_type' => 'image/png',
             'content' => 'base64encodedcontent',
@@ -44,6 +45,7 @@ class CreateCaseAttachmentOperationTest extends CreateOperationTestCase
         return array(
             array(
                 array(
+                    'case_id' => '1',
                     'content_type' => 'image/png',
                     'file_name' => 'awesome_pic.png',
                     'content' => 'base64encodedcontent',

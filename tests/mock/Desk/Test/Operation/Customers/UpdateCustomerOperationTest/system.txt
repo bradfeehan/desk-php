@@ -1,0 +1,59 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+Location: http://mock.localhost/customers/1
+Status: 200 OK
+Vary: X-AppVersion
+X-AppVersion: 15.99
+X-Frame-Options: SAMEORIGIN
+X-Rate-Limit-Limit: 60
+X-Rate-Limit-Remaining: 59
+X-Rate-Limit-Reset: 53
+Content-Length: 1092
+Connection: keep-alive
+
+{
+    "background" : "",
+    "custom_fields" : {
+        "level" : "vip"
+    },
+    "locked_until" : null,
+    "addresses" : [],
+    "avatar" : "http://www.gravatar.com/avatar/123123123123123123?default=404&rating=PG&size=50",
+    "title" : "",
+    "external_id" : null,
+    "id" : 1,
+    "access_company_cases" : false,
+    "phone_numbers" : [],
+    "first_name" : "John",
+    "updated_at" : "2014-10-08T18:33:26Z",
+    "company" : null,
+    "access_private_portal" : true,
+    "_links" : {
+        "locked_by" : null,
+        "self": {
+            "href": "/api/v2/customers/1",
+            "class": "customer"
+        },
+        "cases": {
+            "href": "/api/v2/customers/1/cases",
+            "class": "case"
+        },
+        "facebook_user" : null,
+        "twitter_user" : null
+    },
+    "last_name" : "Doe",
+    "emails" : [
+        {
+            "type": "work",
+            "value": "john@acme.com"
+        },
+        {
+            "type": "home",
+            "value": "john@home.com"
+        }
+    ],
+    "language" : null,
+    "created_at" : "2012-12-03T18:13:58Z"
+}

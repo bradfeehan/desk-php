@@ -26,7 +26,6 @@ class UpdateCustomerOperationTest extends UpdateOperationTestCase
     protected function getDefaultSystemParameters()
     {
         return array(
-            'id' => 1,
             'first_name' => 'John',
             'last_name' => 'Doe',
             'emails' => array(
@@ -43,13 +42,13 @@ class UpdateCustomerOperationTest extends UpdateOperationTestCase
     public function dataParameterValid()
     {
         return array(
-            array(array('id' => 33), array('body' => '#^$#')),
+            array(array(), array('body' => '#^$#')),
             array(
-                array('id' => 43, 'first_name' => 'Test'),
+                array('first_name' => 'Test'),
                 array('body' => '#^{"first_name":"Test"}$#'),
             ),
             array(
-                array('id' => 53, 'company_id' => 4),
+                array('company_id' => 4),
                 array(
                     'body' => '#^{"_links":{"company":{"class":"company",' .
                         '"href":"\\\\/api\\\\/v2\\\\/companies\\\\/4"}}}$#'

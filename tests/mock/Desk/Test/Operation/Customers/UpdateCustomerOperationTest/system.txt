@@ -1,17 +1,16 @@
-HTTP/1.1 200 OK
+HTTP/1.1 201 Created
+Accept-Ranges: bytes
 Cache-Control: max-age=0, private, must-revalidate
 Content-Type: application/json; charset=utf-8
-Status: 200 OK
+Location: http://mock.localhost/customers/1
+Status: 201 Created
 Vary: X-AppVersion
-X-AppVersion: 15.99
+X-AppVersion: 781247eace915fac36f43a20c87f25019542d2d5.0
 X-Frame-Options: SAMEORIGIN
-X-Rack-Cache: invalidate, pass
 X-Rate-Limit-Limit: 60
 X-Rate-Limit-Remaining: 59
-X-Rate-Limit-Reset: 17
-X-Runtime: 0.241191
-X-UA-Compatible: IE=Edge,chrome=1
-Content-Length: 1383
+X-Rate-Limit-Reset: 53
+Content-Length: 841
 Connection: keep-alive
 
 {

@@ -49,7 +49,7 @@ class EmbeddedCommandFactory implements EmbeddedCommandFactoryInterface
     {
         $statusCode = $originalResponse->getStatusCode();
         $reasonPhrase = $originalResponse->getReasonPhrase();
-        $headers = $originalResponse->getHeaders()->toArray();
+        $headers = $originalResponse->getHeaders();
         $body = json_encode($data);
 
         // set reason phrase -- needs to be done vie

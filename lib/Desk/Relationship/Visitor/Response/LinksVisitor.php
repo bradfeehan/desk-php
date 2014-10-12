@@ -68,15 +68,28 @@ class LinksVisitor extends ResponseVisitor
         // check if there's a link provided for the param's "wire" name
         $links = $this->get($command, 'links');
         if (!empty($links[$param->getWireName()])) {
-            // create a command representing the link
-            $linkCommand = $this->builder->createLinkCommand(
-                $command,
-                $param,
-                $links[$param->getWireName()]
-            );
+            // if links is a multidimensional array; iterate
+            if (isset($links[$param->getWireName()][0])) {
+                $value[self::ELEMENT][$param->getName()] = array();
 
-            // store the created link command in the results array
-            $value[self::ELEMENT][$param->getName()] = $linkCommand;
+                foreach ($links[$param->getWireName()] as $field) {
+                    $linkCommand = $this->builder->createLinkCommand(
+                        $command,
+                        $param,
+                        $field
+                    );
+
+                    $value[self::ELEMENT][$param->getName()][] = $linkCommand;
+                }
+            } else {
+                $linkCommand = $this->builder->createLinkCommand(
+                    $command,
+                    $param,
+                    $links[$param->getWireName()]
+                );
+
+                $value[self::ELEMENT][$param->getName()] = $linkCommand;
+            }
         }
     }
 }

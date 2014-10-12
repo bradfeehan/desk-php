@@ -43,13 +43,13 @@ class UpdateCustomerOperationTest extends UpdateOperationTestCase
     public function dataParameterValid()
     {
         return array(
-            array(array('id' => 33), array('body' => '#^$#')),
+            array(array('id' => 1), array('body' => '#^$#')),
             array(
-                array('id' => 43, 'first_name' => 'Test'),
+                array('id' => 1, 'first_name' => 'Test'),
                 array('body' => '#^{"first_name":"Test"}$#'),
             ),
             array(
-                array('id' => 53, 'company_id' => 4),
+                array('id' => 1, 'company_id' => 4),
                 array(
                     'body' => '#^{"_links":{"company":{"class":"company",' .
                         '"href":"\\\\/api\\\\/v2\\\\/companies\\\\/4"}}}$#'
@@ -75,17 +75,18 @@ class UpdateCustomerOperationTest extends UpdateOperationTestCase
     {
         $this->assertSame('CustomerModel', $customer->getStructure()->getName());
 
+        $this->assertSame(1, $customer->get('id'));
         $this->assertSame('John', $customer->get('first_name'));
         $this->assertSame('Doe', $customer->get('last_name'));
         $this->assertNull($customer->get('company'));
-        $this->assertNull($customer->get('title'));
+        $this->assertSame('', $customer->get('title'));
         $this->assertNull($customer->get('external_id'));
-        $this->assertNull($customer->get('background'));
+        $this->assertSame('', $customer->get('background'));
         $this->assertNull($customer->get('locked_until'));
         $this->assertInstanceOf('DateTime', $customer->get('created_at'));
-        $this->assertSame(1373570905, $customer->get('created_at')->getTimestamp());
+        $this->assertSame(1354558438, $customer->get('created_at')->getTimestamp());
         $this->assertInstanceOf('DateTime', $customer->get('updated_at'));
-        $this->assertSame(1373570905, $customer->get('updated_at')->getTimestamp());
+        $this->assertSame(1412793206, $customer->get('updated_at')->getTimestamp());
         $this->assertSame(array('level' => 'vip'), $customer->get('custom_fields'));
 
         $emails = array(
@@ -96,6 +97,11 @@ class UpdateCustomerOperationTest extends UpdateOperationTestCase
         $this->assertSame(array(), $customer->get('phone_numbers'));
         $this->assertSame(array(), $customer->get('addresses'));
         $this->assertNull($customer->get('locked_by'));
+        $this->assertSame('http://www.gravatar.com/avatar/1', $customer->get('avatar'));
+        $this->assertFalse($customer->get('access_company_cases'));
+        $this->assertTrue($customer->get('access_private_portal'));
+        $this->assertTrue($customer->get('access_private_portal'));
+        $this->assertNull($customer->get('language'));
     }
 
     /**

@@ -1,5 +1,5 @@
 extends: update.main
-summary: Update a customer
+summary: Update an existing customer
 uri: "customers/{id}"
 responseClass: CustomerModel
 parameters:
@@ -11,8 +11,6 @@ parameters:
     background:    { extends: CustomerModel.background }
     language:      { extends: CustomerModel.language }
     locked_until:  { extends: CustomerModel.locked_until }
-    created_at:    { extends: CustomerModel.created_at }
-    updated_at:    { extends: CustomerModel.updated_at }
     emails:        { extends: CustomerModel.emails }
     phone_numbers: { extends: CustomerModel.phone_numbers }
     addresses:     { extends: CustomerModel.addresses }

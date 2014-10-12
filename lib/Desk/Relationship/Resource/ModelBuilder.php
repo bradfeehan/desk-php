@@ -74,8 +74,10 @@ class ModelBuilder implements ModelBuilderInterface
         $items = $structure->getItems();
         $models = array();
 
-        foreach ($data as $element) {
-            $models[] = $this->createEmbeddedModel($command, $items, $element);
+        if ($items !== null) {
+            foreach ($data as $element) {
+                $models[] = $this->createEmbeddedModel($command, $items, $element);
+            }
         }
 
         return $models;

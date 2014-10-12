@@ -97,19 +97,8 @@ class ClientTest extends UnitTestCase
     public function testAddDefaultHeader()
     {
         $client = $this->mock('addDefaultHeader')
-            ->shouldReceive('getDefaultHeaders')
-                ->andReturn(new Collection(array('foo' => 'bar')))
-            ->shouldReceive('setDefaultHeaders')
-                ->with(
-                    \Mockery::on(
-                        function ($headers) {
-                            return
-                                $headers->hasKey('baz') &&
-                                $headers->get('baz') === 'qux'
-                            ;
-                        }
-                    )
-                )
+            ->shouldReceive('setDefaultOption')
+                ->with('headers/baz', 'qux')
             ->getMock();
 
         $this->assertSame($client, $client->addDefaultHeader('baz', 'qux'));

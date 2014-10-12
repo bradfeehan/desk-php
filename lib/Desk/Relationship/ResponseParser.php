@@ -105,8 +105,12 @@ class ResponseParser extends OperationResponseParser
      *
      * @return boolean
      */
-    public function responseTypeIsModel(AbstractCommand $command)
+    public function responseTypeIsModel(CommandInterface $command)
     {
+        if (!($command instanceof AbstractCommand)) {
+            return false;
+        }
+
         $operation = $command->getOperation();
         $processing = $command->get(AbstractCommand::RESPONSE_PROCESSING);
         $description = $operation->getServiceDescription();

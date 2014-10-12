@@ -2,12 +2,10 @@
 
 namespace Desk\Relationship\Visitor\Response;
 
-use Guzzle\Http\Message\Response;
 use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Description\Parameter;
 use Desk\Relationship\Resource\CommandBuilder;
 use Desk\Relationship\Resource\CommandBuilderInterface;
-use Desk\Relationship\Visitor\ResponseVisitor;
 
 /**
  * Processes link parameters into commands representing the link
@@ -15,16 +13,8 @@ use Desk\Relationship\Visitor\ResponseVisitor;
  * This response visitor parses the _links element in the response, and
  * creates command objects that will retrieve the linked resource.
  */
-class LinksVisitor extends ResponseVisitor
+class LinksVisitor extends AbstractVisitor
 {
-
-    /**
-     * The key in responses where link data is stored
-     *
-     * @var string
-     */
-    const ELEMENT = '_links';
-
 
     /**
      * Builds commands from links
@@ -47,36 +37,16 @@ class LinksVisitor extends ResponseVisitor
     /**
      * {@inheritdoc}
      */
-    public function before(CommandInterface $command, array &$result)
+    protected function getFieldName()
     {
-        $json = $command->getResponse()->json();
-
-        // store links to use later
-        if (array_key_exists(self::ELEMENT, $json)) {
-            $this->set($command, 'links', $json[self::ELEMENT]);
-        }
-
-        // create new array of links which visit() adds to
-        $result[self::ELEMENT] = array();
+        return 'links';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function visit(CommandInterface $command, Response $response, Parameter $param, &$value, $context = null)
+    protected function createResourceFromData(CommandInterface $command, Parameter $structure, array $data)
     {
-        // check if there's a link provided for the param's "wire" name
-        $links = $this->get($command, 'links');
-        if (!empty($links[$param->getWireName()])) {
-            // create a command representing the link
-            $linkCommand = $this->builder->createLinkCommand(
-                $command,
-                $param,
-                $links[$param->getWireName()]
-            );
-
-            // store the created link command in the results array
-            $value[self::ELEMENT][$param->getName()] = $linkCommand;
-        }
+        return $this->builder->createLinkCommand($command, $structure, $data);
     }
 }

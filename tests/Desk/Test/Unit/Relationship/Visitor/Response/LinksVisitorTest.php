@@ -42,7 +42,9 @@ class LinksVisitorTest extends UnitTestCase
     }
 
     /**
-     * @covers Desk\Relationship\Visitor\Response\LinksVisitor::before
+     * @covers Desk\Relationship\Visitor\Response\AbstractVisitor::before
+     * @covers Desk\Relationship\Visitor\Response\LinksVisitor::getFieldName
+     * @covers Desk\Relationship\Visitor\Response\LinksVisitor::getOutputFieldName
      */
     public function testBefore()
     {
@@ -66,7 +68,9 @@ class LinksVisitorTest extends UnitTestCase
     }
 
     /**
-     * @covers Desk\Relationship\Visitor\Response\LinksVisitor::before
+     * @covers Desk\Relationship\Visitor\Response\AbstractVisitor::before
+     * @covers Desk\Relationship\Visitor\Response\LinksVisitor::getFieldName
+     * @covers Desk\Relationship\Visitor\Response\LinksVisitor::getOutputFieldName
      */
     public function testBeforeWithNoLinks()
     {
@@ -85,7 +89,8 @@ class LinksVisitorTest extends UnitTestCase
     }
 
     /**
-     * @covers Desk\Relationship\Visitor\Response\LinksVisitor::visit
+     * @covers Desk\Relationship\Visitor\Response\AbstractVisitor::visit
+     * @covers Desk\Relationship\Visitor\Response\LinksVisitor::createResourceFromData
      */
     public function testVisit()
     {

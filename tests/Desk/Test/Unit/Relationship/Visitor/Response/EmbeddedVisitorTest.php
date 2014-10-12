@@ -30,7 +30,9 @@ class EmbeddedVisitorTest extends UnitTestCase
     }
 
     /**
-     * @covers Desk\Relationship\Visitor\Response\EmbeddedVisitor::before
+     * @covers Desk\Relationship\Visitor\Response\AbstractVisitor::before
+     * @covers Desk\Relationship\Visitor\Response\EmbeddedVisitor::getFieldName
+     * @covers Desk\Relationship\Visitor\Response\EmbeddedVisitor::getOutputFieldName
      */
     public function testBefore()
     {
@@ -49,7 +51,9 @@ class EmbeddedVisitorTest extends UnitTestCase
     }
 
     /**
-     * @covers Desk\Relationship\Visitor\Response\EmbeddedVisitor::before
+     * @covers Desk\Relationship\Visitor\Response\AbstractVisitor::before
+     * @covers Desk\Relationship\Visitor\Response\EmbeddedVisitor::getFieldName
+     * @covers Desk\Relationship\Visitor\Response\EmbeddedVisitor::getOutputFieldName
      */
     public function testBeforeWithEmbeddedModel()
     {
@@ -76,7 +80,8 @@ class EmbeddedVisitorTest extends UnitTestCase
     }
 
     /**
-     * @covers Desk\Relationship\Visitor\Response\EmbeddedVisitor::visit
+     * @covers Desk\Relationship\Visitor\Response\AbstractVisitor::visit
+     * @covers Desk\Relationship\Visitor\Response\EmbeddedVisitor::createResourceFromData
      */
     public function testVisit()
     {

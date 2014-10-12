@@ -14,6 +14,3 @@
 # when depending on this package. Ignoring it ensures that our CI is as
 # close as possible to real-world use
 /composer.lock
-
-# JetBrains IDE metadata
-.idea

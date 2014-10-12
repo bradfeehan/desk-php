@@ -19,7 +19,7 @@ interface ModelBuilderInterface
      * @param \Guzzle\Service\Description\Parameter    $structure
      * @param array                                    $data
      *
-     * @return \Guzzle\Service\Command\OperationCommand
+     * @return \Desk\Relationship\Resource\Model|array
      */
     public function createEmbeddedModel(CommandInterface $command, Parameter $structure, array $data);
 }

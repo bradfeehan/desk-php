@@ -10,7 +10,7 @@ X-Frame-Options: SAMEORIGIN
 X-Rate-Limit-Limit: 60
 X-Rate-Limit-Remaining: 59
 X-Rate-Limit-Reset: 53
-Content-Length: 1092
+Content-Length: 1040
 Connection: keep-alive
 
 {
@@ -20,7 +20,7 @@ Connection: keep-alive
     },
     "locked_until" : null,
     "addresses" : [],
-    "avatar" : "http://www.gravatar.com/avatar/123123123123123123?default=404&rating=PG&size=50",
+    "avatar" : "http://www.gravatar.com/avatar/1",
     "title" : "",
     "external_id" : null,
     "id" : 1,

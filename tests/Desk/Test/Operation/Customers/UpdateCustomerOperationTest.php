@@ -97,7 +97,7 @@ class UpdateCustomerOperationTest extends UpdateOperationTestCase
         $this->assertSame(array(), $customer->get('phone_numbers'));
         $this->assertSame(array(), $customer->get('addresses'));
         $this->assertNull($customer->get('locked_by'));
-        $this->assertSame('http://www.gravatar.com/avatar/123123123123123123?default=404&rating=PG&size=50', $customer->get('avatar'));
+        $this->assertSame('http://www.gravatar.com/avatar/1', $customer->get('avatar'));
         $this->assertFalse($customer->get('access_company_cases'));
         $this->assertTrue($customer->get('access_private_portal'));
         $this->assertTrue($customer->get('access_private_portal'));

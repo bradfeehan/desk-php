@@ -77,7 +77,7 @@ class ModelBuilderTest extends UnitTestCase
 
         $builder = $this->mock('createEmbeddedModel', array($factory))
             ->shouldReceive('process')
-                ->with($embeddedCommand, $structure, $data)
+                ->with($embeddedCommand, $structure)
                 ->andReturn(array('foo' => 'bar_processed'))
             ->getMock();
 
@@ -135,7 +135,7 @@ class ModelBuilderTest extends UnitTestCase
 
         $builder = $this->mock('createEmbeddedModel', array($factory))
             ->shouldReceive('process')
-                ->with($embeddedCommand, $structure, $data)
+                ->with($embeddedCommand, $structure)
                 ->andReturn(array('foo' => 'bar_processed'))
             ->getMock();
 

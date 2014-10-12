@@ -56,7 +56,7 @@ class ModelBuilder implements ModelBuilderInterface
 
         $embeddedCommand = $this->factory->factory($command, $data);
 
-        $processedData = $this->process($embeddedCommand, $structure, $data);
+        $processedData = $this->process($embeddedCommand, $structure);
         return new Model($processedData, $structure);
     }
 
@@ -92,7 +92,7 @@ class ModelBuilder implements ModelBuilderInterface
      *
      * @return array
      */
-    public function process(EmbeddedCommand $command, Parameter $schema, array $data)
+    public function process(EmbeddedCommand $command, Parameter $schema)
     {
         $result = array();
         $visitors = array();

@@ -1,0 +1,19 @@
+type: object
+properties:
+    file_name:    { extends: CaseAttachmentModel.file_name }
+    content_type: { extends: CaseAttachmentModel.content_type }
+    size:         { extends: CaseAttachmentModel.size }
+    url:          { extends: CaseAttachmentModel.url }
+    created_at:   { extends: CaseAttachmentModel.created_at }
+    updated_at:   { extends: CaseAttachmentModel.updated_at }
+    erased_at:    { extends: CaseAttachmentModel.erased_at }
+    self:
+        location: links
+        data:
+            operation: ShowCaseAttachment
+            pattern: "#/cases/(?P<case_id>[0-9]+)/attachments/(?P<attachment_id>[0-9]+)$#"
+    case:
+        location: links
+        data:
+            operation: ShowCase
+            pattern: "#/cases/(?P<id>[0-9]+)$#"

@@ -1,0 +1,15 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: CaseAttachmentModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: ListCaseAttachments
+            pattern: "#/cases/(?P<case_id>[0-9]+)/attachments\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

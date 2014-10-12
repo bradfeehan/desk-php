@@ -1,0 +1,13 @@
+extends: create
+summary: Create a new case attachment
+uri: "cases/{case_id}/attachments"
+responseClass: CaseAttachmentModel
+parameters:
+    case_id:      { extends: id, required: true, location: uri }
+    file_name:    { extends: CaseAttachmentModel.file_name, required: true }
+    content_type: { extends: CaseAttachmentModel.content_type, required: true }
+    content:
+        extends: parameter
+        description: The base64 encoded file content
+        required: true
+        type: string

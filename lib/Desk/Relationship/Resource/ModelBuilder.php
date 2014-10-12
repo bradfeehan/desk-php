@@ -101,12 +101,7 @@ class ModelBuilder implements ModelBuilderInterface
 
         foreach ($properties as $property) {
             $location = $property->getLocation();
-            if ($location && !isset($visitors[$location])) {
-                // add visitor for this location and trigger before()
-                $visitor = $this->visitors->getResponseVisitor($location);
-                $visitor->before($command, $result);
-                $visitors[$location] = $visitor;
-            }
+            $this->addVisitor($visitors, $location, $command, $result);
         }
 
         $response = $command->getResponse();
@@ -117,10 +112,8 @@ class ModelBuilder implements ModelBuilderInterface
             // Only visit when a location is specified
             $location = $additional->getLocation();
             if ($location) {
-                if (!isset($visitors[$location])) {
-                    $visitors[$location] = $this->visitors->getResponseVisitor($location);
-                    $visitors[$location]->before($command, $result);
-                }
+                $this->addVisitor($visitors, $location, $command, $result);
+
                 // Only traverse if an array was parsed from the before() visitors
                 if (is_array($result)) {
                     // Find each additional property
@@ -152,5 +145,19 @@ class ModelBuilder implements ModelBuilderInterface
         }
 
         return $result;
+    }
+
+    /**
+     * Ensures that the visitor for a given location is added to the array
+     *
+     * This will create the visitor if it's not already in $visitors, and then
+     * run its "before()" method, before adding it as $visitors[$location].
+     */
+    private function addVisitor(array &$visitors, $location, EmbeddedCommand $command, array &$result)
+    {
+        if ($location && !isset($visitors[$location])) {
+            $visitors[$location] = $this->visitors->getResponseVisitor($location);
+            $visitors[$location]->before($command, $result);
+        }
     }
 }

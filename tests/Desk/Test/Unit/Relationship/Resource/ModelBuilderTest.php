@@ -205,6 +205,7 @@ class ModelBuilderTest extends UnitTestCase
 
     /**
      * @covers Desk\Relationship\Resource\ModelBuilder::process
+     * @covers Desk\Relationship\Resource\ModelBuilder::addVisitor
      */
     public function testProcess()
     {

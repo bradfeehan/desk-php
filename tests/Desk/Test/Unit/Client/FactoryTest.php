@@ -191,9 +191,9 @@ class FactoryTest extends UnitTestCase
 
         $factory->addAuthentication($client);
 
-        $headers = $client->getDefaultHeaders();
-        $this->assertTrue($headers->hasKey('Authorization'));
-        $this->assertSame('Basic dXNlcjpwYXNz', $headers->get('Authorization'));
+        $headers = $client->getDefaultOption('headers');
+        $this->assertArrayHasKey('Authorization', $headers);
+        $this->assertSame('Basic dXNlcjpwYXNz', $headers['Authorization']);
     }
 
     /**

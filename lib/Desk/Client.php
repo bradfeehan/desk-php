@@ -108,9 +108,7 @@ class Client extends \Guzzle\Service\Client
      */
     public function addDefaultHeader($header, $value)
     {
-        $headers = $this->getDefaultHeaders() ?: new Collection();
-        $headers->set($header, $value);
-        $this->setDefaultHeaders($headers);
+        $this->setDefaultOption("headers/$header", $value);
 
         return $this;
     }

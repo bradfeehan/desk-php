@@ -77,7 +77,7 @@ class ResourceIteratorTest extends UnitTestCase
         // Assert that next page is saved
         $this->assertSame(
             '$nextLink',
-            $this->getPrivateProperty($iterator, 'nextToken')
+            $this->getPrivateProperty($iterator, 'nextCommand')
         );
     }
 
@@ -104,7 +104,8 @@ class ResourceIteratorTest extends UnitTestCase
             ->getMock();
 
         $iterator = $this->mock('sendRequest');
-        $this->setPrivateProperty($iterator, 'nextToken', $command);
+        $this->setPrivateProperty($iterator, 'nextToken', true);
+        $this->setPrivateProperty($iterator, 'nextCommand', $command);
 
         $result = $this->callPrivateMethod($iterator, 'sendRequest');
         $this->assertSame($result, $entries);

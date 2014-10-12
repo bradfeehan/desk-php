@@ -166,6 +166,7 @@ class ResponseParserTest extends UnitTestCase
         $parser = $this->mock('responseTypeIsModel');
         $this->assertTrue($parser->responseTypeIsModel($command));
     }
+
     /**
      * @covers Desk\Relationship\ResponseParser::responseTypeIsModel
      */
@@ -186,6 +187,17 @@ class ResponseParserTest extends UnitTestCase
             ->getMock();
 
         $parser = $this->mock('responseTypeIsModel');
+        $this->assertFalse($parser->responseTypeIsModel($command));
+    }
+
+    /**
+     * @covers Desk\Relationship\ResponseParser::responseTypeIsModel
+     */
+    public function testResponseTypeIsModelFalseWrongClass()
+    {
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\CommandInterface');
+        $parser = $this->mock('responseTypeIsModel');
+
         $this->assertFalse($parser->responseTypeIsModel($command));
     }
 

@@ -55,6 +55,18 @@ class UpdateCustomerOperationTest extends UpdateOperationTestCase
                         '"href":"\\\\/api\\\\/v2\\\\/companies\\\\/4"}}}$#'
                 ),
             ),
+            array(
+                array('id' => 1, 'addresses_update_action' => 'replace'),
+                array('body' => '#^{"addresses_update_action":"replace"}$#'),
+            ),
+            array(
+                array('id' => 1, 'emails_update_action' => 'append'),
+                array('body' => '#^{"emails_update_action":"append"}$#'),
+            ),
+            array(
+                array('id' => 1, 'phone_numbers_update_action' => 'replace'),
+                array('body' => '#^{"phone_numbers_update_action":"replace"}$#'),
+            ),
         );
     }
 

@@ -15,6 +15,15 @@ parameters:
     phone_numbers: { extends: CustomerModel.phone_numbers }
     addresses:     { extends: CustomerModel.addresses }
     custom_fields: { extends: CustomerModel.custom_fields }
+    addresses_update_action:
+        extends: update_action
+        description: Whether the addresses sent will be added to the customer's existing ones or replace them
+    emails_update_action:
+        extends: update_action
+        description: Whether the emails sent will be added to the customer's existing ones or replace them
+    phone_numbers_update_action:
+            extends: update_action
+            description: Whether the phone numbers sent will be added to the customer's existing ones or replace them
     company_id:
         description: ID of company to assign to this customer
         type: integer

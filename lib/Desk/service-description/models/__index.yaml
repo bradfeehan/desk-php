@@ -40,6 +40,10 @@ status:
     extends: parameter
     type: string
     enum: ["new", "open", "pending", "resolved", "closed"]
+update_action:
+    extends: parameter
+    type: string
+    enum: ["append", "replace"]
 
 
 

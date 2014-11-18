@@ -1,0 +1,64 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: must-revalidate, private, max-age=0
+Content-Type: application/json; charset=utf-8
+Status: 200
+X-Rate-Limit-Limit: 60
+X-Rate-Limit-Remaining: 59
+X-Rate-Limit-Reset: 2
+Content-Length: 3490
+Connection: keep-alive
+
+{
+    "total_entries": 2,
+    "_links": {
+        "self": {
+            "href": "/api/v2/labels?page=1&per_page=50",
+            "class": "page"
+        },
+        "first": {
+            "href": "/api/v2/labels?page=1&per_page=50",
+            "class": "page"
+        },
+        "last": {
+            "href": "/api/v2/labels?page=1&per_page=50",
+            "class": "page"
+        },
+        "previous": null,
+        "next": null
+    },
+    "_embedded": {
+        "entries": [{
+            "name": "My great label",
+            "types": [
+                "case",
+                "macro"
+            ],
+            "description": "A label to use for great things.",
+            "enabled": true,
+            "color": "default",
+            "_links": {
+                "self": {
+                    "href": "/api/v2/labels/1",
+                    "class": "label"
+                }
+            }
+        },
+        {
+            "name": "My great label",
+            "types": [
+                "case",
+                "macro"
+            ],
+            "description": "A label to use for great things.",
+            "enabled": true,
+            "color": "pink",
+            "_links": {
+                "self": {
+                    "href": "/api/v2/labels/2",
+                    "class": "label"
+                }
+            }
+        }]
+    }
+}

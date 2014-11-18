@@ -1,0 +1,23 @@
+LabelModel.name:
+    extends: parameter
+    description: name of the label
+    required: true
+    type: string
+    minLength: 1
+LabelModel.description:
+    extends: parameter
+    description: An optional description of the label
+    type: string
+LabelModel.enabled:
+    extends: parameter
+    description: Whether or not the label can be used by an Agent
+    type: boolean
+LabelModel.types:
+    extends: parameter
+    description: "An array of the label's types. Can be one of: case, macro, article"
+    type: array
+    items: { type: string }
+LabelModel.color:
+    extends: parameter
+    description: "The color representing the label - one of default, blue, white, yellow, red, orange, green, black, purple, brown, grey, pink"
+    type: string

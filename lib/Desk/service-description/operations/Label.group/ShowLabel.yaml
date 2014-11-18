@@ -1,0 +1,4 @@
+extends: show.main
+summary: Retrieve a single label by ID
+uri: "labels/{id}"
+responseClass: LabelModel

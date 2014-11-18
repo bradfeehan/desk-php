@@ -1,0 +1,19 @@
+extends: page
+properties:
+    entries:
+        type: array
+        items: { extends: LabelModel }
+        location: embedded
+    self: &SELF
+        location: links
+        data:
+            operation: ListLabels
+            # TODO: This pattern should actually be "labels/search?...," but
+            # due to a bug in the Desk API, the "list" URI is returned
+            # instead. This pattern should be updated if/when the Desk API is
+            # fixed.
+            pattern: "#/labels\\??(?P<_query>.*)$#"
+    first: *SELF
+    last: *SELF
+    next: *SELF
+    previous: *SELF

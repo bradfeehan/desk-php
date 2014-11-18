@@ -38,8 +38,10 @@ class ShowLabelOperationTest extends ShowOperationTestCase
         $this->assertSame('LabelModel', $label->getStructure()->getName());
 
         $this->assertSame('My great label', $label->get('name'));
-        $this->assertSame('case', $label->get('types')[0]);
-        $this->assertSame('macro', $label->get('types')[1]);
+        $types = $label->get('types');
+        $this->assertSame(2, count($types));
+        $this->assertSame('case', $types[0]);
+        $this->assertSame('macro', $types[1]);
         $this->assertSame('A label to use for great things.', $label->get('description'));
         $this->assertSame(true, $label->get('enabled'));
         $this->assertSame('default', $label->get('color'));

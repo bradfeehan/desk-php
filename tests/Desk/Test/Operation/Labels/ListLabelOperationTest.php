@@ -33,8 +33,10 @@ class ListLabelsOperationTest extends ListOperationTestCase
 
         $default = $labels[0];
         $this->assertSame('My great label', $default->get('name'));
-        $this->assertSame('case', $default->get('types')[0]);
-        $this->assertSame('macro', $default->get('types')[1]);
+        $types = $default->get('types');
+        $this->assertSame(2, count($types));
+        $this->assertSame('case', $types[0]);
+        $this->assertSame('macro', $types[1]);
         $this->assertSame('A label to use for great things.', $default->get('description'));
         $this->assertSame(true, $default->get('enabled'));
         $this->assertSame('default', $default->get('color'));
@@ -46,8 +48,10 @@ class ListLabelsOperationTest extends ListOperationTestCase
 
         $pink = $labels[1];
         $this->assertSame('My great label', $pink->get('name'));
-        $this->assertSame('case', $pink->get('types')[0]);
-        $this->assertSame('macro', $pink->get('types')[1]);
+        $types = $pink->get('types');
+        $this->assertSame(2, count($types));
+        $this->assertSame('case', $types[0]);
+        $this->assertSame('macro', $types[1]);
         $this->assertSame('A label to use for great things.', $pink->get('description'));
         $this->assertSame(true, $pink->get('enabled'));
         $this->assertSame('pink', $pink->get('color'));

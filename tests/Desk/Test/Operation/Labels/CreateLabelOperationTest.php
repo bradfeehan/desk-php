@@ -29,7 +29,7 @@ class CreateLabelOperationTest extends CreateOperationTestCase
             'name' => 'My great label',
             'description' => 'A label to use for great things.',
             'enabled' => true,
-            'types' => ['case', 'macro'],
+            'types' => array('case', 'macro'),
             'color' => 'default'
         );
     }

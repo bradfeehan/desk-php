@@ -1,0 +1,11 @@
+HTTP/1.1 204 No Content
+Accept-Ranges: bytes
+Cache-Control: no-cache
+Connection: keep-alive
+Status: 204 No Content
+Vary: X-AppVersion
+X-AppVersion: 15.99
+X-Frame-Options: SAMEORIGIN
+X-Rate-Limit-Limit: 300
+X-Rate-Limit-Remaining: 297
+X-Rate-Limit-Reset: 30

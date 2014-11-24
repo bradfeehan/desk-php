@@ -1,0 +1,10 @@
+extends: create
+summary: Create a new label
+uri: labels
+responseClass: LabelModel
+parameters:
+    name:        { extends: LabelModel.name }
+    description: { extends: LabelModel.description }
+    enabled:     { extends: LabelModel.enabled }
+    types:       { extends: LabelModel.types }
+    color:       { extends: LabelModel.color }

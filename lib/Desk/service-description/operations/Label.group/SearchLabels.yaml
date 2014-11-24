@@ -1,0 +1,22 @@
+extends: list
+summary: Search labels with pagination
+uri: labels/search
+responseClass: SearchLabelsPage
+parameters:
+    names:
+        description: Comma delimited list of names to search for
+        type: array
+        location: query
+    name:
+        description: A single name to search for
+        type: string
+        location: query
+    type:
+        description: Array of types to search for.
+        type: array
+        items:
+            type: string
+            enum:
+                - case
+                - macro
+        location: query

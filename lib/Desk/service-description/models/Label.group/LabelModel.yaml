@@ -1,0 +1,12 @@
+type: object
+properties:
+    name:        { extends: LabelModel.name }
+    description: { extends: LabelModel.description }
+    enabled:     { extends: LabelModel.enabled }
+    types:       { extends: LabelModel.types }
+    color:       { extends: LabelModel.color }
+    self:
+        location: links
+        data:
+            operation: ShowLabel
+            pattern: "#/labels/(?P<id>[0-9]+)$#"

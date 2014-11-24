@@ -1,0 +1,3 @@
+extends: delete.main
+summary: Delete a single label by ID
+uri: "labels/{id}"

@@ -1,0 +1,30 @@
+HTTP/1.1 201 Created
+Accept-Ranges: bytes
+Cache-Control: max-age=0, private, must-revalidate
+Connection: keep-alive
+Content-Length: 205
+Content-Type: application/json; charset=utf-8
+Status: 201 Created
+Vary: X-AppVersion
+X-AppVersion: 15.99
+X-Frame-Options: SAMEORIGIN
+X-Rate-Limit-Limit: 300
+X-Rate-Limit-Remaining: 207
+X-Rate-Limit-Reset: 5
+
+{
+    "name": "My great label",
+    "types": [
+        "case",
+        "macro"
+    ],
+    "description": "A label to use for great things.",
+    "enabled": true,
+    "color": "default",
+    "_links": {
+        "self": {
+            "href": "/api/v2/labels/1",
+            "class": "label"
+        }
+    }
+}

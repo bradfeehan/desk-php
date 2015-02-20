@@ -3,6 +3,21 @@ summary: Search cases based on a combination of parameters with pagination
 uri: cases/search
 responseClass: SearchCasesPage
 parameters:
+    q:
+        description: >
+            Search across multiple fields with a single string. The
+            value of the q param is a string composed of one or more
+            search fields and values, with each set separated by a
+            space, such as group:general+subject:welcome. Note that
+            spaces must be represented as %20 or +.
+        type: string
+        location: query
+    sort_field:
+        type: string
+        location: query
+    sort_direction:
+        type: string
+        location: query
     name:
         description: Search for cases from customers with particular names
         type: array

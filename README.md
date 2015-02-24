@@ -115,6 +115,31 @@ everything you need to consume the Desk.com API.
     "More information about the autoloader on the Composer site"
 
 
+Super Quick Run-down
+--------------------
+
+```php
+use Desk\Client;
+
+$client = Client::factory(array(
+    'subdomain' => 'foo',
+    'username' => 'myuser',
+    'password' => 'secret',
+));
+
+foreach ($client->getIterator("ListUsers") as $user) {
+    // do things with $user
+    
+    $getCasesForCurrentUser = $user->getLink("cases");
+}
+
+
+
+
+```
+
+
+
 Basic Usage
 -----------
 

@@ -132,10 +132,6 @@ foreach ($client->getIterator("ListUsers") as $user) {
     
     $getCasesForCurrentUser = $user->getLink("cases");
 }
-
-
-
-
 ```
 
 

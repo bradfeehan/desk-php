@@ -130,7 +130,7 @@ $client = Client::factory(array(
 foreach ($client->getIterator("ListUsers") as $user) {
     // do things with $user
     
-    $getCasesForCurrentUser = $user->getLink("cases");
+    $casesForCurrentUser = $user->getLink("cases")->execute();
 }
 ```
 

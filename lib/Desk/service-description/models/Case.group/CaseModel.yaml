@@ -17,39 +17,39 @@ properties:
         location: links
         data:
             operation: ShowCase
-            pattern: "#/cases/(?P<id>[0-9]+)$#"
+            pattern: "#/cases/(?P<id>[0-9]+)#"
     message:
         location: links
         data:
             operation: ShowCaseMessage
-            pattern: "#/cases/(?P<case_id>[0-9]+)/message$#"
+            pattern: "#/cases/(?P<case_id>[0-9]+)/message#"
     customer:
         location: links
         data:
             operation: ShowCustomer
-            pattern: "#/customers/(?P<id>[0-9]+)$#"
+            pattern: "#/customers/(?P<id>[0-9]+)#"
     assigned_user:
         location: links
         data:
             operation: ShowUser
-            pattern: "#/users/(?P<id>[0-9]+)$#"
+            pattern: "#/users/(?P<id>[0-9]+)#"
     assigned_group:
         location: links
         data:
             operation: ShowGroup
-            pattern: "#/groups/(?P<id>[0-9]+)$#"
+            pattern: "#/groups/(?P<id>[0-9]+)#"
     locked_by:
         location: links
         data:
             operation: ShowUser
-            pattern: "#/users/(?P<id>[0-9]+)$#"
+            pattern: "#/users/(?P<id>[0-9]+)#"
     replies:
         location: links
         data:
             operation: ListCaseReplies
-            pattern: "#/cases/(?P<case_id>[0-9]+)/replies$#"
+            pattern: "#/cases/(?P<case_id>[0-9]+)/replies#"
     notes:
         location: links
         data:
             operation: ListCaseNotes
-            pattern: "#/cases/(?P<case_id>[0-9]+)/notes$#"
+            pattern: "#/cases/(?P<case_id>[0-9]+)/notes#"

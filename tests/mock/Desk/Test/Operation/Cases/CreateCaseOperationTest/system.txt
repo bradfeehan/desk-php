@@ -34,27 +34,27 @@ Connection: keep-alive
     },
     "_links": {
         "self": {
-            "href": "/api/v2/cases/1",
+            "href": "/api/v2/cases/1?page=1&per_page=50",
             "class": "case"
         },
         "message": {
-            "href": "/api/v2/cases/1/message",
+            "href": "/api/v2/cases/1/message?page=1&per_page=50",
             "class": "message"
         },
         "customer": {
-            "href": "/api/v2/customers/1",
+            "href": "/api/v2/customers/1?page=1&per_page=50",
             "class": "customer"
         },
         "assigned_user": {
-            "href": "/api/v2/users/1",
+            "href": "/api/v2/users/1?page=1&per_page=50",
             "class": "user"
         },
         "assigned_group": {
-            "href": "/api/v2/groups/1",
+            "href": "/api/v2/groups/1?page=1&per_page=50",
             "class": "group"
         },
         "locked_by": {
-            "href": "/api/v2/users/1",
+            "href": "/api/v2/users/1?page=1&per_page=50",
             "class": "user"
         }
     }

@@ -1,0 +1,11 @@
+type: object
+properties:
+    type:         { extends: CaseHistoryModel.type }
+    context:      { extends: CaseHistoryModel.context }
+    created_at:   { extends: CaseHistoryModel.created_at }
+    changes:      { extends: CaseHistoryModel.changes }
+    self:
+        location: links
+        data:
+            operation: ShowCaseHistory
+            pattern: "#/cases/(?P<case_id>[0-9]+)/history/(?P<attachment_id>[0-9]+)$#"

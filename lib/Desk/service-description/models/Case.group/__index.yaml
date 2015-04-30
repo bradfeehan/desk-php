@@ -210,3 +210,67 @@ CaseAttachmentModel.updated_at:
 CaseAttachmentModel.erased_at:
     extends: date.output
     description: Time at which an agent erased this attachment
+
+CaseHistoryModel.type:
+    extends: parameter
+    description: Type of history event for the case
+    type: string
+    enum:
+        - case_opened
+        - case_pending
+        - case_reopened
+        - case_resolved
+        - case_error_dismissed
+        - case_updated
+        - note_created
+        - note_erased
+        - customer_created
+        - customer_changed_from_merge
+        - macro_applied
+        - article_applied
+        - rule_applied
+        - email_pending_send
+        - email_sent
+        - email_sent_failure
+        - email_sent_ack
+        - email_sent_ticket_forward
+        - email_content_erased
+        - tweet_pending_send
+        - tweet_sent
+        - tweet_sent_failure
+        - tweet_content_erased
+        - tweet_retweeted
+        - facebook_pending_send
+        - facebook_sent
+        - facebook_sent_failure
+        - facebook_post_content_erased
+        - facebook_comment_content_erased
+        - facebook_content_liked
+        - facebook_content_unliked
+        - facebook_content_deleted
+        - question_hidden
+        - question_unhidden
+        - question_allow_answers
+        - question_disallow_answers
+        - answer_marked_best
+        - answer_unmarked_best
+        - attachment_created
+        - attachment_deleted
+        - attachment_erased
+        - phone_content_erased
+        - queue_item_pulled
+        - queue_item_accept
+        - queue_item_transferred_queue
+        - queue_item_putback
+        - queue_item_timeout
+
+CaseHistoryModel.context:
+    extends: parameter
+    description: Context id of the event
+    type: string
+CaseHistoryModel.created_at:
+    extends: date.output
+    description: Time at which the event was created
+CaseHistoryModel.changes:
+    extends: parameter
+    type: object

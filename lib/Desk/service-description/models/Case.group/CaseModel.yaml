@@ -53,3 +53,8 @@ properties:
         data:
             operation: ListCaseNotes
             pattern: "#/cases/(?P<case_id>[0-9]+)/notes$#"
+    history:
+        location: links
+        data:
+            operation: ListCaseHistory
+            pattern: "#/cases/(?P<case_id>[0-9]+)/history$#"

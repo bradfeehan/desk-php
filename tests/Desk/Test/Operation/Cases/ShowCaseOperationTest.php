@@ -47,6 +47,12 @@ class ShowCaseOperationTest extends ShowOperationTestCase
         $this->assertSame(1335994728, $case->get('updated_at')->getTimestamp());
         $this->assertInstanceOf('DateTime', $case->get('received_at'));
         $this->assertSame(1335994728, $case->get('received_at')->getTimestamp());
+
+
+        $caseHistory = $case->getLink('history');
+        $this->assertInstanceOf('Guzzle\\Service\\Command\\OperationCommand', $caseHistory);
+        $this->assertSame('ListCaseHistory', $caseHistory->getName());
+        $this->assertSame(1, $caseHistory->get('case_id'));
     }
 
     /**

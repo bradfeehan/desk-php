@@ -149,7 +149,7 @@ abstract class ListOperationTestCase extends OperationTestCase
     /**
      * Contains assertions to make about the results of the system test
      *
-     * @param array $models Resulting models from system test
+     * @param array $history Resulting models from system test
      */
-    abstract protected function assertSystem(array $models);
+    abstract protected function assertSystem(array $history);
 }

@@ -45,6 +45,10 @@ Connection: keep-alive
             "href": "/api/v2/groups/1",
             "class": "group"
         },
+        "history": {
+            "href": "/api/v2/cases/1/history",
+            "class": "case"
+        },
         "locked_by": null
     }
 }

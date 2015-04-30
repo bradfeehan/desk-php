@@ -1,0 +1,7 @@
+extends: show
+summary: Retrieve a case history event by case ID and history ID
+uri: "cases/{case_id}/history/{history_id}"
+responseClass: CaseHistoryModel
+parameters:
+    case_id: { extends: id, required: true, location: uri }
+    history_id: { extends: id, required: true, location: uri }

@@ -1,0 +1,14 @@
+extends: list
+summary: Retrieve a paginated list of the history for a particular case
+uri: "cases/{case_id}/history"
+responseClass: CaseHistoryPage
+parameters:
+    case_id:
+        extends: id
+        description: The ID of the case to retrieve the history for
+        required: true
+        location: uri
+data:
+    embeds:
+        entries:
+            model: CaseHistoryModel

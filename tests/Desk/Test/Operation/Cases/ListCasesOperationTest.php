@@ -57,6 +57,11 @@ class ListCasesOperationTest extends ListOperationTestCase
         $this->assertSame('ShowGroup', $welcomeAssignedGroup->getName());
         $this->assertSame(1, $welcomeAssignedGroup->get('id'));
 
+        $welcomeHistory = $welcome->getLink('history');
+        $this->assertInstanceOf('Guzzle\\Service\\Command\\OperationCommand', $welcomeHistory);
+        $this->assertSame('ListCaseHistory', $welcomeHistory->getName());
+        $this->assertSame(1, $welcomeHistory->get('case_id'));
+
 
         $help = $cases[1];
         $this->assertSame('Help Please!', $help->get('subject'));
@@ -83,5 +88,10 @@ class ListCasesOperationTest extends ListOperationTestCase
         $this->assertInstanceOf('Guzzle\\Service\\Command\\OperationCommand', $helpAssignedGroup);
         $this->assertSame('ShowGroup', $helpAssignedGroup->getName());
         $this->assertSame(1, $helpAssignedGroup->get('id'));
+
+        $helpHistory = $help->getLink('history');
+        $this->assertInstanceOf('Guzzle\\Service\\Command\\OperationCommand', $helpHistory);
+        $this->assertSame('ListCaseHistory', $helpHistory->getName());
+        $this->assertSame(2, $helpHistory->get('case_id'));
     }
 }

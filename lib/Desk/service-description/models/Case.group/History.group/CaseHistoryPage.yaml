@@ -7,8 +7,8 @@ properties:
     self: &SELF
         location: links
         data:
-            operation: ListCases
-            pattern: "#/cases\\??(?P<_query>.*)$#"
+            operation: ListCaseHistory
+            pattern: "#/cases/(?P<case_id>[0-9]+)/history\\??(?P<_query>.*)$#"
     first: *SELF
     last: *SELF
     next: *SELF

@@ -43,11 +43,20 @@ class Date
     /**
      * Converts a DateTime object to a timestamp
      *
-     * @param DateTime $date
+     * @param mixed $date
      * @return int
      */
-    public static function objectToTimestamp(DateTime $date)
+    public static function toTimestamp($date)
     {
-        return $date->getTimestamp();
+        if ($date instanceof DateTime) {
+            return $date->getTimestamp();
+        }
+
+        if (!is_numeric($date)) {
+            $date = new DateTime($date, new DateTimeZone('UTC'));
+            return $date->getTimestamp();
+        }
+
+        return $date;
     }
 }

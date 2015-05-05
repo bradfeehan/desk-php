@@ -95,25 +95,25 @@ parameters:
         description: Updated date range to filter by
         location: query
     since_created_at:
-        extends: date.input
+        extends: parameter
         description: Search for cases created more recently than a particular date
         location: query
-        filters: Desk\Filter\Date::objectToTimestamp
+        filters: Desk\Filter\Date::toTimestamp
     max_created_at:
-        extends: date.input
+        extends: parameter
         description: Search for cases created on or before a particular date
         location: query
-        filters: Desk\Filter\Date::objectToTimestamp
+        filters: Desk\Filter\Date::toTimestamp
     since_updated_at:
-        extends: date.input
+        extends: parameter
         description: Search for cases updated more recently than a particular date
         location: query
-        filters: Desk\Filter\Date::objectToTimestamp
+        filters: Desk\Filter\Date::toTimestamp
     max_updated_at:
-        extends: date.input
+        extends: parameter
         description: Search for cases updated on or before a particular date
         location: query
-        filters: Desk\Filter\Date::objectToTimestamp
+        filters: Desk\Filter\Date::toTimestamp
     since_id:
         extends: id
         description: Search for cases with an ID greater than a particular ID

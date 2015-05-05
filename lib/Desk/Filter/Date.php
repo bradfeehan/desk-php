@@ -39,4 +39,24 @@ class Date
         $date->setTimezone(new DateTimeZone('UTC'));
         return $date->format("Y-m-d\\TH:i:s\\Z");
     }
+
+    /**
+     * Converts a DateTime object to a timestamp
+     *
+     * @param mixed $date
+     * @return int
+     */
+    public static function toTimestamp($date)
+    {
+        if ($date instanceof DateTime) {
+            return $date->getTimestamp();
+        }
+
+        if (!is_numeric($date)) {
+            $date = new DateTime($date, new DateTimeZone('UTC'));
+            return $date->getTimestamp();
+        }
+
+        return $date;
+    }
 }

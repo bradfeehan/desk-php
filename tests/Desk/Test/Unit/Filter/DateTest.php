@@ -70,4 +70,24 @@ class DateTest extends UnitTestCase
             ),
         );
     }
+
+    /**
+     * @dataProvider dataToTimestamp
+     * @param $date
+     * @param $expected
+     */
+    public function testToTimestamp($date, $expected)
+    {
+        $actual = Date::toTimestamp($date);
+        $this->assertSame($expected, $actual);
+    }
+
+    public function dataToTimestamp()
+    {
+        return array(
+            array(new DateTime('2013-05-24T16:55:02Z'), 1369414502),
+            array(1369414502, 1369414502),
+            array('2013-05-24T16:55:02Z', 1369414502)
+        );
+    }
 }

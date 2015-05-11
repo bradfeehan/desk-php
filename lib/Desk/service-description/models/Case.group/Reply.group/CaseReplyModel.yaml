@@ -22,3 +22,8 @@ properties:
         data:
             operation: ShowCase
             pattern: "#/cases/(?P<id>[0-9]+)$#"
+    sent_by:
+        location: links
+        data:
+            operation: ShowUser
+            pattern: "#/users/(?P<id>[0-9]+)#"

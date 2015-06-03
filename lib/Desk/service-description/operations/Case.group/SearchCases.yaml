@@ -118,3 +118,7 @@ parameters:
         extends: id
         description: Search for cases with an ID less than or equal to a particular ID
         location: query
+    q:
+        extends: parameter
+        description: Custom query string
+        location: query

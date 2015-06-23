@@ -1,0 +1,7 @@
+extends: create
+summary: Create a new case note for a particular case
+uri: "cases/{case_id}/notes"
+responseClass: CaseNoteModel
+parameters:
+    case_id:    { extends: id, required: true, location: uri }
+    body:       { extends: CaseNoteModel.body }

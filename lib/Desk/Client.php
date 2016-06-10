@@ -14,6 +14,8 @@ class Client extends \Guzzle\Service\Client
      * @var \Desk\Client\FactoryInterface
      */
     private static $factory;
+    
+    static public function getmego(){}
 
 
     /**

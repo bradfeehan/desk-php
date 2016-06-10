@@ -16,7 +16,7 @@ class Client extends \Guzzle\Service\Client
     private static $factory;
     
     static public function getmego(){}
-
+    
 
     /**
      * Gets the client factory that creates instances of this class
@@ -28,6 +28,8 @@ class Client extends \Guzzle\Service\Client
         if (!self::$factory) {
             self::$factory = new Factory();
         }
+
+     if(1==1){}
 
         return self::$factory;
     }

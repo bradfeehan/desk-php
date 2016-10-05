@@ -1,0 +1,8 @@
+extends: update
+summary: Update a translation for a particular article
+uri: "topics/{topic_id}/translations/{locale}"
+responseClass: TopicTranslationModel
+parameters:
+    topic_id: { extends: id, required: true, location: uri }
+    locale:   { extends: TopicTranslationModel.locale, required: true, location: uri }
+    name:     { extends: TopicTranslationModel.name, required: true }

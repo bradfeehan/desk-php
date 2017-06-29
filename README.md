@@ -153,7 +153,7 @@ $client = \Desk\Client::factory(array(
 
 ```php
 $client = \Desk\Client::factory(array(
-    'subdomain' => 'foo'
+    'subdomain' => 'foo',
     'consumer_key' => 'key',
     'consumer_secret' => 'secret',
     'token' => 'key',

@@ -8,7 +8,7 @@ properties:
         location: links
         data:
             operation: ListBrandArticles
-            pattern: "#/articles\\??(?P<_query>.*)$#"
+            pattern: "#/brands/(?P<brand_id>[0-9]+)/articles\\??(?P<_query>.*)$#"
     first: *SELF
     last: *SELF
     next: *SELF
